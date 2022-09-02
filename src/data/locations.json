@@ -1,0 +1,378 @@
+{
+    "Eastern_Kae_Empire": [
+        {
+            "name": "Kaerum",
+            "latlng": {
+                "lat": -61.52269494598361,
+                "lng": 48.20800781250001
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Kormùn",
+            "latlng": {
+                "lat": -51.83577752045248,
+                "lng": 63.41308593750001
+            },
+            "type": "fort",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Stillwood",
+            "latlng": {
+                "lat": -61.24910209024154,
+                "lng": 64.64355468750001
+            },
+            "type": "town",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Venvaris",
+            "latlng": {
+                "lat": -61.37567331572748,
+                "lng": 67.14843750000001
+            },
+            "type": "dungeon",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Eastern Mound Camps",
+            "latlng": {
+                "lat": -53.30462107510271,
+                "lng": 85.7373046875
+            },
+            "type": "town",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Gnollwood",
+            "latlng": {
+                "lat": -57.421294392094055,
+                "lng": 84.85839843750001
+            },
+            "type": "forest",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Lakewood",
+            "latlng": {
+                "lat": -62.471723714758724,
+                "lng": 85.6494140625
+            },
+            "type": "town",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Antiquarian's Lair",
+            "latlng": {
+                "lat": -64.1297836764257,
+                "lng": 95.537109375
+            },
+            "type": "miscellaneous",
+            "dev_notes": "There are not many miscellaneous locations, consider adding more to this category, or find another one to include this in. This location was an unmarked location, added because the players have discovered it in game - maybe this could be a category",
+            "visited": true
+        },
+        {
+            "name": "Yerden",
+            "latlng": {
+                "lat": -44.84029065139799,
+                "lng": 82.57324218750001
+            },
+            "type": "town",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Sorrowguard",
+            "latlng": {
+                "lat": -47.42808726171426,
+                "lng": 99.140625
+            },
+            "type": "fort",
+            "dev_notes": "This location was an unmarked location, added because the players have discovered it in game - maybe this could be a category",
+            "visited": true
+        },
+        {
+            "name": "Orc Stronghold",
+            "latlng": {
+                "lat": -45.9511496866914,
+                "lng": 95.18554687500001
+            },
+            "type": "fort",
+            "dev_notes": "This location was an unmarked location, added because the players have discovered it in game - maybe this could be a category",
+            "visited": true
+        },
+        {
+            "name": "Bluewater",
+            "latlng": {
+                "lat": -39.23225314171489,
+                "lng": 68.15917968750001
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Ag Daesos",
+            "latlng": {
+                "lat": -17.056784609942554,
+                "lng": 115.7080078125
+            },
+            "type": "ruins",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "The Ironwald",
+            "latlng": {
+                "lat": -10.833305983642491,
+                "lng": 111.4453125
+            },
+            "type": "forest",
+            "dev_notes": null,
+            "visited": true
+        },        
+        {
+            "name": "Bronzeshire",
+            "latlng": {
+                "lat": -5.266007882805498,
+                "lng": 98.43750000000001
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Halls of Enkindlement",
+            "latlng": {
+                "lat": -9.015302333420586,
+                "lng": 98.0419921875
+            },
+            "type": "dungeon",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Blackcrag Village",
+            "latlng": {
+                "lat": -44.55916341529182,
+                "lng": 44.20898437500001
+            },
+            "type": "town",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Shimmer's Grove",
+            "latlng": {
+                "lat": -18.437924653474408,
+                "lng": 94.08691406250001
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": true
+        }
+    ],
+    "The_North": [
+        {
+            "name": "Ironholme",
+            "latlng": {
+                "lat": 1.4939713066293239,
+                "lng": 129.99023437500003
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Blackbarrow",
+            "latlng": {
+                "lat": -7.885147283424331,
+                "lng": 158.203125
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Winterlight",
+            "latlng": {
+                "lat": 19.84939395842279,
+                "lng": 111.35742187500001
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Gastor Mines",
+            "latlng": {
+                "lat": 24.206889622398023,
+                "lng": 104.0625
+            },
+            "type": "dungeon",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Snowshore",
+            "latlng": {
+                "lat": 35.0659731379842,
+                "lng": 106.5673828125
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "The Sunless Citadel",
+            "latlng": {
+                "lat": 39.740986355883564,
+                "lng": 98.0419921875
+            },
+            "type": "dungeon",
+            "dev_notes": null,
+            "visited": true
+        },
+        {
+            "name": "Karadùr",
+            "latlng": {
+                "lat": 39.436192999314095,
+                "lng": 132.05566406250003
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        }
+    ],
+    "The_Elven_Kingdoms": [
+        {
+            "name": "The Sisters",
+            "latlng": {
+                "lat": -23.079731762449878,
+                "lng": 133.06640625000003
+            },
+            "type": "fort",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Ruins of Red Orchard",
+            "latlng": {
+                "lat": -26.23430203240673,
+                "lng": 159.91699218750003
+            },
+            "type": "ruins",
+            "dev_notes": "This location could be considered two different types, perhaps types should be an array of strings instead of just an array?",
+            "visited": false
+        },
+        {
+            "name": "Yrenthalas",
+            "latlng": {
+                "lat": -34.415973384481866,
+                "lng": 130.34179687500003
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Ag Cullin",
+            "latlng": {
+                "lat": -45.24395342262325,
+                "lng": 107.70996093750001
+            },
+            "type": "ruins",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Drak'Batan",
+            "latlng": {
+                "lat": -50.84757295365388,
+                "lng": 116.982421875
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Ga'thil",
+            "latlng": {
+                "lat": -46.1646144968971,
+                "lng": 142.91015625000003
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Mesil",
+            "latlng": {
+                "lat": -53.981935162091666,
+                "lng": 162.33398437500003
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Dul'fesch",
+            "latlng": {
+                "lat": -63.3324127919358,
+                "lng": 148.75488281250003
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Elloray's Gate",
+            "latlng": {
+                "lat": -66.93006025862447,
+                "lng": 105.82031250000001
+            },
+            "type": "fort",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "Ruins of Ashaseth",
+            "latlng": {
+                "lat": -68.97416358340674,
+                "lng": 141.10839843750003
+            },
+            "type": "ruins",
+            "dev_notes": "This location could be considered two different types, perhaps types should be an array of strings instead of just an array?",
+            "visited": false
+        },
+        {
+            "name": "Arrania",
+            "latlng": {
+                "lat": -73.7880535310551,
+                "lng": 118.95996093750001
+            },
+            "type": "city",
+            "dev_notes": null,
+            "visited": false
+        },
+        {
+            "name": "The Pass of Larkanon",
+            "latlng": {
+                "lat": -66.9816661111497,
+                "lng": 75.9814453125
+            },
+            "type": "tunnel",
+            "dev_notes": "There are not many tunnels on this map, consider consolidating this into another category or making another category for miscellaneous - Perhaps this could be tied in with forests, some kind of natural formation group",
+            "visited": false
+        }
+    ]
+}

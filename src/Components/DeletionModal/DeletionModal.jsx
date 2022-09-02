@@ -1,0 +1,66 @@
+import React, { useState, useEffect } from "react";
+import "./DeletionModal.css";
+
+// Component imports
+import DeleteSubLocation from "./DeleteSubLocation";
+import DeleteNPC from "./DeleteNPC";
+import DeleteQuest from "./DeleteQuest";
+
+const DeletionModal = (props) => {
+    const {
+        data,
+        setDeleteData,
+        selectedLocationNotes,
+        serosLocations,
+        setSerosLocations,
+        serosNPCs,
+        setSerosNPCs,
+        serosQuests,
+        setSerosQuests,
+    } = props;
+
+    const [dataType, setDataType] = useState(null);
+
+    useEffect(() => {
+        if (Object.hasOwn(data, "disposition") === true) {
+            setDataType("NPC");
+        } else if (Object.hasOwn(data, "completed") === true) {
+            setDataType("Quest");
+        } else {
+            setDataType("Sub Location");
+        }
+    }, [data]);
+
+    if (dataType === "NPC") {
+        return (
+            <DeleteNPC
+                data={data}
+                setDeleteData={setDeleteData}
+                serosNPCs={serosNPCs}
+                setSerosNPCs={setSerosNPCs}
+            />
+        );
+    } else if (dataType === "Quest") {
+        return (
+            <DeleteQuest
+                data={data}
+                setDeleteData={setDeleteData}
+                serosQuests={serosQuests}
+                setSerosQuests={setSerosQuests}
+                setSerosNPCs={setSerosNPCs}
+            />
+        );
+    } else if (dataType === "Sub Location") {
+        return (
+            <DeleteSubLocation
+                data={data}
+                setDeleteData={setDeleteData}
+                selectedLocationNotes={selectedLocationNotes}
+                serosLocations={serosLocations}
+                setSerosLocations={setSerosLocations}
+            />
+        );
+    }
+};
+
+export default DeletionModal;

@@ -1,0 +1,11 @@
+.location-notes-details-data-separator {
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
+
+.location-notes-details-data-separator {
+    /* align-self: center; */
+    margin: 0 auto;
+    fill: #922610;
+}

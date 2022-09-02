@@ -1,0 +1,16 @@
+#quest-list-wrapper {
+    padding: 0 8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.quest-list-individual-quest {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* .quest-list-individual-quest>p {
+    margin-left: 1rem;
+} */

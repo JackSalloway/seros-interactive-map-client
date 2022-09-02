@@ -1,0 +1,261 @@
+#location-notes-wrapper {
+    /* height: auto; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    overflow-y: auto;
+    font-family: "Noto Sans", sans-serif;
+    background: #fdf1dc;
+    color: black;
+}
+
+/* Prevent scrollbar from appearing when div becomes to long */
+#location-notes-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+#location-notes-title {
+    height: auto;
+    min-height: 5rem;
+    max-height: 10rem;
+    padding: 0.5rem 0;
+    width: 100%;
+    font-size: 4em;
+    align-self: center;
+    /* padding: 0 calc(100vw - width); */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(14, 22, 31, 1);
+    /* border-radius: 5rem; */
+}
+
+.location-notes-title-content-wrapper {
+    /* width: 100%; */
+    -webkit-text-stroke: 2px black;
+    display: flex;
+}
+
+#location-notes-data {
+    padding: 0 1rem;
+    color: #922610;
+}
+
+#location-notes-data > p {
+    font-size: 1em;
+    margin-bottom: 2rem;
+    align-self: center;
+}
+
+.location-notes-category-wrapper-image {
+    height: 3rem;
+}
+
+.location-notes-category-header > h3 {
+    font-size: 2.5em;
+    text-decoration: underline;
+}
+
+.location-notes-fa-icon.h3 {
+    font-size: 1.5rem;
+}
+
+.location-notes-fa-icon.location-notes-fa-plus,
+.location-notes-fa-icon.location-notes-fa-cross {
+    margin-right: 1rem;
+    margin-left: auto;
+}
+
+h4 {
+    font-size: 1.5em;
+    /* text-decoration: underline; */
+}
+
+h5 {
+    font-size: 1.3rem;
+}
+
+p,
+ul {
+    font-size: 1em;
+}
+
+button {
+    width: fit-content;
+}
+
+/* SUBMIT FORM STYLES - These are the styles found within the location-notes section when a user wants to add new data */
+
+.location-notes-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 0.2rem;
+}
+
+.location-notes-details-data-section.name-section.editing {
+    display: flex;
+    padding: 0.7rem 0.2rem;
+}
+
+.location-notes-create.first-input {
+    margin-top: 0.7rem;
+}
+
+.location-notes-create > label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.location-notes-submit {
+    align-self: center;
+    padding-bottom: 0.7rem;
+}
+
+/* LOCATION NOTES STYLES - These can be found within the: QuestNotes.jsx, NPCNotes.jsx and SubLocationNotes.jsx components */
+.location-notes-category-wrapper {
+    margin: 0.5rem 0;
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.location-notes-category-header {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.expand-down-arrow {
+    width: 5rem;
+}
+
+#location-notes-category-wrapper > p {
+    margin: 0 4rem;
+}
+
+.location-notes-details {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.location-notes-brighter-filter {
+    filter: contrast(110%);
+    box-shadow: 0px 0px 3px 3px rgba(0, 0, 0, 0.2);
+    width: calc(100% - 5px);
+    align-self: center;
+}
+
+.location-notes-open-internal {
+    padding-bottom: 0.7rem;
+}
+
+.location-notes-details-border {
+    background-color: #e69a28;
+    width: 100%;
+    height: 5px;
+    border: solid 1px black;
+}
+
+.location-notes-details-border.top {
+    margin-top: 0.5rem;
+}
+
+.location-notes-details-border.bottom {
+    margin-bottom: 0.5rem;
+}
+
+.location-notes-details-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.7rem 0;
+    background-size: contain;
+}
+
+.location-notes-details-header > h4 {
+    font-weight: 700;
+    padding-left: 0.2rem;
+    overflow-wrap: anywhere;
+}
+
+.name-section > h4 {
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.location-notes-details-data-section {
+    padding: 0.7rem 0.2rem;
+    /* border-bottom: solid red 2px; */
+    font-family: "Noto Sans", sans-serif;
+}
+
+.details-closed,
+.name-section {
+    font-family: "Libre Baskerville", serif;
+}
+
+.name-section > p {
+    margin-top: 0.2rem;
+}
+
+/* .details-open {
+    border-bottom: solid red 2px;
+} */
+
+.location-notes-details-data-section.name-section {
+    border-bottom: none;
+    padding: 0 0 0 0.2rem;
+}
+
+.details-open > .journal-fa-icon,
+.details-open > .notes-button-wrapper {
+    align-self: flex-start;
+}
+
+.location-notes-details-data-section > h5 {
+    font-weight: bold;
+    padding-bottom: 0.2rem;
+}
+
+.location-notes-details-data-section > ul {
+    list-style: inside disc;
+}
+
+.quests-section {
+    border-bottom: none;
+}
+
+.location-notes-fa-icon,
+.journal-fa-icon {
+    cursor: pointer;
+}
+
+.journal-fa-icon.cancel-edit {
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+.notes-button-wrapper.unhovered {
+    margin-left: auto;
+    margin-right: 1rem;
+    display: flex;
+    gap: 1rem;
+    filter: opacity(20%);
+}
+
+.notes-button-wrapper.hovered {
+    margin-left: auto;
+    margin-right: 1rem;
+    display: flex;
+    gap: 1rem;
+    filter: opacity(100%);
+}

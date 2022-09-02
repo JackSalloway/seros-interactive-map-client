@@ -1,0 +1,188 @@
+#creation-form-map-blur-div {
+    width: 100vw;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+/* creation-location-form-container styles are subject to change */
+#creation-form-container {
+    width: 40rem;
+    height: fit-content;
+    background-color: rgb(14, 22, 31);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* gap: 3rem; */
+    position: fixed;
+    top: 18%;
+    left: 0;
+    right: 0;
+    top: 25vh;
+    bottom: 20vh;
+    margin: auto;
+    padding: 1rem 0;
+    z-index: 2;
+    border-radius: 1rem;
+}
+
+#creation-form-container > h2 {
+    color: white;
+    font-size: 2.5em;
+}
+
+.creation-form {
+    width: 28rem;
+    height: auto;
+    margin: 1rem;
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(1fr);
+    color: white;
+    gap: 0.5rem;
+}
+
+label > textarea {
+    height: 3rem;
+    resize: vertical;
+    max-height: 10rem;
+}
+
+/* LOCATION FORM STYLES */
+
+#create-location-form {
+    grid-template-areas:
+        "name name"
+        "desc desc"
+        "type region"
+        "visited unmarked"
+        "submit submit";
+}
+
+.creation-input-div {
+    min-height: 4rem;
+    font-size: 1.5em;
+}
+
+.creation-input-div > label {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* .creation-input-div>label>input {
+    will use this later to style inputs and make them look somewhat nice
+} */
+
+/* #create-location-latitude {
+    grid-area: latitude;
+}
+
+#create-location-longitude {
+    grid-area: longitude;
+} */
+
+#create-location-name {
+    grid-area: name;
+    width: inherit;
+}
+
+#create-location-desc {
+    grid-area: desc;
+    width: inherit;
+}
+
+#create-location-type {
+    grid-area: type;
+    width: 13rem;
+    justify-self: start;
+}
+
+#create-location-region {
+    grid-area: region;
+    width: 13rem;
+    justify-self: end;
+}
+
+#create-location-visited {
+    grid-area: visited;
+}
+
+#create-location-marked {
+    grid-area: unmarked;
+}
+
+#create-location-submit {
+    grid-area: submit;
+}
+
+/* QUEST FORM STYLES */
+
+#create-quest-form {
+    grid-template-areas:
+        "name name"
+        "desc desc"
+        "completed completed"
+        "location location"
+        "submit submit";
+}
+
+#create-quest-name {
+    grid-area: name;
+    width: inherit;
+}
+
+#create-quest-desc {
+    grid-area: desc;
+    width: inherit;
+}
+
+#create-quest-completed {
+    grid-area: completed;
+}
+
+#create-quest-location {
+    grid-area: location;
+    width: inherit;
+}
+
+/* NPC FORM STYLES */
+
+#create-npc-form {
+    grid-template-areas:
+        "name name"
+        "desc desc"
+        "disposition disposition"
+        "location location"
+        "quest quest";
+}
+
+#create-npc-name {
+    grid-area: name;
+    width: inherit;
+}
+
+#create-npc-desc {
+    grid-area: desc;
+    width: inherit;
+}
+
+#create-npc-disposition {
+    grid-area: disposition;
+    width: inherit;
+}
+
+#create-npc-location {
+    grid-area: location;
+    width: inherit;
+}
+
+#create-npc-quest {
+    grid-area: quest;
+    width: inherit;
+}

@@ -1,0 +1,22 @@
+/* leaflet styles - things to do with MapBox.jsx */
+.leaflet-container {
+    /* margin: 0 auto; */
+    width: auto;
+    height: 100vh;
+    background: url("../../../public/maps/seros/png-example/5/7/12.png");
+    z-index: 1;
+    /* margin-bottom: 5vh; */
+    grid-area: mapbox;
+}
+
+.popup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1;
+}
+
+.popup-h2 {
+    font-size: 1.5rem;
+    text-decoration: underline;
+}
