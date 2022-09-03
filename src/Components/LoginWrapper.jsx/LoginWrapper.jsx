@@ -32,7 +32,7 @@ const LoginWrapper = (props) => {
                 password: password,
             },
             withCredentials: true,
-            url: "login",
+            url: "https://seros-interactive-map.herokuapp.com/login",
         });
         // Set value to true
         if (result.status) setUserAuthenticated(result.data);
