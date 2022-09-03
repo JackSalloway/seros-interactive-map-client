@@ -70,7 +70,10 @@ function App() {
             return;
         }
 
-        fetch("https://seros-interactive-map.herokuapp.com/location_data")
+        fetch("https://seros-interactive-map.herokuapp.com/location_data", {
+            method: "GET",
+            mode: "cors",
+        })
             .then((response) => response.json())
             .then((locations) => setSerosLocations(locations));
     }, [serosLocations, setSerosLocations]);
@@ -81,7 +84,10 @@ function App() {
             return;
         }
 
-        fetch("https://seros-interactive-map.herokuapp.com/quest_data")
+        fetch("https://seros-interactive-map.herokuapp.com/quest_data", {
+            method: "GET",
+            mode: "cors",
+        })
             .then((response) => response.json())
             .then((quests) => setSerosQuests(quests));
     }, [serosQuests, setSerosQuests]);
@@ -92,14 +98,20 @@ function App() {
             return;
         }
 
-        fetch("https://seros-interactive-map.herokuapp.com/npc_data")
+        fetch("https://seros-interactive-map.herokuapp.com/npc_data", {
+            method: "GET",
+            mode: "cors",
+        })
             .then((response) => response.json())
             .then((NPCs) => setSerosNPCs(NPCs));
     }, [serosNPCs, setSerosNPCs]);
 
     // Check cookies on startup to see if user was logged in last time they used the site and their refresh token is still valid.
     useEffect(() => {
-        fetch("https://seros-interactive-map.herokuapp.com/startup")
+        fetch("https://seros-interactive-map.herokuapp.com/startup", {
+            method: "GET",
+            mode: "cors",
+        })
             .then((response) => response.json())
             .then((res) => {
                 setUserAuthenticated(res);
