@@ -139,7 +139,9 @@ const LocationNotes = (props) => {
                 </span>
             </div>
             <div id="location-notes-data">
-                <p>{he.decode(locationNotes.desc)}</p>
+                {locationNotes.desc === true ? (
+                    <p>{he.decode(locationNotes.desc)}</p>
+                ) : null}
 
                 <SubLocationWrapper
                     showSubLocations={showSubLocations}
