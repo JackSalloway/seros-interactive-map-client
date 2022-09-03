@@ -1,15 +1,15 @@
 <!-- startup -->
 
-/https://seros-interactive-map.netlify.app/startup /https://seros-interactive-map.herokuapp.com/startup 200
+<!-- /https://seros-interactive-map.netlify.app/startup /https://seros-interactive-map.herokuapp.com/startup 200 -->
 
 <!-- location data -->
 
-/https://seros-interactive-map.netlify.app/location_data /https://seros-interactive-map.herokuapp.com/location_data 200
+<!-- /https://seros-interactive-map.netlify.app/location_data /https://seros-interactive-map.herokuapp.com/location_data 200 -->
 
 <!-- npc data -->
 
-/https://seros-interactive-map.netlify.app/npc_data /https://seros-interactive-map.herokuapp.com/npc_data 200
+<!-- /https://seros-interactive-map.netlify.app/npc_data /https://seros-interactive-map.herokuapp.com/npc_data 200 -->
 
 <!-- quest data -->
 
-/https://seros-interactive-map.netlify.app/quest_data /https://seros-interactive-map.herokuapp.com/quest_data 200
+<!-- /https://seros-interactive-map.netlify.app/quest_data /https://seros-interactive-map.herokuapp.com/quest_data 200 -->
