@@ -38,7 +38,10 @@ const CreateNPC = (props) => {
             // cache: 'default',
         };
 
-        const result = await fetch("create_npc", init);
+        const result = await fetch(
+            "https://seros-interactive-map.herokuapp.com/create_npc",
+            init
+        );
         const returnedData = await result.json();
         setSerosNPCs([...serosNPCs, ...returnedData]);
         setAddNewNPC(false);

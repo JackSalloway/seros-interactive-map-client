@@ -35,7 +35,10 @@ const DeleteNPC = (props) => {
 
         //   console.log(myInit);
 
-        await fetch("delete_npc", init);
+        await fetch(
+            "https://seros-interactive-map.herokuapp.com/delete_npc",
+            init
+        );
         // const returnedData = await result.json();
         // setSerosNPCs(returnedData);
         let serosNPCsCopy = [...serosNPCs];

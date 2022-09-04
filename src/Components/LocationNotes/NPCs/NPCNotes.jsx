@@ -218,7 +218,10 @@ const NPCNotes = (props) => {
             // cache: 'default',
         };
 
-        const result = await fetch("update_npc", init);
+        const result = await fetch(
+            "https://seros-interactive-map.herokuapp.com/update_npc",
+            init
+        );
         const returnedData = await result.json();
         let serosNPCsCopy = [...serosNPCs];
         serosNPCsCopy[originalIndex] = returnedData;
