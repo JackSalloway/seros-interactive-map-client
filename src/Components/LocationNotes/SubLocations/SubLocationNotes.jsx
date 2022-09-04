@@ -82,11 +82,9 @@ const SubLocationNotes = (props) => {
 
         const init = {
             method: "POST",
-            headers: {
-                "Content-Type": CONTENT_TYPE_APPLICATION_JSON,
-                Accept: "application/json",
-            },
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
             body: JSON.stringify(subLocationData),
+            mode: "cors",
         };
 
         const result = await fetch(
