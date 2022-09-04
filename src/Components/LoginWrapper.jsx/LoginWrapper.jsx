@@ -95,7 +95,7 @@ const LoginWrapper = (props) => {
                 password: password,
             },
             // withCredentials: true,
-            url: "register",
+            url: "https://seros-interactive-map.herokuapp.com/register",
         });
 
         // const userData = {
