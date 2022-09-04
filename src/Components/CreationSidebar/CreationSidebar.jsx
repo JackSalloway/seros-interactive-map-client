@@ -36,14 +36,14 @@ const CreationSidebar = (props) => {
                         <button onClick={() => setRenderCreationMarker(true)}>
                             Add a new location!
                         </button>
-                        <button
+                        {/* <button
                             onClick={() => setRenderQuestCreationForm(true)}
                         >
                             Add a new quest!
                         </button>
                         <button onClick={() => setRenderNPCCreationForm(true)}>
                             Add a new NPC!
-                        </button>
+                        </button> */}
                         {/* <button onClick={() => setRenderQuestList(true)}>Show all quests!</button> */}
                     </div>
                     <div
