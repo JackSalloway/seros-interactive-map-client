@@ -191,6 +191,7 @@ function App() {
                 />
 
                 <CreationSidebar
+                    inputStyles={inputStyles}
                     renderCreationSidebar={renderCreationSidebar}
                     setRenderCreationSidebar={setRenderCreationSidebar}
                     renderCreationMarker={renderCreationMarker}

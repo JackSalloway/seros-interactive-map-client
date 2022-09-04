@@ -8,8 +8,9 @@ const CreationSidebar = (props) => {
         renderCreationSidebar,
         setRenderCreationSidebar,
         setRenderCreationMarker,
-        setRenderQuestCreationForm,
-        setRenderNPCCreationForm,
+        inputStyles,
+        // setRenderQuestCreationForm,
+        // setRenderNPCCreationForm,
     } = props;
 
     if (!renderCreationSidebar) {
@@ -17,6 +18,7 @@ const CreationSidebar = (props) => {
             <div
                 className="creation-sidebar-icon-wrapper"
                 id="sidebar-close"
+                style={inputStyles}
                 onClick={() => {
                     setRenderCreationSidebar(!renderCreationSidebar);
                 }}
@@ -30,7 +32,7 @@ const CreationSidebar = (props) => {
     } else {
         return (
             <>
-                <div id="creation-sidebar-wrapper">
+                <div id="creation-sidebar-wrapper" style={inputStyles}>
                     <div id="creation-sidebar-input-wrapper">
                         <h2>Create new data!</h2>
                         <button onClick={() => setRenderCreationMarker(true)}>
