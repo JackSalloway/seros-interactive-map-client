@@ -82,7 +82,10 @@ const SubLocationNotes = (props) => {
 
         const init = {
             method: "POST",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            headers: {
+                "Content-Type": CONTENT_TYPE_APPLICATION_JSON,
+                Accept: "application/json",
+            },
             body: JSON.stringify(subLocationData),
         };
 
