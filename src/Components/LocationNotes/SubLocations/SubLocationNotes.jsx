@@ -86,7 +86,10 @@ const SubLocationNotes = (props) => {
             body: JSON.stringify(subLocationData),
         };
 
-        const result = await fetch("update_sub_location", init);
+        const result = await fetch(
+            "https://seros-interactive-map.herokuapp.com/update_sub_location",
+            init
+        );
         const returnedData = await result.json();
         let serosLocationsCopy = [...serosLocations];
         const indexToUpdate = serosLocationsCopy

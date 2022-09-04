@@ -29,7 +29,10 @@ const CreateSubLocation = (props) => {
             body: JSON.stringify(subLocationData),
         };
 
-        const result = await fetch("create_sub_location", init);
+        const result = await fetch(
+            "https://seros-interactive-map.herokuapp.com/create_sub_location",
+            init
+        );
         const data = await result.json();
         let serosLocationsCopy = [...serosLocations];
         const indexToUpdate = serosLocationsCopy

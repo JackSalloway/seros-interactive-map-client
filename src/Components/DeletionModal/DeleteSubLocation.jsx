@@ -41,7 +41,10 @@ const DeleteSubLocation = (props) => {
 
         //   console.log(myInit);
 
-        const result = await fetch("delete_sub_location", init);
+        const result = await fetch(
+            "https://seros-interactive-map.herokuapp.com/delete_sub_location",
+            init
+        );
         const returnedData = await result.json();
         let serosLocationsCopy = [...serosLocations];
         const indexToUpdate = serosLocationsCopy
