@@ -112,10 +112,7 @@ const LocationNotes = (props) => {
 
     // Render data
     return (
-        <div
-            id="location-notes-wrapper"
-            style={{ backgroundImage: `url(./images/papyr.jpg)` }}
-        >
+        <div id="location-notes-wrapper">
             <div
                 id="location-notes-title"
                 style={{

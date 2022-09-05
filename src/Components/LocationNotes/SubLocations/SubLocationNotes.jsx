@@ -106,7 +106,7 @@ const SubLocationNotes = (props) => {
     // Return a form with values set to sub location values for the user to update
     if (editing === true) {
         return (
-            <>
+            <div className="location-notes-details">
                 <div
                     className="location-notes-details-border top"
                     style={{
@@ -174,12 +174,12 @@ const SubLocationNotes = (props) => {
                         backgroundImage: `url(./images/statblockbar.jpg)`,
                     }}
                 />
-            </>
+            </div>
         );
     }
 
     return (
-        <>
+        <div className="location-notes-details">
             <div
                 className="location-notes-details-border top"
                 style={{ backgroundImage: `url(./images/statblockbar.jpg)` }}
@@ -241,7 +241,7 @@ const SubLocationNotes = (props) => {
                 className="location-notes-details-border bottom"
                 style={{ backgroundImage: `url(./images/statblockbar.jpg)` }}
             />
-        </>
+        </div>
     );
 };
 

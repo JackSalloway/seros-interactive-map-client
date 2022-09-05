@@ -48,7 +48,7 @@ const CreateSubLocation = (props) => {
 
     // Render sub location form
     return (
-        <>
+        <div className="location-notes-details">
             <div
                 className="location-notes-details-border top"
                 style={{
@@ -102,7 +102,7 @@ const CreateSubLocation = (props) => {
                     backgroundImage: `url(./images/statblockbar.jpg)`,
                 }}
             />
-        </>
+        </div>
     );
 };
 

@@ -64,7 +64,7 @@ const CreateQuest = (props) => {
 
     // Render quest form
     return (
-        <>
+        <div className="location-notes-details">
             <div
                 className="location-notes-details-border top"
                 style={{
@@ -145,7 +145,7 @@ const CreateQuest = (props) => {
                     backgroundImage: `url(./images/statblockbar.jpg)`,
                 }}
             />
-        </>
+        </div>
     );
 };
 

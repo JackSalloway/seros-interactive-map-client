@@ -78,7 +78,7 @@ const QuestNotes = (props) => {
 
     if (selected === false) {
         return (
-            <>
+            <div className="location-notes-details">
                 <div
                     className="location-notes-details-border top"
                     style={{
@@ -104,7 +104,7 @@ const QuestNotes = (props) => {
                         backgroundImage: `url(./images/statblockbar.jpg)`,
                     }}
                 />
-            </>
+            </div>
         );
     }
 
@@ -172,7 +172,7 @@ const QuestNotes = (props) => {
 
     if (editing === true) {
         return (
-            <>
+            <div className="location-notes-details">
                 <div
                     className="location-notes-details-border top"
                     style={{
@@ -267,12 +267,12 @@ const QuestNotes = (props) => {
                         backgroundImage: `url(./images/statblockbar.jpg)`,
                     }}
                 />
-            </>
+            </div>
         );
     }
 
     return (
-        <>
+        <div className="location-notes-details">
             <div
                 className="location-notes-details-border top"
                 style={{ backgroundImage: `url(./images/statblockbar.jpg)` }}
@@ -354,7 +354,7 @@ const QuestNotes = (props) => {
                 className="location-notes-details-border bottom"
                 style={{ backgroundImage: `url(./images/statblockbar.jpg)` }}
             />
-        </>
+        </div>
     );
 };
 

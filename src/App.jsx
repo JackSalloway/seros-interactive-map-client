@@ -15,7 +15,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 // Component imports
-import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
+// import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
 import CreationSidebar from "./Components/CreationSidebar/CreationSidebar";
@@ -46,7 +46,7 @@ function App() {
         visibility: "hidden",
         display: "none",
     });
-    const [startupComplete, setStartupComplete] = useState(false);
+    // const [startupComplete, setStartupComplete] = useState(false);
 
     // Map marker states
     const [renderCreationMarker, setRenderCreationMarker] = useState(false);
@@ -118,8 +118,8 @@ function App() {
                 if (res.privilege === true) {
                     setInputStyles({ visibility: "visible" });
                 }
-            })
-            .then(setStartupComplete(true));
+            });
+        // .then(setStartupComplete(true));
     }, []);
 
     // Check if user is authenticated after login - to enable Create, Update and Delete access
@@ -140,9 +140,9 @@ function App() {
         faPencil
     ); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
 
-    if (startupComplete === false) {
-        return <LoadingScreen />;
-    }
+    // if (startupComplete === false) {
+    //     return <LoadingScreen />;
+    // }
 
     return (
         <>

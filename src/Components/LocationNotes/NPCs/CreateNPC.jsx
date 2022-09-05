@@ -133,7 +133,7 @@ const CreateNPC = (props) => {
 
     // Render NPC form
     return (
-        <>
+        <div className="location-notes-details">
             <div
                 className="location-notes-details-border top"
                 style={{
@@ -228,7 +228,7 @@ const CreateNPC = (props) => {
                     backgroundImage: `url(./images/statblockbar.jpg)`,
                 }}
             />
-        </>
+        </div>
     );
 };
 

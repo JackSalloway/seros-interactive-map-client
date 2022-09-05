@@ -1,6 +1,9 @@
 // Style imports
 import "./MapBox.css";
 
+// Component Imports
+import LoadingScreen from "../LoadingScreen/LoadingScreen";
+
 // Leaflet imports
 import { LatLng, LatLngBounds } from "leaflet";
 import {
@@ -158,7 +161,7 @@ function MapBox(props) {
 
     // If data hasn't been fetched yet, don't render the map
     if (serosLocations === null) {
-        return <p>Loading...</p>;
+        return <LoadingScreen />;
     }
 
     // Create map boundries

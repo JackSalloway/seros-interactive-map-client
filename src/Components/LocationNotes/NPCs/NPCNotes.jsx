@@ -231,7 +231,7 @@ const NPCNotes = (props) => {
 
     if (editing === true) {
         return (
-            <>
+            <div className="location-notes-details">
                 <div
                     className="location-notes-details-border top"
                     style={{
@@ -338,12 +338,12 @@ const NPCNotes = (props) => {
                         backgroundImage: `url(./images/statblockbar.jpg)`,
                     }}
                 />
-            </>
+            </div>
         );
     }
 
     return (
-        <>
+        <div className="location-notes-details">
             <div
                 className="location-notes-details-border top"
                 style={{ backgroundImage: `url(./images/statblockbar.jpg)` }}
@@ -437,7 +437,7 @@ const NPCNotes = (props) => {
                 className="location-notes-details-border bottom"
                 style={{ backgroundImage: `url(./images/statblockbar.jpg)` }}
             />
-        </>
+        </div>
     );
 };
 

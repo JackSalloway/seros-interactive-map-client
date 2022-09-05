@@ -7,7 +7,6 @@
     overflow-y: auto;
     font-family: "Noto Sans", sans-serif;
     background: #fdf1dc;
-    color: black;
 }
 
 /* Prevent scrollbar from appearing when div becomes to long */
@@ -121,7 +120,9 @@ button {
 /* LOCATION NOTES STYLES - These can be found within the: QuestNotes.jsx, NPCNotes.jsx and SubLocationNotes.jsx components */
 .location-notes-category-wrapper {
     margin: 0.5rem 0;
-    padding: 1rem 0;
+    padding: 1rem 0rem;
+    border: black solid 2px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
 }
@@ -142,6 +143,8 @@ button {
 }
 
 .location-notes-details {
+    margin: auto;
+    width: 99%;
     display: flex;
     flex-direction: column;
     align-items: left;

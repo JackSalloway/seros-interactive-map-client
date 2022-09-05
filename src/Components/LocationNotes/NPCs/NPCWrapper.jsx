@@ -21,7 +21,10 @@ const NPCWrapper = (props) => {
     } = props;
 
     return (
-        <div className="location-notes-category-wrapper">
+        <div
+            className="location-notes-category-wrapper"
+            style={{ backgroundImage: `url(./images/papyr.jpg)` }}
+        >
             <div className="location-notes-category-header">
                 <div className="location-notes-category-wrapper-images-wrapper">
                     <img
