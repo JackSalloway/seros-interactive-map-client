@@ -6,7 +6,8 @@
     gap: 2rem;
     overflow-y: auto;
     font-family: "Noto Sans", sans-serif;
-    background: #fdf1dc;
+    /* background: #fdf1dc; */
+    background: rgba(0, 0, 0, 0.1);
 }
 
 /* Prevent scrollbar from appearing when div becomes to long */

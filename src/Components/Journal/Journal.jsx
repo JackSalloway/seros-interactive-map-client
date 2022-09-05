@@ -43,16 +43,27 @@ const Journal = (props) => {
                 {Object.keys(userAuthenticated).length === 0 ? (
                     <LoginWrapper setUserAuthenticated={setUserAuthenticated} />
                 ) : (
-                    <>
-                        <p>Welcome back {userAuthenticated.username}!</p>
+                    <div className="login-status">
+                        <p id="status-username">
+                            Welcome back {userAuthenticated.username}!
+                        </p>
+                        {userAuthenticated.privileged === true ? (
+                            <p>You are authorized to make changes!</p>
+                        ) : (
+                            <p>
+                                You are not authroized to make changes. Contact
+                                an admin if you want to change this.
+                            </p>
+                        )}
                         <button
+                            id="logout-button"
                             onClick={() => {
                                 logout();
                             }}
                         >
                             Logout
                         </button>
-                    </>
+                    </div>
                 )}
                 <div id="journal-front-page-logo">
                     <img src="images/SerosLogo2.png" alt="" id="seros-logo" />

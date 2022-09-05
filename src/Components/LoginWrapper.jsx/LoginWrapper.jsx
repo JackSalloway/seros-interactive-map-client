@@ -41,38 +41,44 @@ const LoginWrapper = (props) => {
     const renderLoginForm = () => {
         return (
             <>
-                <h2>Login!</h2>
-                <p>
-                    For full read/write access, please sign in to your account.
-                </p>
                 <form onSubmit={userLogin} className="user-form-inputs">
-                    <label htmlFor="login-name">
-                        Username
-                        <input
-                            type="text"
-                            id="login-name"
-                            required
-                            value={username}
-                            onChange={({ target }) => {
-                                setUsername(target.value);
-                            }}
-                        />
-                    </label>
-                    <label htmlFor="login-password">
-                        Password
-                        <input
-                            type="password"
-                            id="login-password"
-                            required
-                            value={password}
-                            onChange={({ target }) => {
-                                setPassword(target.value);
-                            }}
-                        />
-                    </label>
-                    <button>Sign in</button>
+                    <fieldset>
+                        <legend>Login!</legend>
+                        <label htmlFor="login-name">
+                            Username
+                            <input
+                                type="text"
+                                id="login-name"
+                                required
+                                value={username}
+                                onChange={({ target }) => {
+                                    setUsername(target.value);
+                                }}
+                            />
+                        </label>
+                        <label htmlFor="login-password">
+                            Password
+                            <input
+                                type="password"
+                                id="login-password"
+                                required
+                                value={password}
+                                onChange={({ target }) => {
+                                    setPassword(target.value);
+                                }}
+                            />
+                        </label>
+                        <button
+                            className="user-form-button"
+                            id="sign-in-button"
+                        >
+                            Sign in
+                        </button>
+                    </fieldset>
                 </form>
                 <button
+                    className="user-form-button"
+                    id="create-account-button"
                     onClick={() => {
                         setNewUser(true);
                     }}
@@ -119,7 +125,7 @@ const LoginWrapper = (props) => {
         return (
             <>
                 <h2>Create an account!</h2>
-                <p>Create a new account for full read/write access!</p>
+                <p>Create a new account!</p>
                 <form onSubmit={createUser} className="user-form-inputs">
                     <label htmlFor="login-name">
                         Username
@@ -178,7 +184,7 @@ const LoginWrapper = (props) => {
             {newUser === false ? renderLoginForm() : renderCreateUserForm()}
             {/* <Link to={'/login'}>Login!</Link> */}
             <br />
-            <p>Or continue as a guest for read only access.</p>
+
             {/* <Link to={"/interactive-map"}>Continue as a guest!</Link> */}
         </div>
     );
