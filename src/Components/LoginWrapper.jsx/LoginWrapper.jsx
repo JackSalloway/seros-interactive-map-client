@@ -35,8 +35,16 @@ const LoginWrapper = (props) => {
             // withCredentials: true,
             url: "https://seros-interactive-map.herokuapp.com/login",
         });
-        // Set value to true
-        if (result.status) setUserAuthenticated(result.data);
+        if (
+            result.data ===
+            "Incorrect details provided. Ensure your details are correct."
+        ) {
+            setLoginResMes(result.data);
+            return;
+        }
+        if (result.status)
+            // Set value to true
+            setUserAuthenticated(result.data);
     };
 
     const renderLoginForm = () => {
