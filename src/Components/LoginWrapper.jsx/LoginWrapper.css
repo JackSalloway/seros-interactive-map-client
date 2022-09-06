@@ -11,6 +11,10 @@
     align-self: center;
 }
 
+.login-response-message {
+    margin: auto;
+}
+
 .user-form-inputs {
     width: 100%;
     display: flex;
@@ -46,8 +50,4 @@
 
 .user-form-button {
     margin: auto;
-}
-
-#sign-in-button {
-    align-self: center;
 }
