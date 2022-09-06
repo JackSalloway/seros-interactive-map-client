@@ -103,22 +103,6 @@ const LoginWrapper = (props) => {
             // withCredentials: true,
             url: "https://seros-interactive-map.herokuapp.com/register",
         });
-
-        // const userData = {
-        //     username: username,
-        //     email: email,
-        //     password: password,
-        // }
-
-        // const init = {
-        //     method: 'POST',
-        //     headers: { 'Content-Type': 'application/json' },
-        //     body: JSON.stringify(userData),
-        //     mode: 'cors',
-        //     // cache: 'default',
-        //   };
-
-        // fetch('register', init);
     };
 
     const renderCreateUserForm = () => {
