@@ -1,7 +1,6 @@
 {
     "name": "client",
     "version": "0.1.0",
-    "proxy": "https://seros-interactive-map.herokuapp.com/",
     "private": true,
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.1.1",
@@ -11,6 +10,7 @@
         "@testing-library/react": "^13.3.0",
         "@testing-library/user-event": "^13.5.0",
         "axios": "^0.27.2",
+        "dotenv": "^16.0.2",
         "he": "^1.2.0",
         "js-cookie": "^3.0.1",
         "leaflet": "^1.8.0",

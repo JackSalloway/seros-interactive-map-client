@@ -28,7 +28,7 @@ const Journal = (props) => {
     const logout = async () => {
         await axios({
             method: "post",
-            // withCredentials: true,
+            withCredentials: true,
             url: "https://seros-interactive-map.herokuapp.com/logout",
         });
         // Set value to true
@@ -65,9 +65,9 @@ const Journal = (props) => {
                         </button>
                     </div>
                 )}
-                <div id="journal-front-page-logo">
+                {/* <div id="journal-front-page-logo">
                     <img src="images/SerosLogo2.png" alt="" id="seros-logo" />
-                </div>
+                </div> */}
                 <div id="journal-front-page-title">
                     <h1>Tactical Journal</h1>
                 </div>

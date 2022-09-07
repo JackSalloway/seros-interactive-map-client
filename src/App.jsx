@@ -70,7 +70,7 @@ function App() {
             return;
         }
 
-        fetch("https://seros-interactive-map.herokuapp.com/location_data", {
+        fetch(`${process.env.REACT_APP_API_URL}/location_data`, {
             method: "GET",
             mode: "cors",
         })
@@ -84,7 +84,7 @@ function App() {
             return;
         }
 
-        fetch("https://seros-interactive-map.herokuapp.com/quest_data", {
+        fetch(`${process.env.REACT_APP_API_URL}/quest_data`, {
             method: "GET",
             mode: "cors",
         })
@@ -98,7 +98,7 @@ function App() {
             return;
         }
 
-        fetch("https://seros-interactive-map.herokuapp.com/npc_data", {
+        fetch(`${process.env.REACT_APP_API_URL}/npc_data`, {
             method: "GET",
             mode: "cors",
         })
@@ -108,7 +108,7 @@ function App() {
 
     // Check cookies on startup to see if user was logged in last time they used the site and their refresh token is still valid.
     useEffect(() => {
-        fetch("https://seros-interactive-map.herokuapp.com/startup", {
+        fetch(`${process.env.REACT_APP_API_URL}/startup`, {
             method: "GET",
             mode: "cors",
         })
