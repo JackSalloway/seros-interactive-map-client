@@ -116,7 +116,7 @@ function App() {
             .then((response) => response.json())
             .then((res) => {
                 setUserAuthenticated(res);
-                if (res.privilege === true) {
+                if (res.privileged === true) {
                     setInputStyles({ visibility: "visible" });
                 }
             });
