@@ -35,7 +35,10 @@ const CreateQuest = (props) => {
             // cache: 'default',
         };
 
-        const result = await fetch("create_quest", init);
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/create_quest`,
+            init
+        );
         const returnedData = await result.json();
         setSerosQuests([...serosQuests, ...returnedData]);
         setAddNewQuest(false);

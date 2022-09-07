@@ -33,7 +33,7 @@ const LoginWrapper = (props) => {
                 password: password,
             },
             withCredentials: true,
-            url: "https://seros-interactive-map.herokuapp.com/login",
+            url: `${process.env.REACT_APP_API_URL}/login`,
         });
         if (
             result.data ===
@@ -111,7 +111,7 @@ const LoginWrapper = (props) => {
                 password: password,
             },
             withCredentials: true,
-            url: "https://seros-interactive-map.herokuapp.com/register",
+            url: `${process.env.REACT_APP_API_URL}/register`,
         }).then((response) => {
             // Sending a 401 or 409 status response crashed the app and stopped it from working, so unsure how to do this next part efficiently
             if (

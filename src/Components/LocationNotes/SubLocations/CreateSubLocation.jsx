@@ -31,7 +31,7 @@ const CreateSubLocation = (props) => {
         };
 
         const result = await fetch(
-            "https://seros-interactive-map.herokuapp.com/create_sub_location",
+            `${process.env.REACT_APP_API_URL}/create_sub_location`,
             init
         );
         const data = await result.json();

@@ -33,7 +33,10 @@ const DeleteQuest = (props) => {
             // mode: 'cors',
             // cache: 'default',
         };
-        const result = await fetch("delete_quest", init);
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/delete_quest`,
+            init
+        );
         const returnedData = await result.json(); // returnedData is the list of NPCs, need to do this as deleting quests could affect npcs.
         const serosQuestsCopy = [...serosQuests];
         const questToRemove = serosQuests

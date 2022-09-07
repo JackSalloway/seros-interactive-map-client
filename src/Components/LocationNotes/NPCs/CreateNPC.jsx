@@ -39,7 +39,7 @@ const CreateNPC = (props) => {
         };
 
         const result = await fetch(
-            "https://seros-interactive-map.herokuapp.com/create_npc",
+            `${process.env.REACT_APP_API_URL}/create_npc`,
             init
         );
         const returnedData = await result.json();

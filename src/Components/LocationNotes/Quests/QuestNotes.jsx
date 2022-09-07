@@ -128,7 +128,10 @@ const QuestNotes = (props) => {
             // cache: 'default',
         };
 
-        const result = await fetch("update_quest", init);
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/update_quest`,
+            init
+        );
         const returnedData = await result.json();
         let serosQuestsCopy = [...serosQuests];
         serosQuestsCopy[originalIndex] = returnedData.questResult;

@@ -88,7 +88,7 @@ const SubLocationNotes = (props) => {
         };
 
         const result = await fetch(
-            "https://seros-interactive-map.herokuapp.com/update_sub_location",
+            `${process.env.REACT_APP_API_URL}/update_sub_location`,
             init
         );
         const returnedData = await result.json();

@@ -29,7 +29,7 @@ const Journal = (props) => {
         await axios({
             method: "post",
             withCredentials: true,
-            url: "https://seros-interactive-map.herokuapp.com/logout",
+            url: `${process.env.REACT_APP_API_URL}/logout`,
         });
         // Set value to true
         setUserAuthenticated({});

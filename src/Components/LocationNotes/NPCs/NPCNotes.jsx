@@ -219,7 +219,7 @@ const NPCNotes = (props) => {
         };
 
         const result = await fetch(
-            "https://seros-interactive-map.herokuapp.com/update_npc",
+            `${process.env.REACT_APP_API_URL}/update_npc`,
             init
         );
         const returnedData = await result.json();
