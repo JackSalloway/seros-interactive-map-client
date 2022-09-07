@@ -62,8 +62,8 @@ const CreateNPCForm = (props) => {
             method: "POST",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
             body: JSON.stringify(NPCData),
-            // mode: 'cors',
-            // cache: 'default',
+            mode: "cors",
+            credentials: "include",
         };
 
         //   console.log(myInit);

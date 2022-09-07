@@ -30,8 +30,8 @@ const DeleteQuest = (props) => {
             method: "POST",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
             body: JSON.stringify(dataToDelete),
-            // mode: 'cors',
-            // cache: 'default',
+            mode: "cors",
+            credentials: "include",
         };
         const result = await fetch(
             `${process.env.REACT_APP_API_URL}/delete_quest`,

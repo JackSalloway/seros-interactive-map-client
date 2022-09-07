@@ -35,8 +35,8 @@ const CreateLocationForm = (props) => {
             method: "POST",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
             body: JSON.stringify(locationData),
-            // mode: 'cors',
-            // cache: 'default',
+            mode: "cors",
+            credentials: "include",
         };
 
         fetch("create_location", init);

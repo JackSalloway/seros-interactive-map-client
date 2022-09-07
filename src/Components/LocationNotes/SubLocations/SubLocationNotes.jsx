@@ -85,6 +85,7 @@ const SubLocationNotes = (props) => {
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
             body: JSON.stringify(subLocationData),
             mode: "cors",
+            credentials: "include",
         };
 
         const result = await fetch(

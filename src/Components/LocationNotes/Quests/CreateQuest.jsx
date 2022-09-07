@@ -31,8 +31,8 @@ const CreateQuest = (props) => {
             method: "POST",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
             body: JSON.stringify(questData),
-            // mode: 'cors',
-            // cache: 'default',
+            mode: "cors",
+            credentials: "include",
         };
 
         const result = await fetch(

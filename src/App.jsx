@@ -111,6 +111,7 @@ function App() {
         fetch(`${process.env.REACT_APP_API_URL}/startup`, {
             method: "GET",
             mode: "cors",
+            credentials: "include",
         })
             .then((response) => response.json())
             .then((res) => {
