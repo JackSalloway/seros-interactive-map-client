@@ -39,7 +39,7 @@ const CreateLocationForm = (props) => {
             credentials: "include",
         };
 
-        fetch("create_location", init);
+        fetch(`${process.env.REACT_APP_API_URL}/create_location`, init);
     };
 
     return (
