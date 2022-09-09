@@ -27,7 +27,7 @@ const Journal = (props) => {
 
     const logout = async () => {
         await axios({
-            method: "post",
+            method: "get",
             withCredentials: true,
             url: `${process.env.REACT_APP_API_URL}/logout`,
         });
