@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./Journal.css";
 import LoginWrapper from "../LoginWrapper.jsx/LoginWrapper";
 import LocationNotes from "../LocationNotes/LocationNotes";
+import JournalMenuHeaderBox from "../JournalMenu/JournalMenuHeaderBox";
+import JournalMenuContent from "../JournalMenu/JournalMenuContent";
 
 const Journal = (props) => {
     const {
@@ -23,7 +25,13 @@ const Journal = (props) => {
         setUserAuthenticated,
         inputStyles,
         setInputStyles,
+        setRenderCreationMarker,
     } = props;
+
+    const [selectedTab, setSelectedTab] = useState("Create location");
+
+    // Tooltip states
+    const [showTooltip, setShowTooltip] = useState(false);
 
     const logout = async () => {
         await axios({
@@ -71,8 +79,41 @@ const Journal = (props) => {
                 <div id="journal-front-page-title">
                     <h1>Tactical Journal</h1>
                 </div>
-                <div id="journal-front-page-instructions">
-                    <h2>Select a location to display notes!</h2>
+
+                <div id="journal-front-page-menu">
+                    <div id="journal-front-page-menu-header">
+                        <JournalMenuHeaderBox
+                            selectedTab={selectedTab}
+                            setSelectedTab={setSelectedTab}
+                            headerValue={"Create location"}
+                            boxPosition={"instruction-header-box-end"}
+                            showTooltip={showTooltip}
+                            setShowTooltip={setShowTooltip}
+                        />
+                        <JournalMenuHeaderBox
+                            selectedTab={selectedTab}
+                            setSelectedTab={setSelectedTab}
+                            headerValue={"Quest list"}
+                            boxPosition={"instruction-header-box-middle"}
+                            showTooltip={showTooltip}
+                            setShowTooltip={setShowTooltip}
+                        />
+                        <JournalMenuHeaderBox
+                            selectedTab={selectedTab}
+                            setSelectedTab={setSelectedTab}
+                            headerValue={"NPC list"}
+                            boxPosition={"instruction-header-box-end"}
+                            showTooltip={showTooltip}
+                            setShowTooltip={setShowTooltip}
+                        />
+                    </div>
+                    <JournalMenuContent
+                        userAuthenticated={userAuthenticated}
+                        selectedTab={selectedTab}
+                        serosQuests={serosQuests}
+                        setRenderCreationMarker={setRenderCreationMarker}
+                        showTooltip={showTooltip}
+                    />
                 </div>
             </div>
         );

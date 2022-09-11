@@ -12,18 +12,18 @@ import {
     faTimes,
     faTrashCan,
     faPencil,
+    faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Component imports
 // import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
-import CreationSidebar from "./Components/CreationSidebar/CreationSidebar";
+// import CreationSidebar from "./Components/CreationSidebar/CreationSidebar";
 import CreateLocationForm from "./Components/CreationForms/CreateLocationForm";
 import CreateQuestForm from "./Components/CreationForms/CreateQuestForm";
 import CreateNPCForm from "./Components/CreationForms/CreateNPCForm";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
-import QuestList from "./Components/QuestList/QuestList";
 
 // React imports
 import { useState, useEffect } from "react";
@@ -53,7 +53,7 @@ function App() {
     const [creationMarkerLatLng, setCreationMarkerLatLng] = useState([0, 0]);
 
     // Render creation form states
-    const [renderCreationSidebar, setRenderCreationSidebar] = useState(false);
+    // const [renderCreationSidebar, setRenderCreationSidebar] = useState(false);
     const [renderLocationCreationForm, setRenderLocationCreationForm] =
         useState(false);
     const [renderQuestCreationForm, setRenderQuestCreationForm] =
@@ -62,7 +62,6 @@ function App() {
     const [deleteData, setDeleteData] = useState(null);
 
     // Render data states
-    const [renderQuestList, setRenderQuestList] = useState(false);
 
     // Fetch location data from database
     useEffect(() => {
@@ -138,7 +137,8 @@ function App() {
         faPlus,
         faTimes,
         faTrashCan,
-        faPencil
+        faPencil,
+        faInfoCircle
     ); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
 
     // if (startupComplete === false) {
@@ -189,9 +189,10 @@ function App() {
                     setUserAuthenticated={setUserAuthenticated}
                     inputStyles={inputStyles}
                     setInputStyles={setInputStyles}
+                    setRenderCreationMarker={setRenderCreationMarker}
                 />
 
-                <CreationSidebar
+                {/* <CreationSidebar
                     inputStyles={inputStyles}
                     renderCreationSidebar={renderCreationSidebar}
                     setRenderCreationSidebar={setRenderCreationSidebar}
@@ -199,8 +200,7 @@ function App() {
                     setRenderCreationMarker={setRenderCreationMarker}
                     setRenderQuestCreationForm={setRenderQuestCreationForm}
                     setRenderNPCCreationForm={setRenderNPCCreationForm}
-                    setRenderQuestList={setRenderQuestList}
-                />
+                /> */}
 
                 {deleteData !== null ? (
                     <DeletionModal
@@ -241,10 +241,6 @@ function App() {
                     serosLocations={serosLocations}
                     serosQuests={serosQuests}
                 />
-            ) : null}
-
-            {renderQuestList === true ? (
-                <QuestList serosQuests={serosQuests} />
             ) : null}
         </>
     );

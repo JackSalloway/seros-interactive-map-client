@@ -1,0 +1,30 @@
+.journal-front-page-instruction-header-box {
+    width: calc(100% / 3);
+    height: 100%;
+    display: flex;
+    cursor: pointer;
+    text-align: center;
+    line-height: 3rem;
+    font-size: 1rem;
+    z-index: 1;
+}
+
+.journal-front-page-instruction-header-box > h2 {
+    align-self: center;
+    margin: auto;
+}
+
+.instruction-header-box-end {
+    border: 1px solid black;
+}
+
+.instruction-header-box-middle {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#menu-tab-tooltip-icon {
+    position: relative;
+    right: 0rem;
+    padding: 0.4rem;
+}
