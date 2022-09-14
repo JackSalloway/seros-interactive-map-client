@@ -33,14 +33,16 @@ const JournalMenuHeaderBox = (props) => {
         >
             <h2>{headerValue}</h2>
             {selectedTab === headerValue ? (
-                <FontAwesomeIcon
-                    icon="info-circle"
-                    className="journal-fa-icon"
-                    id="menu-tab-tooltip-icon"
-                    onClick={() => {
-                        setShowTooltip(!showTooltip);
-                    }}
-                />
+                <span style={{ position: "absolute", right: 0 }}>
+                    <FontAwesomeIcon
+                        icon="info-circle"
+                        className="journal-fa-icon"
+                        id="menu-tab-tooltip-icon"
+                        onClick={() => {
+                            setShowTooltip(!showTooltip);
+                        }}
+                    />
+                </span>
             ) : null}
         </div>
     );
