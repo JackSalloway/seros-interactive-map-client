@@ -53,21 +53,19 @@ const JournalMenuContent = (props) => {
     };
 
     const conditionalRender = () => {
-        let componentToRender = null;
-        switch (selectedTab) {
-            case "Create location":
-                componentToRender = createLocationContent();
-                break;
-            case "Quest list":
-                componentToRender = questListContent();
-                break;
-            case "NPC list":
-                componentToRender = npcListContent();
-                break;
-            default:
-                <p>test</p>;
+        if (selectedTab === "Create location") {
+            return createLocationContent();
         }
-        return componentToRender;
+
+        if (selectedTab === "QuestList") {
+            return questListContent();
+        }
+
+        if (selectedTab === "NPC list") {
+            return npcListContent();
+        }
+
+        return null;
     };
 
     return (
