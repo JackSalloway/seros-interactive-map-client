@@ -57,7 +57,7 @@ const JournalMenuContent = (props) => {
             return createLocationContent();
         }
 
-        if (selectedTab === "QuestList") {
+        if (selectedTab === "Quest list") {
             return questListContent();
         }
 
