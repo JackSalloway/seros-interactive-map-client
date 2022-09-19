@@ -1,12 +1,14 @@
 import React from "react";
 import "./JournalMenuContent.css";
-import QuestList from "../QuestList/QuestListWrapper";
+import QuestListWrapper from "../QuestList/QuestListWrapper";
+import NPCListWrapper from "../NPCList/NPCListWrapper";
 
 const JournalMenuContent = (props) => {
     const {
         userAuthenticated,
         selectedTab,
         serosQuests,
+        serosNPCs,
         setRenderCreationMarker,
         showTooltip,
     } = props;
@@ -40,15 +42,16 @@ const JournalMenuContent = (props) => {
 
     const questListContent = () => {
         return (
-            <QuestList serosQuests={serosQuests} showTooltip={showTooltip} />
+            <QuestListWrapper
+                serosQuests={serosQuests}
+                showTooltip={showTooltip}
+            />
         );
     };
 
     const npcListContent = () => {
         return (
-            <>
-                <p>Not yet implemented.</p>
-            </>
+            <NPCListWrapper serosNPCs={serosNPCs} showTooltip={showTooltip} />
         );
     };
 

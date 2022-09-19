@@ -1,0 +1,21 @@
+.npc-list-wrapper-category {
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+#npc-list-wrapper-header {
+    position: sticky;
+    top: 1rem;
+}
+
+#npc-list-wrapper-header::before {
+    content: "";
+    position: absolute;
+    top: calc(-1rem + 2px);
+    display: block;
+    background-color: rgb(14 22 31);
+    width: 100%;
+    height: calc(1rem - 2px);
+}

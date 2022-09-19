@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import he from "he";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./QuestListNotes.css";
+import "./NPCListNotes.css";
 
-const QuestListNotes = (props) => {
-    const { quest } = props;
+const NPCListNotes = (props) => {
+    const { npc } = props;
 
     const [hover, setHover] = useState(false);
     const [selected, setSelected] = useState(false);
@@ -21,16 +21,20 @@ const QuestListNotes = (props) => {
 
     return (
         <div
-            className="quest-list-notes-individual"
+            className="npc-list-notes-individual"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
-            <p style={{ color: quest.completed === true ? "green" : "red" }}>
-                {he.decode(quest.name)}
+            <p
+                style={{
+                    color: npc.disposition === "Friendly" ? "green" : "red",
+                }}
+            >
+                {he.decode(npc.name)}
             </p>
             {hover === true ? expandDownChevron : null}
         </div>
     );
 };
 
-export default QuestListNotes;
+export default NPCListNotes;

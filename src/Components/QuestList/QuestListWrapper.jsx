@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 import "./QuestListWrapper.css";
 import QuestListNotes from "./QuestListNotes";
 
-const QuestList = (props) => {
+const QuestListWrapper = (props) => {
     const { serosQuests, showTooltip } = props;
 
     const [questList, SetQuestList] = useState(serosQuests);
@@ -19,7 +19,9 @@ const QuestList = (props) => {
             return;
         } else {
             SetQuestList(
-                serosQuests.filter((quest) => quest.name.includes(searchValue))
+                serosQuests.filter((quest) =>
+                    quest.name.toLowerCase().includes(searchValue.toLowerCase())
+                )
             );
         }
     }, [searchValue, serosQuests]);
@@ -76,4 +78,4 @@ const QuestList = (props) => {
     );
 };
 
-export default QuestList;
+export default QuestListWrapper;
