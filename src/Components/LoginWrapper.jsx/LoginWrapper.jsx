@@ -26,7 +26,7 @@ const LoginWrapper = (props) => {
     const userLogin = async (e) => {
         e.preventDefault(); // Adding this for now as I haven't set up the route yet, however this function will redirect the page depending on the response.
 
-        const result = await axios({
+        axios({
             method: "post",
             data: {
                 username: username,
@@ -34,17 +34,30 @@ const LoginWrapper = (props) => {
             },
             withCredentials: true,
             url: `${process.env.REACT_APP_API_URL}/login`,
-        });
-        if (
-            result.data ===
-            "Incorrect details provided. Ensure your details are correct."
-        ) {
-            setLoginResMes(result.data);
-            return;
-        }
-        if (result.status)
-            // Set value to true
-            setUserAuthenticated(result.data);
+        })
+            .then((response) => {
+                console.log(response.data);
+                if (response.status === 200) {
+                    setUserAuthenticated(response.data);
+                }
+            })
+            .catch(function (error) {
+                if (error.response && error.response.status === 400) {
+                    setLoginResMes(error.response.data);
+                    return;
+                }
+                setLoginResMes("Oops, something went wrong.");
+            });
+        // if (
+        //     result.data ===
+        //     "Incorrect details provided. Ensure your details are correct."
+        // ) {
+        //     setLoginResMes(result.data);
+        //     return;
+        // }
+        // if (result.status)
+        //     // Set value to true
+        //     setUserAuthenticated(result.data);
     };
 
     const renderLoginForm = () => {
@@ -114,22 +127,6 @@ const LoginWrapper = (props) => {
             url: `${process.env.REACT_APP_API_URL}/register`,
         })
             .then((response) => {
-                // Sending a 401 or 409 status response crashed the app and stopped it from working, so unsure how to do this next part efficiently
-                // if (
-                //     response.data ===
-                //     "Username already exists. Please choose a different one."
-                // ) {
-                //     setLoginResMes(response.data);
-                //     return;
-                // }
-                // if (
-                //     response.data ===
-                //     "Email is already in use. Please use a different one."
-                // ) {
-                //     setLoginResMes(response.data);
-                //     return;
-                // }
-
                 if (response.data === "User created! Please login!") {
                     setNewUser(false);
                     setLoginResMes(response.data);
