@@ -3,7 +3,7 @@ import "./NPCListWrapper.css";
 import NPCListNotes from "./NPCListNotes";
 
 const NPCListWrapper = (props) => {
-    const { serosNPCs } = props;
+    const { serosLocations, setLocationNotes, serosNPCs, map } = props;
 
     // const [NPCList, setNPCList] = useState(serosNPCs);
     const [friendlyNPCList, setFriendlyNPCList] = useState(
@@ -67,7 +67,13 @@ const NPCListWrapper = (props) => {
                     />
                 </div>
                 {friendlyNPCList.map((npc) => (
-                    <NPCListNotes npc={npc} key={npc._id} />
+                    <NPCListNotes
+                        npc={npc}
+                        key={npc._id}
+                        map={map}
+                        serosLocations={serosLocations}
+                        setLocationNotes={setLocationNotes}
+                    />
                 ))}
             </div>
             <div className="npc-list-wrapper-category" id="npc-list-hostile">
@@ -81,7 +87,13 @@ const NPCListWrapper = (props) => {
                     />
                 </div>
                 {hostileNPCList.map((npc) => (
-                    <NPCListNotes npc={npc} key={npc._id} />
+                    <NPCListNotes
+                        npc={npc}
+                        key={npc._id}
+                        map={map}
+                        serosLocations={serosLocations}
+                        setLocationNotes={setLocationNotes}
+                    />
                 ))}
             </div>
         </div>

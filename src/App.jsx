@@ -26,7 +26,7 @@ import CreateNPCForm from "./Components/CreationForms/CreateNPCForm";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
 
 // React imports
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function App() {
     // Set states
@@ -49,6 +49,7 @@ function App() {
     // const [startupComplete, setStartupComplete] = useState(false);
 
     // Map marker states
+    const map = useRef();
     const [renderCreationMarker, setRenderCreationMarker] = useState(false);
     const [creationMarkerLatLng, setCreationMarkerLatLng] = useState([0, 0]);
 
@@ -154,6 +155,7 @@ function App() {
                     serosNPCs={serosNPCs}
                     serosQuests={serosQuests}
                     setSerosLocations={setSerosLocations}
+                    map={map}
                     renderCreationMarker={renderCreationMarker}
                     creationMarkerLatLng={creationMarkerLatLng}
                     setCreationMarkerLatLng={setCreationMarkerLatLng}
@@ -169,28 +171,31 @@ function App() {
                     setSelectedLocationNPCs={setSelectedLocationNPCs}
                 />
 
-                <Journal
-                    locationNotes={
-                        serosLocations?.[selectedLocationNotes] || null
-                    }
-                    setLocationNotes={setSelectedLocationNotes}
-                    serosNPCs={serosNPCs}
-                    setSerosNPCs={setSerosNPCs}
-                    locationNPCs={selectedLocationNPCs}
-                    setLocationNPCs={setSelectedLocationNPCs}
-                    locationQuests={selectedLocationQuests}
-                    setLocationQuests={setSelectedLocationQuests}
-                    serosLocations={serosLocations}
-                    setSerosLocations={setSerosLocations}
-                    serosQuests={serosQuests}
-                    setSerosQuests={setSerosQuests}
-                    setDeleteData={setDeleteData}
-                    userAuthenticated={userAuthenticated}
-                    setUserAuthenticated={setUserAuthenticated}
-                    inputStyles={inputStyles}
-                    setInputStyles={setInputStyles}
-                    setRenderCreationMarker={setRenderCreationMarker}
-                />
+                {map ? (
+                    <Journal
+                        locationNotes={
+                            serosLocations?.[selectedLocationNotes] || null
+                        }
+                        setLocationNotes={setSelectedLocationNotes}
+                        serosNPCs={serosNPCs}
+                        setSerosNPCs={setSerosNPCs}
+                        locationNPCs={selectedLocationNPCs}
+                        setLocationNPCs={setSelectedLocationNPCs}
+                        locationQuests={selectedLocationQuests}
+                        setLocationQuests={setSelectedLocationQuests}
+                        serosLocations={serosLocations}
+                        setSerosLocations={setSerosLocations}
+                        serosQuests={serosQuests}
+                        setSerosQuests={setSerosQuests}
+                        setDeleteData={setDeleteData}
+                        userAuthenticated={userAuthenticated}
+                        setUserAuthenticated={setUserAuthenticated}
+                        inputStyles={inputStyles}
+                        setInputStyles={setInputStyles}
+                        setRenderCreationMarker={setRenderCreationMarker}
+                        map={map}
+                    />
+                ) : null}
 
                 {/* <CreationSidebar
                     inputStyles={inputStyles}

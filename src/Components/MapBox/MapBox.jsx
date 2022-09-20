@@ -29,6 +29,7 @@ function MapBox(props) {
         serosLocations,
         serosNPCs,
         serosQuests,
+        map,
         renderCreationMarker,
         creationMarkerLatLng,
         setCreationMarkerLatLng,
@@ -119,7 +120,13 @@ function MapBox(props) {
                 <LayerGroup>
                     {locations.reduce((matching, location, index) => {
                         if (location.type === type) {
-                            return [...matching, renderMarker(location, index)];
+                            return [
+                                ...matching,
+                                renderMarker(
+                                    { ...location, originalIndex: index },
+                                    index
+                                ),
+                            ];
                         }
 
                         return matching;
@@ -237,6 +244,7 @@ function MapBox(props) {
             scrollWheelZoom={true}
             zoomControl={false}
             maxBounds={bounds}
+            ref={map}
         >
             <TileLayer
                 url="../maps/seros/png-example/{z}/{x}/{y}.png"

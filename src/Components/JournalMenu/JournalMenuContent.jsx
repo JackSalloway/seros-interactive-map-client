@@ -5,12 +5,15 @@ import NPCListWrapper from "../NPCList/NPCListWrapper";
 
 const JournalMenuContent = (props) => {
     const {
+        serosLocations,
+        setLocationNotes,
         userAuthenticated,
         selectedTab,
         serosQuests,
         serosNPCs,
         setRenderCreationMarker,
         showTooltip,
+        map,
     } = props;
 
     const createLocationContent = () => {
@@ -51,7 +54,13 @@ const JournalMenuContent = (props) => {
 
     const npcListContent = () => {
         return (
-            <NPCListWrapper serosNPCs={serosNPCs} showTooltip={showTooltip} />
+            <NPCListWrapper
+                serosLocations={serosLocations}
+                setLocationNotes={setLocationNotes}
+                serosNPCs={serosNPCs}
+                showTooltip={showTooltip}
+                map={map}
+            />
         );
     };
 

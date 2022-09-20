@@ -26,6 +26,7 @@ const Journal = (props) => {
         inputStyles,
         setInputStyles,
         setRenderCreationMarker,
+        map,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Create location");
@@ -108,12 +109,15 @@ const Journal = (props) => {
                         />
                     </div>
                     <JournalMenuContent
+                        serosLocations={serosLocations}
+                        setLocationNotes={setLocationNotes}
                         userAuthenticated={userAuthenticated}
                         selectedTab={selectedTab}
                         serosQuests={serosQuests}
                         serosNPCs={serosNPCs}
                         setRenderCreationMarker={setRenderCreationMarker}
                         showTooltip={showTooltip}
+                        map={map}
                     />
                 </div>
             </div>
