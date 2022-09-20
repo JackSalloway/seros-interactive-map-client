@@ -2,12 +2,15 @@
     padding: 1rem 1rem;
     display: flex;
     flex-direction: column;
+    background-color: rgb(14 22 31);
+
     gap: 0.2rem;
 }
 
 #npc-list-wrapper-header {
     position: sticky;
     top: 1rem;
+    background-color: rgb(14 22 31);
 }
 
 #npc-list-wrapper-header::before {

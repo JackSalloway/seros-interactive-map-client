@@ -2,3 +2,21 @@
     margin: 0.4rem;
     display: flex;
 }
+
+.npc-list-notes-individual.npc-list-notes-individual-header {
+    gap: 0.5rem;
+}
+
+.npc-list-notes-individual.npc-list-notes-individual-information {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.npc-list-notes-locations {
+    display: flex;
+}
+
+.npc-list-notes-locations-name {
+    width: 10rem;
+}
