@@ -62,7 +62,6 @@ const NPCListNotes = (props) => {
                         } else {
                             map.current.setView(location.latlng, 5);
                         }
-                        // map.current.flyTo(location.latlng);
                         setLocationNotes(
                             serosLocations
                                 .map((serosLocation) => serosLocation._id)
