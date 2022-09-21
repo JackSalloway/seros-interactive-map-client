@@ -57,9 +57,6 @@ const NPCListNotes = (props) => {
                 <button
                     className="npc-list-notes-locations-lat-lng"
                     onClick={() => {
-                        // console.log(location);
-                        // console.log(serosLocations);
-                        // console.log(serosLocations.indexOf(location._id));
                         if (map.current.getZoom() === 5) {
                             map.current.flyTo(location.latlng);
                         } else {
