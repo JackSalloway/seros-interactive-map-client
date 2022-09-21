@@ -1,6 +1,6 @@
 import React from "react";
 import "./JournalMenuHeaderBox.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const JournalMenuHeaderBox = (props) => {
     const {
@@ -8,8 +8,8 @@ const JournalMenuHeaderBox = (props) => {
         setSelectedTab,
         headerValue,
         boxPosition,
-        showTooltip,
-        setShowTooltip,
+        // showTooltip,
+        // setShowTooltip,
     } = props;
 
     const classNames = `journal-front-page-instruction-header-box ${boxPosition}`;
