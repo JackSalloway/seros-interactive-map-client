@@ -1,0 +1,23 @@
+.location-list-notes-individual {
+    margin: 0.4rem;
+    display: flex;
+}
+
+.location-list-notes-individual.location-list-notes-individual-header {
+    gap: 0.5rem;
+}
+
+.location-list-notes-individual.location-list-notes-individual-information {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.location-list-notes-locations {
+    display: flex;
+    gap: 1rem;
+}
+
+.location-list-notes-locations-name {
+    width: 10rem;
+}

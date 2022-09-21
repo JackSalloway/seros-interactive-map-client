@@ -1,6 +1,6 @@
 import React from "react";
 import "./JournalMenuContent.css";
-import CreationMarkerMenuWrapper from "../LocationList/LocationListWrapper";
+import LocationListWrapper from "../LocationList/LocationListWrapper";
 import QuestListWrapper from "../QuestList/QuestListWrapper";
 import NPCListWrapper from "../NPCList/NPCListWrapper";
 import FrontPageWrapper from "../FrontPageWrapper/FrontPageWrapper";
@@ -21,10 +21,12 @@ const JournalMenuContent = (props) => {
 
     const createLocationContent = () => {
         return (
-            <CreationMarkerMenuWrapper
+            <LocationListWrapper
                 userAuthenticated={userAuthenticated}
                 setRenderCreationMarker={setRenderCreationMarker}
                 creationMarkerLatLng={creationMarkerLatLng}
+                serosLocations={serosLocations}
+                setLocationNotes={setLocationNotes}
                 map={map}
             />
         );

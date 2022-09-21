@@ -1,14 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./LocationListWrapper.css";
+import LocationListNotes from "./LocationListNotes";
 
 const LocationListWrapper = (props) => {
     const {
         userAuthenticated,
         setRenderCreationMarker,
         creationMarkerLatLng,
+        serosLocations,
+        setLocationNotes,
         map,
     } = props;
-    return (
+
+    const [locationList, setLocationList] = useState(serosLocations);
+    const [searchValue, setSearchValue] = useState("");
+
+    // Filter the location list whenever the user edits the searchValue state
+    useEffect(() => {
+        if (searchValue === "") {
+            setLocationList(serosLocations);
+            return;
+        } else {
+            setLocationList(
+                serosLocations.filter((location) =>
+                    location.name
+                        .toLowerCase()
+                        .includes(searchValue.toLocaleLowerCase())
+                )
+            );
+        }
+    }, [serosLocations, searchValue]);
+
+    const createLocationWrapper = (
         <div id="create-location-wrapper">
             {userAuthenticated.privileged === true ? (
                 <>
@@ -35,6 +58,27 @@ const LocationListWrapper = (props) => {
                 </>
             )}
             <h2>Or select a location to display notes!</h2>
+        </div>
+    );
+
+    return (
+        <div id="location-list-wrapper">
+            {createLocationWrapper}
+            <div id="location-list-wrapper-header">
+                <input
+                    type="text"
+                    placeholder="Search for a location!"
+                    onChange={({ target }) => setSearchValue(target.value)}
+                />
+            </div>
+            {locationList.map((location) => (
+                <LocationListNotes
+                    location={location}
+                    serosLocations={serosLocations}
+                    setLocationNotes={setLocationNotes}
+                    map={map}
+                />
+            ))}
         </div>
     );
 };
