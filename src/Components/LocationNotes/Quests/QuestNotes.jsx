@@ -134,6 +134,17 @@ const QuestNotes = (props) => {
         );
         const returnedData = await result.json();
         let serosQuestsCopy = [...serosQuests];
+        console.log(returnedData.questResult.associated_locations[0].latlng);
+        // The following assignment is needed due to how the latlng values were being returned as they were being returned like this:
+        // {latlng: { lat: {$numberDecimal: LAT_VALUE}, lng: {$numberDecimal: LNG_VALUE} }}
+        // I suspect this has something to do with the way the backend is returning the mongodb document - however this works for now.
+        returnedData.questResult.associated_locations[0].latlng = {
+            lat: returnedData.questResult.associated_locations[0].latlng.lat
+                .$numberDecimal,
+            lng: returnedData.questResult.associated_locations[0].latlng.lng
+                .$numberDecimal,
+        };
+        console.log(returnedData.questResult.associated_locations[0].latlng);
         serosQuestsCopy[originalIndex] = returnedData.questResult;
         setSerosQuests(serosQuestsCopy);
         setSerosNPCs(returnedData.npcResult);
