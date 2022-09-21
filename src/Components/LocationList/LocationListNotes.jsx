@@ -70,14 +70,7 @@ const LocationListNotes = (props) => {
         return (
             <>
                 <div className="location-list-notes-individual location-list-notes-individual-header">
-                    <p
-                        style={{
-                            color:
-                                location.completed === true ? "green" : "red",
-                        }}
-                    >
-                        {he.decode(location.name)}
-                    </p>
+                    <p>{he.decode(location.name)}</p>
                     {collapseUpChevron}
                 </div>
                 <div className="location-list-notes-individual location-list-notes-individual-information">
