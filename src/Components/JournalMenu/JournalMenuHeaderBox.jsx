@@ -18,7 +18,11 @@ const JournalMenuHeaderBox = (props) => {
         <div
             className={classNames}
             onClick={() => {
-                setSelectedTab(headerValue);
+                if (selectedTab === headerValue) {
+                    setSelectedTab("Front Page");
+                } else {
+                    setSelectedTab(headerValue);
+                }
             }}
             style={{
                 backgroundColor:

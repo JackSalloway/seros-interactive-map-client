@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Journal.css";
-import LoginWrapper from "../LoginWrapper.jsx/LoginWrapper";
+import LoginWrapper from "../LoginWrapper/LoginWrapper";
 import LocationNotes from "../LocationNotes/LocationNotes";
 import JournalMenuHeaderBox from "../JournalMenu/JournalMenuHeaderBox";
 import JournalMenuContent from "../JournalMenu/JournalMenuContent";
@@ -30,7 +30,7 @@ const Journal = (props) => {
         map,
     } = props;
 
-    const [selectedTab, setSelectedTab] = useState("Create location");
+    const [selectedTab, setSelectedTab] = useState("Front Page");
 
     // Tooltip states
     const [showTooltip, setShowTooltip] = useState(false);
@@ -75,19 +75,13 @@ const Journal = (props) => {
                         </button>
                     </div>
                 )}
-                {/* <div id="journal-front-page-logo">
-                    <img src="images/SerosLogo2.png" alt="" id="seros-logo" />
-                </div> */}
-                <div id="journal-front-page-title">
-                    <h1>Tactical Journal</h1>
-                </div>
 
                 <div id="journal-front-page-menu">
                     <div id="journal-front-page-menu-header">
                         <JournalMenuHeaderBox
                             selectedTab={selectedTab}
                             setSelectedTab={setSelectedTab}
-                            headerValue={"Create location"}
+                            headerValue={"Location List"}
                             boxPosition={"instruction-header-box-end"}
                             showTooltip={showTooltip}
                             setShowTooltip={setShowTooltip}

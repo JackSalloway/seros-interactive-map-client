@@ -1,8 +1,9 @@
 import React from "react";
 import "./JournalMenuContent.css";
-import CreationMarkerMenuWrapper from "./CreationMarkerMenuWrapper/CreationMarkerMenuWrapper";
+import CreationMarkerMenuWrapper from "../LocationList/LocationListWrapper";
 import QuestListWrapper from "../QuestList/QuestListWrapper";
 import NPCListWrapper from "../NPCList/NPCListWrapper";
+import FrontPageWrapper from "../FrontPageWrapper/FrontPageWrapper";
 
 const JournalMenuContent = (props) => {
     const {
@@ -54,7 +55,7 @@ const JournalMenuContent = (props) => {
     };
 
     const conditionalRender = () => {
-        if (selectedTab === "Create location") {
+        if (selectedTab === "Location List") {
             return createLocationContent();
         }
 
@@ -66,7 +67,7 @@ const JournalMenuContent = (props) => {
             return npcListContent();
         }
 
-        return null;
+        return <FrontPageWrapper />;
     };
 
     return (

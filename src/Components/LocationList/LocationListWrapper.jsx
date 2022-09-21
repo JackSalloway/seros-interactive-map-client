@@ -1,6 +1,7 @@
 import React from "react";
+import "./LocationListWrapper.css";
 
-const CreationMarkerMenuWrapper = (props) => {
+const LocationListWrapper = (props) => {
     const {
         userAuthenticated,
         setRenderCreationMarker,
@@ -38,4 +39,4 @@ const CreationMarkerMenuWrapper = (props) => {
     );
 };
 
-export default CreationMarkerMenuWrapper;
+export default LocationListWrapper;

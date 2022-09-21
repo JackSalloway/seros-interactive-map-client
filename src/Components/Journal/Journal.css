@@ -13,10 +13,9 @@
 #journal-front-page-container {
     width: 30vw;
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr;
     grid-template-areas:
         "login"
-        "title"
         "menu";
     align-items: center;
     justify-content: center;
@@ -44,30 +43,21 @@
     width: auto;
 }
 
-#journal-front-page-title {
-    height: fit-content;
-    width: fit-content;
-    text-align: center;
-    grid-area: title;
-}
-
-#journal-front-page-title > h1 {
-    font-size: 6rem;
-}
-
-#journal-front-page-title > h2 {
-    font-size: 1.5rem;
-}
 #journal-front-page-menu {
     grid-area: menu;
     align-self: flex-start;
     display: flex;
     flex-direction: column;
     height: 100%;
+    width: 30vw;
     overflow-y: auto;
 }
 
 #journal-front-page-menu-header {
     display: flex;
+    width: 100%;
+}
+
+.journal-menu-wrapper {
     width: 100%;
 }
