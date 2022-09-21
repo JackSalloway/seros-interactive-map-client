@@ -36,7 +36,8 @@ const JournalMenuHeaderBox = (props) => {
             }}
         >
             <h2>{headerValue}</h2>
-            {selectedTab === headerValue ? (
+            {/* Removed the tooltip icon for now due to it being buggy, plan to implement it in relevant wrappers at a later date */}
+            {/* {selectedTab === headerValue ? (
                 <span style={{ position: "absolute", right: 0 }}>
                     <FontAwesomeIcon
                         icon="info-circle"
@@ -47,7 +48,7 @@ const JournalMenuHeaderBox = (props) => {
                         }}
                     />
                 </span>
-            ) : null}
+            ) : null} */}
         </div>
     );
 };

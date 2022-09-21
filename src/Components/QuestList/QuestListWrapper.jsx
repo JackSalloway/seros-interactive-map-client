@@ -50,20 +50,20 @@ const QuestListWrapper = (props) => {
 
     return (
         <div id="quest-list-wrapper">
-            {showTooltip === true ? (
-                <div id="quest-list-tooltip">
-                    <p>
-                        <span className="span-color-green">Completed</span>{" "}
-                        quests are colored
-                        <span className="span-color-green"> green</span>.
-                    </p>
-                    <p>
-                        <span className="span-color-red">Incomplete</span>{" "}
-                        quests are colored
-                        <span className="span-color-red"> red</span>.
-                    </p>
-                </div>
-            ) : null}
+            {/* Removed the tooltip toggle logic for now, plan to implement it again at a later date within in this and other wrapper components */}
+            <div id="quest-list-tooltip">
+                <p>
+                    <span className="span-color-green">Completed</span> quests
+                    are colored
+                    <span className="span-color-green"> green</span>.
+                </p>
+                <p>
+                    <span className="span-color-red">Incomplete</span> quests
+                    are colored
+                    <span className="span-color-red"> red</span>.
+                </p>
+            </div>
+
             <div id="quest-list-wrapper-header">
                 <input
                     type="text"
