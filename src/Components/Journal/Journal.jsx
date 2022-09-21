@@ -26,6 +26,7 @@ const Journal = (props) => {
         inputStyles,
         setInputStyles,
         setRenderCreationMarker,
+        creationMarkerLatLng,
         map,
     } = props;
 
@@ -116,6 +117,7 @@ const Journal = (props) => {
                         serosQuests={serosQuests}
                         serosNPCs={serosNPCs}
                         setRenderCreationMarker={setRenderCreationMarker}
+                        creationMarkerLatLng={creationMarkerLatLng}
                         showTooltip={showTooltip}
                         map={map}
                     />

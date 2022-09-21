@@ -193,6 +193,7 @@ function App() {
                         inputStyles={inputStyles}
                         setInputStyles={setInputStyles}
                         setRenderCreationMarker={setRenderCreationMarker}
+                        creationMarkerLatLng={creationMarkerLatLng}
                         map={map}
                     />
                 ) : null}

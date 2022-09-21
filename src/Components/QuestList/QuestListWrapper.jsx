@@ -6,7 +6,8 @@ import "./QuestListWrapper.css";
 import QuestListNotes from "./QuestListNotes";
 
 const QuestListWrapper = (props) => {
-    const { serosQuests, showTooltip } = props;
+    const { serosLocations, setLocationNotes, serosQuests, showTooltip, map } =
+        props;
 
     const [questList, SetQuestList] = useState(serosQuests);
     // const [showTooltip, setShowTooltip] = useState(false);
@@ -72,7 +73,13 @@ const QuestListWrapper = (props) => {
             </div>
 
             {questList.map((quest) => (
-                <QuestListNotes quest={quest} key={quest._id} />
+                <QuestListNotes
+                    quest={quest}
+                    key={quest._id}
+                    map={map}
+                    serosLocations={serosLocations}
+                    setLocationNotes={setLocationNotes}
+                />
             ))}
         </div>
     );

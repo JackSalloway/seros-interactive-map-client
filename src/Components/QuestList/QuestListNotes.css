@@ -2,3 +2,22 @@
     margin: 0.4rem;
     display: flex;
 }
+
+.quest-list-notes-individual.quest-list-notes-individual-header {
+    gap: 0.5rem;
+}
+
+.quest-list-notes-individual.quest-list-notes-individual-information {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.quest-list-notes-locations {
+    display: flex;
+    gap: 1rem;
+}
+
+.quest-list-notes-locations-name {
+    width: 10rem;
+}
