@@ -27,9 +27,6 @@ const LocationListNotes = (props) => {
             }}
         />
     );
-
-    console.log(location);
-
     if (selected === false) {
         return (
             <div className="location-list-notes-individual location-list-notes-individual-header">

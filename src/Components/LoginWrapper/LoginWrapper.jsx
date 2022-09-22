@@ -36,7 +36,6 @@ const LoginWrapper = (props) => {
             url: `${process.env.REACT_APP_API_URL}/login`,
         })
             .then((response) => {
-                console.log(response.data);
                 if (response.status === 200) {
                     setUserAuthenticated(response.data);
                 }

@@ -32,9 +32,6 @@ const DeleteNPC = (props) => {
             mode: "cors",
             credentials: "include",
         };
-
-        //   console.log(myInit);
-
         await fetch(`${process.env.REACT_APP_API_URL}/delete_npc`, init);
         // const returnedData = await result.json();
         // setSerosNPCs(returnedData);

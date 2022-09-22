@@ -65,16 +65,12 @@ const CreateNPCForm = (props) => {
             mode: "cors",
             credentials: "include",
         };
-
-        //   console.log(myInit);
-
         fetch("create_npc", init).then(setRenderNPCCreationForm(false));
     };
 
     // Function to handle changes in the location selection box
     const handleChangeLocation = (value) => {
         setNPCLocations(value.map((location) => location.value));
-        console.log(npcLocations);
     };
 
     // Function to to handle changes in the quest selection box
