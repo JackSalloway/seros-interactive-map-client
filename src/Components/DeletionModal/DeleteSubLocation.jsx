@@ -38,9 +38,6 @@ const DeleteSubLocation = (props) => {
             mode: "cors",
             credentials: "include",
         };
-
-        //   console.log(myInit);
-
         const result = await fetch(
             `${process.env.REACT_APP_API_URL}/delete_sub_location`,
             init
