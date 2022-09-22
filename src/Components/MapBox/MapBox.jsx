@@ -5,7 +5,7 @@ import "./MapBox.css";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 // Leaflet imports
-import { LatLng, LatLngBounds } from "leaflet";
+import L, { LatLng, LatLngBounds } from "leaflet";
 import {
     MapContainer,
     TileLayer,
@@ -138,18 +138,26 @@ function MapBox(props) {
 
     // Renders markers in using latlng coords and renders relevant information within a popup.
     var renderMarker = (location, index) => {
+        console.log(location);
         return (
             <Marker
                 position={[location.latlng.lat, location.latlng.lng]}
                 key={location._id}
+                // icon={getIcon("Mine")}
             >
-                <Popup>
+                <Popup
+                // The following attribute can be used to move the position of the popup in relation to the marker icon
+                // offset={L.point(21, 7)}
+                >
                     <div className="popup-container">
                         <h2 className="popup-h2">{he.decode(location.name)}</h2>
                         <h3 className="popup-h3">{titleCase(location.type)}</h3>
                         <button
                             onClick={() => {
                                 setSelectedLocationNotes(index);
+                                if (location.marked === true) {
+                                    map.current.closePopup();
+                                }
                             }}
                         >
                             Open notes!
@@ -165,6 +173,13 @@ function MapBox(props) {
             </Marker>
         );
     };
+
+    // This function is used to give each marker an icon dependant on its type. Only issue is - I need to find/create images that match these types before I can implement is
+    // const getIcon = (iconType) => {
+    //     return L.icon({
+    //         iconUrl: require(`./icons/${iconType}.svg`),
+    //     });
+    // };
 
     // If data hasn't been fetched yet, don't render the map
     if (serosLocations === null) {
@@ -195,7 +210,6 @@ function MapBox(props) {
     // Tried to center the view when the creation marker was added, but there was a bug where the 'layeradd' event was clashing with the 'dragend' event
     // const CreationMarkerEvent = () => {
     //     const map = useMapEvent('layeradd', () => {
-    //         // console.log(map.getCenter())
     //         const centerLatLng = map.getCenter()
     //         map.setView(centerLatLng, 5)
     //         // setCreationMarkerLatLng([centerLatLng.lat, centerLatLng.lng])
@@ -206,6 +220,7 @@ function MapBox(props) {
     const renderDraggableMarker = () => {
         return (
             <Marker
+                // icon={getIcon("natural_feature")}
                 position={creationMarkerLatLng}
                 draggable={true}
                 eventHandlers={{
