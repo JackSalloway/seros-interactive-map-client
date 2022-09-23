@@ -138,12 +138,12 @@ function MapBox(props) {
 
     // Renders markers in using latlng coords and renders relevant information within a popup.
     var renderMarker = (location, index) => {
-        console.log(location);
         return (
             <Marker
                 position={[location.latlng.lat, location.latlng.lng]}
                 key={location._id}
-                // icon={getIcon("Mine")}
+                icon={getIcon(location.type)}
+                riseOnHover={true}
             >
                 <Popup
                 // The following attribute can be used to move the position of the popup in relation to the marker icon
@@ -175,11 +175,40 @@ function MapBox(props) {
     };
 
     // This function is used to give each marker an icon dependant on its type. Only issue is - I need to find/create images that match these types before I can implement is
-    // const getIcon = (iconType) => {
-    //     return L.icon({
-    //         iconUrl: require(`./icons/${iconType}.svg`),
-    //     });
-    // };
+    const getIcon = (iconType) => {
+        // set icon anchor values dependant on icon height
+        let iconHeight = 0;
+        let iconWidth = 0;
+        if (iconType === "city") {
+            iconHeight = 40;
+            iconWidth = 33;
+        } else if (iconType === "fort") {
+            iconHeight = 41;
+            iconWidth = 26;
+        } else if (iconType === "town") {
+            iconHeight = 42;
+            iconWidth = 31;
+        } else if (iconType === "dungeon") {
+            iconHeight = 43;
+            iconWidth = 30;
+        } else if (iconType === "natural_feature") {
+            iconHeight = 35;
+            iconWidth = 43;
+        } else if (iconType === "miscellaneous") {
+            iconHeight = 40;
+            iconWidth = 20;
+        } else {
+            iconHeight = 41;
+            iconWidth = 26;
+        }
+
+        return L.icon({
+            iconUrl: require(`./icons/${iconType}.svg`),
+            iconAnchor: L.point(iconWidth / 2, iconHeight),
+            popupAnchor: L.point(0, iconHeight * -1),
+            tooltipAnchor: L.point(iconWidth / 2, iconHeight * -0.65),
+        });
+    };
 
     // If data hasn't been fetched yet, don't render the map
     if (serosLocations === null) {
