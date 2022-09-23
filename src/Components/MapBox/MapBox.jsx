@@ -216,15 +216,13 @@ function MapBox(props) {
     }
 
     // Create map boundries
-    const swBoundry = new LatLng(-85, -180);
-    const neBoundry = new LatLng(85, 180);
+    const swBoundry = new LatLng(-85, -200);
+    const neBoundry = new LatLng(85, 200);
     const bounds = new LatLngBounds(swBoundry, neBoundry);
 
     // Events for animated panning when clicking a marker
     const MapEvents = () => {
         const map = useMapEvents({
-            // There is a bug that stems from this event listener. When clicking a marker whilst the current zoom level === 5, if the marker is on either side of the map it hits the max bounds and stops trying to center the screen on the marker.
-            // this can be fixed by increasing the map bounds, but I don't really want to do that - I wonder if there is a better way to do it.
             popupopen(e) {
                 if (map.getZoom() === 5) {
                     map.flyTo(e.popup._latlng);
@@ -288,6 +286,7 @@ function MapBox(props) {
             scrollWheelZoom={true}
             zoomControl={false}
             maxBounds={bounds}
+            // maxBoundsViscosity={0.3}
             ref={map}
         >
             <TileLayer
