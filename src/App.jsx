@@ -52,6 +52,8 @@ function App() {
     const map = useRef();
     const [renderCreationMarker, setRenderCreationMarker] = useState(false);
     const [creationMarkerLatLng, setCreationMarkerLatLng] = useState([0, 0]);
+    const [creationMarkerType, setCreationMarkerType] =
+        useState("miscellaneous");
 
     // Render creation form states
     // const [renderCreationSidebar, setRenderCreationSidebar] = useState(false);
@@ -158,6 +160,7 @@ function App() {
                     map={map}
                     renderCreationMarker={renderCreationMarker}
                     creationMarkerLatLng={creationMarkerLatLng}
+                    creationMarkerType={creationMarkerType}
                     setCreationMarkerLatLng={setCreationMarkerLatLng}
                     renderLocationCreationForm={renderLocationCreationForm}
                     setRenderLocationCreationForm={
@@ -192,8 +195,10 @@ function App() {
                         setUserAuthenticated={setUserAuthenticated}
                         inputStyles={inputStyles}
                         setInputStyles={setInputStyles}
+                        renderCreationMarker={renderCreationMarker}
                         setRenderCreationMarker={setRenderCreationMarker}
                         creationMarkerLatLng={creationMarkerLatLng}
+                        setCreationMarkerType={setCreationMarkerType}
                         map={map}
                     />
                 ) : null}

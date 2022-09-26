@@ -136,7 +136,7 @@ const LocationNotes = (props) => {
                 </span>
             </div>
             <div id="location-notes-data">
-                {locationNotes.desc === true ? (
+                {locationNotes.desc ? (
                     <p>{he.decode(locationNotes.desc)}</p>
                 ) : null}
 

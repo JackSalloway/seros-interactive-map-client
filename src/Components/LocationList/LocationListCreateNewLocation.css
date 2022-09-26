@@ -1,0 +1,59 @@
+#journal-create-new-location {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0;
+    position: relative;
+}
+
+#journal-create-new-location-info-icon {
+    position: absolute;
+    right: 1rem;
+    cursor: help;
+}
+
+#journal-create-new-location-guide-div {
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.journal-create-new-location-guide-bold-text {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+#journal-create-new-location-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+form > .journal-create-new-location-input-div {
+    width: 100%;
+}
+
+.journal-create-new-location-input-div.create-new-location-select-box {
+    margin: auto;
+}
+
+form > .journal-create-new-location-input-div > label,
+.journal-create-new-location-visited-marked-wrapper {
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.journal-create-new-location-visited-marked-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#journal-create-new-location-submit-button-div {
+    margin: auto;
+}

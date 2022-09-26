@@ -33,7 +33,7 @@ function MapBox(props) {
         renderCreationMarker,
         creationMarkerLatLng,
         setCreationMarkerLatLng,
-        setRenderLocationCreationForm,
+        creationMarkerType,
         selectedLocationNotes,
         setSelectedLocationNotes,
         setSelectedLocationNPCs,
@@ -247,7 +247,7 @@ function MapBox(props) {
     const renderDraggableMarker = () => {
         return (
             <Marker
-                // icon={getIcon("natural_feature")}
+                icon={getIcon(creationMarkerType)}
                 position={creationMarkerLatLng}
                 draggable={true}
                 eventHandlers={{
@@ -261,17 +261,7 @@ function MapBox(props) {
             >
                 {/* <CreationMarkerEvent /> */}
                 <Popup>
-                    <p>
-                        Latitude: {creationMarkerLatLng[0]} <br /> Longitude:{" "}
-                        {creationMarkerLatLng[1]}
-                    </p>
-                    <button
-                        onClick={() => {
-                            setRenderLocationCreationForm(true);
-                        }}
-                    >
-                        Create a location here!
-                    </button>
+                    <p>Add your new location here!</p>
                 </Popup>
             </Marker>
         );

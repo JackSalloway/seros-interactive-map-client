@@ -13,8 +13,10 @@ const JournalMenuContent = (props) => {
         selectedTab,
         serosQuests,
         serosNPCs,
+        renderCreationMarker,
         setRenderCreationMarker,
         creationMarkerLatLng,
+        setCreationMarkerType,
         showTooltip,
         map,
     } = props;
@@ -23,8 +25,10 @@ const JournalMenuContent = (props) => {
         return (
             <LocationListWrapper
                 userAuthenticated={userAuthenticated}
+                renderCreationMarker={renderCreationMarker}
                 setRenderCreationMarker={setRenderCreationMarker}
                 creationMarkerLatLng={creationMarkerLatLng}
+                setCreationMarkerType={setCreationMarkerType}
                 serosLocations={serosLocations}
                 setLocationNotes={setLocationNotes}
                 map={map}

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./LocationListWrapper.css";
 import LocationListNotes from "./LocationListNotes";
+import LocationListCreateNewLocation from "./LocationListCreateNewLocation";
 
 const LocationListWrapper = (props) => {
     const {
         userAuthenticated,
+        renderCreationMarker,
         setRenderCreationMarker,
         creationMarkerLatLng,
+        setCreationMarkerType,
         serosLocations,
         setLocationNotes,
         map,
@@ -30,6 +33,17 @@ const LocationListWrapper = (props) => {
             );
         }
     }, [serosLocations, searchValue]);
+
+    if (renderCreationMarker === true) {
+        return (
+            <LocationListCreateNewLocation
+                map={map}
+                setRenderCreationMarker={setRenderCreationMarker}
+                creationMarkerLatLng={creationMarkerLatLng}
+                setCreationMarkerType={setCreationMarkerType}
+            />
+        );
+    }
 
     const createLocationWrapper = (
         <div id="create-location-wrapper">
@@ -77,6 +91,7 @@ const LocationListWrapper = (props) => {
                     serosLocations={serosLocations}
                     setLocationNotes={setLocationNotes}
                     map={map}
+                    key={location._id}
                 />
             ))}
         </div>
