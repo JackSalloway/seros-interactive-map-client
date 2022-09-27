@@ -80,8 +80,6 @@ const MapMarker = (props) => {
             </Marker>
         );
     }
-
-    // console.log(editMarkerLatLng);
     return (
         <Marker
             position={editMarkerLatLng}
@@ -91,7 +89,6 @@ const MapMarker = (props) => {
             draggable={draggable}
             eventHandlers={{
                 dragend: (e) => {
-                    console.log(e.target._latlng);
                     setEditMarkerLatLng([
                         e.target._latlng.lat,
                         e.target._latlng.lng,

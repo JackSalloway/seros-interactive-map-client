@@ -18,10 +18,6 @@ const EditLocation = (props) => {
         map,
     } = props;
 
-    // console.log(editLocationDetails);
-    // console.log(editMarkerLatLng);
-    // console.log(editMarkerType);
-
     const [showGuide, setShowGuide] = useState(false);
 
     // Create location state values
@@ -74,7 +70,7 @@ const EditLocation = (props) => {
         };
 
         // fetch(`${process.env.REACT_APP_API_URL}/update_location`, init);
-        console.log(locationData);
+        // console.log(locationData);
         alert("This button currently does nothing!");
     };
 
