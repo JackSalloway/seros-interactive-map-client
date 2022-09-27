@@ -21,9 +21,24 @@ const JournalMenuContent = (props) => {
         map,
         markerBeingEdited,
         setMarkerBeingEdited,
+        editLocationDetails,
+        editMarkerLatLng,
+        setEditMarkerType,
     } = props;
 
-    const createLocationContent = () => {
+    if (markerBeingEdited === true) {
+        return (
+            <EditLocation
+                setMarkerBeingEdited={setMarkerBeingEdited}
+                editLocationDetails={editLocationDetails}
+                editMarkerLatLng={editMarkerLatLng}
+                setEditMarkerType={setEditMarkerType}
+                map={map}
+            />
+        );
+    }
+
+    const locationListContent = () => {
         return (
             <LocationListWrapper
                 userAuthenticated={userAuthenticated}
@@ -60,13 +75,9 @@ const JournalMenuContent = (props) => {
         );
     };
 
-    if (markerBeingEdited === true) {
-        return <EditLocation />;
-    }
-
     const conditionalRender = () => {
         if (selectedTab === "Location List") {
-            return createLocationContent();
+            return locationListContent();
         }
 
         if (selectedTab === "Quest list") {

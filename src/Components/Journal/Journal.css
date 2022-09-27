@@ -47,10 +47,15 @@
     grid-area: menu;
     align-self: flex-start;
     display: flex;
+    position: relative;
     flex-direction: column;
     height: 100%;
     width: 30vw;
     overflow-y: auto;
+}
+
+#journal-front-page-menu::-webkit-scrollbar {
+    display: none;
 }
 
 #journal-front-page-menu-header {

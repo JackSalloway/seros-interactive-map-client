@@ -54,7 +54,11 @@ function App() {
     const [creationMarkerLatLng, setCreationMarkerLatLng] = useState([0, 0]);
     const [creationMarkerType, setCreationMarkerType] =
         useState("miscellaneous");
+    // Map marker edit location states
     const [markerBeingEdited, setMarkerBeingEdited] = useState(false); // This is used to prevent people editing multiple locations at once.
+    const [editLocationDetails, setEditLocationDetails] = useState({});
+    const [editMarkerLatLng, setEditMarkerLatLng] = useState([]);
+    const [editMarkerType, setEditMarkerType] = useState(null);
 
     // Render creation form states
     // const [renderCreationSidebar, setRenderCreationSidebar] = useState(false);
@@ -176,6 +180,11 @@ function App() {
                     userAuthenticated={userAuthenticated}
                     markerBeingEdited={markerBeingEdited}
                     setMarkerBeingEdited={setMarkerBeingEdited}
+                    setEditLocationDetails={setEditLocationDetails}
+                    editMarkerLatLng={editMarkerLatLng}
+                    setEditMarkerLatLng={setEditMarkerLatLng}
+                    editMarkerType={editMarkerType}
+                    setEditMarkerType={setEditMarkerType}
                 />
 
                 {map ? (
@@ -205,6 +214,10 @@ function App() {
                         setCreationMarkerType={setCreationMarkerType}
                         map={map}
                         markerBeingEdited={markerBeingEdited}
+                        setMarkerBeingEdited={setMarkerBeingEdited}
+                        editLocationDetails={editLocationDetails}
+                        editMarkerLatLng={editMarkerLatLng}
+                        setEditMarkerType={setEditMarkerType}
                     />
                 ) : null}
 

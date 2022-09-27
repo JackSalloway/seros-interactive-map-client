@@ -32,6 +32,9 @@ const Journal = (props) => {
         map,
         markerBeingEdited,
         setMarkerBeingEdited,
+        editLocationDetails,
+        editMarkerLatLng,
+        setEditMarkerType,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -121,6 +124,9 @@ const Journal = (props) => {
                         map={map}
                         markerBeingEdited={markerBeingEdited}
                         setMarkerBeingEdited={setMarkerBeingEdited}
+                        editLocationDetails={editLocationDetails}
+                        editMarkerLatLng={editMarkerLatLng}
+                        setEditMarkerType={setEditMarkerType}
                     />
                 </div>
             </div>

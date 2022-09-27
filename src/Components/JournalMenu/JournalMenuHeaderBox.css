@@ -1,7 +1,7 @@
 .journal-front-page-instruction-header-box {
     width: calc(100% / 3);
     height: 100%;
-    position: relative;
+    position: sticky;
     display: flex;
     cursor: pointer;
     text-align: center;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Marker, Popup, Tooltip } from "react-leaflet";
 import he from "he";
 
@@ -12,11 +12,20 @@ const MapMarker = (props) => {
         userAuthenticated,
         markerBeingEdited,
         setMarkerBeingEdited,
+        setEditLocationDetails,
+        editMarkerLatLng,
+        setEditMarkerLatLng,
+        editMarkerType,
+        setEditMarkerType,
     } = props;
 
     const [draggable, setDraggable] = useState(false);
 
-    console.log(userAuthenticated);
+    useEffect(() => {
+        if (markerBeingEdited === false) {
+            setDraggable(false);
+        }
+    }, [markerBeingEdited]);
 
     if (draggable === false) {
         return (
@@ -49,6 +58,9 @@ const MapMarker = (props) => {
                                 onClick={() => {
                                     setDraggable(true);
                                     setMarkerBeingEdited(true);
+                                    setEditLocationDetails(location);
+                                    setEditMarkerLatLng(location.latlng);
+                                    setEditMarkerType(location.type);
                                 }}
                                 disabled={markerBeingEdited}
                             >
@@ -69,13 +81,23 @@ const MapMarker = (props) => {
         );
     }
 
+    // console.log(editMarkerLatLng);
     return (
         <Marker
-            position={[location.latlng.lat, location.latlng.lng]}
+            position={editMarkerLatLng}
             key={location._id}
-            icon={getIcon(location.type)}
+            icon={getIcon(editMarkerType)}
             riseOnHover={true}
             draggable={draggable}
+            eventHandlers={{
+                dragend: (e) => {
+                    console.log(e.target._latlng);
+                    setEditMarkerLatLng([
+                        e.target._latlng.lat,
+                        e.target._latlng.lng,
+                    ]);
+                },
+            }}
         >
             <Popup
             // The following attribute can be used to move the position of the popup in relation to the marker icon
