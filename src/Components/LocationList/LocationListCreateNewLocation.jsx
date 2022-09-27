@@ -59,7 +59,7 @@ const LocationListCreateNewLocation = (props) => {
         { value: "town", label: "Town" },
         { value: "fort", label: "Fort" },
         { value: "ruins", label: "Ruins" },
-        { value: "natural feature", label: "Natural Feature" },
+        { value: "natural_feature", label: "Natural Feature" },
         { value: "dungeon", label: "Dungeon" },
         { value: "miscellaneous", label: "Miscellaneous" },
     ];
