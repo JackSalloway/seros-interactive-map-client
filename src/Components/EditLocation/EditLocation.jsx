@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../LocationList/LocationListCreateNewLocation.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Select from "react-select";
@@ -75,6 +75,7 @@ const EditLocation = (props) => {
 
         // fetch(`${process.env.REACT_APP_API_URL}/update_location`, init);
         console.log(locationData);
+        alert("This button currently does nothing!");
     };
 
     // Type selection box variables
@@ -300,7 +301,7 @@ const EditLocation = (props) => {
                     </div>
                 </div>
                 <div id="journal-create-new-location-submit-button-div">
-                    <button>Submit update!</button>
+                    <button>Submit update! NOT IMPLEMENTED</button>
                 </div>
             </form>
             <button onClick={() => setMarkerBeingEdited(false)}>
