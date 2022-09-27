@@ -46,6 +46,7 @@ form > .journal-create-new-location-input-div > label,
     margin: 0 1rem;
     display: flex;
     flex-direction: column;
+    gap: 0.3rem;
 }
 
 .journal-create-new-location-visited-marked-wrapper {

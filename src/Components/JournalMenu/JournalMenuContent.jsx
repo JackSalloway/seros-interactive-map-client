@@ -4,6 +4,7 @@ import LocationListWrapper from "../LocationList/LocationListWrapper";
 import QuestListWrapper from "../QuestList/QuestListWrapper";
 import NPCListWrapper from "../NPCList/NPCListWrapper";
 import FrontPageWrapper from "../FrontPageWrapper/FrontPageWrapper";
+import EditLocation from "../EditLocation/EditLocation";
 
 const JournalMenuContent = (props) => {
     const {
@@ -17,8 +18,9 @@ const JournalMenuContent = (props) => {
         setRenderCreationMarker,
         creationMarkerLatLng,
         setCreationMarkerType,
-        showTooltip,
         map,
+        markerBeingEdited,
+        setMarkerBeingEdited,
     } = props;
 
     const createLocationContent = () => {
@@ -42,7 +44,6 @@ const JournalMenuContent = (props) => {
                 serosLocations={serosLocations}
                 setLocationNotes={setLocationNotes}
                 serosQuests={serosQuests}
-                showTooltip={showTooltip}
                 map={map}
             />
         );
@@ -54,11 +55,14 @@ const JournalMenuContent = (props) => {
                 serosLocations={serosLocations}
                 setLocationNotes={setLocationNotes}
                 serosNPCs={serosNPCs}
-                showTooltip={showTooltip}
                 map={map}
             />
         );
     };
+
+    if (markerBeingEdited === true) {
+        return <EditLocation />;
+    }
 
     const conditionalRender = () => {
         if (selectedTab === "Location List") {
@@ -73,7 +77,12 @@ const JournalMenuContent = (props) => {
             return npcListContent();
         }
 
-        return <FrontPageWrapper />;
+        return (
+            <FrontPageWrapper
+                markerBeingEdited={markerBeingEdited}
+                setMarkerBeingEdited={setMarkerBeingEdited}
+            />
+        );
     };
 
     return (

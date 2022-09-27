@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Journal.css";
 import LoginWrapper from "../LoginWrapper/LoginWrapper";
@@ -30,12 +30,17 @@ const Journal = (props) => {
         creationMarkerLatLng,
         setCreationMarkerType,
         map,
+        markerBeingEdited,
+        setMarkerBeingEdited,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
 
-    // Tooltip states
-    const [showTooltip, setShowTooltip] = useState(false);
+    useEffect(() => {
+        if (markerBeingEdited === true) {
+            setSelectedTab("Front Page");
+        }
+    }, [markerBeingEdited]);
 
     const logout = async () => {
         await axios({
@@ -85,24 +90,21 @@ const Journal = (props) => {
                             setSelectedTab={setSelectedTab}
                             headerValue={"Location List"}
                             boxPosition={"instruction-header-box-end"}
-                            showTooltip={showTooltip}
-                            setShowTooltip={setShowTooltip}
+                            markerBeingEdited={markerBeingEdited}
                         />
                         <JournalMenuHeaderBox
                             selectedTab={selectedTab}
                             setSelectedTab={setSelectedTab}
                             headerValue={"Quest list"}
                             boxPosition={"instruction-header-box-middle"}
-                            showTooltip={showTooltip}
-                            setShowTooltip={setShowTooltip}
+                            markerBeingEdited={markerBeingEdited}
                         />
                         <JournalMenuHeaderBox
                             selectedTab={selectedTab}
                             setSelectedTab={setSelectedTab}
                             headerValue={"NPC list"}
                             boxPosition={"instruction-header-box-end"}
-                            showTooltip={showTooltip}
-                            setShowTooltip={setShowTooltip}
+                            markerBeingEdited={markerBeingEdited}
                         />
                     </div>
                     <JournalMenuContent
@@ -116,8 +118,9 @@ const Journal = (props) => {
                         setRenderCreationMarker={setRenderCreationMarker}
                         creationMarkerLatLng={creationMarkerLatLng}
                         setCreationMarkerType={setCreationMarkerType}
-                        showTooltip={showTooltip}
                         map={map}
+                        markerBeingEdited={markerBeingEdited}
+                        setMarkerBeingEdited={setMarkerBeingEdited}
                     />
                 </div>
             </div>

@@ -54,6 +54,7 @@ function App() {
     const [creationMarkerLatLng, setCreationMarkerLatLng] = useState([0, 0]);
     const [creationMarkerType, setCreationMarkerType] =
         useState("miscellaneous");
+    const [markerBeingEdited, setMarkerBeingEdited] = useState(false); // This is used to prevent people editing multiple locations at once.
 
     // Render creation form states
     // const [renderCreationSidebar, setRenderCreationSidebar] = useState(false);
@@ -172,6 +173,9 @@ function App() {
                     setSelectedLocationNotes={setSelectedLocationNotes}
                     setSelectedLocationQuests={setSelectedLocationQuests}
                     setSelectedLocationNPCs={setSelectedLocationNPCs}
+                    userAuthenticated={userAuthenticated}
+                    markerBeingEdited={markerBeingEdited}
+                    setMarkerBeingEdited={setMarkerBeingEdited}
                 />
 
                 {map ? (
@@ -200,6 +204,7 @@ function App() {
                         creationMarkerLatLng={creationMarkerLatLng}
                         setCreationMarkerType={setCreationMarkerType}
                         map={map}
+                        markerBeingEdited={markerBeingEdited}
                     />
                 ) : null}
 

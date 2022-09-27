@@ -8,8 +8,7 @@ const JournalMenuHeaderBox = (props) => {
         setSelectedTab,
         headerValue,
         boxPosition,
-        // showTooltip,
-        // setShowTooltip,
+        markerBeingEdited,
     } = props;
 
     const classNames = `journal-front-page-instruction-header-box ${boxPosition}`;
@@ -18,6 +17,12 @@ const JournalMenuHeaderBox = (props) => {
         <div
             className={classNames}
             onClick={() => {
+                if (markerBeingEdited === true) {
+                    alert(
+                        "Finish editing your selected location before selecting another tab."
+                    );
+                    return;
+                }
                 if (selectedTab === headerValue) {
                     setSelectedTab("Front Page");
                 } else {
@@ -43,9 +48,6 @@ const JournalMenuHeaderBox = (props) => {
                         icon="info-circle"
                         className="journal-fa-icon"
                         id="menu-tab-tooltip-icon"
-                        onClick={() => {
-                            setShowTooltip(!showTooltip);
-                        }}
                     />
                 </span>
             ) : null} */}

@@ -3,6 +3,7 @@ import "./MapBox.css";
 
 // Component Imports
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
+import MapMarker from "./MapMarker";
 
 // Leaflet imports
 import L, { LatLng, LatLngBounds } from "leaflet";
@@ -11,7 +12,6 @@ import {
     TileLayer,
     Marker,
     Popup,
-    Tooltip,
     useMapEvents,
     LayersControl,
     LayerGroup,
@@ -20,8 +20,6 @@ import {
 
 // React imports
 import React, { useState, useEffect } from "react";
-
-import he from "he";
 
 function MapBox(props) {
     // Destructure props
@@ -38,6 +36,9 @@ function MapBox(props) {
         setSelectedLocationNotes,
         setSelectedLocationNPCs,
         setSelectedLocationQuests,
+        userAuthenticated,
+        markerBeingEdited,
+        setMarkerBeingEdited,
     } = props;
 
     // useState hooks
@@ -104,14 +105,14 @@ function MapBox(props) {
     }, [serosQuests, selectedLocationNotes, setSelectedLocationQuests]);
 
     // Capitalize first letter of each word
-    function titleCase(str) {
-        var splitStr = str.toLowerCase().split(" ");
-        for (let i = 0; i < splitStr.length; i++) {
-            splitStr[i] =
-                splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
-        }
-        return splitStr.join(" ");
-    }
+    // function titleCase(str) {
+    //     var splitStr = str.toLowerCase().split(" ");
+    //     for (let i = 0; i < splitStr.length; i++) {
+    //         splitStr[i] =
+    //             splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    //     }
+    //     return splitStr.join(" ");
+    // }
 
     // Renders layer check boxes tied to each type of location, then calls the renderMarker function to render each relevant marker.
     var layerType = (type, locations) => {
@@ -139,38 +140,49 @@ function MapBox(props) {
     // Renders markers in using latlng coords and renders relevant information within a popup.
     var renderMarker = (location, index) => {
         return (
-            <Marker
-                position={[location.latlng.lat, location.latlng.lng]}
-                key={location._id}
-                icon={getIcon(location.type)}
-                riseOnHover={true}
-            >
-                <Popup
-                // The following attribute can be used to move the position of the popup in relation to the marker icon
-                // offset={L.point(21, 7)}
-                >
-                    <div className="popup-container">
-                        <h2 className="popup-h2">{he.decode(location.name)}</h2>
-                        <h3 className="popup-h3">{titleCase(location.type)}</h3>
-                        <button
-                            onClick={() => {
-                                setSelectedLocationNotes(index);
-                                if (location.marked === true) {
-                                    map.current.closePopup();
-                                }
-                            }}
-                        >
-                            Open notes!
-                        </button>
-                    </div>
-                </Popup>
-                {/* If location does not have a marked image on the map, display its name as a tooltip */}
-                {location.marked ? null : (
-                    <Tooltip direction="center" offset={[-12.5, 45]}>
-                        {he.decode(location.name)}
-                    </Tooltip>
-                )}
-            </Marker>
+            <MapMarker
+                location={location}
+                index={index}
+                getIcon={getIcon}
+                map={map}
+                setSelectedLocationNotes={setSelectedLocationNotes}
+                userAuthenticated={userAuthenticated}
+                markerBeingEdited={markerBeingEdited}
+                setMarkerBeingEdited={setMarkerBeingEdited}
+            />
+            // <Marker
+            //     position={[location.latlng.lat, location.latlng.lng]}
+            //     key={location._id}
+            //     icon={getIcon(location.type)}
+            //     riseOnHover={true}
+            // >
+            //     <Popup
+            //     // The following attribute can be used to move the position of the popup in relation to the marker icon
+            //     // offset={L.point(21, 7)}
+            //     >
+            //         <div className="popup-container">
+            //             <h2 className="popup-h2">{he.decode(location.name)}</h2>
+            //             {/* <h3 className="popup-h3">{titleCase(location.type)}</h3> */}
+            //             <button
+            //                 onClick={() => {
+            //                     setSelectedLocationNotes(index);
+            //                     if (location.marked === true) {
+            //                         map.current.closePopup();
+            //                     }
+            //                 }}
+            //             >
+            //                 Open notes!
+            //             </button>
+            //             <button>Edit notes!</button>
+            //         </div>
+            //     </Popup>
+            //     {/* If location does not have a marked image on the map, display its name as a tooltip */}
+            //     {location.marked ? null : (
+            //         <Tooltip direction="center" offset={[-12.5, 45]}>
+            //             {he.decode(location.name)}
+            //         </Tooltip>
+            //     )}
+            // </Marker>
         );
     };
 
