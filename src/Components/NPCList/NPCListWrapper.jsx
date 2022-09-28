@@ -7,11 +7,23 @@ const NPCListWrapper = (props) => {
 
     // const [NPCList, setNPCList] = useState(serosNPCs);
     const [friendlyNPCList, setFriendlyNPCList] = useState(
-        serosNPCs.filter((npc) => npc.disposition === "Friendly")
+        serosNPCs
+            .sort(function (a, b) {
+                var npcA = a.name.toUpperCase();
+                var npcB = b.name.toUpperCase();
+                return npcA < npcB ? -1 : npcA > npcB ? 1 : 0;
+            })
+            .filter((npc) => npc.disposition === "Friendly")
     );
     const [friendlySearchValue, setFriendlySearchValue] = useState("");
     const [hostileNPCList, setHostileNPCList] = useState(
-        serosNPCs.filter((npc) => npc.disposition === "Hostile")
+        serosNPCs
+            .sort(function (a, b) {
+                var npcA = a.name.toUpperCase();
+                var npcB = b.name.toUpperCase();
+                return npcA < npcB ? -1 : npcA > npcB ? 1 : 0;
+            })
+            .filter((npc) => npc.disposition === "Hostile")
     );
     const [hostileSearchValue, setHostileSearchValue] = useState("");
 
@@ -19,7 +31,7 @@ const NPCListWrapper = (props) => {
     useEffect(() => {
         if (friendlySearchValue === "") {
             setFriendlyNPCList(
-                serosNPCs.filter((npc) => npc.disposition === "Friendly")
+                serosNPCs.filter((npc) => npc.disposition === "Friendly") // Think this still works as .sort actually edits the array
             );
             return;
         } else {
@@ -39,7 +51,7 @@ const NPCListWrapper = (props) => {
     useEffect(() => {
         if (hostileSearchValue === "") {
             setHostileNPCList(
-                serosNPCs.filter((npc) => npc.disposition === "Hostile")
+                serosNPCs.filter((npc) => npc.disposition === "Hostile") // Think this still works as .sort actually edits the array
             );
         } else {
             setHostileNPCList(

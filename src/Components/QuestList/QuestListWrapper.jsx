@@ -8,13 +8,19 @@ import QuestListNotes from "./QuestListNotes";
 const QuestListWrapper = (props) => {
     const { serosLocations, setLocationNotes, serosQuests, map } = props;
 
-    const [questList, SetQuestList] = useState(serosQuests);
+    const [questList, SetQuestList] = useState(
+        serosQuests.sort(function (a, b) {
+            var questA = a.name.toUpperCase();
+            var questB = b.name.toUpperCase();
+            return questA < questB ? -1 : questA > questB ? 1 : 0;
+        })
+    );
     const [searchValue, setSearchValue] = useState("");
 
     // Filter the quest list whenever the user edits the searchValue state
     useEffect(() => {
         if (searchValue === "") {
-            SetQuestList(serosQuests);
+            SetQuestList(serosQuests); // Think this still works as .sort actually edits the array
             return;
         } else {
             SetQuestList(

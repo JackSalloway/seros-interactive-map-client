@@ -16,13 +16,19 @@ const LocationListWrapper = (props) => {
         map,
     } = props;
 
-    const [locationList, setLocationList] = useState(serosLocations);
+    const [locationList, setLocationList] = useState(
+        serosLocations.sort(function (a, b) {
+            var locationA = a.name.toUpperCase();
+            var locationB = b.name.toUpperCase();
+            return locationA < locationB ? -1 : locationA > locationB ? 1 : 0;
+        })
+    );
     const [searchValue, setSearchValue] = useState("");
 
     // Filter the location list whenever the user edits the searchValue state
     useEffect(() => {
         if (searchValue === "") {
-            setLocationList(serosLocations);
+            setLocationList(serosLocations); // Think this still works as .sort actually edits the array
             return;
         } else {
             setLocationList(
