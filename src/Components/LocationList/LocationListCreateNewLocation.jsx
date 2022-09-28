@@ -14,6 +14,8 @@ const LocationListCreateNewLocation = (props) => {
         setRenderCreationMarker,
         creationMarkerLatLng,
         setCreationMarkerType,
+        serosLocations,
+        setSerosLocations,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -27,7 +29,7 @@ const LocationListCreateNewLocation = (props) => {
     const [locationVisited, setLocationVisited] = useState(false);
 
     // Create post request
-    const postData = (e) => {
+    const postData = async (e) => {
         e.preventDefault();
 
         const locationData = {
@@ -49,7 +51,15 @@ const LocationListCreateNewLocation = (props) => {
             credentials: "include",
         };
 
-        fetch(`${process.env.REACT_APP_API_URL}/create_location`, init);
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/create_location`,
+            init
+        );
+        const returnedData = await result.json();
+        let serosLocationsCopy = [...serosLocations];
+        serosLocationsCopy.push(returnedData[0]);
+        setSerosLocations(serosLocationsCopy);
+        setRenderCreationMarker(false);
     };
 
     // Type selection box variables

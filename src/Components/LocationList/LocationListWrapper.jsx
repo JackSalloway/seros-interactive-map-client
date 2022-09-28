@@ -11,6 +11,7 @@ const LocationListWrapper = (props) => {
         creationMarkerLatLng,
         setCreationMarkerType,
         serosLocations,
+        setSerosLocations,
         setLocationNotes,
         map,
     } = props;
@@ -41,6 +42,8 @@ const LocationListWrapper = (props) => {
                 setRenderCreationMarker={setRenderCreationMarker}
                 creationMarkerLatLng={creationMarkerLatLng}
                 setCreationMarkerType={setCreationMarkerType}
+                serosLocations={serosLocations}
+                setSerosLocations={setSerosLocations}
             />
         );
     }
