@@ -79,7 +79,6 @@ const EditLocation = (props) => {
             init
         );
         const returnedData = await result.json();
-        console.log(returnedData);
         let serosLocationsCopy = [...serosLocations];
         serosLocationsCopy[markerBeingEdited] = returnedData;
         setSerosLocations(serosLocationsCopy);
