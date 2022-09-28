@@ -47,18 +47,20 @@ const EditLocation = (props) => {
         e.preventDefault();
 
         const locationData = {
-            location_lat: editMarkerLatLng[0] // This is assigned as a ternary as editMarkerLatLng doesn't set itself until the marker is dragged
+            location_lat: editMarkerLatLng[0] // This is assigned as a ternary as editMarkerLatLng doesn't set itself until the marker is dragged for the first time
                 ? editMarkerLatLng[0]
                 : editLocationDetails.latlng.lat,
-            location_lng: editMarkerLatLng[1] // This is assigned as a ternary as editMarkerLatLng doesn't set itself until the marker is dragged
+            location_lng: editMarkerLatLng[1] // This is assigned as a ternary as editMarkerLatLng doesn't set itself until the marker is dragged for the first time
                 ? editMarkerLatLng[1]
-                : editLocationDetails.latlng.lat,
+                : editLocationDetails.latlng.lng,
             location_name: locationName,
             location_desc: locationDescription,
             location_region: locationRegion.value,
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
+            location_sub_locations: editLocationDetails.sub_locations,
+            location_id: editLocationDetails._id,
         };
 
         const init = {
@@ -69,9 +71,9 @@ const EditLocation = (props) => {
             credentials: "include",
         };
 
-        // fetch(`${process.env.REACT_APP_API_URL}/update_location`, init);
+        fetch(`${process.env.REACT_APP_API_URL}/update_location`, init);
+        // console.log(editLocationDetails);
         // console.log(locationData);
-        alert("This button currently does nothing!");
     };
 
     // Type selection box variables
@@ -144,7 +146,7 @@ const EditLocation = (props) => {
                     setShowGuide(!showGuide);
                 }}
             />
-            <h2>Edit {he.decode(editLocationDetails.name)}!</h2>
+            <h2>Edit: {he.decode(editLocationDetails.name)}!</h2>
             <button
                 onClick={() => {
                     if (map.current.getZoom() === 5) {
@@ -166,7 +168,7 @@ const EditLocation = (props) => {
                 longitude:{" "}
                 {editMarkerLatLng[1]
                     ? editMarkerLatLng[1]
-                    : editLocationDetails.latlng.lat}
+                    : editLocationDetails.latlng.lng}
             </p>
             {showGuide === true ? (
                 <div id="journal-create-new-location-guide-div">

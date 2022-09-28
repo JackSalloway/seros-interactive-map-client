@@ -50,6 +50,7 @@ const MapMarker = (props) => {
                                     map.current.closePopup();
                                 }
                             }}
+                            disabled={markerBeingEdited}
                         >
                             Open notes!
                         </button>
@@ -61,6 +62,8 @@ const MapMarker = (props) => {
                                     setEditLocationDetails(location);
                                     setEditMarkerLatLng(location.latlng);
                                     setEditMarkerType(location.type);
+                                    setSelectedLocationNotes(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
+                                    console.log(editMarkerLatLng);
                                 }}
                                 disabled={markerBeingEdited}
                             >
