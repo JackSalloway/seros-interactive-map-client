@@ -40,7 +40,7 @@ const Journal = (props) => {
     const [selectedTab, setSelectedTab] = useState("Front Page");
 
     useEffect(() => {
-        if (markerBeingEdited === true) {
+        if (markerBeingEdited !== null) {
             setSelectedTab("Front Page");
         }
     }, [markerBeingEdited]);
@@ -112,6 +112,7 @@ const Journal = (props) => {
                     </div>
                     <JournalMenuContent
                         serosLocations={serosLocations}
+                        setSerosLocations={setSerosLocations}
                         setLocationNotes={setLocationNotes}
                         userAuthenticated={userAuthenticated}
                         selectedTab={selectedTab}

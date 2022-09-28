@@ -17,7 +17,7 @@ const JournalMenuHeaderBox = (props) => {
         <div
             className={classNames}
             onClick={() => {
-                if (markerBeingEdited === true) {
+                if (markerBeingEdited !== null) {
                     alert(
                         "Finish editing your selected location before selecting another tab."
                     );

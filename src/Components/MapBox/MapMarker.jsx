@@ -22,7 +22,7 @@ const MapMarker = (props) => {
     const [draggable, setDraggable] = useState(false);
 
     useEffect(() => {
-        if (markerBeingEdited === false) {
+        if (markerBeingEdited === null) {
             setDraggable(false);
         }
     }, [markerBeingEdited]);
@@ -58,16 +58,18 @@ const MapMarker = (props) => {
                             <button
                                 onClick={() => {
                                     setDraggable(true);
-                                    setMarkerBeingEdited(true);
+                                    setMarkerBeingEdited(index);
                                     setEditLocationDetails(location);
                                     setEditMarkerLatLng(location.latlng);
                                     setEditMarkerType(location.type);
                                     setSelectedLocationNotes(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
                                     console.log(editMarkerLatLng);
                                 }}
-                                disabled={markerBeingEdited}
+                                disabled={
+                                    markerBeingEdited === null ? false : true
+                                }
                             >
-                                {markerBeingEdited === false
+                                {markerBeingEdited === null
                                     ? "Edit Notes!"
                                     : "Editing other location"}
                             </button>

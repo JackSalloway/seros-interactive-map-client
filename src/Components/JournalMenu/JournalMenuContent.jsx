@@ -9,6 +9,7 @@ import EditLocation from "../EditLocation/EditLocation";
 const JournalMenuContent = (props) => {
     const {
         serosLocations,
+        setSerosLocations,
         setLocationNotes,
         userAuthenticated,
         selectedTab,
@@ -26,14 +27,17 @@ const JournalMenuContent = (props) => {
         setEditMarkerType,
     } = props;
 
-    if (markerBeingEdited === true) {
+    if (markerBeingEdited !== null) {
         return (
             <EditLocation
+                markerBeingEdited={markerBeingEdited}
                 setMarkerBeingEdited={setMarkerBeingEdited}
                 editLocationDetails={editLocationDetails}
                 editMarkerLatLng={editMarkerLatLng}
                 setEditMarkerType={setEditMarkerType}
                 map={map}
+                serosLocations={serosLocations}
+                setSerosLocations={setSerosLocations}
             />
         );
     }

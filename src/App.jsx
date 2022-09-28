@@ -55,7 +55,7 @@ function App() {
     const [creationMarkerType, setCreationMarkerType] =
         useState("miscellaneous");
     // Map marker edit location states
-    const [markerBeingEdited, setMarkerBeingEdited] = useState(false); // This is used to prevent people editing multiple locations at once.
+    const [markerBeingEdited, setMarkerBeingEdited] = useState(null); // This is used to prevent people editing multiple locations at once.
     const [editLocationDetails, setEditLocationDetails] = useState({});
     const [editMarkerLatLng, setEditMarkerLatLng] = useState([]);
     const [editMarkerType, setEditMarkerType] = useState(null);

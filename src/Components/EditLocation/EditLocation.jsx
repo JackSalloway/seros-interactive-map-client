@@ -11,11 +11,14 @@ import {
 
 const EditLocation = (props) => {
     const {
+        markerBeingEdited,
         setMarkerBeingEdited,
         editLocationDetails,
         editMarkerLatLng,
         setEditMarkerType,
         map,
+        serosLocations,
+        setSerosLocations,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -43,7 +46,7 @@ const EditLocation = (props) => {
     );
 
     // Create post request
-    const postData = (e) => {
+    const postData = async (e) => {
         e.preventDefault();
 
         const locationData = {
@@ -71,9 +74,16 @@ const EditLocation = (props) => {
             credentials: "include",
         };
 
-        fetch(`${process.env.REACT_APP_API_URL}/update_location`, init);
-        // console.log(editLocationDetails);
-        // console.log(locationData);
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/update_location`,
+            init
+        );
+        const returnedData = await result.json();
+        console.log(returnedData);
+        let serosLocationsCopy = [...serosLocations];
+        serosLocationsCopy[markerBeingEdited] = returnedData;
+        setSerosLocations(serosLocationsCopy);
+        setMarkerBeingEdited(null);
     };
 
     // Type selection box variables
@@ -302,7 +312,7 @@ const EditLocation = (props) => {
                     <button>Submit update! NOT IMPLEMENTED</button>
                 </div>
             </form>
-            <button onClick={() => setMarkerBeingEdited(false)}>
+            <button onClick={() => setMarkerBeingEdited(null)}>
                 Cancel update
             </button>
         </div>
