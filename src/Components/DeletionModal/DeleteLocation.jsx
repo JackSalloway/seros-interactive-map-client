@@ -4,7 +4,14 @@ import he from "he";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const DeleteLocation = (props) => {
-    const { data, setDeleteData, serosLocations, setSerosLocations } = props;
+    const {
+        data,
+        setDeleteData,
+        serosLocations,
+        setSerosLocations,
+        setSerosNPCs,
+        setSerosQuests,
+    } = props;
 
     const [deletionString, setDeletionString] = useState("");
     const [deleteDisabled, setDeleteDisabled] = useState(false);
@@ -23,29 +30,34 @@ const DeleteLocation = (props) => {
         e.preventDefault();
 
         const dataToDelete = {
-            // location_id: selectedLocationNotes._id,
-            sub_location_name: data.name,
+            location_id: data._id,
         };
 
         const init = {
-            method: "POST",
+            method: "DELETE",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
             body: JSON.stringify(dataToDelete),
             mode: "cors",
             credentials: "include",
         };
         const result = await fetch(
-            `${process.env.REACT_APP_API_URL}/delete_sub_location`,
+            `${process.env.REACT_APP_API_URL}/delete_location`,
             init
         );
         const returnedData = await result.json();
+        console.log(returnedData);
         let serosLocationsCopy = [...serosLocations];
-        const indexToUpdate = serosLocationsCopy
+        const indexToRemove = serosLocationsCopy
             .map((location) => location._id)
-            .indexOf(returnedData._id);
-        const location = { ...serosLocationsCopy[indexToUpdate] };
-        location.sub_locations = [...returnedData.sub_locations];
-        serosLocationsCopy[indexToUpdate] = location;
+            .indexOf(data._id);
+        // const location = { ...serosLocationsCopy[indexToUpdate] };
+        // location.sub_locations = [...returnedData.sub_locations];
+        // serosLocationsCopy[indexToUpdate] = location;
+        // setSerosNPCs(result.newNPCs);
+        // setSerosQuests(result.newQuests);
+        console.log(serosLocationsCopy.splice(indexToRemove, 1));
+        serosLocationsCopy.splice(indexToRemove, 1);
+
         setSerosLocations(serosLocationsCopy);
         setDeleteData(null);
     };

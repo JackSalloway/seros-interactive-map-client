@@ -40,7 +40,9 @@ const DeletionModal = (props) => {
                 data={data}
                 setDeleteData={setDeleteData}
                 serosLocations={serosLocations}
-                setSerosLocations={serosLocations}
+                setSerosLocations={setSerosLocations}
+                setSerosNPCs={setSerosNPCs}
+                setSerosQuests={setSerosQuests}
             />
         );
     } else if (dataType === "NPC") {
