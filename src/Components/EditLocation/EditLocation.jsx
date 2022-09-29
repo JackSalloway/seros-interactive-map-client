@@ -308,7 +308,7 @@ const EditLocation = (props) => {
                     </div>
                 </div>
                 <div id="journal-create-new-location-submit-button-div">
-                    <button>Submit update! NOT IMPLEMENTED</button>
+                    <button>Submit update!</button>
                 </div>
             </form>
             <button onClick={() => setMarkerBeingEdited(null)}>
