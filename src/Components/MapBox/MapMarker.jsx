@@ -17,6 +17,7 @@ const MapMarker = (props) => {
         setEditMarkerLatLng,
         editMarkerType,
         setEditMarkerType,
+        setDeleteData,
     } = props;
 
     const [draggable, setDraggable] = useState(false);
@@ -55,24 +56,31 @@ const MapMarker = (props) => {
                             Open notes!
                         </button>
                         {userAuthenticated.privileged === true ? (
-                            <button
-                                onClick={() => {
-                                    setDraggable(true);
-                                    setMarkerBeingEdited(index);
-                                    setEditLocationDetails(location);
-                                    setEditMarkerLatLng(location.latlng);
-                                    setEditMarkerType(location.type);
-                                    setSelectedLocationNotes(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
-                                    console.log(editMarkerLatLng);
-                                }}
-                                disabled={
-                                    markerBeingEdited === null ? false : true
-                                }
-                            >
-                                {markerBeingEdited === null
-                                    ? "Edit Notes!"
-                                    : "Editing other location"}
-                            </button>
+                            <>
+                                <button
+                                    onClick={() => {
+                                        setDraggable(true);
+                                        setMarkerBeingEdited(index);
+                                        setEditLocationDetails(location);
+                                        setEditMarkerLatLng(location.latlng);
+                                        setEditMarkerType(location.type);
+                                        setSelectedLocationNotes(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
+                                        console.log(editMarkerLatLng);
+                                    }}
+                                    disabled={
+                                        markerBeingEdited === null
+                                            ? false
+                                            : true
+                                    }
+                                >
+                                    {markerBeingEdited === null
+                                        ? "Edit Notes!"
+                                        : "Editing other location"}
+                                </button>
+                                <button onClick={() => setDeleteData(location)}>
+                                    Delete Location
+                                </button>
+                            </>
                         ) : null}
                     </div>
                 </Popup>

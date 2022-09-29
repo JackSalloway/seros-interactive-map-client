@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./DeletionModal.css";
 
 // Component imports
+import DeleteLocation from "./DeleteLocation";
 import DeleteSubLocation from "./DeleteSubLocation";
 import DeleteNPC from "./DeleteNPC";
 import DeleteQuest from "./DeleteQuest";
@@ -22,7 +23,9 @@ const DeletionModal = (props) => {
     const [dataType, setDataType] = useState(null);
 
     useEffect(() => {
-        if (Object.hasOwn(data, "disposition") === true) {
+        if (Object.hasOwn(data, "marked") === true) {
+            setDataType("Location");
+        } else if (Object.hasOwn(data, "disposition") === true) {
             setDataType("NPC");
         } else if (Object.hasOwn(data, "completed") === true) {
             setDataType("Quest");
@@ -31,7 +34,16 @@ const DeletionModal = (props) => {
         }
     }, [data]);
 
-    if (dataType === "NPC") {
+    if (dataType === "Location") {
+        return (
+            <DeleteLocation
+                data={data}
+                setDeleteData={setDeleteData}
+                serosLocations={serosLocations}
+                setSerosLocations={serosLocations}
+            />
+        );
+    } else if (dataType === "NPC") {
         return (
             <DeleteNPC
                 data={data}

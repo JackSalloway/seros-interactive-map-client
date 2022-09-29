@@ -44,6 +44,7 @@ function MapBox(props) {
         setEditMarkerLatLng,
         editMarkerType,
         setEditMarkerType,
+        setDeleteData,
     } = props;
 
     // useState hooks
@@ -150,6 +151,7 @@ function MapBox(props) {
                 setEditMarkerLatLng={setEditMarkerLatLng}
                 editMarkerType={editMarkerType}
                 setEditMarkerType={setEditMarkerType}
+                setDeleteData={setDeleteData}
             />
         );
     };

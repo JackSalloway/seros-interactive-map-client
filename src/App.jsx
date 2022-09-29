@@ -185,6 +185,7 @@ function App() {
                     setEditMarkerLatLng={setEditMarkerLatLng}
                     editMarkerType={editMarkerType}
                     setEditMarkerType={setEditMarkerType}
+                    setDeleteData={setDeleteData}
                 />
 
                 {map ? (
