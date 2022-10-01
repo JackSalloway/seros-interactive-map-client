@@ -16,8 +16,10 @@ const DeleteLocation = (props) => {
     const [deletionString, setDeletionString] = useState("");
     const [deleteDisabled, setDeleteDisabled] = useState(false);
 
+    const deleteLocationString = "DELETE-LOCATION: "; // Wanted to do this as deleting a location is quite a serious thing.
+
     useEffect(() => {
-        if (deletionString === he.decode(data.name)) {
+        if (deletionString === deleteLocationString + he.decode(data.name)) {
             setDeleteDisabled(true);
         } else {
             setDeleteDisabled(false);
@@ -128,7 +130,7 @@ const DeleteLocation = (props) => {
                     <p>
                         Please type{" "}
                         <span className="data-to-delete">
-                            {he.decode(data.name)}
+                            {deleteLocationString + he.decode(data.name)}
                         </span>{" "}
                         to confirm.
                     </p>
