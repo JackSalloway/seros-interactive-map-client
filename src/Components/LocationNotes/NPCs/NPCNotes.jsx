@@ -255,9 +255,9 @@ const NPCNotes = (props) => {
                     </div>
                     <form
                         onSubmit={updateNPCData}
-                        className="location-notes-form quest-form"
+                        className="location-notes-form npc-form"
                     >
-                        <div className="create-location-npc-name location-notes-create">
+                        <div className="create-npc-name location-notes-create">
                             <label htmlFor="npc-name">
                                 NPC Name:
                                 <input
@@ -279,7 +279,7 @@ const NPCNotes = (props) => {
                             </label>
                         </div>
 
-                        <div className="create-location-npc-desc location-notes-create">
+                        <div className="create-npc-desc location-notes-create">
                             <label htmlFor="npc-desc">
                                 NPC Description:
                                 <textarea
@@ -294,7 +294,7 @@ const NPCNotes = (props) => {
                             </label>
                         </div>
 
-                        <div className="create-location-disposition-status location-notes-create">
+                        <div className="create-npc-disposition-status location-notes-create">
                             <label htmlFor="disposition-status">
                                 NPC Disposition:
                                 <select
