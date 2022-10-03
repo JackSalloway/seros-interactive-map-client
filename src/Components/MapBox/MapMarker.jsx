@@ -74,7 +74,7 @@ const MapMarker = (props) => {
                                     }
                                 >
                                     {markerBeingEdited === null
-                                        ? "Edit Notes!"
+                                        ? "Edit Location!"
                                         : "Editing other location"}
                                 </button>
                                 <button onClick={() => setDeleteData(location)}>
