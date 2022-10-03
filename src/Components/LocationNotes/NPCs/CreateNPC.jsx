@@ -198,6 +198,7 @@ const CreateNPC = (props) => {
                                     Select a disposition!
                                 </option>
                                 <option value="Friendly">Friendly</option>
+                                <option value="Neutral">Neutral</option>
                                 <option value="Hostile">Hostile</option>
                             </select>
                         </label>
