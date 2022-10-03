@@ -32,11 +32,11 @@ const NPCWrapper = (props) => {
                         src="images/wizard-face.png"
                         alt="wizard face icon"
                     />
-                    <img
+                    {/* <img
                         className="location-notes-category-wrapper-image"
                         src="images/dwarf-face.png"
                         alt="dwarf face icon"
-                    />
+                    /> */}
                 </div>
                 <h3>NPCs</h3>
                 {showNPCs === false ? (
@@ -57,11 +57,11 @@ const NPCWrapper = (props) => {
                     />
                 )}
                 <div className="location-notes-category-wrapper-images-wrapper">
-                    <img
+                    {/* <img
                         className="location-notes-category-wrapper-image"
                         src="images/woman-elf-face.png"
                         alt="woman elf face icon"
-                    />
+                    /> */}
                     <img
                         className="location-notes-category-wrapper-image"
                         src="images/visored-helm.png"

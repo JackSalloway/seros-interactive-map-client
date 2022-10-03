@@ -25,15 +25,15 @@ const SubLocationWrapper = (props) => {
         >
             <div className="location-notes-category-header">
                 <div className="location-notes-category-wrapper-images-wrapper">
-                    <img
+                    {/* <img
                         className="location-notes-category-wrapper-image"
                         src="images/ancient-columns.png"
                         alt="ancient ruins icon"
-                    />
+                    /> */}
                     <img
                         className="location-notes-category-wrapper-image"
-                        src="images/wood-cabin.png"
-                        alt="wood cabin icon"
+                        src="images/village.png"
+                        alt="village houses icon"
                     />
                 </div>
                 <h3>Sub Locations</h3>
@@ -60,11 +60,11 @@ const SubLocationWrapper = (props) => {
                         src="images/medieval-gate-1.png"
                         alt="medieval castle icon"
                     />
-                    <img
+                    {/* <img
                         className="location-notes-category-wrapper-image"
-                        src="images/village.png"
-                        alt="village houses icon"
-                    />
+                        src="images/wood-cabin.png"
+                        alt="wood cabin icon"
+                    /> */}
                 </div>
             </div>
             {/* Has sub-locations drop down been clicked? */}
