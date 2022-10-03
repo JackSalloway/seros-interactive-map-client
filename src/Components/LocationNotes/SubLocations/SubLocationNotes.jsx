@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import he from "he";
-import { CONTENT_TYPE_APPLICATION_JSON } from "../../../imports/imports";
+import {
+    CONTENT_TYPE_APPLICATION_JSON,
+    splitParas,
+} from "../../../imports/imports";
 import Separator from "../Separator/Separator";
 
 const SubLocationNotes = (props) => {
@@ -193,9 +196,13 @@ const SubLocationNotes = (props) => {
                 style={{ backgroundImage: `url(./images/papyr.jpg)` }}
             >
                 <div className="location-notes-details-header details-open">
-                    <div className="location-notes-details-data-section name-section">
+                    <div className="location-notes-details-data-section name-section description-section">
                         <h4>{he.decode(subLocation.name)}</h4>
-                        <p>{he.decode(subLocation.desc)}</p>
+                        {splitParas(subLocation.desc).map((para) => (
+                            <p className="location-notes-description-paragraph">
+                                {he.decode(para)}
+                            </p>
+                        ))}
                     </div>
                     <FontAwesomeIcon
                         icon="chevron-up"

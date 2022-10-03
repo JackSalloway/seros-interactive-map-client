@@ -71,6 +71,12 @@
     margin-left: auto;
 }
 
+.description-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 h4 {
     font-size: 1.5em;
     /* text-decoration: underline; */

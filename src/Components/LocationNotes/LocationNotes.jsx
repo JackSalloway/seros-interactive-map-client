@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./LocationNotes.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import he from "he";
+import { splitParas } from "../../imports/imports";
 
 // Component imports
 import SubLocationWrapper from "./SubLocations/SubLocationWrapper";
@@ -135,10 +136,14 @@ const LocationNotes = (props) => {
                     />
                 </span>
             </div>
-            <div id="location-notes-data">
-                {locationNotes.desc ? (
-                    <p>{he.decode(locationNotes.desc)}</p>
-                ) : null}
+            <div id="location-notes-data" className="description-section">
+                {locationNotes.desc
+                    ? splitParas(locationNotes.desc).map((para) => (
+                          <p className="location-notes-description-paragraph">
+                              {he.decode(para)}
+                          </p>
+                      ))
+                    : null}
 
                 <SubLocationWrapper
                     showSubLocations={showSubLocations}

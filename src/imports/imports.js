@@ -26,3 +26,8 @@ export function titleCase(str) {
     }
     return splitStr.join(" ");
 }
+
+// Split paragraphs to incorporate enter key inputs
+export const splitParas = (string) => {
+    return string.split("\n").filter((para) => para !== "");
+};

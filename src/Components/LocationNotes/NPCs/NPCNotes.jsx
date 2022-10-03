@@ -5,6 +5,7 @@ import he from "he";
 import {
     CONTENT_TYPE_APPLICATION_JSON,
     customStyles,
+    splitParas,
 } from "../../../imports/imports";
 import Separator from "../Separator/Separator";
 
@@ -406,7 +407,11 @@ const NPCNotes = (props) => {
                 <Separator />
                 <div className="location-notes-details-data-section description-section">
                     <h5>Description:</h5>
-                    <p>{he.decode(npc.desc)}</p>
+                    {splitParas(npc.desc).map((para) => (
+                        <p className="location-notes-description-paragraph">
+                            {he.decode(para)}
+                        </p>
+                    ))}
                 </div>
                 <Separator />
                 <div className="location-notes-details-data-section associated-locations-section">
