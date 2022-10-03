@@ -16,30 +16,31 @@ const LocationListWrapper = (props) => {
         map,
     } = props;
 
-    const [locationList, setLocationList] = useState(
-        serosLocations.sort(function (a, b) {
-            var locationA = a.name.toUpperCase();
-            var locationB = b.name.toUpperCase();
-            return locationA < locationB ? -1 : locationA > locationB ? 1 : 0;
-        })
-    );
+    // Create shallow copy variable for reuse
+    const shallowCopy = Array.from(serosLocations).sort(function (a, b) {
+        var locationA = a.name.toUpperCase();
+        var locationB = b.name.toUpperCase();
+        return locationA < locationB ? -1 : locationA > locationB ? 1 : 0;
+    });
+
+    const [locationList, setLocationList] = useState(shallowCopy);
     const [searchValue, setSearchValue] = useState("");
 
     // Filter the location list whenever the user edits the searchValue state
     useEffect(() => {
         if (searchValue === "") {
-            setLocationList(serosLocations); // Think this still works as .sort actually edits the array
+            setLocationList(shallowCopy);
             return;
         } else {
             setLocationList(
-                serosLocations.filter((location) =>
+                shallowCopy.filter((location) =>
                     location.name
                         .toLowerCase()
                         .includes(searchValue.toLocaleLowerCase())
                 )
             );
         }
-    }, [serosLocations, searchValue]);
+    }, [shallowCopy, searchValue]);
 
     if (renderCreationMarker === true) {
         return (

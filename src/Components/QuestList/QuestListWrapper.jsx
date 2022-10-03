@@ -8,28 +8,29 @@ import QuestListNotes from "./QuestListNotes";
 const QuestListWrapper = (props) => {
     const { serosLocations, setLocationNotes, serosQuests, map } = props;
 
-    const [questList, SetQuestList] = useState(
-        serosQuests.sort(function (a, b) {
-            var questA = a.name.toUpperCase();
-            var questB = b.name.toUpperCase();
-            return questA < questB ? -1 : questA > questB ? 1 : 0;
-        })
-    );
+    // Create shallow copy variable for reuse
+    const shallowCopy = Array.from(serosQuests).sort(function (a, b) {
+        var questA = a.name.toUpperCase();
+        var questB = b.name.toUpperCase();
+        return questA < questB ? -1 : questA > questB ? 1 : 0;
+    });
+
+    const [questList, SetQuestList] = useState(shallowCopy);
     const [searchValue, setSearchValue] = useState("");
 
     // Filter the quest list whenever the user edits the searchValue state
     useEffect(() => {
         if (searchValue === "") {
-            SetQuestList(serosQuests); // Think this still works as .sort actually edits the array
+            SetQuestList(shallowCopy); // Think this still works as .sort actually edits the array
             return;
         } else {
             SetQuestList(
-                serosQuests.filter((quest) =>
+                shallowCopy.filter((quest) =>
                     quest.name.toLowerCase().includes(searchValue.toLowerCase())
                 )
             );
         }
-    }, [searchValue, serosQuests]);
+    }, [searchValue, shallowCopy]);
 
     // const completedQuests = serosQuests.filter(
     //     (quest) => quest.completed === true
