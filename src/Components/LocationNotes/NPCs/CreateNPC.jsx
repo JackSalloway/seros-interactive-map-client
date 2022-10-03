@@ -14,6 +14,7 @@ const CreateNPC = (props) => {
     const [newNPCRace, setNewNPCRace] = useState("");
     const [newNPCDesc, setNewNPCDesc] = useState("");
     const [newNPCDisposition, setNewNPCDisposition] = useState(null);
+    const [newNPCStatus, setNewNPCStatus] = useState(null);
     const [newNPCSelectedLocations, setNewNPCSelectedLocations] = useState([]);
     const [newNPCQuests, setNewNPCQuests] = useState([]);
 
@@ -26,6 +27,7 @@ const CreateNPC = (props) => {
             npc_race: newNPCRace,
             npc_desc: newNPCDesc,
             npc_disposition: newNPCDisposition,
+            npc_status: newNPCStatus,
             npc_associated_locations: newNPCSelectedLocations,
             npc_quests: newNPCQuests,
         };
@@ -200,6 +202,26 @@ const CreateNPC = (props) => {
                                 <option value="Friendly">Friendly</option>
                                 <option value="Neutral">Neutral</option>
                                 <option value="Hostile">Hostile</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div className="create-npc-status-status location-notes-create">
+                        <label htmlFor="disposition-status">
+                            NPC status:
+                            <select
+                                name="disposition-status"
+                                defaultValue="default"
+                                id="npc-status"
+                                onChange={({ target }) => {
+                                    setNewNPCStatus(target.value);
+                                }}
+                            >
+                                <option value="default" disabled>
+                                    Select a status!
+                                </option>
+                                <option value="Alive">Alive</option>
+                                <option value="Deceased">Deceased</option>
                             </select>
                         </label>
                     </div>
