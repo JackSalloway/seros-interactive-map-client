@@ -31,13 +31,7 @@ const NPCListNotes = (props) => {
     if (selected === false) {
         return (
             <div className="npc-list-notes-individual npc-list-notes-individual-header">
-                <p
-                    style={{
-                        color: npc.disposition === "Friendly" ? "green" : "red",
-                    }}
-                >
-                    {he.decode(npc.name)}
-                </p>
+                <p>{he.decode(npc.name)}</p>
                 {expandDownChevron}
             </div>
         );
@@ -79,16 +73,7 @@ const NPCListNotes = (props) => {
         return (
             <>
                 <div className="npc-list-notes-individual npc-list-notes-individual-header">
-                    <p
-                        style={{
-                            color:
-                                npc.disposition === "Friendly"
-                                    ? "green"
-                                    : "red",
-                        }}
-                    >
-                        {he.decode(npc.name)}
-                    </p>
+                    <p>{he.decode(npc.name)}</p>
                     {collapseUpChevron}
                 </div>
                 <div className="npc-list-notes-individual npc-list-notes-individual-information">

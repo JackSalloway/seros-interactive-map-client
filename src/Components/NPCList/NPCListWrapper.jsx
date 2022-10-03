@@ -13,53 +13,53 @@ const NPCListWrapper = (props) => {
     });
 
     // const [NPCList, setNPCList] = useState(serosNPCs);
-    const [friendlyNPCList, setFriendlyNPCList] = useState(
+    const [npcList, setNPCList] = useState(
         shallowCopy.filter((npc) => npc.disposition === "Friendly")
     );
-    const [friendlySearchValue, setFriendlySearchValue] = useState("");
-    const [hostileNPCList, setHostileNPCList] = useState(
-        shallowCopy.filter((npc) => npc.disposition === "Hostile")
-    );
-    const [hostileSearchValue, setHostileSearchValue] = useState("");
+    const [searchValue, setFriendlySearchValue] = useState("");
+    // const [hostileNPCList, setHostileNPCList] = useState(
+    //     shallowCopy.filter((npc) => npc.disposition === "Hostile")
+    // );
+    // const [hostileSearchValue, setHostileSearchValue] = useState("");
 
     // Filter the friendly npc list whenever the user edits the friendlySearchValue state
     useEffect(() => {
-        if (friendlySearchValue === "") {
-            setFriendlyNPCList(
+        if (searchValue === "") {
+            setNPCList(
                 shallowCopy.filter((npc) => npc.disposition === "Friendly") // Think this still works as .sort actually edits the array
             );
             return;
         } else {
-            setFriendlyNPCList(
+            setNPCList(
                 shallowCopy
                     .filter((npc) => npc.disposition === "Friendly")
                     .filter((npc) =>
                         npc.name
                             .toLowerCase()
-                            .includes(friendlySearchValue.toLowerCase())
+                            .includes(searchValue.toLowerCase())
                     )
             );
         }
-    }, [friendlySearchValue, shallowCopy]);
+    }, [searchValue, shallowCopy]);
 
     // Filter the hostile npc list whenever the user edits the hostileSearchValue state
-    useEffect(() => {
-        if (hostileSearchValue === "") {
-            setHostileNPCList(
-                shallowCopy.filter((npc) => npc.disposition === "Hostile") // Think this still works as .sort actually edits the array
-            );
-        } else {
-            setHostileNPCList(
-                shallowCopy
-                    .filter((npc) => npc.disposition === "Hostile")
-                    .filter((npc) =>
-                        npc.name
-                            .toLowerCase()
-                            .includes(hostileSearchValue.toLowerCase())
-                    )
-            );
-        }
-    }, [hostileSearchValue, shallowCopy]);
+    // useEffect(() => {
+    //     if (hostileSearchValue === "") {
+    //         setHostileNPCList(
+    //             shallowCopy.filter((npc) => npc.disposition === "Hostile") // Think this still works as .sort actually edits the array
+    //         );
+    //     } else {
+    //         setHostileNPCList(
+    //             shallowCopy
+    //                 .filter((npc) => npc.disposition === "Hostile")
+    //                 .filter((npc) =>
+    //                     npc.name
+    //                         .toLowerCase()
+    //                         .includes(hostileSearchValue.toLowerCase())
+    //                 )
+    //         );
+    //     }
+    // }, [hostileSearchValue, shallowCopy]);
 
     return (
         <div id="npc-list-wrapper">
@@ -67,33 +67,13 @@ const NPCListWrapper = (props) => {
                 <div id="npc-list-wrapper-header">
                     <input
                         type="text"
-                        placeholder="Search for a friendly NPC!"
+                        placeholder="Search for an NPC!"
                         onChange={({ target }) =>
                             setFriendlySearchValue(target.value)
                         }
                     />
                 </div>
-                {friendlyNPCList.map((npc) => (
-                    <NPCListNotes
-                        npc={npc}
-                        key={npc._id}
-                        map={map}
-                        serosLocations={serosLocations}
-                        setLocationNotes={setLocationNotes}
-                    />
-                ))}
-            </div>
-            <div className="npc-list-wrapper-category" id="npc-list-hostile">
-                <div id="npc-list-wrapper-header">
-                    <input
-                        type="text"
-                        placeholder="Search for a hostile NPC!"
-                        onChange={({ target }) =>
-                            setHostileSearchValue(target.value)
-                        }
-                    />
-                </div>
-                {hostileNPCList.map((npc) => (
+                {npcList.map((npc) => (
                     <NPCListNotes
                         npc={npc}
                         key={npc._id}

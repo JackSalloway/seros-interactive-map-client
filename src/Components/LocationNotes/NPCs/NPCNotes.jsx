@@ -37,6 +37,7 @@ const NPCNotes = (props) => {
     const [updatedNPCDispostion, setUpdatedNPCDisposition] = useState(
         npc.disposition
     );
+    const [updatedNPCStatus, setUpdatedNPCStatus] = useState(npc.status);
     const [updatedNPCQuests, setUpdatedNPCQuests] = useState(npc.quests);
     const [updatedNPCSelectedLocations, setUpdatedNPCSelectedLocations] =
         useState({});
@@ -48,6 +49,7 @@ const NPCNotes = (props) => {
             setUpdatedNPCRace({ value: npc.race, label: npc.race });
             setUpdatedNPCDescription(he.decode(npc.desc));
             setUpdatedNPCDisposition(npc.disposition);
+            setUpdatedNPCStatus(npc.status);
             setUpdatedNPCQuests(
                 npc.quests.map((quest) => {
                     return {
@@ -204,6 +206,7 @@ const NPCNotes = (props) => {
             npc_race: updatedNPCRace.value,
             npc_desc: updatedNPCDescription,
             npc_disposition: updatedNPCDispostion,
+            npc_status: updatedNPCStatus,
             npc_associated_locations: updatedNPCSelectedLocations.map(
                 (location) => location.value
             ),
@@ -315,6 +318,26 @@ const NPCNotes = (props) => {
                             </label>
                         </div>
 
+                        <div className="create-npc-status-status location-notes-create">
+                            <label htmlFor="disposition-status">
+                                NPC status:
+                                <select
+                                    name="disposition-status"
+                                    defaultValue={updatedNPCStatus}
+                                    id="npc-status"
+                                    onChange={({ target }) => {
+                                        setUpdatedNPCStatus(target.value);
+                                    }}
+                                >
+                                    <option value="default" disabled>
+                                        Select a status!
+                                    </option>
+                                    <option value="Alive">Alive</option>
+                                    <option value="Deceased">Deceased</option>
+                                </select>
+                            </label>
+                        </div>
+
                         <div className="create-npc-associated-locations location-notes-create">
                             <label htmlFor="quest-associated-locations">
                                 NPC Associated Locations:
@@ -361,7 +384,8 @@ const NPCNotes = (props) => {
                     <div className="location-notes-details-data-section name-section">
                         <h4>{he.decode(npc.name)}</h4>
                         <p>
-                            {npc.race}, {npc.disposition.toLowerCase()}
+                            {npc.race}, {npc.disposition.toLowerCase()},{" "}
+                            {npc.status.toLowerCase()}
                         </p>
                     </div>
 
