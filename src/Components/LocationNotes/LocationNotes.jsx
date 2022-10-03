@@ -92,6 +92,13 @@ const LocationNotes = (props) => {
         }
     }, [showSubLocations]);
 
+    // Close NPC form if the parent category is closed
+    useEffect(() => {
+        if (showNPCs === false) {
+            setAddNewNPC(false);
+        }
+    });
+
     // Close Quest form if the parent category is closed
     useEffect(() => {
         if (showQuests === false) {
