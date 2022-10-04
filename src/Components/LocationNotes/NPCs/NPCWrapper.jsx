@@ -7,6 +7,7 @@ import CreateNPC from "./CreateNPC";
 
 const NPCWrapper = (props) => {
     const {
+        locationNotes,
         showNPCs,
         setShowNPCs,
         locationNPCs,
@@ -137,6 +138,7 @@ const NPCWrapper = (props) => {
             {/* Has add new NPC been clicked? */}
             {addNewNPC === true ? (
                 <CreateNPC
+                    locationNotes={locationNotes}
                     locationList={locationList}
                     questList={questList}
                     serosNPCs={serosNPCs}

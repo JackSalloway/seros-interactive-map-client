@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import Select from "react-select";
+import he from "he";
 import {
     CONTENT_TYPE_APPLICATION_JSON,
     customStyles,
 } from "../../../imports/imports";
 
 const CreateNPC = (props) => {
-    const { locationList, questList, serosNPCs, setSerosNPCs, setAddNewNPC } =
-        props;
+    const {
+        locationNotes,
+        locationList,
+        questList,
+        serosNPCs,
+        setSerosNPCs,
+        setAddNewNPC,
+    } = props;
 
     // Set states
     const [newNPCName, setNewNPCName] = useState("");
@@ -15,7 +22,12 @@ const CreateNPC = (props) => {
     const [newNPCDesc, setNewNPCDesc] = useState("");
     const [newNPCDisposition, setNewNPCDisposition] = useState(null);
     const [newNPCStatus, setNewNPCStatus] = useState(null);
-    const [newNPCSelectedLocations, setNewNPCSelectedLocations] = useState([]);
+    const [newNPCSelectedLocations, setNewNPCSelectedLocations] = useState([
+        {
+            value: he.decode(locationNotes._id),
+            label: he.decode(locationNotes.name),
+        },
+    ]);
     const [newNPCQuests, setNewNPCQuests] = useState([]);
 
     // Send POST request to create a new NPC at this location
@@ -28,7 +40,9 @@ const CreateNPC = (props) => {
             npc_desc: newNPCDesc,
             npc_disposition: newNPCDisposition,
             npc_status: newNPCStatus,
-            npc_associated_locations: newNPCSelectedLocations,
+            npc_associated_locations: newNPCSelectedLocations.map(
+                (location) => location.value
+            ),
             npc_quests: newNPCQuests,
         };
 
@@ -115,7 +129,14 @@ const CreateNPC = (props) => {
     // Function to handle changes inside the npc associated locations box
     const handleNPCLocationChange = (value) => {
         // Having issues keeping the location that is already selected in the selection box (not allowing it to be removed)
-        setNewNPCSelectedLocations(value.map((location) => location.value));
+        setNewNPCSelectedLocations(
+            value.map((location) => {
+                return {
+                    value: he.decode(location.value),
+                    label: he.decode(location.label),
+                };
+            })
+        );
     };
 
     // Create a react select component for npc associated locations
