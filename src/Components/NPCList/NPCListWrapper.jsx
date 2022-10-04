@@ -13,9 +13,7 @@ const NPCListWrapper = (props) => {
     });
 
     // const [NPCList, setNPCList] = useState(serosNPCs);
-    const [npcList, setNPCList] = useState(
-        shallowCopy.filter((npc) => npc.disposition === "Friendly")
-    );
+    const [npcList, setNPCList] = useState(shallowCopy);
     const [searchValue, setFriendlySearchValue] = useState("");
     // const [hostileNPCList, setHostileNPCList] = useState(
     //     shallowCopy.filter((npc) => npc.disposition === "Hostile")
@@ -25,19 +23,13 @@ const NPCListWrapper = (props) => {
     // Filter the friendly npc list whenever the user edits the friendlySearchValue state
     useEffect(() => {
         if (searchValue === "") {
-            setNPCList(
-                shallowCopy.filter((npc) => npc.disposition === "Friendly") // Think this still works as .sort actually edits the array
-            );
+            setNPCList(shallowCopy);
             return;
         } else {
             setNPCList(
-                shallowCopy
-                    .filter((npc) => npc.disposition === "Friendly")
-                    .filter((npc) =>
-                        npc.name
-                            .toLowerCase()
-                            .includes(searchValue.toLowerCase())
-                    )
+                shallowCopy.filter((npc) =>
+                    npc.name.toLowerCase().includes(searchValue.toLowerCase())
+                )
             );
         }
     }, [searchValue, shallowCopy]);
