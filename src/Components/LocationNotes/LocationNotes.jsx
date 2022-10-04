@@ -165,6 +165,7 @@ const LocationNotes = (props) => {
                 />
 
                 <NPCWrapper
+                    locationNotes={locationNotes}
                     showNPCs={showNPCs}
                     setShowNPCs={setShowNPCs}
                     locationNPCs={locationNPCs}
@@ -179,6 +180,7 @@ const LocationNotes = (props) => {
                 />
 
                 <QuestWrapper
+                    locationNotes={locationNotes}
                     showQuests={showQuests}
                     setShowQuests={setShowQuests}
                     locationQuests={locationQuests}
