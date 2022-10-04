@@ -97,7 +97,7 @@ const LocationNotes = (props) => {
         if (showNPCs === false) {
             setAddNewNPC(false);
         }
-    });
+    }, [showNPCs]);
 
     // Close Quest form if the parent category is closed
     useEffect(() => {
