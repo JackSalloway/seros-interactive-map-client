@@ -7,6 +7,7 @@ import CreateQuest from "./CreateQuest";
 
 const QuestWrapper = (props) => {
     const {
+        locationNotes,
         showQuests,
         setShowQuests,
         locationQuests,
@@ -137,6 +138,7 @@ const QuestWrapper = (props) => {
             {/* Has new quest been clicked? */}
             {addNewQuest === true ? (
                 <CreateQuest
+                    locationNotes={locationNotes}
                     locationList={locationList}
                     serosQuests={serosQuests}
                     setSerosQuests={setSerosQuests}

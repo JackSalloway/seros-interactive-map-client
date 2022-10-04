@@ -1,20 +1,32 @@
 import React, { useState } from "react";
 import Select from "react-select";
+import he from "he";
 import {
     CONTENT_TYPE_APPLICATION_JSON,
     customStyles,
 } from "../../../imports/imports";
 
 const CreateQuest = (props) => {
-    const { locationList, serosQuests, setSerosQuests, setAddNewQuest } = props;
+    const {
+        locationNotes,
+        locationList,
+        serosQuests,
+        setSerosQuests,
+        setAddNewQuest,
+    } = props;
 
     // Set states
     const [newQuestName, setNewQuestName] = useState("");
     const [newQuestDesc, setNewQuestDesc] = useState("");
     const [newQuestStatus, setNewQuestStatus] = useState(null);
-    const [newQuestSelectedLocations, setNewQuestSelectedLocations] = useState(
-        []
-    );
+    const [newQuestSelectedLocations, setNewQuestSelectedLocations] = useState([
+        {
+            value: he.decode(locationNotes._id),
+            label: he.decode(locationNotes.name),
+        },
+    ]);
+
+    // console.log(locationNotes);
 
     // Send POST request to create a new quest at this location
     const postQuestData = async (e) => {
@@ -24,7 +36,9 @@ const CreateQuest = (props) => {
             quest_name: newQuestName,
             quest_desc: newQuestDesc,
             quest_completed: newQuestStatus,
-            quest_associated_locations: newQuestSelectedLocations,
+            quest_associated_locations: newQuestSelectedLocations.map(
+                (location) => location.value
+            ),
         };
 
         const init = {
@@ -45,9 +59,16 @@ const CreateQuest = (props) => {
     };
 
     // Function to handle changes in the selection box
-    const handleQuestLocationChange = (value) => {
+    const handleQuestLocationChange = (locations) => {
         // Having issues keeping the location that is already selected in the selection box (not allowing it to be removed)
-        setNewQuestSelectedLocations(value.map((location) => location.value));
+        setNewQuestSelectedLocations(
+            locations.map((location) => {
+                return {
+                    value: he.decode(location.value),
+                    label: he.decode(location.label),
+                };
+            })
+        );
     };
 
     // Create react select component for quest associated locations
