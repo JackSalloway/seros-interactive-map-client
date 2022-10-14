@@ -19,10 +19,6 @@ import {
 // import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
-// import CreationSidebar from "./Components/CreationSidebar/CreationSidebar";
-import CreateLocationForm from "./Components/CreationForms/CreateLocationForm";
-import CreateQuestForm from "./Components/CreationForms/CreateQuestForm";
-import CreateNPCForm from "./Components/CreationForms/CreateNPCForm";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
 
 // React imports
@@ -60,13 +56,6 @@ function App() {
     const [editMarkerLatLng, setEditMarkerLatLng] = useState([]);
     const [editMarkerType, setEditMarkerType] = useState(null);
 
-    // Render creation form states
-    // const [renderCreationSidebar, setRenderCreationSidebar] = useState(false);
-    const [renderLocationCreationForm, setRenderLocationCreationForm] =
-        useState(false);
-    const [renderQuestCreationForm, setRenderQuestCreationForm] =
-        useState(false);
-    const [renderNPCCreationForm, setRenderNPCCreationForm] = useState(false);
     const [deleteData, setDeleteData] = useState(null);
 
     // Render data states
@@ -122,6 +111,9 @@ function App() {
         })
             .then((response) => response.json())
             .then((res) => {
+                if (!res.ok) {
+                    console.log(res);
+                }
                 setUserAuthenticated(res);
                 if (res.privileged === true) {
                     setInputStyles({ visibility: "visible" });
@@ -167,10 +159,6 @@ function App() {
                     creationMarkerLatLng={creationMarkerLatLng}
                     creationMarkerType={creationMarkerType}
                     setCreationMarkerLatLng={setCreationMarkerLatLng}
-                    renderLocationCreationForm={renderLocationCreationForm}
-                    setRenderLocationCreationForm={
-                        setRenderLocationCreationForm
-                    }
                     selectedLocationNotes={
                         serosLocations?.[selectedLocationNotes] || null
                     }
@@ -222,16 +210,6 @@ function App() {
                     />
                 ) : null}
 
-                {/* <CreationSidebar
-                    inputStyles={inputStyles}
-                    renderCreationSidebar={renderCreationSidebar}
-                    setRenderCreationSidebar={setRenderCreationSidebar}
-                    renderCreationMarker={renderCreationMarker}
-                    setRenderCreationMarker={setRenderCreationMarker}
-                    setRenderQuestCreationForm={setRenderQuestCreationForm}
-                    setRenderNPCCreationForm={setRenderNPCCreationForm}
-                /> */}
-
                 {deleteData !== null ? (
                     <DeletionModal
                         data={deleteData}
@@ -248,30 +226,6 @@ function App() {
                     />
                 ) : null}
             </div>
-
-            {renderLocationCreationForm === true ? (
-                <CreateLocationForm
-                    creationMarkerLatLng={creationMarkerLatLng}
-                    setRenderLocationCreationForm={
-                        setRenderLocationCreationForm
-                    }
-                />
-            ) : null}
-
-            {renderQuestCreationForm === true ? (
-                <CreateQuestForm
-                    setRenderQuestCreationForm={setRenderQuestCreationForm}
-                    serosLocations={serosLocations}
-                />
-            ) : null}
-
-            {renderNPCCreationForm === true ? (
-                <CreateNPCForm
-                    setRenderNPCCreationForm={setRenderNPCCreationForm}
-                    serosLocations={serosLocations}
-                    serosQuests={serosQuests}
-                />
-            ) : null}
         </>
     );
 }
