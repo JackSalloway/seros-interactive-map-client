@@ -19,7 +19,8 @@ const EditLocation = (props) => {
         map,
         serosLocations,
         setSerosLocations,
-        setDataResponseMessage,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -83,10 +84,12 @@ const EditLocation = (props) => {
         let serosLocationsCopy = [...serosLocations];
         serosLocationsCopy[markerBeingEdited] = returnedData;
         setSerosLocations(serosLocationsCopy);
-        setDataResponseMessage({
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
             message: `Location: ${locationName}, successfully updated.`,
             important: false,
         });
+        setDataNotifications(notificationsCopy);
         setMarkerBeingEdited(null);
     };
 

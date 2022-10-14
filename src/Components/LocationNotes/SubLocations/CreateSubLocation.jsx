@@ -7,7 +7,8 @@ const CreateSubLocation = (props) => {
         serosLocations,
         setSerosLocations,
         setAddNewSubLocation,
-        setDataResponseMessage,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     // Set states
@@ -45,10 +46,12 @@ const CreateSubLocation = (props) => {
         location.sub_locations = [...data.sub_locations];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
-        setDataResponseMessage({
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
             message: `Sub-location: ${newSubLocationName}, successfully created!`,
             important: false,
         });
+        setDataNotifications(notificationsCopy);
         setAddNewSubLocation(false);
     };
 

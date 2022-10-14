@@ -25,7 +25,8 @@ const LocationNotes = (props) => {
         setSerosQuests,
         setDeleteData,
         inputStyles,
-        setDataResponseMessage,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     // Set states
@@ -163,7 +164,8 @@ const LocationNotes = (props) => {
                     setSerosLocations={setSerosLocations}
                     addNewSubLocation={addNewSubLocation}
                     setAddNewSubLocation={setAddNewSubLocation}
-                    setDataResponseMessage={setDataResponseMessage}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                 />
 
                 <NPCWrapper
@@ -179,7 +181,8 @@ const LocationNotes = (props) => {
                     setSerosNPCs={setSerosNPCs}
                     addNewNPC={addNewNPC}
                     setAddNewNPC={setAddNewNPC}
-                    setDataResponseMessage={setDataResponseMessage}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                 />
 
                 <QuestWrapper
@@ -196,7 +199,8 @@ const LocationNotes = (props) => {
                     setQuestUpdated={setQuestUpdated}
                     addNewQuest={addNewQuest}
                     setAddNewQuest={setAddNewQuest}
-                    setDataResponseMessage={setDataResponseMessage}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                 />
             </div>
         </div>

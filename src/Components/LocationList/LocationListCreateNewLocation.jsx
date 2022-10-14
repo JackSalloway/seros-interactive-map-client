@@ -16,6 +16,8 @@ const LocationListCreateNewLocation = (props) => {
         setCreationMarkerType,
         serosLocations,
         setSerosLocations,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -59,6 +61,12 @@ const LocationListCreateNewLocation = (props) => {
         let serosLocationsCopy = [...serosLocations];
         serosLocationsCopy.push(returnedData[0]);
         setSerosLocations(serosLocationsCopy);
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `Location: ${locationName}, successfully created!`,
+            important: false,
+        });
+        setDataNotifications(notificationsCopy);
         setRenderCreationMarker(false);
     };
 

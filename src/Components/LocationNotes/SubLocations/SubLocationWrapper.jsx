@@ -16,7 +16,8 @@ const SubLocationWrapper = (props) => {
         setSerosLocations,
         addNewSubLocation,
         setAddNewSubLocation,
-        setDataResponseMessage,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     return (
@@ -84,9 +85,8 @@ const SubLocationWrapper = (props) => {
                                     inputStyles={inputStyles}
                                     serosLocations={serosLocations}
                                     setSerosLocations={setSerosLocations}
-                                    setDataResponseMessage={
-                                        setDataResponseMessage
-                                    }
+                                    dataNotifications={dataNotifications}
+                                    setDataNotifications={setDataNotifications}
                                 />
                             )
                         )}
@@ -144,7 +144,8 @@ const SubLocationWrapper = (props) => {
                     serosLocations={serosLocations}
                     setSerosLocations={setSerosLocations}
                     setAddNewSubLocation={setAddNewSubLocation}
-                    setDataResponseMessage={setDataResponseMessage}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                 />
             ) : null}
         </div>

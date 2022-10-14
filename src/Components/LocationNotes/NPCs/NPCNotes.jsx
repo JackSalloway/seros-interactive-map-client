@@ -19,7 +19,8 @@ const NPCNotes = (props) => {
         serosNPCs,
         setSerosNPCs,
         originalIndex,
-        setDataResponseMessage,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -231,10 +232,12 @@ const NPCNotes = (props) => {
         let serosNPCsCopy = [...serosNPCs];
         serosNPCsCopy[originalIndex] = returnedData;
         setSerosNPCs(serosNPCsCopy);
-        setDataResponseMessage({
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
             message: `NPC: ${updatedNPCName}, successfully updated!`,
             important: false,
         });
+        setDataNotifications(notificationsCopy);
         setEditing(false);
     };
 

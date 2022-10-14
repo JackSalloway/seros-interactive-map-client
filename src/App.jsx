@@ -223,6 +223,7 @@ function App() {
                         editLocationDetails={editLocationDetails}
                         editMarkerLatLng={editMarkerLatLng}
                         setEditMarkerType={setEditMarkerType}
+                        dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}
                     />
                 ) : null}
