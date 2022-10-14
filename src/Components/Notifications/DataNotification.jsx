@@ -1,8 +1,13 @@
 import React from "react";
+import he from "he";
 
 const DataNotification = (props) => {
     const { notification } = props;
-    return <div>{notification.message}</div>;
+    return (
+        <div style={{ color: notification.important ? "red" : "white" }}>
+            {he.decode(notification.message)}
+        </div>
+    );
 };
 
 export default DataNotification;
