@@ -25,6 +25,7 @@ const JournalMenuContent = (props) => {
         editLocationDetails,
         editMarkerLatLng,
         setEditMarkerType,
+        setDataResponseMessage,
     } = props;
 
     if (markerBeingEdited !== null) {
@@ -38,6 +39,7 @@ const JournalMenuContent = (props) => {
                 map={map}
                 serosLocations={serosLocations}
                 setSerosLocations={setSerosLocations}
+                setDataResponseMessage={setDataResponseMessage}
             />
         );
     }

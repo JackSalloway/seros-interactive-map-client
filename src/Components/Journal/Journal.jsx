@@ -129,6 +129,7 @@ const Journal = (props) => {
                         editLocationDetails={editLocationDetails}
                         editMarkerLatLng={editMarkerLatLng}
                         setEditMarkerType={setEditMarkerType}
+                        setDataResponseMessage={setDataResponseMessage}
                     />
                 </div>
             </div>

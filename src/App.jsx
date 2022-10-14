@@ -20,6 +20,8 @@ import {
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
+import LoginNotification from "./Components/Notifications/LoginNotification/LoginNotification";
+import DataNotification from "./Components/Notifications/DataNotification/DataNotification";
 
 // React imports
 import { useState, useEffect, useRef } from "react";
@@ -59,10 +61,9 @@ function App() {
     const [deleteData, setDeleteData] = useState(null);
 
     // Notification message state
-    const [loginNotificationMessage, setLoginNotificationMessage] = useState(
-        {}
-    );
-    const [dataResponseMessage, setDataResponseMessage] = useState({});
+    const [loginNotificationMessage, setLoginNotificationMessage] =
+        useState("");
+    const [dataResponseMessage, setDataResponseMessage] = useState("");
 
     // Render data states
 
@@ -115,17 +116,22 @@ function App() {
             mode: "cors",
             credentials: "include",
         })
-            .then((response) => response.json())
             .then((res) => {
-                if (!res.ok) {
-                    console.log(res);
+                if (res.status === 401) {
+                    throw Error("Session timed out, please login again.");
                 }
+                return res.json();
+            })
+            .then((res) => {
                 setUserAuthenticated(res);
                 if (res.privileged === true) {
                     setInputStyles({ visibility: "visible" });
                 }
+            })
+            .catch((err) => {
+                // console.log(err);
+                setLoginNotificationMessage(err.message);
             });
-        // .then(setStartupComplete(true));
     }, []);
 
     // Check if user is authenticated after login - to enable Create, Update and Delete access
@@ -232,6 +238,14 @@ function App() {
                         setSerosQuests={setSerosQuests}
                         setDataResponseMessage={setDataResponseMessage}
                     />
+                ) : null}
+
+                {loginNotificationMessage !== "" ? (
+                    <LoginNotification message={loginNotificationMessage} />
+                ) : null}
+
+                {dataResponseMessage !== "" ? (
+                    <DataNotification message={dataResponseMessage} />
                 ) : null}
             </div>
         </>
