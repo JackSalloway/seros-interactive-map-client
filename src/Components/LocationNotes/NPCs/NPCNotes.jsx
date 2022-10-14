@@ -231,7 +231,10 @@ const NPCNotes = (props) => {
         let serosNPCsCopy = [...serosNPCs];
         serosNPCsCopy[originalIndex] = returnedData;
         setSerosNPCs(serosNPCsCopy);
-        setDataResponseMessage(`NPC: ${updatedNPCName}, successfully updated!`);
+        setDataResponseMessage({
+            message: `NPC: ${updatedNPCName}, successfully updated!`,
+            important: false,
+        });
         setEditing(false);
     };
 

@@ -45,7 +45,10 @@ const DeleteNPC = (props) => {
         const npcToRemove = serosNPCs.map((npc) => npc._id).indexOf(data._id);
         serosNPCsCopy.splice(npcToRemove, 1);
         setSerosNPCs(serosNPCsCopy);
-        setDataResponseMessage(`NPC: ${data.name}, successfully deleted.`);
+        setDataResponseMessage({
+            message: `NPC: ${data.name}, successfully deleted.`,
+            important: false,
+        });
         setDeleteData(null);
     };
 

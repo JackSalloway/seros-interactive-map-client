@@ -20,8 +20,7 @@ import {
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
-import LoginNotification from "./Components/Notifications/LoginNotification/LoginNotification";
-import DataNotification from "./Components/Notifications/DataNotification/DataNotification";
+import DataNotification from "./Components/Notifications/DataNotification";
 
 // React imports
 import { useState, useEffect, useRef } from "react";
@@ -61,8 +60,6 @@ function App() {
     const [deleteData, setDeleteData] = useState(null);
 
     // Notification message state
-    const [loginNotificationMessage, setLoginNotificationMessage] =
-        useState("");
     const [dataResponseMessage, setDataResponseMessage] = useState("");
 
     // Render data states
@@ -130,7 +127,10 @@ function App() {
             })
             .catch((err) => {
                 // console.log(err);
-                setLoginNotificationMessage(err.message);
+                setDataResponseMessage({
+                    message: err.message,
+                    important: true,
+                });
             });
     }, []);
 
@@ -240,12 +240,8 @@ function App() {
                     />
                 ) : null}
 
-                {loginNotificationMessage !== "" ? (
-                    <LoginNotification message={loginNotificationMessage} />
-                ) : null}
-
                 {dataResponseMessage !== "" ? (
-                    <DataNotification message={dataResponseMessage} />
+                    <DataNotification messageObject={dataResponseMessage} />
                 ) : null}
             </div>
         </>

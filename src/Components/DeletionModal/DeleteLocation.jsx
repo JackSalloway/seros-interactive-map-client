@@ -60,7 +60,10 @@ const DeleteLocation = (props) => {
         serosLocationsCopy.splice(indexToRemove, 1);
 
         setSerosLocations(serosLocationsCopy);
-        setDataResponseMessage(`Location: ${data.name}, successfully deleted.`);
+        setDataResponseMessage({
+            message: `Location: ${data.name}, successfully deleted.`,
+            important: false,
+        });
         setDeleteData(null);
     };
 

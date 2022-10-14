@@ -45,9 +45,10 @@ const CreateSubLocation = (props) => {
         location.sub_locations = [...data.sub_locations];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
-        setDataResponseMessage(
-            `Sub-location: ${newSubLocationName}, successfully created!`
-        );
+        setDataResponseMessage({
+            message: `Sub-location: ${newSubLocationName}, successfully created!`,
+            important: false,
+        });
         setAddNewSubLocation(false);
     };
 

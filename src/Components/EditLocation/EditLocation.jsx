@@ -83,9 +83,10 @@ const EditLocation = (props) => {
         let serosLocationsCopy = [...serosLocations];
         serosLocationsCopy[markerBeingEdited] = returnedData;
         setSerosLocations(serosLocationsCopy);
-        setDataResponseMessage(
-            `Location: ${locationName}, successfully updated.`
-        );
+        setDataResponseMessage({
+            message: `Location: ${locationName}, successfully updated.`,
+            important: false,
+        });
         setMarkerBeingEdited(null);
     };
 

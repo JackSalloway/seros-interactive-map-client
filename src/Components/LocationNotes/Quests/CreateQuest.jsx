@@ -56,7 +56,10 @@ const CreateQuest = (props) => {
         );
         const returnedData = await result.json();
         setSerosQuests([...serosQuests, ...returnedData]);
-        setDataResponseMessage(`Quest: ${newQuestName}, successfully created!`);
+        setDataResponseMessage({
+            message: `Quest: ${newQuestName}, successfully created!`,
+            important: false,
+        });
         setAddNewQuest(false);
     };
 

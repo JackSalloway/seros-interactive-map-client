@@ -149,9 +149,10 @@ const QuestNotes = (props) => {
         setSerosQuests(serosQuestsCopy);
         setSerosNPCs(returnedData.npcResult);
         setQuestUpdated(true);
-        setDataResponseMessage(
-            `Quest: ${updatedQuestName}, successfully updated!`
-        );
+        setDataResponseMessage({
+            message: `Quest: ${updatedQuestName}, successfully updated!`,
+            important: false,
+        });
         setEditing(false);
     };
 

@@ -105,9 +105,10 @@ const SubLocationNotes = (props) => {
         location.sub_locations = [...returnedData.sub_locations];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
-        setDataResponseMessage(
-            `Sub-location: ${updatedSubLocationName}, successfully updated!`
-        );
+        setDataResponseMessage({
+            message: `Sub-location: ${updatedSubLocationName}, successfully updated!`,
+            important: false,
+        });
         setEditing(false);
     };
 

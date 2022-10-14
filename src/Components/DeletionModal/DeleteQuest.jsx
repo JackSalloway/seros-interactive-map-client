@@ -51,7 +51,10 @@ const DeleteQuest = (props) => {
         serosQuestsCopy.splice(questToRemove, 1);
         setSerosQuests(serosQuestsCopy);
         setSerosNPCs(returnedData);
-        setDataResponseMessage(`Quest: ${data.name}, successfully deleted.`);
+        setDataResponseMessage({
+            message: `Quest: ${data.name}, successfully deleted.`,
+            important: false,
+        });
         setDeleteData(null);
     };
 
