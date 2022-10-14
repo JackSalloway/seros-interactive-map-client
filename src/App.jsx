@@ -127,14 +127,12 @@ function App() {
             })
             .catch((err) => {
                 // console.log(err);
-                const messagesCopy = dataNotifications;
-                console.log(messagesCopy);
-                messagesCopy.push({
+                const notificationsCopy = dataNotifications;
+                notificationsCopy.push({
                     message: err.message,
                     important: true,
                 });
-                console.log(messagesCopy);
-                setDataNotifications(messagesCopy);
+                setDataNotifications(notificationsCopy);
             });
     }, [dataNotifications]);
 
