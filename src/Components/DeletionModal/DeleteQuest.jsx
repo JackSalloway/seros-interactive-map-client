@@ -4,8 +4,14 @@ import he from "he";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const DeleteQuest = (props) => {
-    const { data, setDeleteData, serosQuests, setSerosQuests, setSerosNPCs } =
-        props;
+    const {
+        data,
+        setDeleteData,
+        serosQuests,
+        setSerosQuests,
+        setSerosNPCs,
+        setDataResponseMessage,
+    } = props;
 
     const [deletionString, setDeletionString] = useState("");
     const [deleteDisabled, setDeleteDisabled] = useState(false);
@@ -45,6 +51,7 @@ const DeleteQuest = (props) => {
         serosQuestsCopy.splice(questToRemove, 1);
         setSerosQuests(serosQuestsCopy);
         setSerosNPCs(returnedData);
+        setDataResponseMessage(`Quest: ${data.name}, successfully deleted.`);
         setDeleteData(null);
     };
 

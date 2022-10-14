@@ -16,6 +16,7 @@ const SubLocationWrapper = (props) => {
         setSerosLocations,
         addNewSubLocation,
         setAddNewSubLocation,
+        setDataResponseMessage,
     } = props;
 
     return (
@@ -83,6 +84,9 @@ const SubLocationWrapper = (props) => {
                                     inputStyles={inputStyles}
                                     serosLocations={serosLocations}
                                     setSerosLocations={setSerosLocations}
+                                    setDataResponseMessage={
+                                        setDataResponseMessage
+                                    }
                                 />
                             )
                         )}
@@ -140,6 +144,7 @@ const SubLocationWrapper = (props) => {
                     serosLocations={serosLocations}
                     setSerosLocations={setSerosLocations}
                     setAddNewSubLocation={setAddNewSubLocation}
+                    setDataResponseMessage={setDataResponseMessage}
                 />
             ) : null}
         </div>

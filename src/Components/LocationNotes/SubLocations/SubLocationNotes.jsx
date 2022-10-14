@@ -17,6 +17,7 @@ const SubLocationNotes = (props) => {
         inputStyles,
         serosLocations,
         setSerosLocations,
+        setDataResponseMessage,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -104,6 +105,9 @@ const SubLocationNotes = (props) => {
         location.sub_locations = [...returnedData.sub_locations];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
+        setDataResponseMessage(
+            `Sub-location: ${updatedSubLocationName}, successfully updated!`
+        );
         setEditing(false);
     };
 

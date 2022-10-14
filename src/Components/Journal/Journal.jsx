@@ -35,6 +35,7 @@ const Journal = (props) => {
         editLocationDetails,
         editMarkerLatLng,
         setEditMarkerType,
+        setDataResponseMessage,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -152,6 +153,7 @@ const Journal = (props) => {
                 setDeleteData={setDeleteData}
                 userAuthenticated={userAuthenticated}
                 inputStyles={inputStyles}
+                setDataResponseMessage={setDataResponseMessage}
             />
         </div>
     );

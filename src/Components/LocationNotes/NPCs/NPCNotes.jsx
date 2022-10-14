@@ -19,6 +19,7 @@ const NPCNotes = (props) => {
         serosNPCs,
         setSerosNPCs,
         originalIndex,
+        setDataResponseMessage,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -230,6 +231,7 @@ const NPCNotes = (props) => {
         let serosNPCsCopy = [...serosNPCs];
         serosNPCsCopy[originalIndex] = returnedData;
         setSerosNPCs(serosNPCsCopy);
+        setDataResponseMessage(`NPC: ${updatedNPCName}, successfully updated!`);
         setEditing(false);
     };
 

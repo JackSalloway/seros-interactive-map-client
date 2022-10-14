@@ -14,6 +14,7 @@ const CreateNPC = (props) => {
         serosNPCs,
         setSerosNPCs,
         setAddNewNPC,
+        setDataResponseMessage,
     } = props;
 
     // Set states
@@ -60,6 +61,7 @@ const CreateNPC = (props) => {
         );
         const returnedData = await result.json();
         setSerosNPCs([...serosNPCs, ...returnedData]);
+        setDataResponseMessage(`NPC: ${newNPCName}, successfully created!`);
         setAddNewNPC(false);
     };
 

@@ -7,10 +7,11 @@ const CreateSubLocation = (props) => {
         serosLocations,
         setSerosLocations,
         setAddNewSubLocation,
+        setDataResponseMessage,
     } = props;
 
     // Set states
-    const [newSublocationName, setNewSubLocationName] = useState("");
+    const [newSubLocationName, setNewSubLocationName] = useState("");
     const [newSubLocationDesc, setNewSubLocationDesc] = useState("");
 
     // Send POST request to create new sub location at this location
@@ -18,7 +19,7 @@ const CreateSubLocation = (props) => {
         e.preventDefault();
 
         const subLocationData = {
-            sub_location_name: newSublocationName,
+            sub_location_name: newSubLocationName,
             sub_location_desc: newSubLocationDesc,
             parent_location_id: locationNotes._id,
         };
@@ -44,6 +45,9 @@ const CreateSubLocation = (props) => {
         location.sub_locations = [...data.sub_locations];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
+        setDataResponseMessage(
+            `Sub-location: ${newSubLocationName}, successfully created!`
+        );
         setAddNewSubLocation(false);
     };
 

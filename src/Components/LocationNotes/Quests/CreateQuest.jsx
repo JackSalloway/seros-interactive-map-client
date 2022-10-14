@@ -13,6 +13,7 @@ const CreateQuest = (props) => {
         serosQuests,
         setSerosQuests,
         setAddNewQuest,
+        setDataResponseMessage,
     } = props;
 
     // Set states
@@ -55,6 +56,7 @@ const CreateQuest = (props) => {
         );
         const returnedData = await result.json();
         setSerosQuests([...serosQuests, ...returnedData]);
+        setDataResponseMessage(`Quest: ${newQuestName}, successfully created!`);
         setAddNewQuest(false);
     };
 

@@ -58,6 +58,12 @@ function App() {
 
     const [deleteData, setDeleteData] = useState(null);
 
+    // Notification message state
+    const [loginNotificationMessage, setLoginNotificationMessage] = useState(
+        {}
+    );
+    const [dataResponseMessage, setDataResponseMessage] = useState({});
+
     // Render data states
 
     // Fetch location data from database
@@ -207,6 +213,7 @@ function App() {
                         editLocationDetails={editLocationDetails}
                         editMarkerLatLng={editMarkerLatLng}
                         setEditMarkerType={setEditMarkerType}
+                        setDataResponseMessage={setDataResponseMessage}
                     />
                 ) : null}
 
@@ -223,6 +230,7 @@ function App() {
                         setSerosNPCs={setSerosNPCs}
                         serosQuests={serosQuests}
                         setSerosQuests={setSerosQuests}
+                        setDataResponseMessage={setDataResponseMessage}
                     />
                 ) : null}
             </div>

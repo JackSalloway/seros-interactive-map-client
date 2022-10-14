@@ -20,6 +20,7 @@ const QuestNotes = (props) => {
         setSerosQuests,
         setQuestUpdated,
         setSerosNPCs,
+        setDataResponseMessage,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -148,6 +149,9 @@ const QuestNotes = (props) => {
         setSerosQuests(serosQuestsCopy);
         setSerosNPCs(returnedData.npcResult);
         setQuestUpdated(true);
+        setDataResponseMessage(
+            `Quest: ${updatedQuestName}, successfully updated!`
+        );
         setEditing(false);
     };
 

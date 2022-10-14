@@ -10,6 +10,7 @@ const DeleteSubLocation = (props) => {
         selectedLocationNotes,
         serosLocations,
         setSerosLocations,
+        setDataResponseMessage,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
@@ -51,6 +52,9 @@ const DeleteSubLocation = (props) => {
         location.sub_locations = [...returnedData.sub_locations];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
+        setDataResponseMessage(
+            `Sub-location: ${data.name}, successfully deleted.`
+        );
         setDeleteData(null);
     };
 
