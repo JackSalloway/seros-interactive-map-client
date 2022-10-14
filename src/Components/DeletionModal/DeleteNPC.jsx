@@ -9,7 +9,8 @@ const DeleteNPC = (props) => {
         setDeleteData,
         serosNPCs,
         setSerosNPCs,
-        setDataResponseMessage,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
@@ -45,10 +46,12 @@ const DeleteNPC = (props) => {
         const npcToRemove = serosNPCs.map((npc) => npc._id).indexOf(data._id);
         serosNPCsCopy.splice(npcToRemove, 1);
         setSerosNPCs(serosNPCsCopy);
-        setDataResponseMessage({
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
             message: `NPC: ${data.name}, successfully deleted.`,
             important: false,
         });
+        setDataNotifications(notificationsCopy);
         setDeleteData(null);
     };
 

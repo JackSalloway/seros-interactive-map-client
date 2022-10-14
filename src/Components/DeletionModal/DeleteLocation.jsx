@@ -11,7 +11,8 @@ const DeleteLocation = (props) => {
         setSerosLocations,
         setSerosNPCs, // This would be for removing associated locations from NPCs after deleting a location
         setSerosQuests, // This would be for removing assocaited locations from Quests after deleting a location
-        setDataResponseMessage,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
@@ -60,10 +61,12 @@ const DeleteLocation = (props) => {
         serosLocationsCopy.splice(indexToRemove, 1);
 
         setSerosLocations(serosLocationsCopy);
-        setDataResponseMessage({
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
             message: `Location: ${data.name}, successfully deleted.`,
             important: false,
         });
+        setDataNotifications(notificationsCopy);
         setDeleteData(null);
     };
 

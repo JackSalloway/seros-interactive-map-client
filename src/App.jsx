@@ -60,7 +60,7 @@ function App() {
     const [deleteData, setDeleteData] = useState(null);
 
     // Notification message state
-    const [dataResponseMessage, setDataResponseMessage] = useState("");
+    const [dataNotifications, setDataNotifications] = useState([]);
 
     // Render data states
 
@@ -127,12 +127,16 @@ function App() {
             })
             .catch((err) => {
                 // console.log(err);
-                setDataResponseMessage({
+                const messagesCopy = dataNotifications;
+                console.log(messagesCopy);
+                messagesCopy.push({
                     message: err.message,
                     important: true,
                 });
+                console.log(messagesCopy);
+                setDataNotifications(messagesCopy);
             });
-    }, []);
+    }, [dataNotifications]);
 
     // Check if user is authenticated after login - to enable Create, Update and Delete access
     useEffect(() => {
@@ -219,7 +223,7 @@ function App() {
                         editLocationDetails={editLocationDetails}
                         editMarkerLatLng={editMarkerLatLng}
                         setEditMarkerType={setEditMarkerType}
-                        setDataResponseMessage={setDataResponseMessage}
+                        setDataNotifications={setDataNotifications}
                     />
                 ) : null}
 
@@ -236,13 +240,18 @@ function App() {
                         setSerosNPCs={setSerosNPCs}
                         serosQuests={serosQuests}
                         setSerosQuests={setSerosQuests}
-                        setDataResponseMessage={setDataResponseMessage}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
                     />
                 ) : null}
 
-                {dataResponseMessage !== "" ? (
-                    <DataNotification messageObject={dataResponseMessage} />
-                ) : null}
+                {dataNotifications.length !== 0
+                    ? dataNotifications.map((notification) => {
+                          return (
+                              <DataNotification notification={notification} />
+                          );
+                      })
+                    : null}
             </div>
         </>
     );

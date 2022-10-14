@@ -1,8 +1,8 @@
 import React from "react";
 
 const DataNotification = (props) => {
-    const { messageObject } = props;
-    return <div>{messageObject.message}</div>;
+    const { notification } = props;
+    return <div>{notification.message}</div>;
 };
 
 export default DataNotification;

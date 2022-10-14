@@ -10,7 +10,8 @@ const DeleteQuest = (props) => {
         serosQuests,
         setSerosQuests,
         setSerosNPCs,
-        setDataResponseMessage,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
@@ -51,10 +52,12 @@ const DeleteQuest = (props) => {
         serosQuestsCopy.splice(questToRemove, 1);
         setSerosQuests(serosQuestsCopy);
         setSerosNPCs(returnedData);
-        setDataResponseMessage({
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
             message: `Quest: ${data.name}, successfully deleted.`,
             important: false,
         });
+        setDataNotifications(notificationsCopy);
         setDeleteData(null);
     };
 
