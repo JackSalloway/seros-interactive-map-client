@@ -245,9 +245,15 @@ function App() {
                 ) : null}
 
                 {dataNotifications.length !== 0
-                    ? dataNotifications.map((notification) => {
+                    ? dataNotifications.map((notification, index) => {
                           return (
-                              <DataNotification notification={notification} />
+                              <DataNotification
+                                  dataNotifications={dataNotifications}
+                                  setDataNotifications={setDataNotifications}
+                                  notification={notification}
+                                  index={index}
+                                  key={`${notification.message} ${index}`}
+                              />
                           );
                       })
                     : null}

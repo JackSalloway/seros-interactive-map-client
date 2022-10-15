@@ -86,7 +86,7 @@ const EditLocation = (props) => {
         setSerosLocations(serosLocationsCopy);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
-            message: `Location: ${locationName}, successfully updated.`,
+            message: `Location: ${locationName}, successfully updated!`,
             important: false,
         });
         setDataNotifications(notificationsCopy);
