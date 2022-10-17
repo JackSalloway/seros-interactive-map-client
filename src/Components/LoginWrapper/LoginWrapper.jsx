@@ -5,7 +5,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const LoginWrapper = (props) => {
-    const { setUserAuthenticated } = props;
+    const { setUserAuthenticated, dataNotifications, setDataNotifications } =
+        props;
 
     const [newUser, setNewUser] = useState(false);
     const [username, setUsername] = useState("");
@@ -21,6 +22,8 @@ const LoginWrapper = (props) => {
             setPassword("");
         }
     }, [newUser]);
+
+    console.log(dataNotifications);
 
     // Login functions
     const userLogin = async (e) => {
@@ -38,6 +41,16 @@ const LoginWrapper = (props) => {
             .then((response) => {
                 if (response.status === 200) {
                     setUserAuthenticated(response.data);
+                    const notificationsCopy = dataNotifications;
+                    const errorIndex = notificationsCopy.findIndex(
+                        (notification) =>
+                            notification.message ===
+                            "Session timed out, please login again."
+                    );
+                    notificationsCopy[errorIndex] = {
+                        message: "Login successful!",
+                        important: false,
+                    };
                 }
             })
             .catch(function (error) {

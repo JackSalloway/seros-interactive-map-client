@@ -63,7 +63,11 @@ const Journal = (props) => {
         return (
             <div id="journal-front-page-container" className="journal">
                 {Object.keys(userAuthenticated).length === 0 ? (
-                    <LoginWrapper setUserAuthenticated={setUserAuthenticated} />
+                    <LoginWrapper
+                        setUserAuthenticated={setUserAuthenticated}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
+                    />
                 ) : (
                     <div className="login-status">
                         <p id="status-username">
