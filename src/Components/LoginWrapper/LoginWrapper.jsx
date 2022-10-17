@@ -51,6 +51,7 @@ const LoginWrapper = (props) => {
                         message: "Login successful!",
                         important: false,
                     };
+                    setDataNotifications(notificationsCopy);
                 }
             })
             .catch(function (error) {
