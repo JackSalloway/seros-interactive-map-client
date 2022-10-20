@@ -23,8 +23,6 @@ const LoginWrapper = (props) => {
         }
     }, [newUser]);
 
-    console.log(dataNotifications);
-
     // Login functions
     const userLogin = async (e) => {
         e.preventDefault(); // Adding this for now as I haven't set up the route yet, however this function will redirect the page depending on the response.
@@ -40,6 +38,9 @@ const LoginWrapper = (props) => {
         })
             .then((response) => {
                 if (response.status === 200) {
+                    // response.data looks like:
+                    // { username: STRING, privileged: BOOL}
+                    console.log(response.data);
                     setUserAuthenticated(response.data);
                     const notificationsCopy = dataNotifications;
                     const errorIndex = notificationsCopy.findIndex(

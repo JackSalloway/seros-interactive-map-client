@@ -17,6 +17,7 @@ import {
 
 // Component imports
 // import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
+import Dashboard from "./Components/Dashboard/Dashboard";
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
@@ -27,6 +28,10 @@ import { useState, useEffect, useRef } from "react";
 
 function App() {
     // Set states
+
+    // Campaign states
+    const [campaign, setCampaign] = useState(null);
+
     // Data states
     const [serosLocations, setSerosLocations] = useState(null);
     const [serosQuests, setSerosQuests] = useState(null);
@@ -126,7 +131,6 @@ function App() {
                 }
             })
             .catch((err) => {
-                // console.log(err);
                 const notificationsCopy = dataNotifications;
                 notificationsCopy.push({
                     message: err.message,
@@ -163,32 +167,39 @@ function App() {
         <>
             {/* This div was used to make the map box and location notes appear next to each other on the same row, however this made the map box function incorreclty due to it not resizing properly so have commented it out for now */}
             <div className="home-page-wrapper">
-                <MapBox
-                    serosLocations={serosLocations}
-                    serosNPCs={serosNPCs}
-                    serosQuests={serosQuests}
-                    setSerosLocations={setSerosLocations}
-                    map={map}
-                    renderCreationMarker={renderCreationMarker}
-                    creationMarkerLatLng={creationMarkerLatLng}
-                    creationMarkerType={creationMarkerType}
-                    setCreationMarkerLatLng={setCreationMarkerLatLng}
-                    selectedLocationNotes={
-                        serosLocations?.[selectedLocationNotes] || null
-                    }
-                    setSelectedLocationNotes={setSelectedLocationNotes}
-                    setSelectedLocationQuests={setSelectedLocationQuests}
-                    setSelectedLocationNPCs={setSelectedLocationNPCs}
-                    userAuthenticated={userAuthenticated}
-                    markerBeingEdited={markerBeingEdited}
-                    setMarkerBeingEdited={setMarkerBeingEdited}
-                    setEditLocationDetails={setEditLocationDetails}
-                    editMarkerLatLng={editMarkerLatLng}
-                    setEditMarkerLatLng={setEditMarkerLatLng}
-                    editMarkerType={editMarkerType}
-                    setEditMarkerType={setEditMarkerType}
-                    setDeleteData={setDeleteData}
-                />
+                {campaign === null ? (
+                    <Dashboard
+                        campaigns={userAuthenticated.campaigns ?? []}
+                        setCampaign={setCampaign}
+                    />
+                ) : (
+                    <MapBox
+                        serosLocations={serosLocations}
+                        serosNPCs={serosNPCs}
+                        serosQuests={serosQuests}
+                        setSerosLocations={setSerosLocations}
+                        map={map}
+                        renderCreationMarker={renderCreationMarker}
+                        creationMarkerLatLng={creationMarkerLatLng}
+                        creationMarkerType={creationMarkerType}
+                        setCreationMarkerLatLng={setCreationMarkerLatLng}
+                        selectedLocationNotes={
+                            serosLocations?.[selectedLocationNotes] || null
+                        }
+                        setSelectedLocationNotes={setSelectedLocationNotes}
+                        setSelectedLocationQuests={setSelectedLocationQuests}
+                        setSelectedLocationNPCs={setSelectedLocationNPCs}
+                        userAuthenticated={userAuthenticated}
+                        markerBeingEdited={markerBeingEdited}
+                        setMarkerBeingEdited={setMarkerBeingEdited}
+                        setEditLocationDetails={setEditLocationDetails}
+                        editMarkerLatLng={editMarkerLatLng}
+                        setEditMarkerLatLng={setEditMarkerLatLng}
+                        editMarkerType={editMarkerType}
+                        setEditMarkerType={setEditMarkerType}
+                        setDeleteData={setDeleteData}
+                    />
+                )}
 
                 {map ? (
                     <Journal
