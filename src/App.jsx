@@ -169,6 +169,7 @@ function App() {
             <div className="home-page-wrapper">
                 {campaign === null ? (
                     <Dashboard
+                        userAuthenticated={userAuthenticated}
                         campaigns={userAuthenticated.campaigns ?? []}
                         setCampaign={setCampaign}
                     />

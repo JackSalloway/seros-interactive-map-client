@@ -38,3 +38,9 @@
     background-size: cover;
     background-repeat: no-repeat;
 }
+
+#dashboard-login-prompt {
+    font-size: 3rem;
+    width: 40%;
+    position: relative;
+}
