@@ -101,13 +101,20 @@ function App() {
             return;
         }
 
+        if (campaign === null) {
+            return; // Checks if the user has selected a campaign or not
+        }
+
         fetch(`${process.env.REACT_APP_API_URL}/quest_data`, {
-            method: "GET",
+            method: "POST",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify({ campaign_id: campaign }),
             mode: "cors",
+            credentials: "include",
         })
             .then((response) => response.json())
             .then((quests) => setSerosQuests(quests));
-    }, [serosQuests, setSerosQuests]);
+    }, [serosQuests, setSerosQuests, campaign]);
 
     // Fetch NPC data from database
     useEffect(() => {
