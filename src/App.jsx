@@ -82,13 +82,13 @@ function App() {
             return; // Checks if the user has selected a campaign or not
         }
 
-        fetch(`${process.env.REACT_APP_API_URL}/location_data`, {
-            method: "POST",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify({ campaign_id: campaign }),
-            mode: "cors",
-            credentials: "include",
-        })
+        fetch(
+            `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaign}`,
+            {
+                method: "GET",
+                mode: "cors",
+            }
+        )
             .then((response) => response.json())
             .then((locations) => setSerosLocations(locations));
     }, [serosLocations, setSerosLocations, campaign]);
@@ -103,13 +103,13 @@ function App() {
             return; // Checks if the user has selected a campaign or not
         }
 
-        fetch(`${process.env.REACT_APP_API_URL}/quest_data`, {
-            method: "POST",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify({ campaign_id: campaign }),
-            mode: "cors",
-            credentials: "include",
-        })
+        fetch(
+            `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaign}`,
+            {
+                method: "GET",
+                mode: "cors",
+            }
+        )
             .then((response) => response.json())
             .then((quests) => setSerosQuests(quests));
     }, [serosQuests, setSerosQuests, campaign]);
@@ -124,13 +124,13 @@ function App() {
             return; // Checks if the user has selected a campaign or not
         }
 
-        fetch(`${process.env.REACT_APP_API_URL}/npc_data`, {
-            method: "POST",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify({ campaign_id: campaign }),
-            mode: "cors",
-            credentials: "include",
-        })
+        fetch(
+            `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaign}`,
+            {
+                method: "GET",
+                mode: "cors",
+            }
+        )
             .then((response) => response.json())
             .then((NPCs) => setSerosNPCs(NPCs));
     }, [serosNPCs, setSerosNPCs, campaign]);
