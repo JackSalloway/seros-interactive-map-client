@@ -82,8 +82,6 @@ function App() {
             return; // Checks if the user has selected a campaign or not
         }
 
-        console.log(JSON.stringify({ campaign_id: campaign }));
-
         fetch(`${process.env.REACT_APP_API_URL}/location_data`, {
             method: "POST",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
