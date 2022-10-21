@@ -122,13 +122,20 @@ function App() {
             return;
         }
 
+        if (campaign === null) {
+            return; // Checks if the user has selected a campaign or not
+        }
+
         fetch(`${process.env.REACT_APP_API_URL}/npc_data`, {
-            method: "GET",
+            method: "POST",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify({ campaign_id: campaign }),
             mode: "cors",
+            credentials: "include",
         })
             .then((response) => response.json())
             .then((NPCs) => setSerosNPCs(NPCs));
-    }, [serosNPCs, setSerosNPCs]);
+    }, [serosNPCs, setSerosNPCs, campaign]);
 
     // Check cookies on startup to see if user was logged in last time they used the site and their refresh token is still valid.
     useEffect(() => {
