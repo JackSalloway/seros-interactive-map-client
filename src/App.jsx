@@ -24,8 +24,6 @@ import Journal from "./Components/Journal/Journal";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
 import DataNotification from "./Components/Notifications/DataNotification";
 
-import { CONTENT_TYPE_APPLICATION_JSON } from "./imports/imports";
-
 // React imports
 import { useState, useEffect, useRef } from "react";
 
