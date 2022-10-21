@@ -58,39 +58,25 @@ const Journal = (props) => {
         setInputStyles({ visibility: "hidden", display: "none" });
     };
 
+    if (Object.keys(userAuthenticated).length === 0) {
+        return null;
+    }
+
     // If a location has not been selected yet, display the front page
     if (locationNotes === null) {
         return (
             <div id="journal-front-page-container" className="journal">
-                {Object.keys(userAuthenticated).length === 0 ? (
-                    <LoginWrapper
-                        setUserAuthenticated={setUserAuthenticated}
-                        dataNotifications={dataNotifications}
-                        setDataNotifications={setDataNotifications}
-                    />
-                ) : (
-                    <div className="login-status">
-                        <p id="status-username">
-                            Welcome back {userAuthenticated.username}!
-                        </p>
-                        {userAuthenticated.privileged === true ? (
-                            <p>You are authorized to make changes!</p>
-                        ) : (
-                            <p>
-                                You are not authroized to make changes. Contact
-                                an admin if you want to change this.
-                            </p>
-                        )}
-                        <button
-                            id="logout-button"
-                            onClick={() => {
-                                logout();
-                            }}
-                        >
-                            Logout
-                        </button>
-                    </div>
-                )}
+                <div className="login-status">
+                    <p id="status-username">{userAuthenticated.username}</p>
+                    <button
+                        id="logout-button"
+                        onClick={() => {
+                            logout();
+                        }}
+                    >
+                        Logout
+                    </button>
+                </div>
 
                 <div id="journal-front-page-menu">
                     <div id="journal-front-page-menu-header">

@@ -17,6 +17,7 @@ import {
 
 // Component imports
 // import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
+import LoginWrapper from "./Components/LoginWrapper/LoginWrapper";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
@@ -162,6 +163,16 @@ function App() {
     // if (startupComplete === false) {
     //     return <LoadingScreen />;
     // }
+
+    if (Object.keys(userAuthenticated).length === 0) {
+        return (
+            <LoginWrapper
+                setUserAuthenticated={setUserAuthenticated}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+            />
+        );
+    }
 
     return (
         <>

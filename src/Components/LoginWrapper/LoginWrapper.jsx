@@ -87,6 +87,7 @@ const LoginWrapper = (props) => {
                                 id="login-name"
                                 required
                                 value={username}
+                                placeholder={"Username"}
                                 onChange={({ target }) => {
                                     setUsername(target.value);
                                 }}
@@ -99,6 +100,7 @@ const LoginWrapper = (props) => {
                                 id="login-password"
                                 required
                                 value={password}
+                                placeholder={"Password"}
                                 onChange={({ target }) => {
                                     setPassword(target.value);
                                 }}
