@@ -24,6 +24,8 @@ import Journal from "./Components/Journal/Journal";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
 import DataNotification from "./Components/Notifications/DataNotification";
 
+import { CONTENT_TYPE_APPLICATION_JSON } from "./imports/imports";
+
 // React imports
 import { useState, useEffect, useRef } from "react";
 
@@ -76,13 +78,22 @@ function App() {
             return;
         }
 
+        if (campaign === null) {
+            return; // Checks if the user has selected a campaign or not
+        }
+
+        console.log(JSON.stringify({ campaign_id: campaign }));
+
         fetch(`${process.env.REACT_APP_API_URL}/location_data`, {
-            method: "GET",
+            method: "POST",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify({ campaign_id: campaign }),
             mode: "cors",
+            credentials: "include",
         })
             .then((response) => response.json())
             .then((locations) => setSerosLocations(locations));
-    }, [serosLocations, setSerosLocations]);
+    }, [serosLocations, setSerosLocations, campaign]);
 
     // Fetch quest data from database
     useEffect(() => {
