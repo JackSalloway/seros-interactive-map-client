@@ -37,6 +37,7 @@ const Journal = (props) => {
         setEditMarkerType,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -77,53 +78,54 @@ const Journal = (props) => {
                         Logout
                     </button>
                 </div>
-
-                <div id="journal-front-page-menu">
-                    <div id="journal-front-page-menu-header">
-                        <JournalMenuHeaderBox
+                {campaign === null ? null : (
+                    <div id="journal-front-page-menu">
+                        <div id="journal-front-page-menu-header">
+                            <JournalMenuHeaderBox
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
+                                headerValue={"Location List"}
+                                boxPosition={"instruction-header-box-end"}
+                                markerBeingEdited={markerBeingEdited}
+                            />
+                            <JournalMenuHeaderBox
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
+                                headerValue={"Quest list"}
+                                boxPosition={"instruction-header-box-middle"}
+                                markerBeingEdited={markerBeingEdited}
+                            />
+                            <JournalMenuHeaderBox
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
+                                headerValue={"NPC list"}
+                                boxPosition={"instruction-header-box-end"}
+                                markerBeingEdited={markerBeingEdited}
+                            />
+                        </div>
+                        <JournalMenuContent
+                            serosLocations={serosLocations}
+                            setSerosLocations={setSerosLocations}
+                            setLocationNotes={setLocationNotes}
+                            userAuthenticated={userAuthenticated}
                             selectedTab={selectedTab}
-                            setSelectedTab={setSelectedTab}
-                            headerValue={"Location List"}
-                            boxPosition={"instruction-header-box-end"}
+                            serosQuests={serosQuests}
+                            serosNPCs={serosNPCs}
+                            renderCreationMarker={renderCreationMarker}
+                            setRenderCreationMarker={setRenderCreationMarker}
+                            creationMarkerLatLng={creationMarkerLatLng}
+                            setCreationMarkerType={setCreationMarkerType}
+                            map={map}
                             markerBeingEdited={markerBeingEdited}
-                        />
-                        <JournalMenuHeaderBox
-                            selectedTab={selectedTab}
-                            setSelectedTab={setSelectedTab}
-                            headerValue={"Quest list"}
-                            boxPosition={"instruction-header-box-middle"}
-                            markerBeingEdited={markerBeingEdited}
-                        />
-                        <JournalMenuHeaderBox
-                            selectedTab={selectedTab}
-                            setSelectedTab={setSelectedTab}
-                            headerValue={"NPC list"}
-                            boxPosition={"instruction-header-box-end"}
-                            markerBeingEdited={markerBeingEdited}
+                            setMarkerBeingEdited={setMarkerBeingEdited}
+                            editLocationDetails={editLocationDetails}
+                            editMarkerLatLng={editMarkerLatLng}
+                            setEditMarkerType={setEditMarkerType}
+                            dataNotifications={dataNotifications}
+                            setDataNotifications={setDataNotifications}
                         />
                     </div>
-                    <JournalMenuContent
-                        serosLocations={serosLocations}
-                        setSerosLocations={setSerosLocations}
-                        setLocationNotes={setLocationNotes}
-                        userAuthenticated={userAuthenticated}
-                        selectedTab={selectedTab}
-                        serosQuests={serosQuests}
-                        serosNPCs={serosNPCs}
-                        renderCreationMarker={renderCreationMarker}
-                        setRenderCreationMarker={setRenderCreationMarker}
-                        creationMarkerLatLng={creationMarkerLatLng}
-                        setCreationMarkerType={setCreationMarkerType}
-                        map={map}
-                        markerBeingEdited={markerBeingEdited}
-                        setMarkerBeingEdited={setMarkerBeingEdited}
-                        editLocationDetails={editLocationDetails}
-                        editMarkerLatLng={editMarkerLatLng}
-                        setEditMarkerType={setEditMarkerType}
-                        dataNotifications={dataNotifications}
-                        setDataNotifications={setDataNotifications}
-                    />
-                </div>
+                )}
             </div>
         );
     }
