@@ -32,6 +32,7 @@ function App() {
 
     // Campaign states
     const [campaign, setCampaign] = useState(null);
+    const [renderCampaignForm, setRenderCampaignForm] = useState(false);
 
     // Data states
     const [serosLocations, setSerosLocations] = useState(null);
@@ -204,6 +205,8 @@ function App() {
                         userAuthenticated={userAuthenticated}
                         campaigns={userAuthenticated.campaigns ?? []}
                         setCampaign={setCampaign}
+                        renderCampaignForm={renderCampaignForm}
+                        setRenderCampaignForm={setRenderCampaignForm}
                     />
                 ) : (
                     <MapBox
@@ -268,6 +271,8 @@ function App() {
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}
                         campaign={campaign}
+                        renderCampaignForm={renderCampaignForm}
+                        setRenderCampaignForm={setRenderCampaignForm}
                     />
                 ) : null}
 

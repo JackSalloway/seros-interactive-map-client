@@ -8,7 +8,13 @@ const Dashboard = (props) => {
     // Campaigns will be stored in the user data (currenty userAuthenticated state value) as an array of strings that will link to relevant campaign documents
     // Users can make new campaigns, or join one that is already created via referal from a friend (or of a similar sort.)
 
-    const { userAuthenticated, campaigns, setCampaign } = props;
+    const {
+        userAuthenticated,
+        campaigns,
+        setCampaign,
+        renderCampaignForm,
+        setRenderCampaignForm,
+    } = props;
 
     const [scale, setScale] = useState(1);
 
@@ -29,7 +35,14 @@ const Dashboard = (props) => {
                     <p>Begin logging your adventures...</p>
                 </div>
                 <div className="dashboard-banner-image">
-                    <button>Add new Campaign!</button>
+                    <button
+                        onClick={() => {
+                            setRenderCampaignForm(true);
+                        }}
+                        disabled={renderCampaignForm}
+                    >
+                        Add new Campaign!
+                    </button>
                 </div>
             </div>
         );

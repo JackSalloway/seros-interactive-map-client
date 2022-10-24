@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Journal.css";
 import LocationNotes from "../LocationNotes/LocationNotes";
+import DashboardJournal from "../DashboardJournal/DashboardJournal";
 import JournalMenuHeaderBox from "../JournalMenu/JournalMenuHeaderBox";
 import JournalMenuContent from "../JournalMenu/JournalMenuContent";
 
@@ -37,6 +38,8 @@ const Journal = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        renderCampaignForm,
+        setRenderCampaignForm,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -77,7 +80,14 @@ const Journal = (props) => {
                         Logout
                     </button>
                 </div>
-                {campaign === null ? null : (
+                {campaign === null ? (
+                    <DashboardJournal
+                        userAuthenticated={userAuthenticated}
+                        setUserAuthenticated={setUserAuthenticated}
+                        renderCampaignForm={renderCampaignForm}
+                        setRenderCampaignForm={setRenderCampaignForm}
+                    />
+                ) : (
                     <div id="journal-front-page-menu">
                         <div id="journal-front-page-menu-header">
                             <JournalMenuHeaderBox
