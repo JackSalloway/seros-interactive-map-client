@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Journal.css";
-import LoginWrapper from "../LoginWrapper/LoginWrapper";
 import LocationNotes from "../LocationNotes/LocationNotes";
 import JournalMenuHeaderBox from "../JournalMenu/JournalMenuHeaderBox";
 import JournalMenuContent from "../JournalMenu/JournalMenuContent";
