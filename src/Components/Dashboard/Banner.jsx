@@ -29,7 +29,7 @@ const Banner = (props) => {
                 >
                     <button
                         onClick={() => {
-                            setCampaign(campaignID);
+                            setCampaign({ name, description, id: campaignID });
                         }}
                     >
                         Select campaign!

@@ -81,7 +81,7 @@ function App() {
         }
 
         fetch(
-            `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaign}`,
+            `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaign.id}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -102,7 +102,7 @@ function App() {
         }
 
         fetch(
-            `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaign}`,
+            `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaign.id}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -123,7 +123,7 @@ function App() {
         }
 
         fetch(
-            `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaign}`,
+            `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaign.id}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -267,6 +267,7 @@ function App() {
                         setEditMarkerType={setEditMarkerType}
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}
+                        campaign={campaign}
                     />
                 ) : null}
 
