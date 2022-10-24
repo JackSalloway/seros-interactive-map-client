@@ -12,14 +12,6 @@ const Dashboard = (props) => {
 
     const [scale, setScale] = useState(1);
 
-    const loginPrompt = () => {
-        return (
-            <div id="dashboard-login-prompt">
-                <h2>Login to begin your adventure!</h2>
-            </div>
-        );
-    };
-
     const createCampaignBanner = () => {
         return (
             <div
@@ -47,12 +39,6 @@ const Dashboard = (props) => {
         <div>
             {campaigns.length > 0
                 ? campaigns.map((campaign) => {
-                      //   console.log(campaign);
-                      //   return campaignSelectBanner(
-                      //       campaign.campaign.name,
-                      //       campaign.campaign.desc,
-                      //       campaign.campaign._id
-                      //   );
                       return (
                           <Banner
                               key={campaign.campaign._id}
@@ -64,9 +50,7 @@ const Dashboard = (props) => {
                       );
                   })
                 : null}
-            {userAuthenticated.username === undefined
-                ? loginPrompt() // Feel like there is a better way of doing this
-                : createCampaignBanner()}
+            {createCampaignBanner()}
         </div>
     );
     // createCampaignBanner();
