@@ -271,6 +271,7 @@ function App() {
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}
                         campaign={campaign}
+                        setCampaign={setCampaign}
                         renderCampaignForm={renderCampaignForm}
                         setRenderCampaignForm={setRenderCampaignForm}
                     />

@@ -40,6 +40,7 @@ const Journal = (props) => {
         campaign,
         renderCampaignForm,
         setRenderCampaignForm,
+        setCampaign,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -58,6 +59,10 @@ const Journal = (props) => {
         });
         // Set value to true
         setUserAuthenticated({});
+        setCampaign(null);
+        setSerosLocations(null);
+        setSerosNPCs(null);
+        setSerosQuests(null);
         setInputStyles({ visibility: "hidden", display: "none" });
     };
 
