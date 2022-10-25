@@ -23,7 +23,7 @@ const Banner = (props) => {
                     <p>{description}</p>
                 </div>
                 {adminRights === true ? (
-                    <div className="dashboardboard-banner-admin-icons">
+                    <div className="dashboard-banner-admin-icons">
                         <FontAwesomeIcon
                             icon="pencil"
                             className="journal-fa-icon"
