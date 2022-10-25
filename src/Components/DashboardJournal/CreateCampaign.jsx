@@ -8,8 +8,6 @@ const CreateCampaign = (props) => {
     const [newCampaignName, setNewCampaignName] = useState("");
     const [newCampaignDescription, setNewCampaignDescription] = useState("");
 
-    console.log(userAuthenticated);
-
     // Send POST request to create a new Campaign with this user assigned as admin for it
     const postCampaignData = async (e) => {
         e.preventDefault();
@@ -34,6 +32,11 @@ const CreateCampaign = (props) => {
         );
         const returnedData = await result.json();
         console.log(returnedData);
+        console.log(userAuthenticated);
+        const userCopy = userAuthenticated;
+        userCopy.campaigns = returnedData.campaigns;
+        console.log(userCopy);
+        setUserAuthenticated({ ...userCopy });
         // setUserAuthenticated(returnedData);
     };
 
