@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CreateCampaign from "./CreateCampaign";
+import CampaignSettings from "./CampaignSettings";
 import "./DashboardJournal.css";
 
 const DashboardJournal = (props) => {
@@ -8,6 +9,8 @@ const DashboardJournal = (props) => {
         setUserAuthenticated,
         renderCampaignForm,
         setRenderCampaignForm,
+        renderCampaignSettings,
+        setRenderCampaignSettings,
     } = props;
 
     const [message, setMessage] = useState("Add a new campaign to begin!");
@@ -21,6 +24,15 @@ const DashboardJournal = (props) => {
             setMessage("Add a new campaign to begin!");
         }
     }, [userAuthenticated]);
+
+    if (renderCampaignSettings !== null) {
+        return (
+            <CampaignSettings
+                renderCampaignSettings={renderCampaignSettings}
+                setRenderCampaignSettings={setRenderCampaignSettings}
+            />
+        );
+    }
 
     if (renderCampaignForm) {
         return (

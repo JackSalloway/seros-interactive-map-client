@@ -27,6 +27,21 @@
     flex-grow: 1;
 }
 
+.dashboard-banner-admin-icons {
+    /* color: white; */
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 3rem;
+    height: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.banner-fa-icon {
+    cursor: pointer;
+}
+
 .dashboard-banner-image {
     grid-area: image;
     display: flex;

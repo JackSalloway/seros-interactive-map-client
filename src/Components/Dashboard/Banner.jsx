@@ -2,9 +2,21 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Banner = (props) => {
-    const { name, description, campaignID, setCampaign, adminRights } = props;
+    const {
+        name,
+        description,
+        campaignID,
+        setCampaign,
+        adminRights,
+        renderCampaignSettings,
+        setRenderCampaignSettings,
+    } = props;
 
     const [scale, setScale] = useState(1);
+
+    const iconStyles = {
+        filter: scale === 1 ? `opacity(20%)` : `opacity(100%)`,
+    };
 
     return (
         <div>
@@ -25,13 +37,20 @@ const Banner = (props) => {
                 {adminRights === true ? (
                     <div className="dashboard-banner-admin-icons">
                         <FontAwesomeIcon
-                            icon="pencil"
-                            className="journal-fa-icon"
-                            // onClick={() => setEditing(true)}
+                            icon="cog"
+                            className="banner-fa-icon"
+                            style={iconStyles}
+                            onClick={() => {
+                                if (renderCampaignSettings !== null) {
+                                    return;
+                                }
+                                setRenderCampaignSettings(campaignID);
+                            }}
                         />
                         <FontAwesomeIcon
                             icon="trash-can"
-                            className="journal-fa-icon"
+                            className="banner-fa-icon"
+                            style={iconStyles}
                             // onClick={() => setDeleteData(subLocation)}
                         />
                     </div>

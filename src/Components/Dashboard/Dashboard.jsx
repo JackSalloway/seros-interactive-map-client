@@ -14,6 +14,8 @@ const Dashboard = (props) => {
         setCampaign,
         renderCampaignForm,
         setRenderCampaignForm,
+        renderCampaignSettings,
+        setRenderCampaignSettings,
     } = props;
 
     const [scale, setScale] = useState(1);
@@ -60,6 +62,10 @@ const Dashboard = (props) => {
                               campaignID={campaign.campaign._id}
                               adminRights={campaign.admin}
                               setCampaign={setCampaign}
+                              renderCampaignSettings={renderCampaignSettings}
+                              setRenderCampaignSettings={
+                                  setRenderCampaignSettings
+                              }
                           />
                       );
                   })

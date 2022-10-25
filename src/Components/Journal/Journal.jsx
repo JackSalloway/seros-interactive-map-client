@@ -41,6 +41,8 @@ const Journal = (props) => {
         renderCampaignForm,
         setRenderCampaignForm,
         setCampaign,
+        renderCampaignSettings,
+        setRenderCampaignSettings,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -91,6 +93,8 @@ const Journal = (props) => {
                         setUserAuthenticated={setUserAuthenticated}
                         renderCampaignForm={renderCampaignForm}
                         setRenderCampaignForm={setRenderCampaignForm}
+                        renderCampaignSettings={renderCampaignSettings}
+                        setRenderCampaignSettings={setRenderCampaignSettings}
                     />
                 ) : (
                     <div id="journal-front-page-menu">
