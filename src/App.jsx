@@ -13,6 +13,7 @@ import {
     faTrashCan,
     faPencil,
     faInfoCircle,
+    faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Component imports
@@ -179,7 +180,8 @@ function App() {
         faTimes,
         faTrashCan,
         faPencil,
-        faInfoCircle
+        faInfoCircle,
+        faCog
     ); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
 
     // if (startupComplete === false) {
