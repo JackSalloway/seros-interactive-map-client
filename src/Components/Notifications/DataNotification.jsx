@@ -16,7 +16,6 @@ const DataNotification = (props) => {
             if (timerWidth !== -4) {
                 setTimeout(() => {
                     setTimerWidth(timerWidth - 4);
-                    console.log(timerWidth);
                 }, 1000);
             }
         }
@@ -24,7 +23,6 @@ const DataNotification = (props) => {
 
     useEffect(() => {
         if (timerWidth <= -4) {
-            console.log("test");
             const notificationsCopy = dataNotifications;
             notificationsCopy.pop();
             setDataNotifications([...notificationsCopy]);

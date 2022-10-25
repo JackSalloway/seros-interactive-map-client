@@ -54,12 +54,10 @@ const DeleteSubLocation = (props) => {
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
         const notificationsCopy = dataNotifications;
-        console.log(notificationsCopy);
         notificationsCopy.push({
             message: `Sub-location: ${data.name}, successfully deleted.`,
             important: false,
         });
-        console.log(notificationsCopy);
         setDataNotifications(notificationsCopy);
         setDeleteData(null);
     };

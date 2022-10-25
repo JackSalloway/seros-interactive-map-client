@@ -28,8 +28,6 @@ const CreateQuest = (props) => {
         },
     ]);
 
-    // console.log(locationNotes);
-
     // Send POST request to create a new quest at this location
     const postQuestData = async (e) => {
         e.preventDefault();

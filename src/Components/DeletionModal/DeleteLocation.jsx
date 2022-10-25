@@ -47,7 +47,6 @@ const DeleteLocation = (props) => {
             init
         );
         const returnedData = await result.json();
-        console.log(returnedData);
         let serosLocationsCopy = [...serosLocations];
         const indexToRemove = serosLocationsCopy
             .map((location) => location._id)
@@ -57,7 +56,6 @@ const DeleteLocation = (props) => {
         // serosLocationsCopy[indexToUpdate] = location;
         // setSerosNPCs(result.newNPCs);
         // setSerosQuests(result.newQuests);
-        console.log(serosLocationsCopy.splice(indexToRemove, 1));
         serosLocationsCopy.splice(indexToRemove, 1);
 
         setSerosLocations(serosLocationsCopy);

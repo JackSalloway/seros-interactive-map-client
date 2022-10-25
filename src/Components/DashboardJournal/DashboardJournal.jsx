@@ -12,8 +12,6 @@ const DashboardJournal = (props) => {
 
     const [message, setMessage] = useState("Add a new campaign to begin!");
 
-    console.log(userAuthenticated);
-
     useEffect(() => {
         if (userAuthenticated.campaigns.length > 0) {
             setMessage(
