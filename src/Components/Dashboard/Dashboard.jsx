@@ -58,6 +58,7 @@ const Dashboard = (props) => {
                               name={campaign.campaign.name}
                               description={campaign.campaign.desc}
                               campaignID={campaign.campaign._id}
+                              adminRights={campaign.admin}
                               setCampaign={setCampaign}
                           />
                       );

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Banner = (props) => {
-    const { name, description, campaignID, setCampaign } = props;
+    const { name, description, campaignID, setCampaign, adminRights } = props;
 
     const [scale, setScale] = useState(1);
 
@@ -21,6 +22,20 @@ const Banner = (props) => {
                     <h2>{name}</h2>
                     <p>{description}</p>
                 </div>
+                {adminRights === true ? (
+                    <div className="dashboardboard-banner-admin-icons">
+                        <FontAwesomeIcon
+                            icon="pencil"
+                            className="journal-fa-icon"
+                            // onClick={() => setEditing(true)}
+                        />
+                        <FontAwesomeIcon
+                            icon="trash-can"
+                            className="journal-fa-icon"
+                            // onClick={() => setDeleteData(subLocation)}
+                        />
+                    </div>
+                ) : null}
                 <div
                     className="dashboard-banner-image"
                     style={{
