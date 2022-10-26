@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const CampaignSettings = (props) => {
     const { renderCampaignSettings, setRenderCampaignSettings } = props;
 
     const [campaignSettings, setCampaignSettings] = useState(null);
+    const [invite, setInvite] = useState(null);
 
     useEffect(() => {
         // Fetch campaign settings from backend
@@ -15,8 +17,29 @@ const CampaignSettings = (props) => {
             }
         )
             .then((res) => res.json())
-            .then((data) => setCampaignSettings(data[0]));
+            .then((data) => {
+                console.log(data);
+                setCampaignSettings(data.campaign[0]);
+                setInvite(data.invite[0]); // If there is no invite code found, data.invite[0] === undefined
+            });
     }, [renderCampaignSettings]);
+
+    const createInviteCode = () => {
+        console.log("creating invite code");
+        console.log(campaignSettings);
+        fetch(`${process.env.REACT_APP_API_URL}/campaign_generate_code/`, {
+            method: "PUT",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify({ campaign_id: campaignSettings._id }),
+            mode: "cors",
+            credentials: "include",
+        })
+            .then((res) => res.json())
+            .then((inviteCode) => {
+                console.log(inviteCode);
+                setInvite(inviteCode[0]);
+            });
+    };
 
     if (campaignSettings === null) {
         return <h2>Loading Campaign Settings...</h2>;
@@ -27,6 +50,17 @@ const CampaignSettings = (props) => {
             <h2>Campaign Settings</h2>
             <h2>{campaignSettings.name}</h2>
             <h2>{campaignSettings.desc}</h2>
+            {invite === undefined ? (
+                <button
+                    onClick={() => {
+                        createInviteCode();
+                    }}
+                >
+                    Generate an invite code!
+                </button>
+            ) : (
+                <h2>InviteCode: {invite.code}</h2>
+            )}
             <button
                 onClick={() => {
                     setRenderCampaignSettings(null);
