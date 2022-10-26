@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
+import dayjs from "dayjs";
+import "./CampaignSettings.css";
 
 const CampaignSettings = (props) => {
     const { renderCampaignSettings, setRenderCampaignSettings } = props;
@@ -46,10 +48,10 @@ const CampaignSettings = (props) => {
     }
 
     return (
-        <div>
+        <div className="campaign-settings-wrapper">
             <h2>Campaign Settings</h2>
-            <h2>{campaignSettings.name}</h2>
-            <h2>{campaignSettings.desc}</h2>
+            <h2>Name: {campaignSettings.name}</h2>
+            <h2>Description: {campaignSettings.desc}</h2>
             {invite === undefined ? (
                 <button
                     onClick={() => {
@@ -59,7 +61,13 @@ const CampaignSettings = (props) => {
                     Generate an invite code!
                 </button>
             ) : (
-                <h2>InviteCode: {invite.code}</h2>
+                <>
+                    <h2>Invite Code: {invite.code}</h2>
+                    <h2>
+                        Time Created:{" "}
+                        {dayjs(invite.created_at).format("DD/MM/YYYY HH:mm:ss")}
+                    </h2>
+                </>
             )}
             <button
                 onClick={() => {
