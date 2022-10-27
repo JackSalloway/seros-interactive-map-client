@@ -18,6 +18,8 @@ const Dashboard = (props) => {
         setRenderCampaignForm,
         renderCampaignSettings,
         setRenderCampaignSettings,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const [createCampaignScale, setCreateCampaignScale] = useState(1);
@@ -62,7 +64,7 @@ const Dashboard = (props) => {
 
     // Function to fire request for user to join a new campaign
     const joinCampaign = async () => {
-        console.log(userAuthenticated);
+        // console.log(userAuthenticated);
 
         const joinCampaignData = {
             username: userAuthenticated.username,
@@ -83,17 +85,36 @@ const Dashboard = (props) => {
             credentials: "include",
         };
 
-        const result = await fetch(
-            `${process.env.REACT_APP_API_URL}/join_campaign`,
-            init
-        );
-        const returnedData = await result.json();
-        // console.log(returnedData);
-        // console.log(userAuthenticated);
-        const userCopy = userAuthenticated;
-        userCopy.campaigns = returnedData.campaigns;
-        console.log(userCopy);
-        setUserAuthenticated({ ...userCopy });
+        fetch(`${process.env.REACT_APP_API_URL}/join_campaign`, init)
+            .then(async (res) => {
+                console.log(res);
+                if (res.status === 400) {
+                    const message = await res.text();
+                    throw Error(message);
+                }
+                // if (res.status === 404) {
+                //     throw Error(
+                //         "Invite code invalid, no relevant campaign found"
+                //     );
+                // }
+                return res.json();
+            })
+            .then((returnedData) => {
+                const userCopy = userAuthenticated;
+                userCopy.campaigns = returnedData.campaigns;
+                // console.log(userCopy);
+                setUserAuthenticated({ ...userCopy });
+                setInviteCode(""); // Reset the invite code to an empty string
+            })
+            .catch((err) => {
+                console.log(err);
+                const notificationsCopy = dataNotifications;
+                notificationsCopy.push({
+                    message: err.message,
+                    important: true,
+                });
+                setDataNotifications([...notificationsCopy]);
+            });
     };
 
     const joinCampaignBanner = () => {

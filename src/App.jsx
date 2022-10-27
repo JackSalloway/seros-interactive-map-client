@@ -213,6 +213,8 @@ function App() {
                         setRenderCampaignForm={setRenderCampaignForm}
                         renderCampaignSettings={renderCampaignSettings}
                         setRenderCampaignSettings={setRenderCampaignSettings}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
                     />
                 ) : (
                     <MapBox
