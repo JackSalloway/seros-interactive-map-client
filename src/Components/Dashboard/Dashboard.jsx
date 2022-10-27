@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Banner from "./Banner";
+import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const Dashboard = (props) => {
     // Plan is to render out multiple banners that display the name, description and a portion of the image (styled somehow).
@@ -10,6 +11,7 @@ const Dashboard = (props) => {
 
     const {
         userAuthenticated,
+        setUserAuthenticated,
         campaigns,
         setCampaign,
         renderCampaignForm,
@@ -18,19 +20,27 @@ const Dashboard = (props) => {
         setRenderCampaignSettings,
     } = props;
 
-    const [scale, setScale] = useState(1);
+    const [createCampaignScale, setCreateCampaignScale] = useState(1);
+    const [joinCampaignScale, setJoinCampaignScale] = useState(1);
+    const [inviteCode, setInviteCode] = useState("");
+    const [validCode, setValidCode] = useState(false);
+
+    useEffect(() => {
+        const regex = /^[a-z,0-9,-]{36,36}$/; // Not the best regex expression, but will prevent user from spamming join
+        setValidCode(regex.test(inviteCode));
+    }, [inviteCode]);
 
     const createCampaignBanner = () => {
         return (
             <div
                 className="dashboard-banner"
                 onMouseEnter={() => {
-                    setScale(1.01);
+                    setCreateCampaignScale(1.01);
                 }}
                 onMouseLeave={() => {
-                    setScale(1);
+                    setCreateCampaignScale(1);
                 }}
-                style={{ transform: `scale(${scale})` }}
+                style={{ transform: `scale(${createCampaignScale})` }}
             >
                 <div className="dashboard-banner-text">
                     <h2>Add a new campaign!</h2>
@@ -44,6 +54,79 @@ const Dashboard = (props) => {
                         disabled={renderCampaignForm}
                     >
                         Add new Campaign!
+                    </button>
+                </div>
+            </div>
+        );
+    };
+
+    // Function to fire request for user to join a new campaign
+    const joinCampaign = async () => {
+        console.log(userAuthenticated);
+
+        const joinCampaignData = {
+            username: userAuthenticated.username,
+            invite_code: inviteCode,
+        };
+
+        // const subLocationData = {
+        //     sub_location_name: newSubLocationName,
+        //     sub_location_desc: newSubLocationDesc,
+        //     parent_location_id: locationNotes._id,
+        // };
+
+        const init = {
+            method: "POST",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify(joinCampaignData),
+            mode: "cors",
+            credentials: "include",
+        };
+
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/join_campaign`,
+            init
+        );
+        const returnedData = await result.json();
+        // console.log(returnedData);
+        // console.log(userAuthenticated);
+        const userCopy = userAuthenticated;
+        userCopy.campaigns = returnedData.campaigns;
+        console.log(userCopy);
+        setUserAuthenticated({ ...userCopy });
+    };
+
+    const joinCampaignBanner = () => {
+        return (
+            <div
+                className="dashboard-banner"
+                onMouseEnter={() => {
+                    setJoinCampaignScale(1.01);
+                }}
+                onMouseLeave={() => {
+                    setJoinCampaignScale(1);
+                }}
+                style={{ transform: `scale(${joinCampaignScale})` }}
+            >
+                <div className="dashboard-banner-text">
+                    <h2>Join an existing campaign!</h2>
+                    <p>Use an invitation code to join your friends...</p>
+                    <input
+                        type="text"
+                        value={inviteCode}
+                        onChange={({ target }) => {
+                            setInviteCode(target.value);
+                        }}
+                    />
+                </div>
+                <div className="dashboard-banner-image">
+                    <button
+                        onClick={() => {
+                            joinCampaign();
+                        }}
+                        disabled={!validCode}
+                    >
+                        Join Campaign!
                     </button>
                 </div>
             </div>
@@ -71,6 +154,7 @@ const Dashboard = (props) => {
                   })
                 : null}
             {createCampaignBanner()}
+            {joinCampaignBanner()}
         </div>
     );
     // createCampaignBanner();

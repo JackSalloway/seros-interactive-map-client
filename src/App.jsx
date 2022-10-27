@@ -206,6 +206,7 @@ function App() {
                 {campaign === null ? (
                     <Dashboard
                         userAuthenticated={userAuthenticated}
+                        setUserAuthenticated={setUserAuthenticated}
                         campaigns={userAuthenticated.campaigns ?? []}
                         setCampaign={setCampaign}
                         renderCampaignForm={renderCampaignForm}
