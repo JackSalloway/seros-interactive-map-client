@@ -27,6 +27,7 @@ const JournalMenuContent = (props) => {
         setEditMarkerType,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     if (markerBeingEdited !== null) {
@@ -42,6 +43,7 @@ const JournalMenuContent = (props) => {
                 setSerosLocations={setSerosLocations}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
+                campaign={campaign}
             />
         );
     }
@@ -60,6 +62,7 @@ const JournalMenuContent = (props) => {
                 map={map}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
+                campaign={campaign}
             />
         );
     };

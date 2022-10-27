@@ -141,6 +141,7 @@ const Journal = (props) => {
                             setEditMarkerType={setEditMarkerType}
                             dataNotifications={dataNotifications}
                             setDataNotifications={setDataNotifications}
+                            campaign={campaign}
                         />
                     </div>
                 )}

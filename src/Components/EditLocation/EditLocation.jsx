@@ -21,6 +21,7 @@ const EditLocation = (props) => {
         setSerosLocations,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -65,6 +66,7 @@ const EditLocation = (props) => {
             location_marked: locationMarked,
             location_visited: locationVisited,
             location_sub_locations: editLocationDetails.sub_locations,
+            location_campaign_id: campaign.id,
             location_id: editLocationDetails._id,
         };
 

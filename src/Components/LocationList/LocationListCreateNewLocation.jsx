@@ -18,6 +18,7 @@ const LocationListCreateNewLocation = (props) => {
         setSerosLocations,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -43,6 +44,7 @@ const LocationListCreateNewLocation = (props) => {
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
+            location_campaign_id: campaign.id,
         };
 
         const init = {
