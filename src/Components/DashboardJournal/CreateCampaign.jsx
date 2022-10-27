@@ -31,8 +31,8 @@ const CreateCampaign = (props) => {
             init
         );
         const returnedData = await result.json();
-        console.log(returnedData);
-        console.log(userAuthenticated);
+        // console.log(returnedData);
+        // console.log(userAuthenticated);
         const userCopy = userAuthenticated;
         userCopy.campaigns = returnedData.campaigns;
         console.log(userCopy);
