@@ -66,6 +66,7 @@ const Journal = (props) => {
         setSerosNPCs(null);
         setSerosQuests(null);
         setInputStyles({ visibility: "hidden", display: "none" });
+        setRenderCampaignSettings(null);
     };
 
     if (Object.keys(userAuthenticated).length === 0) {
