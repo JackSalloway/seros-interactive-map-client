@@ -203,6 +203,7 @@ const LocationNotes = (props) => {
                     setAddNewQuest={setAddNewQuest}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
+                    campaign={campaign}
                 />
             </div>
         </div>

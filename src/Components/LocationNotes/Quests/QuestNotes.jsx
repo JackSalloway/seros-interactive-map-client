@@ -22,6 +22,7 @@ const QuestNotes = (props) => {
         setSerosNPCs,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -120,6 +121,7 @@ const QuestNotes = (props) => {
             quest_desc: updatedQuestDescription,
             quest_completed: updatedQuestStatus,
             quest_associated_locations: updatedQuestSelectedLocationsData,
+            quest_campaign: campaign.id,
             quest_id: quest._id,
         };
 

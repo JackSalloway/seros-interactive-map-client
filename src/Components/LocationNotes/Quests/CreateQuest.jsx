@@ -15,6 +15,7 @@ const CreateQuest = (props) => {
         setAddNewQuest,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     // Set states
@@ -39,6 +40,7 @@ const CreateQuest = (props) => {
             quest_associated_locations: newQuestSelectedLocations.map(
                 (location) => location.value
             ),
+            quest_campaign: campaign.id,
         };
 
         const init = {
