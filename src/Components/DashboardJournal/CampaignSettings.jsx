@@ -8,6 +8,7 @@ const CampaignSettings = (props) => {
 
     const [campaignSettings, setCampaignSettings] = useState(null);
     const [invite, setInvite] = useState(null);
+    const [campaignUsers, setCampaignUsers] = useState(null);
 
     useEffect(() => {
         // Fetch campaign settings from backend
@@ -23,6 +24,7 @@ const CampaignSettings = (props) => {
                 console.log(data);
                 setCampaignSettings(data.campaign[0]);
                 setInvite(data.invite[0]); // If there is no invite code found, data.invite[0] === undefined
+                setCampaignUsers(data.campaignUsers);
             });
     }, [renderCampaignSettings]);
 
@@ -52,6 +54,26 @@ const CampaignSettings = (props) => {
             <h2>Campaign Settings</h2>
             <h2>Name: {campaignSettings.name}</h2>
             <h2>Description: {campaignSettings.desc}</h2>
+            <div>
+                <h2>Users:</h2>
+                {campaignUsers.map((user) => {
+                    return (
+                        <div
+                            key={user._id}
+                            className="campaign-settings-single-user-wrapper"
+                        >
+                            <p>
+                                {user.username}
+
+                                {user.campaigns[0].admin === true
+                                    ? " - Admin"
+                                    : null}
+                            </p>
+                            <p></p>
+                        </div>
+                    );
+                })}
+            </div>
             {invite === undefined ? (
                 <button
                     onClick={() => {
