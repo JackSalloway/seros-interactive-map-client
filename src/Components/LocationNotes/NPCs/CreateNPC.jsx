@@ -16,6 +16,7 @@ const CreateNPC = (props) => {
         setAddNewNPC,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     // Set states
@@ -46,6 +47,7 @@ const CreateNPC = (props) => {
                 (location) => location.value
             ),
             npc_quests: newNPCQuests,
+            npc_campaign: campaign.id,
         };
 
         const init = {

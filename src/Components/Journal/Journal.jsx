@@ -169,6 +169,7 @@ const Journal = (props) => {
                 inputStyles={inputStyles}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
+                campaign={campaign}
             />
         </div>
     );

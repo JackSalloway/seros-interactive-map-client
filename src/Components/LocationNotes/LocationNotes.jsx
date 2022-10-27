@@ -27,6 +27,7 @@ const LocationNotes = (props) => {
         inputStyles,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     // Set states
@@ -183,6 +184,7 @@ const LocationNotes = (props) => {
                     setAddNewNPC={setAddNewNPC}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
+                    campaign={campaign}
                 />
 
                 <QuestWrapper

@@ -21,6 +21,7 @@ const NPCWrapper = (props) => {
         setAddNewNPC,
         dataNotifications,
         setDataNotifications,
+        campaign,
     } = props;
 
     return (
@@ -90,6 +91,7 @@ const NPCWrapper = (props) => {
                                 setSerosNPCs={setSerosNPCs}
                                 dataNotifications={dataNotifications}
                                 setDataNotifications={setDataNotifications}
+                                campaign={campaign}
                             />
                         ))}
                         {/* Has add new NPC been clicked? */}
@@ -150,6 +152,7 @@ const NPCWrapper = (props) => {
                     setAddNewNPC={setAddNewNPC}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
+                    campaign={campaign}
                 />
             ) : null}
         </div>
