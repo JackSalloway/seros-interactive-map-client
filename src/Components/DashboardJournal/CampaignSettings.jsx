@@ -64,7 +64,9 @@ const CampaignSettings = (props) => {
                         >
                             <p>
                                 {user.username}
-
+                                {user.campaigns[0].creator === true
+                                    ? " - Creator"
+                                    : null}
                                 {user.campaigns[0].admin === true
                                     ? " - Admin"
                                     : null}
