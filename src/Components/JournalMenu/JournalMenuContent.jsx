@@ -56,7 +56,7 @@ const JournalMenuContent = (props) => {
                 setRenderCreationMarker={setRenderCreationMarker}
                 creationMarkerLatLng={creationMarkerLatLng}
                 setCreationMarkerType={setCreationMarkerType}
-                serosLocations={serosLocations}
+                serosLocations={Array.from(serosLocations)}
                 setSerosLocations={setSerosLocations}
                 setLocationNotes={setLocationNotes}
                 map={map}
