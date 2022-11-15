@@ -166,6 +166,7 @@ const Dashboard = (props) => {
                               campaignID={campaign.campaign._id}
                               adminRights={campaign.admin}
                               setCampaign={setCampaign}
+                              renderCampaignForm={renderCampaignForm} // Used to disable campaign settings/deletion buttons if campaign creation form is open
                               renderCampaignSettings={renderCampaignSettings}
                               setRenderCampaignSettings={
                                   setRenderCampaignSettings

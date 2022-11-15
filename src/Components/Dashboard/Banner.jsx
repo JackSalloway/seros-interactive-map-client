@@ -8,6 +8,7 @@ const Banner = (props) => {
         campaignID,
         setCampaign,
         adminRights,
+        renderCampaignForm,
         renderCampaignSettings,
         setRenderCampaignSettings,
     } = props;
@@ -41,7 +42,10 @@ const Banner = (props) => {
                             className="banner-fa-icon"
                             style={iconStyles}
                             onClick={() => {
-                                if (renderCampaignSettings !== null) {
+                                if (renderCampaignForm === true) {
+                                    alert(
+                                        "Finish Creating your campaign first!"
+                                    );
                                     return;
                                 }
                                 setRenderCampaignSettings(campaignID);
