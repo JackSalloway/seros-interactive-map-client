@@ -87,6 +87,19 @@ const Journal = (props) => {
                     >
                         Logout
                     </button>
+                    {campaign !== null ? (
+                        <button
+                            id="return-to-dashboard-button"
+                            onClick={() => {
+                                setCampaign(null);
+                                setSerosLocations(null);
+                                setSerosNPCs(null);
+                                setSerosQuests(null);
+                            }}
+                        >
+                            Return to Dashboard
+                        </button>
+                    ) : null}
                 </div>
                 {campaign === null ? (
                     <DashboardJournal

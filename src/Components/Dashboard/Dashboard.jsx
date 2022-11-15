@@ -52,6 +52,7 @@ const Dashboard = (props) => {
                     <button
                         onClick={() => {
                             setRenderCampaignForm(true);
+                            setRenderCampaignSettings(null);
                         }}
                         disabled={renderCampaignForm}
                     >

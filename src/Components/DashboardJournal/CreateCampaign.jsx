@@ -57,8 +57,8 @@ const CreateCampaign = (props) => {
     return (
         <>
             <p id="create-campaign-notice">
-                Currently campaigns can only display a static image. This is due
-                to server restraints.
+                Due to server restraints, campaigns can only display a static
+                image.
             </p>
             <form onSubmit={postCampaignData} id="create-campaign-form">
                 <fieldset id="create-campaign-form">
