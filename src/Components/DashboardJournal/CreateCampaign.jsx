@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
+import "./CreateCampaign.css";
 
 const CreateCampaign = (props) => {
     const { userAuthenticated, setUserAuthenticated, setRenderCampaignForm } =
@@ -55,8 +56,12 @@ const CreateCampaign = (props) => {
 
     return (
         <>
+            <p id="create-campaign-notice">
+                Currently campaigns can only display a static image. This is due
+                to server restraints.
+            </p>
             <form onSubmit={postCampaignData} id="create-campaign-form">
-                <fieldset>
+                <fieldset id="create-campaign-form">
                     <legend>Create a Campaign!</legend>
                     <label htmlFor="campaign-form-name">
                         Campaign Name
