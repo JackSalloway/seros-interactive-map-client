@@ -4,7 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./LocationListNotes.css";
 
 const LocationListNotes = (props) => {
-    const { location, serosLocations, setLocationNotes, map } = props;
+    const {
+        location,
+        unfilteredSerosLocations,
+        serosLocations,
+        setLocationNotes,
+        map,
+    } = props;
 
     const [selected, setSelected] = useState(false);
 
@@ -53,10 +59,11 @@ const LocationListNotes = (props) => {
                     map.current.setView(location.latlng, 5);
                 }
                 setLocationNotes(
-                    serosLocations
+                    unfilteredSerosLocations
                         .map((serosLocation) => serosLocation._id)
                         .indexOf(location._id)
                 );
+                console.log(location);
             }}
         >
             Jump to location!
