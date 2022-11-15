@@ -90,6 +90,9 @@ const CreateCampaign = (props) => {
                 </fieldset>
                 <button>Create Campaign!</button>
             </form>
+            <button onClick={() => setRenderCampaignForm(false)}>
+                Cancel Campaign Creation
+            </button>
         </>
     );
 };
