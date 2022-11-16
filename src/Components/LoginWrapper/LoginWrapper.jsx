@@ -226,11 +226,18 @@ const LoginWrapper = (props) => {
     };
 
     return (
-        <div id="homepage-banner">
+        <div id="login-wrapper">
+            <div id="video-background-wrapper">
+                <video autoPlay muted loop id="map-pan-video">
+                    <source src="videos/SerosMapPan.mp4" type="video/mp4" />
+                </video>
+            </div>
             {loginResMsg === null ? null : (
                 <p className="login-response-message">{loginResMsg}</p>
             )}
-            {newUser === false ? renderLoginForm() : renderCreateUserForm()}
+            <div id="login-form-wrapper">
+                {newUser === false ? renderLoginForm() : renderCreateUserForm()}
+            </div>
         </div>
     );
 };

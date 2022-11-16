@@ -1,7 +1,17 @@
-#homepage-banner {
+#video-background-wrapper {
+    width: 100vw;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+/* #map-pan-video {
+} */
+
+#login-wrapper {
     height: 100vh;
     width: 100%;
-    padding: 0 5rem;
+    /* padding: 0 5rem; */
+    position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -9,20 +19,32 @@
     justify-content: center;
 }
 
-#homepage-banner > h1,
-#homepage-banner > h2 {
+#login-wrapper > h1,
+#login-wrapper > h2 {
     align-self: center;
-}
-
-#login-wrapper {
 }
 
 .login-response-message {
     margin: auto;
 }
 
+#video-background-wrapper {
+    position: relative;
+}
+
+#login-form-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background-color: rgba(14, 22, 31, 1);
+    width: 40rem;
+    height: 100vh;
+    right: 0;
+}
+
 .user-form-inputs {
-    width: 100%;
+    /* width: 100vw; */
+    /* height: 100vh; */
     display: flex;
     flex-direction: column;
     align-items: center;
