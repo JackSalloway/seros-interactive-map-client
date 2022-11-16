@@ -21,6 +21,8 @@ import {
 // React imports
 import React, { useState, useEffect } from "react";
 
+import { titleCase } from "../../imports/imports.js";
+
 function MapBox(props) {
     // Destructure props
     const {
@@ -113,7 +115,11 @@ function MapBox(props) {
     // Renders layer check boxes tied to each type of location, then calls the renderMarker function to render each relevant marker.
     var layerType = (type, locations) => {
         return (
-            <LayersControl.Overlay name={type} checked key={type}>
+            <LayersControl.Overlay
+                name={titleCase(type).replace("_", " ")} // The replace method is used to remove the _ in the natural_feature location type
+                checked
+                key={type}
+            >
                 <LayerGroup>
                     {locations.reduce((matching, location, index) => {
                         if (location.type === type) {
