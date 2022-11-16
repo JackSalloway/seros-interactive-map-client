@@ -124,6 +124,10 @@ button {
     gap: 0.5rem;
 }
 
+.location-notes-create > label > textarea {
+    resize: vertical;
+}
+
 .location-notes-submit {
     align-self: center;
     padding-bottom: 0.7rem;

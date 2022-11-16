@@ -10,37 +10,41 @@ const LocationListWrapper = (props) => {
         setRenderCreationMarker,
         creationMarkerLatLng,
         setCreationMarkerType,
-        serosLocations,
+        unfilteredSerosLocations, // This is the original version, used to set the actual journal notes to the relevant location
+        serosLocations, // This is a new version of serosLocations - passed in via the props of the component to keep the sorted list persistent
         setSerosLocations,
         setLocationNotes,
         map,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
     } = props;
 
     // Create shallow copy variable for reuse
-    const shallowCopy = Array.from(serosLocations).sort(function (a, b) {
+    serosLocations.sort(function (a, b) {
         var locationA = a.name.toUpperCase();
         var locationB = b.name.toUpperCase();
         return locationA < locationB ? -1 : locationA > locationB ? 1 : 0;
     });
 
-    const [locationList, setLocationList] = useState(shallowCopy);
+    const [locationList, setLocationList] = useState(serosLocations);
     const [searchValue, setSearchValue] = useState("");
 
     // Filter the location list whenever the user edits the searchValue state
     useEffect(() => {
         if (searchValue === "") {
-            setLocationList(shallowCopy);
+            setLocationList(serosLocations);
             return;
         } else {
             setLocationList(
-                shallowCopy.filter((location) =>
+                serosLocations.filter((location) =>
                     location.name
                         .toLowerCase()
                         .includes(searchValue.toLocaleLowerCase())
                 )
             );
         }
-    }, [shallowCopy, searchValue]);
+    }, [serosLocations, searchValue]);
 
     if (renderCreationMarker === true) {
         return (
@@ -51,6 +55,9 @@ const LocationListWrapper = (props) => {
                 setCreationMarkerType={setCreationMarkerType}
                 serosLocations={serosLocations}
                 setSerosLocations={setSerosLocations}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+                campaign={campaign}
             />
         );
     }
@@ -98,6 +105,7 @@ const LocationListWrapper = (props) => {
             {locationList.map((location) => (
                 <LocationListNotes
                     location={location}
+                    unfilteredSerosLocations={unfilteredSerosLocations}
                     serosLocations={serosLocations}
                     setLocationNotes={setLocationNotes}
                     map={map}

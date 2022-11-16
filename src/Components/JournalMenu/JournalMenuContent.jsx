@@ -25,6 +25,9 @@ const JournalMenuContent = (props) => {
         editLocationDetails,
         editMarkerLatLng,
         setEditMarkerType,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
     } = props;
 
     if (markerBeingEdited !== null) {
@@ -38,6 +41,9 @@ const JournalMenuContent = (props) => {
                 map={map}
                 serosLocations={serosLocations}
                 setSerosLocations={setSerosLocations}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+                campaign={campaign}
             />
         );
     }
@@ -50,10 +56,14 @@ const JournalMenuContent = (props) => {
                 setRenderCreationMarker={setRenderCreationMarker}
                 creationMarkerLatLng={creationMarkerLatLng}
                 setCreationMarkerType={setCreationMarkerType}
-                serosLocations={serosLocations}
+                unfilteredSerosLocations={serosLocations}
+                serosLocations={Array.from(serosLocations)}
                 setSerosLocations={setSerosLocations}
                 setLocationNotes={setLocationNotes}
                 map={map}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+                campaign={campaign}
             />
         );
     };

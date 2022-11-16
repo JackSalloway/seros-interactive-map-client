@@ -13,6 +13,9 @@ const CreateQuest = (props) => {
         serosQuests,
         setSerosQuests,
         setAddNewQuest,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
     } = props;
 
     // Set states
@@ -26,8 +29,6 @@ const CreateQuest = (props) => {
         },
     ]);
 
-    // console.log(locationNotes);
-
     // Send POST request to create a new quest at this location
     const postQuestData = async (e) => {
         e.preventDefault();
@@ -39,6 +40,7 @@ const CreateQuest = (props) => {
             quest_associated_locations: newQuestSelectedLocations.map(
                 (location) => location.value
             ),
+            quest_campaign: campaign.id,
         };
 
         const init = {
@@ -55,6 +57,12 @@ const CreateQuest = (props) => {
         );
         const returnedData = await result.json();
         setSerosQuests([...serosQuests, ...returnedData]);
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `Quest: ${newQuestName}, successfully created!`,
+            important: false,
+        });
+        setDataNotifications(notificationsCopy);
         setAddNewQuest(false);
     };
 

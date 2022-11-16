@@ -14,6 +14,9 @@ const CreateNPC = (props) => {
         serosNPCs,
         setSerosNPCs,
         setAddNewNPC,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
     } = props;
 
     // Set states
@@ -44,6 +47,7 @@ const CreateNPC = (props) => {
                 (location) => location.value
             ),
             npc_quests: newNPCQuests,
+            npc_campaign: campaign.id,
         };
 
         const init = {
@@ -60,6 +64,12 @@ const CreateNPC = (props) => {
         );
         const returnedData = await result.json();
         setSerosNPCs([...serosNPCs, ...returnedData]);
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `NPC: ${newNPCName}, successfully created!`,
+            important: false,
+        });
+        setDataNotifications(notificationsCopy);
         setAddNewNPC(false);
     };
 

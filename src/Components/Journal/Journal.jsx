@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Journal.css";
-import LoginWrapper from "../LoginWrapper/LoginWrapper";
 import LocationNotes from "../LocationNotes/LocationNotes";
+import DashboardJournal from "../DashboardJournal/DashboardJournal";
 import JournalMenuHeaderBox from "../JournalMenu/JournalMenuHeaderBox";
 import JournalMenuContent from "../JournalMenu/JournalMenuContent";
 
@@ -35,6 +35,14 @@ const Journal = (props) => {
         editLocationDetails,
         editMarkerLatLng,
         setEditMarkerType,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
+        renderCampaignForm,
+        setRenderCampaignForm,
+        setCampaign,
+        renderCampaignSettings,
+        setRenderCampaignSettings,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -53,83 +61,104 @@ const Journal = (props) => {
         });
         // Set value to true
         setUserAuthenticated({});
+        setCampaign(null);
+        setSerosLocations(null);
+        setSerosNPCs(null);
+        setSerosQuests(null);
         setInputStyles({ visibility: "hidden", display: "none" });
+        setRenderCampaignSettings(null);
     };
+
+    if (Object.keys(userAuthenticated).length === 0) {
+        return null;
+    }
 
     // If a location has not been selected yet, display the front page
     if (locationNotes === null) {
         return (
             <div id="journal-front-page-container" className="journal">
-                {Object.keys(userAuthenticated).length === 0 ? (
-                    <LoginWrapper setUserAuthenticated={setUserAuthenticated} />
-                ) : (
-                    <div className="login-status">
-                        <p id="status-username">
-                            Welcome back {userAuthenticated.username}!
-                        </p>
-                        {userAuthenticated.privileged === true ? (
-                            <p>You are authorized to make changes!</p>
-                        ) : (
-                            <p>
-                                You are not authroized to make changes. Contact
-                                an admin if you want to change this.
-                            </p>
-                        )}
+                <div className="login-status">
+                    <p id="status-username">{userAuthenticated.username}</p>
+                    <button
+                        id="logout-button"
+                        onClick={() => {
+                            logout();
+                        }}
+                    >
+                        Logout
+                    </button>
+                    {campaign !== null ? (
                         <button
-                            id="logout-button"
+                            id="return-to-dashboard-button"
                             onClick={() => {
-                                logout();
+                                setCampaign(null);
+                                setSerosLocations(null);
+                                setSerosNPCs(null);
+                                setSerosQuests(null);
                             }}
                         >
-                            Logout
+                            Return to Dashboard
                         </button>
+                    ) : null}
+                </div>
+                {campaign === null ? (
+                    <DashboardJournal
+                        userAuthenticated={userAuthenticated}
+                        setUserAuthenticated={setUserAuthenticated}
+                        renderCampaignForm={renderCampaignForm}
+                        setRenderCampaignForm={setRenderCampaignForm}
+                        renderCampaignSettings={renderCampaignSettings}
+                        setRenderCampaignSettings={setRenderCampaignSettings}
+                    />
+                ) : (
+                    <div id="journal-front-page-menu">
+                        <div id="journal-front-page-menu-header">
+                            <JournalMenuHeaderBox
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
+                                headerValue={"Location List"}
+                                boxPosition={"instruction-header-box-end"}
+                                markerBeingEdited={markerBeingEdited}
+                            />
+                            <JournalMenuHeaderBox
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
+                                headerValue={"Quest list"}
+                                boxPosition={"instruction-header-box-middle"}
+                                markerBeingEdited={markerBeingEdited}
+                            />
+                            <JournalMenuHeaderBox
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
+                                headerValue={"NPC list"}
+                                boxPosition={"instruction-header-box-end"}
+                                markerBeingEdited={markerBeingEdited}
+                            />
+                        </div>
+                        <JournalMenuContent
+                            serosLocations={serosLocations}
+                            setSerosLocations={setSerosLocations}
+                            setLocationNotes={setLocationNotes}
+                            userAuthenticated={userAuthenticated}
+                            selectedTab={selectedTab}
+                            serosQuests={serosQuests}
+                            serosNPCs={serosNPCs}
+                            renderCreationMarker={renderCreationMarker}
+                            setRenderCreationMarker={setRenderCreationMarker}
+                            creationMarkerLatLng={creationMarkerLatLng}
+                            setCreationMarkerType={setCreationMarkerType}
+                            map={map}
+                            markerBeingEdited={markerBeingEdited}
+                            setMarkerBeingEdited={setMarkerBeingEdited}
+                            editLocationDetails={editLocationDetails}
+                            editMarkerLatLng={editMarkerLatLng}
+                            setEditMarkerType={setEditMarkerType}
+                            dataNotifications={dataNotifications}
+                            setDataNotifications={setDataNotifications}
+                            campaign={campaign}
+                        />
                     </div>
                 )}
-
-                <div id="journal-front-page-menu">
-                    <div id="journal-front-page-menu-header">
-                        <JournalMenuHeaderBox
-                            selectedTab={selectedTab}
-                            setSelectedTab={setSelectedTab}
-                            headerValue={"Location List"}
-                            boxPosition={"instruction-header-box-end"}
-                            markerBeingEdited={markerBeingEdited}
-                        />
-                        <JournalMenuHeaderBox
-                            selectedTab={selectedTab}
-                            setSelectedTab={setSelectedTab}
-                            headerValue={"Quest list"}
-                            boxPosition={"instruction-header-box-middle"}
-                            markerBeingEdited={markerBeingEdited}
-                        />
-                        <JournalMenuHeaderBox
-                            selectedTab={selectedTab}
-                            setSelectedTab={setSelectedTab}
-                            headerValue={"NPC list"}
-                            boxPosition={"instruction-header-box-end"}
-                            markerBeingEdited={markerBeingEdited}
-                        />
-                    </div>
-                    <JournalMenuContent
-                        serosLocations={serosLocations}
-                        setSerosLocations={setSerosLocations}
-                        setLocationNotes={setLocationNotes}
-                        userAuthenticated={userAuthenticated}
-                        selectedTab={selectedTab}
-                        serosQuests={serosQuests}
-                        serosNPCs={serosNPCs}
-                        renderCreationMarker={renderCreationMarker}
-                        setRenderCreationMarker={setRenderCreationMarker}
-                        creationMarkerLatLng={creationMarkerLatLng}
-                        setCreationMarkerType={setCreationMarkerType}
-                        map={map}
-                        markerBeingEdited={markerBeingEdited}
-                        setMarkerBeingEdited={setMarkerBeingEdited}
-                        editLocationDetails={editLocationDetails}
-                        editMarkerLatLng={editMarkerLatLng}
-                        setEditMarkerType={setEditMarkerType}
-                    />
-                </div>
             </div>
         );
     }
@@ -152,6 +181,9 @@ const Journal = (props) => {
                 setDeleteData={setDeleteData}
                 userAuthenticated={userAuthenticated}
                 inputStyles={inputStyles}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+                campaign={campaign}
             />
         </div>
     );

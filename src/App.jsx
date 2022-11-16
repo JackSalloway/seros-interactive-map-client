@@ -13,23 +13,29 @@ import {
     faTrashCan,
     faPencil,
     faInfoCircle,
+    faCog,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Component imports
 // import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
+import LoginWrapper from "./Components/LoginWrapper/LoginWrapper";
+import Dashboard from "./Components/Dashboard/Dashboard";
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
-// import CreationSidebar from "./Components/CreationSidebar/CreationSidebar";
-import CreateLocationForm from "./Components/CreationForms/CreateLocationForm";
-import CreateQuestForm from "./Components/CreationForms/CreateQuestForm";
-import CreateNPCForm from "./Components/CreationForms/CreateNPCForm";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
+import DataNotification from "./Components/Notifications/DataNotification";
 
 // React imports
 import { useState, useEffect, useRef } from "react";
 
 function App() {
     // Set states
+
+    // Campaign states
+    const [campaign, setCampaign] = useState(null);
+    const [renderCampaignForm, setRenderCampaignForm] = useState(false);
+    const [renderCampaignSettings, setRenderCampaignSettings] = useState(null);
+
     // Data states
     const [serosLocations, setSerosLocations] = useState(null);
     const [serosQuests, setSerosQuests] = useState(null);
@@ -60,14 +66,10 @@ function App() {
     const [editMarkerLatLng, setEditMarkerLatLng] = useState([]);
     const [editMarkerType, setEditMarkerType] = useState(null);
 
-    // Render creation form states
-    // const [renderCreationSidebar, setRenderCreationSidebar] = useState(false);
-    const [renderLocationCreationForm, setRenderLocationCreationForm] =
-        useState(false);
-    const [renderQuestCreationForm, setRenderQuestCreationForm] =
-        useState(false);
-    const [renderNPCCreationForm, setRenderNPCCreationForm] = useState(false);
     const [deleteData, setDeleteData] = useState(null);
+
+    // Notification message state
+    const [dataNotifications, setDataNotifications] = useState([]);
 
     // Render data states
 
@@ -77,13 +79,20 @@ function App() {
             return;
         }
 
-        fetch(`${process.env.REACT_APP_API_URL}/location_data`, {
-            method: "GET",
-            mode: "cors",
-        })
+        if (campaign === null) {
+            return; // Checks if the user has selected a campaign or not
+        }
+
+        fetch(
+            `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaign.id}`,
+            {
+                method: "GET",
+                mode: "cors",
+            }
+        )
             .then((response) => response.json())
             .then((locations) => setSerosLocations(locations));
-    }, [serosLocations, setSerosLocations]);
+    }, [serosLocations, setSerosLocations, campaign]);
 
     // Fetch quest data from database
     useEffect(() => {
@@ -91,13 +100,20 @@ function App() {
             return;
         }
 
-        fetch(`${process.env.REACT_APP_API_URL}/quest_data`, {
-            method: "GET",
-            mode: "cors",
-        })
+        if (campaign === null) {
+            return; // Checks if the user has selected a campaign or not
+        }
+
+        fetch(
+            `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaign.id}`,
+            {
+                method: "GET",
+                mode: "cors",
+            }
+        )
             .then((response) => response.json())
             .then((quests) => setSerosQuests(quests));
-    }, [serosQuests, setSerosQuests]);
+    }, [serosQuests, setSerosQuests, campaign]);
 
     // Fetch NPC data from database
     useEffect(() => {
@@ -105,13 +121,20 @@ function App() {
             return;
         }
 
-        fetch(`${process.env.REACT_APP_API_URL}/npc_data`, {
-            method: "GET",
-            mode: "cors",
-        })
+        if (campaign === null) {
+            return; // Checks if the user has selected a campaign or not
+        }
+
+        fetch(
+            `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaign.id}`,
+            {
+                method: "GET",
+                mode: "cors",
+            }
+        )
             .then((response) => response.json())
             .then((NPCs) => setSerosNPCs(NPCs));
-    }, [serosNPCs, setSerosNPCs]);
+    }, [serosNPCs, setSerosNPCs, campaign]);
 
     // Check cookies on startup to see if user was logged in last time they used the site and their refresh token is still valid.
     useEffect(() => {
@@ -120,15 +143,27 @@ function App() {
             mode: "cors",
             credentials: "include",
         })
-            .then((response) => response.json())
+            .then((res) => {
+                if (res.status === 401) {
+                    throw Error("Session timed out, please login again.");
+                }
+                return res.json();
+            })
             .then((res) => {
                 setUserAuthenticated(res);
                 if (res.privileged === true) {
                     setInputStyles({ visibility: "visible" });
                 }
+            })
+            .catch((err) => {
+                const notificationsCopy = dataNotifications;
+                notificationsCopy.push({
+                    message: err.message,
+                    important: true,
+                });
+                setDataNotifications(notificationsCopy);
             });
-        // .then(setStartupComplete(true));
-    }, []);
+    }, [dataNotifications]);
 
     // Check if user is authenticated after login - to enable Create, Update and Delete access
     useEffect(() => {
@@ -146,47 +181,69 @@ function App() {
         faTimes,
         faTrashCan,
         faPencil,
-        faInfoCircle
+        faInfoCircle,
+        faCog
     ); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
 
     // if (startupComplete === false) {
     //     return <LoadingScreen />;
     // }
 
+    if (Object.keys(userAuthenticated).length === 0) {
+        return (
+            <LoginWrapper
+                setUserAuthenticated={setUserAuthenticated}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+            />
+        );
+    }
+
     return (
         <>
             {/* This div was used to make the map box and location notes appear next to each other on the same row, however this made the map box function incorreclty due to it not resizing properly so have commented it out for now */}
             <div className="home-page-wrapper">
-                <MapBox
-                    serosLocations={serosLocations}
-                    serosNPCs={serosNPCs}
-                    serosQuests={serosQuests}
-                    setSerosLocations={setSerosLocations}
-                    map={map}
-                    renderCreationMarker={renderCreationMarker}
-                    creationMarkerLatLng={creationMarkerLatLng}
-                    creationMarkerType={creationMarkerType}
-                    setCreationMarkerLatLng={setCreationMarkerLatLng}
-                    renderLocationCreationForm={renderLocationCreationForm}
-                    setRenderLocationCreationForm={
-                        setRenderLocationCreationForm
-                    }
-                    selectedLocationNotes={
-                        serosLocations?.[selectedLocationNotes] || null
-                    }
-                    setSelectedLocationNotes={setSelectedLocationNotes}
-                    setSelectedLocationQuests={setSelectedLocationQuests}
-                    setSelectedLocationNPCs={setSelectedLocationNPCs}
-                    userAuthenticated={userAuthenticated}
-                    markerBeingEdited={markerBeingEdited}
-                    setMarkerBeingEdited={setMarkerBeingEdited}
-                    setEditLocationDetails={setEditLocationDetails}
-                    editMarkerLatLng={editMarkerLatLng}
-                    setEditMarkerLatLng={setEditMarkerLatLng}
-                    editMarkerType={editMarkerType}
-                    setEditMarkerType={setEditMarkerType}
-                    setDeleteData={setDeleteData}
-                />
+                {campaign === null ? (
+                    <Dashboard
+                        userAuthenticated={userAuthenticated}
+                        setUserAuthenticated={setUserAuthenticated}
+                        campaigns={userAuthenticated.campaigns ?? []}
+                        setCampaign={setCampaign}
+                        renderCampaignForm={renderCampaignForm}
+                        setRenderCampaignForm={setRenderCampaignForm}
+                        renderCampaignSettings={renderCampaignSettings}
+                        setRenderCampaignSettings={setRenderCampaignSettings}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
+                    />
+                ) : (
+                    <MapBox
+                        serosLocations={serosLocations}
+                        serosNPCs={serosNPCs}
+                        serosQuests={serosQuests}
+                        setSerosLocations={setSerosLocations}
+                        map={map}
+                        renderCreationMarker={renderCreationMarker}
+                        creationMarkerLatLng={creationMarkerLatLng}
+                        creationMarkerType={creationMarkerType}
+                        setCreationMarkerLatLng={setCreationMarkerLatLng}
+                        selectedLocationNotes={
+                            serosLocations?.[selectedLocationNotes] || null
+                        }
+                        setSelectedLocationNotes={setSelectedLocationNotes}
+                        setSelectedLocationQuests={setSelectedLocationQuests}
+                        setSelectedLocationNPCs={setSelectedLocationNPCs}
+                        userAuthenticated={userAuthenticated}
+                        markerBeingEdited={markerBeingEdited}
+                        setMarkerBeingEdited={setMarkerBeingEdited}
+                        setEditLocationDetails={setEditLocationDetails}
+                        editMarkerLatLng={editMarkerLatLng}
+                        setEditMarkerLatLng={setEditMarkerLatLng}
+                        editMarkerType={editMarkerType}
+                        setEditMarkerType={setEditMarkerType}
+                        setDeleteData={setDeleteData}
+                    />
+                )}
 
                 {map ? (
                     <Journal
@@ -219,18 +276,16 @@ function App() {
                         editLocationDetails={editLocationDetails}
                         editMarkerLatLng={editMarkerLatLng}
                         setEditMarkerType={setEditMarkerType}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
+                        campaign={campaign}
+                        setCampaign={setCampaign}
+                        renderCampaignForm={renderCampaignForm}
+                        setRenderCampaignForm={setRenderCampaignForm}
+                        renderCampaignSettings={renderCampaignSettings}
+                        setRenderCampaignSettings={setRenderCampaignSettings}
                     />
                 ) : null}
-
-                {/* <CreationSidebar
-                    inputStyles={inputStyles}
-                    renderCreationSidebar={renderCreationSidebar}
-                    setRenderCreationSidebar={setRenderCreationSidebar}
-                    renderCreationMarker={renderCreationMarker}
-                    setRenderCreationMarker={setRenderCreationMarker}
-                    setRenderQuestCreationForm={setRenderQuestCreationForm}
-                    setRenderNPCCreationForm={setRenderNPCCreationForm}
-                /> */}
 
                 {deleteData !== null ? (
                     <DeletionModal
@@ -245,33 +300,25 @@ function App() {
                         setSerosNPCs={setSerosNPCs}
                         serosQuests={serosQuests}
                         setSerosQuests={setSerosQuests}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
                     />
                 ) : null}
+
+                {dataNotifications.length !== 0
+                    ? dataNotifications.map((notification, index) => {
+                          return (
+                              <DataNotification
+                                  dataNotifications={dataNotifications}
+                                  setDataNotifications={setDataNotifications}
+                                  notification={notification}
+                                  index={index}
+                                  key={`${notification.message} ${index}`}
+                              />
+                          );
+                      })
+                    : null}
             </div>
-
-            {renderLocationCreationForm === true ? (
-                <CreateLocationForm
-                    creationMarkerLatLng={creationMarkerLatLng}
-                    setRenderLocationCreationForm={
-                        setRenderLocationCreationForm
-                    }
-                />
-            ) : null}
-
-            {renderQuestCreationForm === true ? (
-                <CreateQuestForm
-                    setRenderQuestCreationForm={setRenderQuestCreationForm}
-                    serosLocations={serosLocations}
-                />
-            ) : null}
-
-            {renderNPCCreationForm === true ? (
-                <CreateNPCForm
-                    setRenderNPCCreationForm={setRenderNPCCreationForm}
-                    serosLocations={serosLocations}
-                    serosQuests={serosQuests}
-                />
-            ) : null}
         </>
     );
 }

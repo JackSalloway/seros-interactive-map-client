@@ -19,6 +19,9 @@ const NPCNotes = (props) => {
         serosNPCs,
         setSerosNPCs,
         originalIndex,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -211,6 +214,7 @@ const NPCNotes = (props) => {
                 (location) => location.value
             ),
             npc_quests: updatedNPCQuests.map((quest) => quest.value),
+            npc_campaign: campaign.id,
             npc_id: npc._id,
         };
 
@@ -230,6 +234,12 @@ const NPCNotes = (props) => {
         let serosNPCsCopy = [...serosNPCs];
         serosNPCsCopy[originalIndex] = returnedData;
         setSerosNPCs(serosNPCsCopy);
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `NPC: ${updatedNPCName}, successfully updated!`,
+            important: false,
+        });
+        setDataNotifications(notificationsCopy);
         setEditing(false);
     };
 

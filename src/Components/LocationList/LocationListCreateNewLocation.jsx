@@ -16,6 +16,9 @@ const LocationListCreateNewLocation = (props) => {
         setCreationMarkerType,
         serosLocations,
         setSerosLocations,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -41,6 +44,7 @@ const LocationListCreateNewLocation = (props) => {
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
+            location_campaign_id: campaign.id,
         };
 
         const init = {
@@ -59,6 +63,12 @@ const LocationListCreateNewLocation = (props) => {
         let serosLocationsCopy = [...serosLocations];
         serosLocationsCopy.push(returnedData[0]);
         setSerosLocations(serosLocationsCopy);
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `Location: ${locationName}, successfully created!`,
+            important: false,
+        });
+        setDataNotifications(notificationsCopy);
         setRenderCreationMarker(false);
     };
 

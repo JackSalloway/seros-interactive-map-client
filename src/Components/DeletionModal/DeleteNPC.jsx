@@ -4,7 +4,14 @@ import he from "he";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const DeleteNPC = (props) => {
-    const { data, setDeleteData, serosNPCs, setSerosNPCs } = props;
+    const {
+        data,
+        setDeleteData,
+        serosNPCs,
+        setSerosNPCs,
+        dataNotifications,
+        setDataNotifications,
+    } = props;
 
     const [deletionString, setDeletionString] = useState("");
     const [deleteDisabled, setDeleteDisabled] = useState(false);
@@ -39,6 +46,12 @@ const DeleteNPC = (props) => {
         const npcToRemove = serosNPCs.map((npc) => npc._id).indexOf(data._id);
         serosNPCsCopy.splice(npcToRemove, 1);
         setSerosNPCs(serosNPCsCopy);
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `NPC: ${data.name}, successfully deleted.`,
+            important: false,
+        });
+        setDataNotifications(notificationsCopy);
         setDeleteData(null);
     };
 

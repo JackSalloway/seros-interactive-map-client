@@ -20,6 +20,9 @@ const QuestWrapper = (props) => {
         setQuestUpdated,
         addNewQuest,
         setAddNewQuest,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
     } = props;
     return (
         <div
@@ -86,6 +89,9 @@ const QuestWrapper = (props) => {
                                 setSerosQuests={setSerosQuests}
                                 setSerosNPCs={setSerosNPCs}
                                 setQuestUpdated={setQuestUpdated}
+                                dataNotifications={dataNotifications}
+                                setDataNotifications={setDataNotifications}
+                                campaign={campaign}
                             />
                         ))}
                         {/* Has new quest been clicked? */}
@@ -143,6 +149,9 @@ const QuestWrapper = (props) => {
                     serosQuests={serosQuests}
                     setSerosQuests={setSerosQuests}
                     setAddNewQuest={setAddNewQuest}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
+                    campaign={campaign}
                 />
             ) : null}
         </div>

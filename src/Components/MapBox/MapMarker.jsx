@@ -65,7 +65,6 @@ const MapMarker = (props) => {
                                         setEditMarkerLatLng(location.latlng);
                                         setEditMarkerType(location.type);
                                         setSelectedLocationNotes(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
-                                        console.log(editMarkerLatLng);
                                     }}
                                     disabled={
                                         markerBeingEdited === null

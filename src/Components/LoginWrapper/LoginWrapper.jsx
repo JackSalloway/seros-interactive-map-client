@@ -5,7 +5,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const LoginWrapper = (props) => {
-    const { setUserAuthenticated } = props;
+    const { setUserAuthenticated, dataNotifications, setDataNotifications } =
+        props;
 
     const [newUser, setNewUser] = useState(false);
     const [username, setUsername] = useState("");
@@ -37,7 +38,21 @@ const LoginWrapper = (props) => {
         })
             .then((response) => {
                 if (response.status === 200) {
+                    // response.data looks like:
+                    // { username: STRING, privileged: BOOL}
+                    console.log(response.data);
                     setUserAuthenticated(response.data);
+                    const notificationsCopy = dataNotifications;
+                    const errorIndex = notificationsCopy.findIndex(
+                        (notification) =>
+                            notification.message ===
+                            "Session timed out, please login again."
+                    );
+                    notificationsCopy[errorIndex] = {
+                        message: "Login successful!",
+                        important: false,
+                    };
+                    setDataNotifications(notificationsCopy);
                 }
             })
             .catch(function (error) {
@@ -72,6 +87,7 @@ const LoginWrapper = (props) => {
                                 id="login-name"
                                 required
                                 value={username}
+                                placeholder={"Username"}
                                 onChange={({ target }) => {
                                     setUsername(target.value);
                                 }}
@@ -84,6 +100,7 @@ const LoginWrapper = (props) => {
                                 id="login-password"
                                 required
                                 value={password}
+                                placeholder={"Password"}
                                 onChange={({ target }) => {
                                     setPassword(target.value);
                                 }}

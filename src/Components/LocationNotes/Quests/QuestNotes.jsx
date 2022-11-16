@@ -20,6 +20,9 @@ const QuestNotes = (props) => {
         setSerosQuests,
         setQuestUpdated,
         setSerosNPCs,
+        dataNotifications,
+        setDataNotifications,
+        campaign,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -118,6 +121,7 @@ const QuestNotes = (props) => {
             quest_desc: updatedQuestDescription,
             quest_completed: updatedQuestStatus,
             quest_associated_locations: updatedQuestSelectedLocationsData,
+            quest_campaign: campaign.id,
             quest_id: quest._id,
         };
 
@@ -148,6 +152,12 @@ const QuestNotes = (props) => {
         setSerosQuests(serosQuestsCopy);
         setSerosNPCs(returnedData.npcResult);
         setQuestUpdated(true);
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `Quest: ${updatedQuestName}, successfully updated!`,
+            important: false,
+        });
+        setDataNotifications(notificationsCopy);
         setEditing(false);
     };
 
