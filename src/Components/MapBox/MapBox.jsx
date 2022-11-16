@@ -216,15 +216,6 @@ function MapBox(props) {
         return false;
     };
 
-    // Tried to center the view when the creation marker was added, but there was a bug where the 'layeradd' event was clashing with the 'dragend' event
-    // const CreationMarkerEvent = () => {
-    //     const map = useMapEvent('layeradd', () => {
-    //         const centerLatLng = map.getCenter()
-    //         map.setView(centerLatLng, 5)
-    //         // setCreationMarkerLatLng([centerLatLng.lat, centerLatLng.lng])
-    //     })
-    // }
-
     // Function to render marker when button is clicked
     const renderDraggableMarker = () => {
         return (
