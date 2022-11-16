@@ -156,7 +156,7 @@ const Dashboard = (props) => {
     };
 
     return (
-        <div>
+        <div id="dashboard-banner-wrapper">
             {campaigns.length > 0
                 ? campaigns.map((campaign) => {
                       return (

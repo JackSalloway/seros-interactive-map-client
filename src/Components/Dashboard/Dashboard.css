@@ -1,3 +1,7 @@
+#dashboard-banner-wrapper {
+    overflow-y: scroll;
+}
+
 .dashboard-banner {
     height: 8rem;
     margin: 1rem;
