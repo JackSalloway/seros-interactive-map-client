@@ -175,7 +175,7 @@ const EditLocation = (props) => {
                     }
                 }}
             >
-                Jump to update marker!
+                Jump to marker!
             </button>
             <p>
                 Latitude:{" "}

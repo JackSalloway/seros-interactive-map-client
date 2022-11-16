@@ -115,6 +115,7 @@ const MapMarker = (props) => {
                 <div className="popup-container">
                     <h2 className="popup-h2">{he.decode(location.name)}</h2>
                     <p>Currently editing...</p>
+                    <p>Drag and drop the marker to move the location!</p>
                 </div>
             </Popup>
             {/* If location does not have a marked image on the map, display its name as a tooltip */}

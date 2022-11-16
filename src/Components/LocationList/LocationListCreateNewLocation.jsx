@@ -142,20 +142,6 @@ const LocationListCreateNewLocation = (props) => {
                     setShowGuide(!showGuide);
                 }}
             />
-            <h2>Create a location!</h2>
-            <button
-                onClick={() => {
-                    if (map.current.getZoom() === 5) {
-                        map.current.flyTo(creationMarkerLatLng);
-                    } else {
-                        map.current.setView(creationMarkerLatLng, 5);
-                    }
-                }}
-            >
-                Jump to creation marker!
-            </button>
-            <p>Latitude: {creationMarkerLatLng[0]}</p>
-            <p>longitude: {creationMarkerLatLng[1]}</p>
             {showGuide === true ? (
                 <div id="journal-create-new-location-guide-div">
                     <h3>Create Location Guide</h3>
@@ -173,6 +159,15 @@ const LocationListCreateNewLocation = (props) => {
                         brief description of your location in the first
                         sentence, as this will be used in the location list to
                         describe the location.
+                    </p>
+                    <p>
+                        <span className="journal-create-new-location-guide-bold-text">
+                            Latitude/Longitude
+                        </span>
+                        : The reference points of your new location, They are
+                        used to determine where the location is on the map. Drag
+                        and drop the relevant marker to move the location to a
+                        new point on the map.
                     </p>
                     <p>
                         <span className="journal-create-new-location-guide-bold-text">
@@ -205,6 +200,21 @@ const LocationListCreateNewLocation = (props) => {
                     </p>
                 </div>
             ) : null}
+            <h2>Create a location!</h2>
+            <button
+                onClick={() => {
+                    if (map.current.getZoom() === 5) {
+                        map.current.flyTo(creationMarkerLatLng);
+                    } else {
+                        map.current.setView(creationMarkerLatLng, 5);
+                    }
+                }}
+            >
+                Jump to creation marker!
+            </button>
+            <p>Latitude: {creationMarkerLatLng[0]}</p>
+            <p>longitude: {creationMarkerLatLng[1]}</p>
+
             <form onSubmit={postData} id="journal-create-new-location-form">
                 <div className="journal-create-new-location-input-div">
                     <label htmlFor="name">

@@ -240,7 +240,13 @@ function MapBox(props) {
             >
                 {/* <CreationMarkerEvent /> */}
                 <Popup>
-                    <p>Add your new location here!</p>
+                    <div className="popup-container">
+                        <p>Add your new location here!</p>
+                        <p>
+                            Drag and drop this marker to change its position on
+                            the map!
+                        </p>
+                    </div>
                 </Popup>
             </Marker>
         );
