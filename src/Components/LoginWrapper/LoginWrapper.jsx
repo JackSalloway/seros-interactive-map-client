@@ -1,3 +1,6 @@
+import React, { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 // Style imports
 import "./LoginWrapper.css";
 
@@ -118,7 +121,7 @@ const LoginWrapper = (props) => {
                 {/* Scroll bar wrapper */}
                 <div id="content-display-scroller-wrapper">
                     <div id="content-display-scroller-progress">
-                        {contentDisplay.map((display, index) => {
+                        {contentDisplay.map((subject, index) => {
                             return (
                                 <div
                                     className="content-display-scroller-progress-bar"
@@ -137,23 +140,34 @@ const LoginWrapper = (props) => {
                     </div>
                 </div>
                 {/* Arrow wrappers */}
-                {/* login-screen-arrow-wrapper#left-arrow */}
                 <div className="login-screen-arrow-wrapper" id="left-arrow">
                     <FontAwesomeIcon
                         icon="chevron-left"
                         className="journal-fa-icon"
-                        // onClick={() => {
-                        //     setSelected(true);
-                        // }}
+                        onClick={() => {
+                            if (contentDisplayProgress === 0) {
+                                setContentDisplayProgress(4);
+                                return;
+                            }
+                            setContentDisplayProgress(
+                                contentDisplayProgress - 1
+                            );
+                        }}
                     />
                 </div>
                 <div className="login-screen-arrow-wrapper" id="right-arrow">
                     <FontAwesomeIcon
                         icon="chevron-right"
                         className="journal-fa-icon"
-                        // onClick={() => {
-                        //     setSelected(true);
-                        // }}
+                        onClick={() => {
+                            if (contentDisplayProgress === 4) {
+                                setContentDisplayProgress(0);
+                                return;
+                            }
+                            setContentDisplayProgress(
+                                contentDisplayProgress + 1
+                            );
+                        }}
                     />
                 </div>
             </div>
