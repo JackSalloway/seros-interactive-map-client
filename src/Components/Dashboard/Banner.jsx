@@ -9,7 +9,7 @@ const Banner = (props) => {
         setCampaign,
         adminRights,
         renderCampaignForm,
-        renderCampaignSettings,
+        // renderCampaignSettings,
         setRenderCampaignSettings,
     } = props;
 
