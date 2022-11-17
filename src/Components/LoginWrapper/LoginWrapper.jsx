@@ -3,16 +3,54 @@ import "./LoginWrapper.css";
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const LoginWrapper = (props) => {
     const { setUserAuthenticated, dataNotifications, setDataNotifications } =
         props;
 
+    // User login/register states
     const [newUser, setNewUser] = useState(false);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loginResMsg, setLoginResMes] = useState(null);
+
+    // Content display states
+    const [contentDisplayProgress, setContentDisplayProgress] = useState(0);
+
+    const contentDisplay = [
+        {
+            subject_header: "Welcome to the Seros Project!",
+            sub_header:
+                "A Dungeons and Dragons interactive map and note tracker.",
+
+            render_login: true,
+        },
+        {
+            subject_header: "Create campaigns!",
+            sub_header:
+                "Create and manage your own campaigns for you and your friends to enjoy!",
+        },
+        {
+            subject_header: "Make your mark!",
+            sub_header: "Add locations to specific points on your map!",
+        },
+        {
+            subject_header: "Remember every face!",
+            sub_header:
+                "Take note of each and every character you meet along the way!",
+        },
+        {
+            subject_header: "Set your own goals!",
+            sub_header:
+                "Set goals in the form of quests to help track your adventure!",
+        },
+        // {
+        //     subject_header: "Begin creating memories!",
+        //     sub_header: "Start your journey by creating memories!",
+        // },
+    ];
 
     useEffect(() => {
         // Reset states when newUser state is switched
@@ -235,8 +273,71 @@ const LoginWrapper = (props) => {
             {loginResMsg === null ? null : (
                 <p className="login-response-message">{loginResMsg}</p>
             )}
-            <div id="login-form-wrapper">
-                {newUser === false ? renderLoginForm() : renderCreateUserForm()}
+            <div id="login-screen-wrapper">
+                {/* Header wrapper */}
+                <div id="login-screen-header-wrapper">
+                    <h1
+                        id="login-screen-header"
+                        className="login-screen-text-center"
+                    >
+                        {contentDisplay[contentDisplayProgress].subject_header}
+                    </h1>
+                    <p className="login-screen-text-center">
+                        {contentDisplay[contentDisplayProgress].sub_header}
+                    </p>
+                </div>
+
+                {/* Content Wrapper */}
+                <div id="login-screen-content-display-wrapper">
+                    {contentDisplay[contentDisplayProgress].render_login ===
+                    true
+                        ? newUser === false
+                            ? renderLoginForm()
+                            : renderCreateUserForm()
+                        : null}
+                </div>
+
+                {/* Scroll bar wrapper */}
+                <div id="content-display-scroller-wrapper">
+                    <div id="content-display-scroller-progress">
+                        {contentDisplay.map((display, index) => {
+                            return (
+                                <div
+                                    className="content-display-scroller-progress-bar"
+                                    onClick={() => {
+                                        setContentDisplayProgress(index);
+                                    }}
+                                    style={{
+                                        backgroundColor:
+                                            contentDisplayProgress === index
+                                                ? "black"
+                                                : "white",
+                                    }}
+                                />
+                            );
+                        })}
+                    </div>
+                </div>
+                {/* Arrow wrappers */}
+                {/* login-screen-arrow-wrapper#left-arrow */}
+                <div className="login-screen-arrow-wrapper" id="left-arrow">
+                    <FontAwesomeIcon
+                        icon="chevron-left"
+                        className="journal-fa-icon"
+                        // onClick={() => {
+                        //     setSelected(true);
+                        // }}
+                    />
+                </div>
+                <div className="login-screen-arrow-wrapper" id="right-arrow">
+                    <FontAwesomeIcon
+                        icon="chevron-right"
+                        className="journal-fa-icon"
+                        // onClick={() => {
+                        //     setSelected(true);
+                        // }}
+                    />
+                </div>
             </div>
         </div>
     );
