@@ -27,27 +27,49 @@ const LoginWrapper = (props) => {
             subject_header: "Welcome to the Seros Project!",
             sub_header:
                 "A Dungeons and Dragons interactive map and note tracker.",
-
             render_login: true,
         },
         {
-            subject_header: "Create campaigns!",
-            sub_header:
-                "Create and manage your own campaigns for you and your friends to enjoy!",
+            subject_header: "Begin your adventure!",
+            sub_header: "Create and manage your own campaigns!",
+            subject_messages: [
+                "Upload your own map. (NOT YET IMPLEMENTED)",
+                "Name and describe your campaign.",
+                "Invite your friends.",
+                "Manage your campaign settings.",
+            ],
         },
         {
             subject_header: "Make your mark!",
             sub_header: "Add locations to specific points on your map!",
+            subject_messages: [
+                "Add memorable or important locations.",
+                "Name and describe your locations.",
+                "Filter locations from an array of location types.",
+                "Edit your locations values.",
+            ],
         },
         {
             subject_header: "Remember every face!",
             sub_header:
                 "Take note of each and every character you meet along the way!",
+            subject_messages: [
+                "Log each character you meet, friend or foe.",
+                "Name and describe your characters.",
+                "Monitor characters statuses and dispositions.",
+                "Edit your characters values.",
+            ],
         },
         {
             subject_header: "Set your own goals!",
             sub_header:
                 "Set goals in the form of quests to help track your adventure!",
+            subject_messages: [
+                "Create quests to help guide your party.",
+                "Assign relevant characters and locations to quests.",
+                "Filter between completed and incomplete quests.",
+                "Edit your quests values as the story progresses.",
+            ],
         },
         // {
         //     subject_header: "Begin creating memories!",
@@ -89,33 +111,55 @@ const LoginWrapper = (props) => {
                 <div id="login-screen-content-display-wrapper">
                     {contentDisplay[contentDisplayProgress].render_login ===
                     true ? (
-                        newUser === false ? (
-                            <LoginUserForm
-                                username={username}
-                                setUsername={setUsername}
-                                password={password}
-                                setPassword={setPassword}
-                                setUserAuthenticated={setUserAuthenticated}
-                                dataNotifications={dataNotifications}
-                                setDataNotifications={setDataNotifications}
-                                loginResMsg={loginResMsg}
-                                setLoginResMes={setLoginResMes}
-                                setNewUser={setNewUser}
-                            />
-                        ) : (
-                            <CreateUserForm
-                                username={username}
-                                setUsername={setUsername}
-                                email={email}
-                                setEmail={setEmail}
-                                password={password}
-                                setPassword={setPassword}
-                                setNewUser={setNewUser}
-                                loginResMsg={loginResMsg}
-                                setLoginResMes={setLoginResMes}
-                            />
-                        )
-                    ) : null}
+                        <div id="login-screen-content-display-wrapper">
+                            {newUser === false ? (
+                                <LoginUserForm
+                                    username={username}
+                                    setUsername={setUsername}
+                                    password={password}
+                                    setPassword={setPassword}
+                                    setUserAuthenticated={setUserAuthenticated}
+                                    dataNotifications={dataNotifications}
+                                    setDataNotifications={setDataNotifications}
+                                    loginResMsg={loginResMsg}
+                                    setLoginResMes={setLoginResMes}
+                                    setNewUser={setNewUser}
+                                />
+                            ) : (
+                                <CreateUserForm
+                                    username={username}
+                                    setUsername={setUsername}
+                                    email={email}
+                                    setEmail={setEmail}
+                                    password={password}
+                                    setPassword={setPassword}
+                                    setNewUser={setNewUser}
+                                    loginResMsg={loginResMsg}
+                                    setLoginResMes={setLoginResMes}
+                                />
+                            )}
+                        </div>
+                    ) : (
+                        <div id="content-display-wrapper">
+                            <div id="content-display-image-wrapper">
+                                Image placeholder
+                            </div>
+                            <div id="content-display-list-wrapper">
+                                {contentDisplay[
+                                    contentDisplayProgress
+                                ].subject_messages.map((message) => {
+                                    return (
+                                        <div
+                                            className="content-display-list-text"
+                                            key={message}
+                                        >
+                                            {message}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Scroll bar wrapper */}
@@ -124,6 +168,7 @@ const LoginWrapper = (props) => {
                         {contentDisplay.map((subject, index) => {
                             return (
                                 <div
+                                    key={subject.subject_header}
                                     className="content-display-scroller-progress-bar"
                                     onClick={() => {
                                         setContentDisplayProgress(index);
@@ -140,36 +185,45 @@ const LoginWrapper = (props) => {
                     </div>
                 </div>
                 {/* Arrow wrappers */}
-                <div className="login-screen-arrow-wrapper" id="left-arrow">
-                    <FontAwesomeIcon
-                        icon="chevron-left"
-                        className="journal-fa-icon"
-                        onClick={() => {
-                            if (contentDisplayProgress === 0) {
-                                setContentDisplayProgress(4);
-                                return;
-                            }
-                            setContentDisplayProgress(
-                                contentDisplayProgress - 1
-                            );
-                        }}
-                    />
-                </div>
-                <div className="login-screen-arrow-wrapper" id="right-arrow">
-                    <FontAwesomeIcon
-                        icon="chevron-right"
-                        className="journal-fa-icon"
-                        onClick={() => {
-                            if (contentDisplayProgress === 4) {
-                                setContentDisplayProgress(0);
-                                return;
-                            }
-                            setContentDisplayProgress(
-                                contentDisplayProgress + 1
-                            );
-                        }}
-                    />
-                </div>
+                {/* If on first tab, do not render left arrow */}
+                {contentDisplayProgress === 0 ? null : (
+                    <div className="login-screen-arrow-wrapper" id="left-arrow">
+                        <FontAwesomeIcon
+                            icon="chevron-left"
+                            className="journal-fa-icon"
+                            onClick={() => {
+                                if (contentDisplayProgress === 0) {
+                                    setContentDisplayProgress(4);
+                                    return;
+                                }
+                                setContentDisplayProgress(
+                                    contentDisplayProgress - 1
+                                );
+                            }}
+                        />
+                    </div>
+                )}
+                {/* If on last tab, do not render right arrow */}
+                {contentDisplayProgress === 4 ? null : (
+                    <div
+                        className="login-screen-arrow-wrapper"
+                        id="right-arrow"
+                    >
+                        <FontAwesomeIcon
+                            icon="chevron-right"
+                            className="journal-fa-icon"
+                            onClick={() => {
+                                if (contentDisplayProgress === 4) {
+                                    setContentDisplayProgress(0);
+                                    return;
+                                }
+                                setContentDisplayProgress(
+                                    contentDisplayProgress + 1
+                                );
+                            }}
+                        />
+                    </div>
+                )}
             </div>
         </div>
     );
