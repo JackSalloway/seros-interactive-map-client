@@ -33,11 +33,11 @@
 #login-screen-wrapper {
     display: grid;
     grid-template-areas:
-        "left-arrow header right-arrow"
-        "left-arrow content right-arrow"
-        "left-arrow scroller right-arrow";
+        "header"
+        "content"
+        "scroller";
     grid-template-rows: 2fr 10fr 0.5fr;
-    grid-template-columns: 0.5fr 10fr 0.5fr;
+    /* grid-template-columns: 10fr; */
     position: absolute;
     background-color: rgba(14, 22, 31, 1);
     box-sizing: border-box;
@@ -113,9 +113,20 @@
     width: 34rem;
     height: 18rem;
     border: 2px solid black;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#content-display-image-wrapper > img {
+    /* grid-area: image-wrapper; */
+    width: 34rem;
+    height: 18rem;
+    border-radius: 1rem;
+    /* border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
 }
 
 #content-display-list-wrapper {

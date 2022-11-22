@@ -20,7 +20,18 @@ const LoginWrapper = (props) => {
     const [loginResMsg, setLoginResMes] = useState(null);
 
     // Content display states
+    const [leftArrowStyles, setLeftArrowStyles] = useState(0.2);
+    const [rightArrowStyles, setRightArrowStyles] = useState(1);
     const [contentDisplayProgress, setContentDisplayProgress] = useState(0);
+
+    // Reset states when newUser state is switched
+    useEffect(() => {
+        if (newUser === true || newUser === false) {
+            setUsername("");
+            setEmail("");
+            setPassword("");
+        }
+    }, [newUser]);
 
     const contentDisplay = [
         {
@@ -38,6 +49,10 @@ const LoginWrapper = (props) => {
                 "Invite your friends.",
                 "Manage your campaign settings.",
             ],
+            image: {
+                src: "campaign",
+                alt: "Tactical Journal App campaign dashboard screen.",
+            },
         },
         {
             subject_header: "Make your mark!",
@@ -48,6 +63,10 @@ const LoginWrapper = (props) => {
                 "Filter locations from an array of location types.",
                 "Edit your locations values.",
             ],
+            image: {
+                src: "locations",
+                alt: "Tactical Journal App, interactive map screen.",
+            },
         },
         {
             subject_header: "Remember every face!",
@@ -59,6 +78,10 @@ const LoginWrapper = (props) => {
                 "Monitor characters statuses and dispositions.",
                 "Edit your characters values.",
             ],
+            image: {
+                src: "npc",
+                alt: "Tactical Journal App, selected location NPC section.",
+            },
         },
         {
             subject_header: "Set your own goals!",
@@ -70,6 +93,10 @@ const LoginWrapper = (props) => {
                 "Filter between completed and incomplete quests.",
                 "Edit your quests values as the story progresses.",
             ],
+            image: {
+                src: "quest",
+                alt: "Tactical Journal App, selected location quest section",
+            },
         },
         // {
         //     subject_header: "Begin creating memories!",
@@ -77,14 +104,35 @@ const LoginWrapper = (props) => {
         // },
     ];
 
+    // Changes left arrow styles if contentDisplayProgress === 0
     useEffect(() => {
-        // Reset states when newUser state is switched
-        if (newUser === true || newUser === false) {
-            setUsername("");
-            setEmail("");
-            setPassword("");
+        if (contentDisplayProgress === 0) {
+            setLeftArrowStyles({
+                filter: `opacity(0.20)`,
+                cursor: "default",
+            });
+        } else {
+            setLeftArrowStyles({
+                filter: `opacity(1)`,
+                cursor: "pointer",
+            });
         }
-    }, [newUser]);
+    }, [contentDisplayProgress]);
+
+    // Changes right arrow styles if contentDisplayProgress === contentDisplay.Length - 1
+    useEffect(() => {
+        if (contentDisplayProgress === contentDisplay.length - 1) {
+            setRightArrowStyles({
+                filter: `opacity(0.20)`,
+                cursor: "default",
+            });
+        } else {
+            setRightArrowStyles({
+                filter: `opacity(1)`,
+                cursor: "pointer",
+            });
+        }
+    }, [contentDisplayProgress, contentDisplay.length]);
 
     return (
         <div id="login-wrapper">
@@ -142,7 +190,10 @@ const LoginWrapper = (props) => {
                     ) : (
                         <div id="content-display-wrapper">
                             <div id="content-display-image-wrapper">
-                                Image placeholder
+                                <img
+                                    src={`images/showcase-images/seros-${contentDisplay[contentDisplayProgress].image.src}.png`}
+                                    alt={`${contentDisplay[contentDisplayProgress].image.alt}`}
+                                />
                             </div>
                             <div id="content-display-list-wrapper">
                                 {contentDisplay[
@@ -165,6 +216,24 @@ const LoginWrapper = (props) => {
                 {/* Scroll bar wrapper */}
                 <div id="content-display-scroller-wrapper">
                     <div id="content-display-scroller-progress">
+                        <div
+                            className="login-screen-arrow-wrapper"
+                            id="left-arrow"
+                        >
+                            <FontAwesomeIcon
+                                icon="chevron-left"
+                                className="content-showcase-fa-icon"
+                                style={leftArrowStyles}
+                                onClick={() => {
+                                    if (contentDisplayProgress === 0) {
+                                        return;
+                                    }
+                                    setContentDisplayProgress(
+                                        contentDisplayProgress - 1
+                                    );
+                                }}
+                            />
+                        </div>
                         {contentDisplay.map((subject, index) => {
                             return (
                                 <div
@@ -176,54 +245,38 @@ const LoginWrapper = (props) => {
                                     style={{
                                         backgroundColor:
                                             contentDisplayProgress === index
-                                                ? "black"
-                                                : "white",
+                                                ? "white"
+                                                : "black",
                                     }}
                                 />
                             );
                         })}
+                        <div
+                            className="login-screen-arrow-wrapper"
+                            id="right-arrow"
+                        >
+                            <FontAwesomeIcon
+                                icon="chevron-right"
+                                className="content-showcase-fa-icon"
+                                style={rightArrowStyles}
+                                onClick={() => {
+                                    console.log(contentDisplayProgress);
+                                    if (
+                                        contentDisplayProgress ===
+                                        contentDisplay.length - 1
+                                    ) {
+                                        // setContentDisplayProgress(0);
+                                        return;
+                                    }
+                                    setContentDisplayProgress(
+                                        contentDisplayProgress + 1
+                                    );
+                                }}
+                            />
+                        </div>
                     </div>
                 </div>
                 {/* Arrow wrappers */}
-                {/* If on first tab, do not render left arrow */}
-                {contentDisplayProgress === 0 ? null : (
-                    <div className="login-screen-arrow-wrapper" id="left-arrow">
-                        <FontAwesomeIcon
-                            icon="chevron-left"
-                            className="journal-fa-icon"
-                            onClick={() => {
-                                if (contentDisplayProgress === 0) {
-                                    setContentDisplayProgress(4);
-                                    return;
-                                }
-                                setContentDisplayProgress(
-                                    contentDisplayProgress - 1
-                                );
-                            }}
-                        />
-                    </div>
-                )}
-                {/* If on last tab, do not render right arrow */}
-                {contentDisplayProgress === 4 ? null : (
-                    <div
-                        className="login-screen-arrow-wrapper"
-                        id="right-arrow"
-                    >
-                        <FontAwesomeIcon
-                            icon="chevron-right"
-                            className="journal-fa-icon"
-                            onClick={() => {
-                                if (contentDisplayProgress === 4) {
-                                    setContentDisplayProgress(0);
-                                    return;
-                                }
-                                setContentDisplayProgress(
-                                    contentDisplayProgress + 1
-                                );
-                            }}
-                        />
-                    </div>
-                )}
             </div>
         </div>
     );
