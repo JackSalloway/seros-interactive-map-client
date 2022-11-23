@@ -23,8 +23,6 @@ const Journal = (props) => {
         setDeleteData,
         userAuthenticated,
         setUserAuthenticated,
-        inputStyles,
-        setInputStyles,
         setRenderCreationMarker,
         renderCreationMarker,
         creationMarkerLatLng,
@@ -65,7 +63,6 @@ const Journal = (props) => {
         setSerosLocations(null);
         setSerosNPCs(null);
         setSerosQuests(null);
-        setInputStyles({ visibility: "hidden", display: "none" });
         setRenderCampaignSettings(null);
     };
 
@@ -180,7 +177,6 @@ const Journal = (props) => {
                 setSerosQuests={setSerosQuests}
                 setDeleteData={setDeleteData}
                 userAuthenticated={userAuthenticated}
-                inputStyles={inputStyles}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}

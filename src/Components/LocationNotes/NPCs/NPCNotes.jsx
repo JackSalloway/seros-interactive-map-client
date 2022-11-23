@@ -15,7 +15,7 @@ const NPCNotes = (props) => {
         setDeleteData,
         questList,
         locationList,
-        inputStyles,
+
         serosNPCs,
         setSerosNPCs,
         originalIndex,
@@ -407,10 +407,7 @@ const NPCNotes = (props) => {
                         }}
                     />
                     {hover === true ? (
-                        <div
-                            className="notes-button-wrapper hovered"
-                            style={inputStyles}
-                        >
+                        <div className="notes-button-wrapper hovered">
                             <FontAwesomeIcon
                                 icon="pencil"
                                 className="journal-fa-icon"
@@ -423,10 +420,7 @@ const NPCNotes = (props) => {
                             />
                         </div>
                     ) : (
-                        <div
-                            className="notes-button-wrapper unhovered"
-                            style={inputStyles}
-                        >
+                        <div className="notes-button-wrapper unhovered">
                             <FontAwesomeIcon
                                 icon="pencil"
                                 className="journal-fa-icon"

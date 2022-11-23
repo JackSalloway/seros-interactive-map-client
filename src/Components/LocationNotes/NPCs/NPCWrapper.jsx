@@ -14,7 +14,7 @@ const NPCWrapper = (props) => {
         setDeleteData,
         questList,
         locationList,
-        inputStyles,
+
         serosNPCs,
         setSerosNPCs,
         addNewNPC,
@@ -86,7 +86,6 @@ const NPCWrapper = (props) => {
                                 setDeleteData={setDeleteData}
                                 questList={questList}
                                 locationList={locationList}
-                                inputStyles={inputStyles}
                                 serosNPCs={serosNPCs}
                                 setSerosNPCs={setSerosNPCs}
                                 dataNotifications={dataNotifications}
@@ -99,7 +98,6 @@ const NPCWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-plus"
                                 className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewNPC(true);
                                 }}
@@ -108,7 +106,6 @@ const NPCWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-times"
                                 className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewNPC(false);
                                 }}
@@ -123,7 +120,6 @@ const NPCWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-plus"
                                 className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewNPC(true);
                                 }}
@@ -132,7 +128,6 @@ const NPCWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-times"
                                 className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewNPC(false);
                                 }}

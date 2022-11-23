@@ -48,11 +48,6 @@ function App() {
 
     // User states
     const [userAuthenticated, setUserAuthenticated] = useState({});
-    const [inputStyles, setInputStyles] = useState({
-        visibility: "hidden",
-        display: "none",
-    });
-    // const [startupComplete, setStartupComplete] = useState(false);
 
     // Map marker states
     const map = useRef();
@@ -151,9 +146,6 @@ function App() {
             })
             .then((res) => {
                 setUserAuthenticated(res);
-                if (res.privileged === true) {
-                    setInputStyles({ visibility: "visible" });
-                }
             })
             .catch((err) => {
                 const notificationsCopy = dataNotifications;
@@ -164,13 +156,6 @@ function App() {
                 setDataNotifications(notificationsCopy);
             });
     }, [dataNotifications]);
-
-    // Check if user is authenticated after login - to enable Create, Update and Delete access
-    useEffect(() => {
-        if (userAuthenticated.privileged === true) {
-            setInputStyles({ visibility: "visible" });
-        }
-    }, [userAuthenticated]);
 
     library.add(
         faChevronRight,
@@ -279,8 +264,6 @@ function App() {
                         setDeleteData={setDeleteData}
                         userAuthenticated={userAuthenticated}
                         setUserAuthenticated={setUserAuthenticated}
-                        inputStyles={inputStyles}
-                        setInputStyles={setInputStyles}
                         renderCreationMarker={renderCreationMarker}
                         setRenderCreationMarker={setRenderCreationMarker}
                         creationMarkerLatLng={creationMarkerLatLng}

@@ -14,7 +14,7 @@ const SubLocationNotes = (props) => {
         index,
         locationNotes,
         setDeleteData,
-        inputStyles,
+
         serosLocations,
         setSerosLocations,
         dataNotifications,
@@ -220,10 +220,7 @@ const SubLocationNotes = (props) => {
                         }}
                     />
                     {hover === true ? (
-                        <div
-                            className="notes-button-wrapper hovered"
-                            style={inputStyles}
-                        >
+                        <div className="notes-button-wrapper hovered">
                             <FontAwesomeIcon
                                 icon="pencil"
                                 className="journal-fa-icon"
@@ -236,10 +233,7 @@ const SubLocationNotes = (props) => {
                             />
                         </div>
                     ) : (
-                        <div
-                            className="notes-button-wrapper unhovered"
-                            style={inputStyles}
-                        >
+                        <div className="notes-button-wrapper unhovered">
                             <FontAwesomeIcon
                                 icon="pencil"
                                 className="journal-fa-icon"

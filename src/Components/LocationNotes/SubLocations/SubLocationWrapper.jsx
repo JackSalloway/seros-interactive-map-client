@@ -11,7 +11,7 @@ const SubLocationWrapper = (props) => {
         setShowSubLocations,
         locationNotes,
         setDeleteData,
-        inputStyles,
+
         serosLocations,
         setSerosLocations,
         addNewSubLocation,
@@ -82,7 +82,6 @@ const SubLocationWrapper = (props) => {
                                     key={subLocation.name}
                                     locationNotes={locationNotes}
                                     setDeleteData={setDeleteData}
-                                    inputStyles={inputStyles}
                                     serosLocations={serosLocations}
                                     setSerosLocations={setSerosLocations}
                                     dataNotifications={dataNotifications}
@@ -95,7 +94,6 @@ const SubLocationWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-plus"
                                 className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewSubLocation(true);
                                 }}
@@ -104,7 +102,6 @@ const SubLocationWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-times"
                                 className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewSubLocation(false);
                                 }}
@@ -119,7 +116,6 @@ const SubLocationWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-plus"
                                 className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewSubLocation(true);
                                 }}
@@ -128,7 +124,6 @@ const SubLocationWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-times"
                                 className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewSubLocation(false);
                                 }}

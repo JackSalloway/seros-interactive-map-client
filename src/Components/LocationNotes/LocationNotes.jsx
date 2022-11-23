@@ -24,7 +24,6 @@ const LocationNotes = (props) => {
         serosQuests,
         setSerosQuests,
         setDeleteData,
-        inputStyles,
         dataNotifications,
         setDataNotifications,
         campaign,
@@ -160,7 +159,6 @@ const LocationNotes = (props) => {
                     setShowSubLocations={setShowSubLocations}
                     locationNotes={locationNotes}
                     setDeleteData={setDeleteData}
-                    inputStyles={inputStyles}
                     serosLocations={serosLocations}
                     setSerosLocations={setSerosLocations}
                     addNewSubLocation={addNewSubLocation}
@@ -177,7 +175,6 @@ const LocationNotes = (props) => {
                     setDeleteData={setDeleteData}
                     questList={questList}
                     locationList={locationList}
-                    inputStyles={inputStyles}
                     serosNPCs={serosNPCs}
                     setSerosNPCs={setSerosNPCs}
                     addNewNPC={addNewNPC}
@@ -194,7 +191,6 @@ const LocationNotes = (props) => {
                     locationQuests={locationQuests}
                     setDeleteData={setDeleteData}
                     locationList={locationList}
-                    inputStyles={inputStyles}
                     serosQuests={serosQuests}
                     setSerosQuests={setSerosQuests}
                     setSerosNPCs={setSerosNPCs}

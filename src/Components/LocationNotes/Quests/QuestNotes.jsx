@@ -15,7 +15,7 @@ const QuestNotes = (props) => {
         originalIndex,
         setDeleteData,
         locationList,
-        inputStyles,
+
         serosQuests,
         setSerosQuests,
         setQuestUpdated,
@@ -323,10 +323,7 @@ const QuestNotes = (props) => {
                         }}
                     />
                     {hover === true ? (
-                        <div
-                            className="notes-button-wrapper hovered"
-                            style={inputStyles}
-                        >
+                        <div className="notes-button-wrapper hovered">
                             <FontAwesomeIcon
                                 icon="pencil"
                                 className="journal-fa-icon"
@@ -339,10 +336,7 @@ const QuestNotes = (props) => {
                             />
                         </div>
                     ) : (
-                        <div
-                            className="notes-button-wrapper unhovered"
-                            style={inputStyles}
-                        >
+                        <div className="notes-button-wrapper unhovered">
                             <FontAwesomeIcon
                                 icon="pencil"
                                 className="journal-fa-icon"

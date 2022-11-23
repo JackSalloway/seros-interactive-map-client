@@ -13,7 +13,7 @@ const QuestWrapper = (props) => {
         locationQuests,
         setDeleteData,
         locationList,
-        inputStyles,
+
         serosQuests,
         setSerosQuests,
         setSerosNPCs,
@@ -84,7 +84,6 @@ const QuestWrapper = (props) => {
                                 key={quest.questData._id}
                                 setDeleteData={setDeleteData}
                                 locationList={locationList}
-                                inputStyles={inputStyles}
                                 serosQuests={serosQuests}
                                 setSerosQuests={setSerosQuests}
                                 setSerosNPCs={setSerosNPCs}
@@ -99,7 +98,6 @@ const QuestWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-plus"
                                 className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewQuest(true);
                                 }}
@@ -108,7 +106,6 @@ const QuestWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-times"
                                 className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewQuest(false);
                                 }}
@@ -123,7 +120,6 @@ const QuestWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-plus"
                                 className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewQuest(true);
                                 }}
@@ -132,7 +128,6 @@ const QuestWrapper = (props) => {
                             <FontAwesomeIcon
                                 icon="fa-times"
                                 className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                style={inputStyles}
                                 onClick={() => {
                                     setAddNewQuest(false);
                                 }}
