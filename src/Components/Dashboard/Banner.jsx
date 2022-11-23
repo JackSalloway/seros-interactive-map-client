@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import he from "he";
 
 const Banner = (props) => {
     const {
@@ -32,8 +33,8 @@ const Banner = (props) => {
                 style={{ transform: `scale(${scale})` }}
             >
                 <div className="dashboard-banner-text">
-                    <h2>{name}</h2>
-                    <p>{description}</p>
+                    <h2>{he.decode(name)}</h2>
+                    <p>{he.decode(description)}</p>
                 </div>
                 {adminRights === true ? (
                     <div className="dashboard-banner-admin-icons">
