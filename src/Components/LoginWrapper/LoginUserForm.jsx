@@ -38,16 +38,16 @@ const LoginUserForm = (props) => {
                     console.log(response.data);
                     setUserAuthenticated(response.data);
                     const notificationsCopy = dataNotifications;
-                    const errorIndex = notificationsCopy.findIndex(
-                        (notification) =>
-                            notification.message ===
-                            "Session timed out, please login again."
-                    );
-                    notificationsCopy[errorIndex] = {
+                    // const errorIndex = notificationsCopy.findIndex(
+                    //     (notification) =>
+                    //         notification.message ===
+                    //         "Session timed out, please login again."
+                    // );
+                    notificationsCopy.push({
                         message: "Login successful!",
                         important: false,
-                    };
-                    setDataNotifications(notificationsCopy);
+                    });
+                    setDataNotifications([...notificationsCopy]);
                 }
             })
             .catch(function (error) {
@@ -61,9 +61,6 @@ const LoginUserForm = (props) => {
 
     return (
         <>
-            {loginResMsg === null ? null : (
-                <p className="login-response-message">{loginResMsg}</p>
-            )}
             <form onSubmit={userLogin} className="user-form-inputs">
                 <fieldset>
                     <legend>Login!</legend>

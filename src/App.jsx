@@ -191,11 +191,26 @@ function App() {
 
     if (Object.keys(userAuthenticated).length === 0) {
         return (
-            <LoginWrapper
-                setUserAuthenticated={setUserAuthenticated}
-                dataNotifications={dataNotifications}
-                setDataNotifications={setDataNotifications}
-            />
+            <>
+                <LoginWrapper
+                    setUserAuthenticated={setUserAuthenticated}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
+                />
+                {dataNotifications.length !== 0
+                    ? dataNotifications.map((notification, index) => {
+                          return (
+                              <DataNotification
+                                  dataNotifications={dataNotifications}
+                                  setDataNotifications={setDataNotifications}
+                                  notification={notification}
+                                  index={index}
+                                  key={`${notification.message} ${index}`}
+                              />
+                          );
+                      })
+                    : null}
+            </>
         );
     }
 

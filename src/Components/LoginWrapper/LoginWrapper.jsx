@@ -184,6 +184,8 @@ const LoginWrapper = (props) => {
                                     setNewUser={setNewUser}
                                     loginResMsg={loginResMsg}
                                     setLoginResMes={setLoginResMes}
+                                    dataNotifications={dataNotifications}
+                                    setDataNotifications={setDataNotifications}
                                 />
                             )}
                         </div>
