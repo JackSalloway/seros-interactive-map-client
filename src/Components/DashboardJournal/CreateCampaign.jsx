@@ -3,8 +3,13 @@ import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 import "./CreateCampaign.css";
 
 const CreateCampaign = (props) => {
-    const { userAuthenticated, setUserAuthenticated, setRenderCampaignForm } =
-        props;
+    const {
+        userAuthenticated,
+        setUserAuthenticated,
+        setRenderCampaignForm,
+        dataNotifications,
+        setDataNotifications,
+    } = props;
 
     const [newCampaignName, setNewCampaignName] = useState("");
     const [newCampaignDescription, setNewCampaignDescription] = useState("");
@@ -38,6 +43,12 @@ const CreateCampaign = (props) => {
         userCopy.campaigns = returnedData.campaigns;
         console.log(userCopy);
         setUserAuthenticated({ ...userCopy });
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `Campaign: ${newCampaignName} successfully created!`,
+            important: false,
+        });
+        setDataNotifications([...notificationsCopy]);
         // setUserAuthenticated(returnedData);
     };
 

@@ -106,6 +106,8 @@ const Journal = (props) => {
                         setRenderCampaignForm={setRenderCampaignForm}
                         renderCampaignSettings={renderCampaignSettings}
                         setRenderCampaignSettings={setRenderCampaignSettings}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
                     />
                 ) : (
                     <div id="journal-front-page-menu">

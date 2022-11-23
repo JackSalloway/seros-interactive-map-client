@@ -11,6 +11,8 @@ const DashboardJournal = (props) => {
         setRenderCampaignForm,
         renderCampaignSettings,
         setRenderCampaignSettings,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const [message, setMessage] = useState("Add a new campaign to begin!");
@@ -41,6 +43,8 @@ const DashboardJournal = (props) => {
                     userAuthenticated={userAuthenticated}
                     setUserAuthenticated={setUserAuthenticated}
                     setRenderCampaignForm={setRenderCampaignForm}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                 />
             </div>
         );
