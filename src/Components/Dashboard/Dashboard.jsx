@@ -106,6 +106,12 @@ const Dashboard = (props) => {
                 // console.log(userCopy);
                 setUserAuthenticated({ ...userCopy });
                 setInviteCode(""); // Reset the invite code to an empty string
+                const notificationsCopy = dataNotifications;
+                notificationsCopy.push({
+                    message: "New campaign successfully joined!",
+                    important: false,
+                });
+                setDataNotifications([...notificationsCopy]);
             })
             .catch((err) => {
                 console.log(err);
