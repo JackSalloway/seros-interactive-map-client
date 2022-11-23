@@ -41,6 +41,16 @@
     display: flex;
     gap: 1rem;
 }
+.dashboard-banner-not-admin-icons {
+    /* color: white; */
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    gap: 1rem;
+}
 
 .banner-fa-icon {
     cursor: pointer;

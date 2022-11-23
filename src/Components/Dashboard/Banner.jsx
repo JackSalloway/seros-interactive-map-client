@@ -60,6 +60,15 @@ const Banner = (props) => {
                         />
                     </div>
                 ) : null}
+                {adminRights === false ? (
+                    <div className="dashboard-banner-not-admin-icons">
+                        <FontAwesomeIcon
+                            icon="right-from-bracket"
+                            className="banner-fa-icon"
+                            style={iconStyles}
+                        />
+                    </div>
+                ) : null}
                 <div
                     className="dashboard-banner-image"
                     style={{
