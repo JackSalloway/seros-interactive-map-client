@@ -91,7 +91,7 @@
     justify-self: center;
     display: flex;
     flex-direction: column;
-    /* flex-direction: column; */
+    justify-content: center;
 }
 
 #content-display-wrapper {
