@@ -41,6 +41,7 @@ const SubLocationWrapper = (props) => {
                 <h3>Sub Locations</h3>
                 {showSubLocations === false ? (
                     <FontAwesomeIcon
+                        // title="show-sub-locations-chevron" // This was an attempt to queryByTitle while unit testing.
                         icon="chevron-down"
                         className="location-notes-fa-icon h3"
                         onClick={() => {
