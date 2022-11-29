@@ -7,25 +7,26 @@ import SubLocationWrapper from "../SubLocationWrapper";
 // Or perhaps it is a mix of both, some of the functions change this prop, others do not.
 
 const mockSetShowSubLocations = jest.fn();
+const mockSetAddNewSubLocation = jest.fn();
 
 const MockSubLocationWrapper = ({
-    mockNewSubLocationState,
+    mockAddNewSubLocationState,
     mockLocationNotes,
     mockLocations,
     mockShowSubLocationsState,
 }) => {
     return (
         <SubLocationWrapper
-            addNewSubLocation={mockNewSubLocationState} // Boolean that dictate whether the CreateSubLocation component is rendered or not.
+            addNewSubLocation={mockAddNewSubLocationState} // Boolean that dictate whether the CreateSubLocation component is rendered or not.
             dataNotifications={[]} // Array of message for the user to see when they interact with the app.
             locationNotes={mockLocationNotes} // An object containing the currently selected locations data values.
             serosLocations={mockLocations} // The list of all locations on the map, used to update the selected location without requiring a GET request after creating/updating/deleting a sub-location.
             showSubLocations={mockShowSubLocationsState} // Boolean that dictates whether the Sub-location list is rendered or not.
-            setAddNewSubLocation={jest.fn()} // Function that toggles the addNewSubLocation boolean Value.
-            setDataNotifications={jest.fn()} // Function that updates the dataNotifications state value depedning on the action the user took.
-            setDeleteData={jest.fn()} // Function that changes the deleteData state value to the relevant data (in this case a sub-location).
-            setSerosLocations={mockSetShowSubLocations} // Function to update the maps list of locations depending on the action the user takes.
-            setShowSubLocations={jest.fn()} // Function that toggles the showSubLocations boolean value.
+            setAddNewSubLocation={mockSetAddNewSubLocation} // Function that toggles the addNewSubLocation boolean Value.
+            setDataNotifications={jest.fn()} // Function that updates the dataNotifications state value depedning on the action the user took. NOT REQUIRED FOR THIS UNIT TEST
+            setDeleteData={jest.fn()} // Function that changes the deleteData state value to the relevant data (in this case a sub-location). NOT REQUIRED FOR THIS UNIT TEST
+            setSerosLocations={jest.fn()} // Function to update the maps list of locations depending on the action the user takes. NOT REQUIRED FOR THIS UNIT TEST
+            setShowSubLocations={mockSetShowSubLocations} // Function that toggles the showSubLocations boolean value.
         />
     );
 };
@@ -72,11 +73,12 @@ const fakeLocations = [
     },
 ];
 
+// HEADER
 describe("Header", () => {
     it("Renders correct header", async () => {
         render(
             <MockSubLocationWrapper
-                mockNewSubLocationState={false}
+                mockAddNewSubLocationState={false}
                 mockLocationNotes={fakeLocationNotes}
                 mockLocations={fakeLocations}
                 mockShowSubLocationsState={false}
@@ -87,11 +89,43 @@ describe("Header", () => {
     });
 });
 
+// EXPAND/COLLAPSE CHEVRON ICON
 describe("Sub-locations expand/collapse chevron", () => {
+    it("Renders expand/collapse chevron span element", async () => {
+        render(
+            <MockSubLocationWrapper
+                mockAddNewSubLocationState={false}
+                mockLocationNotes={fakeLocationNotes}
+                mockLocations={fakeLocations}
+                mockShowSubLocationsState={false}
+            />
+        );
+        const expandOrCollapseChevron = screen.getByTestId(
+            "expand/collapse sub-locations icon"
+        );
+        expect(expandOrCollapseChevron).toBeInTheDocument();
+    });
+
+    it("Calls setShowSubLocations when up/down chevron icon is clicked", async () => {
+        render(
+            <MockSubLocationWrapper
+                mockAddNewSubLocationState={false}
+                mockLocationNotes={fakeLocationNotes}
+                mockLocations={fakeLocations}
+                mockShowSubLocationsState={false}
+            />
+        );
+        const showSubLocationsChevron = screen.getByTestId(
+            "expand/collapse sub-locations icon"
+        );
+        fireEvent.click(showSubLocationsChevron);
+        expect(mockSetShowSubLocations).toHaveBeenCalled();
+    });
+
     it("Renders sub-location list depending on mockShowSubLocationsState", async () => {
         render(
             <MockSubLocationWrapper
-                mockNewSubLocationState={false}
+                mockAddNewSubLocationState={false}
                 mockLocationNotes={fakeLocationNotes}
                 mockLocations={fakeLocations}
                 mockShowSubLocationsState={true}
@@ -106,7 +140,7 @@ describe("Sub-locations expand/collapse chevron", () => {
     it("Doesn't render sub-location list depending on mockShowSubLocationsState", async () => {
         render(
             <MockSubLocationWrapper
-                mockNewSubLocationState={false}
+                mockAddNewSubLocationState={false}
                 mockLocationNotes={fakeLocationNotes}
                 mockLocations={fakeLocations}
                 mockShowSubLocationsState={false}
@@ -117,21 +151,70 @@ describe("Sub-locations expand/collapse chevron", () => {
         });
         expect(subLocationBanner).not.toBeInTheDocument();
     });
+});
 
-    // Unable to query by title for react-fontawesome icons, looks like I might have to try mocking this entirely
-    // it("Calls setShowSubLocations when up/down chevron icon is clicked", async () => {
-    //     render(
-    //         <MockSubLocationWrapper
-    //             mockNewSubLocationState={false}
-    //             mockLocationNotes={fakeLocationNotes}
-    //             mockLocations={fakeLocations}
-    //             mockShowSubLocationsState={false}
-    //         />
-    //     );
-    //     const showSubLocationsChevron = screen.getByTitle(
-    //         "show-sub-locations-chevron"
-    //     );
-    //     fireEvent.click(showSubLocationsChevron);
-    //     expect(mockSetShowSubLocations).toHaveBeenCalled();
-    // });
+// PLUS ICON
+describe("Sub-locations add new sub-location icon", () => {
+    it("Renders create new sub-locations icon span element(plus icon)", () => {
+        render(
+            <MockSubLocationWrapper
+                mockAddNewSubLocationState={false}
+                mockLocationNotes={fakeLocationNotes}
+                mockLocations={fakeLocations}
+                mockShowSubLocationsState={true}
+            />
+        );
+
+        const addNewSubLocationIcon = screen.getByTestId(
+            "add new sub-location icon"
+        );
+        expect(addNewSubLocationIcon).toBeInTheDocument();
+    });
+
+    it("Calls setAddNewSubLocation when plus icon is clicked", () => {
+        render(
+            <MockSubLocationWrapper
+                mockAddNewSubLocationState={false}
+                mockLocationNotes={fakeLocationNotes}
+                mockLocations={fakeLocations}
+                mockShowSubLocationsState={true}
+            />
+        );
+
+        const addNewSubLocationIcon = screen.getByTestId(
+            "add new sub-location icon"
+        );
+        fireEvent.click(addNewSubLocationIcon);
+        expect(mockSetAddNewSubLocation).toHaveBeenCalled();
+    });
+
+    it("Renders createSubLocation form when mockAddNewSubLocationState is true", () => {
+        render(
+            <MockSubLocationWrapper
+                mockAddNewSubLocationState={true}
+                mockLocationNotes={fakeLocationNotes}
+                mockLocations={fakeLocations}
+                mockShowSubLocationsState={true}
+            />
+        );
+
+        const newSubLocationFormNameLabel =
+            screen.getByLabelText("Sub Location Name:");
+        expect(newSubLocationFormNameLabel).toBeInTheDocument();
+    });
+
+    it("Doesn't render createSubLocation form when mockAddNewSubLocationState is false", () => {
+        render(
+            <MockSubLocationWrapper
+                mockAddNewSubLocationState={false}
+                mockLocationNotes={fakeLocationNotes}
+                mockLocations={fakeLocations}
+                mockShowSubLocationsState={true}
+            />
+        );
+
+        const newSubLocationFormNameLabel =
+            screen.queryByLabelText("Sub Location Name:");
+        expect(newSubLocationFormNameLabel).not.toBeInTheDocument();
+    });
 });
