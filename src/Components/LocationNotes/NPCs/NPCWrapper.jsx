@@ -94,23 +94,30 @@ const NPCWrapper = (props) => {
                             />
                         ))}
                         {/* Has add new NPC been clicked? */}
-                        {addNewNPC === false ? (
-                            <FontAwesomeIcon
-                                icon="fa-plus"
-                                className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                onClick={() => {
-                                    setAddNewNPC(true);
-                                }}
-                            />
-                        ) : (
-                            <FontAwesomeIcon
-                                icon="fa-times"
-                                className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                onClick={() => {
-                                    setAddNewNPC(false);
-                                }}
-                            />
-                        )}
+                        <span
+                            className="add-new-data"
+                            onClick={() => {
+                                setAddNewNPC(!addNewNPC);
+                            }}
+                        >
+                            {addNewNPC === false ? (
+                                <FontAwesomeIcon
+                                    icon="fa-plus"
+                                    className="location-notes-fa-icon h3 location-notes-fa-plus"
+                                    onClick={() => {
+                                        setAddNewNPC(true);
+                                    }}
+                                />
+                            ) : (
+                                <FontAwesomeIcon
+                                    icon="fa-times"
+                                    className="location-notes-fa-icon h3 location-notes-fa-cross"
+                                    onClick={() => {
+                                        setAddNewNPC(false);
+                                    }}
+                                />
+                            )}
+                        </span>
                     </>
                 ) : (
                     <>

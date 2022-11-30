@@ -390,8 +390,11 @@ const NPCNotes = (props) => {
                 onMouseLeave={() => setHover(false)}
                 style={{ backgroundImage: `url(./images/papyr.jpg)` }}
             >
-                <div className="location-notes-details-header details-open">
-                    <div className="location-notes-details-data-section name-section">
+                <div className="details-open">
+                    <div
+                        className="location-notes-open-header-wrapper"
+                        // className="location-notes-details-data-section name-section"
+                    >
                         <h4>{he.decode(npc.name)}</h4>
                         <p>
                             {npc.race}, {npc.disposition.toLowerCase()},{" "}
@@ -399,73 +402,76 @@ const NPCNotes = (props) => {
                         </p>
                     </div>
 
-                    <FontAwesomeIcon
-                        icon="chevron-up"
-                        className="journal-fa-icon"
-                        onClick={() => {
-                            setSelected(!selected);
-                        }}
-                    />
-                    {hover === true ? (
-                        <div className="notes-button-wrapper hovered">
-                            <FontAwesomeIcon
-                                icon="pencil"
-                                className="journal-fa-icon"
-                                onClick={() => setEditing(true)}
-                            />
-                            <FontAwesomeIcon
-                                icon="trash-can"
-                                className="journal-fa-icon"
-                                onClick={() => setDeleteData(npc)}
-                            />
-                        </div>
-                    ) : (
-                        <div className="notes-button-wrapper unhovered">
-                            <FontAwesomeIcon
-                                icon="pencil"
-                                className="journal-fa-icon"
-                            />
-                            <FontAwesomeIcon
-                                icon="trash-can"
-                                className="journal-fa-icon"
-                            />
-                        </div>
-                    )}
-                </div>
-                <Separator />
-                <div className="location-notes-details-data-section description-section">
-                    <h5>Description:</h5>
-                    {splitParas(npc.desc).map((para) => (
-                        <p className="location-notes-description-paragraph">
-                            {he.decode(para)}
-                        </p>
-                    ))}
-                </div>
-                <Separator />
-                <div className="location-notes-details-data-section associated-locations-section">
-                    <h5>Relevant Locations:</h5>
-                    <ul>
-                        {npc.associated_locations.map((location) => (
-                            <li key={location._id}>
-                                {he.decode(location.name)}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <Separator />
-
-                {npc.quests.length > 0 ? (
-                    <div className="location-notes-details-data-section quests-section">
-                        <h5>Relevant Quests:</h5>
-                        <ul>
-                            {npc.quests.map((quest) => (
-                                <li>{he.decode(quest.name)}</li>
-                            ))}
-                        </ul>
+                    <div className="location-notes-open-icons-wrapper">
+                        <FontAwesomeIcon
+                            icon="chevron-up"
+                            className="journal-fa-icon"
+                            onClick={() => {
+                                setSelected(!selected);
+                            }}
+                        />
+                        {hover === true ? (
+                            <div className="notes-button-wrapper hovered">
+                                <FontAwesomeIcon
+                                    icon="pencil"
+                                    className="journal-fa-icon"
+                                    onClick={() => setEditing(true)}
+                                />
+                                <FontAwesomeIcon
+                                    icon="trash-can"
+                                    className="journal-fa-icon"
+                                    onClick={() => setDeleteData(npc)}
+                                />
+                            </div>
+                        ) : (
+                            <div className="notes-button-wrapper unhovered">
+                                <FontAwesomeIcon
+                                    icon="pencil"
+                                    className="journal-fa-icon"
+                                />
+                                <FontAwesomeIcon
+                                    icon="trash-can"
+                                    className="journal-fa-icon"
+                                />
+                            </div>
+                        )}
                     </div>
-                ) : null}
+                    <div className="location-notes-open-details-wrapper">
+                        <Separator />
+                        <div className="location-notes-details-data-section description-section">
+                            <h5>Description:</h5>
+                            {splitParas(npc.desc).map((para) => (
+                                <p className="location-notes-description-paragraph">
+                                    {he.decode(para)}
+                                </p>
+                            ))}
+                        </div>
+                        <Separator />
+                        <div className="location-notes-details-data-section associated-locations-section">
+                            <h5>Relevant Locations:</h5>
+                            <ul>
+                                {npc.associated_locations.map((location) => (
+                                    <li key={location._id}>
+                                        {he.decode(location.name)}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <Separator />
+                        {npc.quests.length > 0 ? (
+                            <div className="location-notes-details-data-section quests-section">
+                                <h5>Relevant Quests:</h5>
+                                <ul>
+                                    {npc.quests.map((quest) => (
+                                        <li>{he.decode(quest.name)}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        ) : null}
 
-                {npc.quests.length > 0 ? <Separator /> : null}
+                        {npc.quests.length > 0 ? <Separator /> : null}
+                    </div>
+                </div>
             </div>
             <div
                 className="location-notes-details-border bottom"
