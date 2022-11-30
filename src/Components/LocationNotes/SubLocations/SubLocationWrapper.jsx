@@ -39,24 +39,24 @@ const SubLocationWrapper = (props) => {
                     />
                 </div>
                 <h3>Sub Locations</h3>
-                {showSubLocations === false ? (
-                    <FontAwesomeIcon
-                        // title="show-sub-locations-chevron" // This was an attempt to queryByTitle while unit testing.
-                        icon="chevron-down"
-                        className="location-notes-fa-icon h3"
-                        onClick={() => {
-                            setShowSubLocations(!showSubLocations);
-                        }}
-                    />
-                ) : (
-                    <FontAwesomeIcon
-                        icon="chevron-up"
-                        className="location-notes-fa-icon h3"
-                        onClick={() => {
-                            setShowSubLocations(!showSubLocations);
-                        }}
-                    />
-                )}
+                <span
+                    data-testid="expand/collapse sub-locations icon"
+                    onClick={() => {
+                        setShowSubLocations(!showSubLocations);
+                    }}
+                >
+                    {showSubLocations === false ? (
+                        <FontAwesomeIcon
+                            icon="chevron-down"
+                            className="location-notes-fa-icon h3"
+                        />
+                    ) : (
+                        <FontAwesomeIcon
+                            icon="chevron-up"
+                            className="location-notes-fa-icon h3"
+                        />
+                    )}
+                </span>
                 <div className="location-notes-category-wrapper-images-wrapper">
                     <img
                         className="location-notes-category-wrapper-image"
@@ -91,23 +91,26 @@ const SubLocationWrapper = (props) => {
                             )
                         )}
                         {/* Has add new sub-location been clicked? */}
-                        {addNewSubLocation === false ? (
-                            <FontAwesomeIcon
-                                icon="fa-plus"
-                                className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                onClick={() => {
-                                    setAddNewSubLocation(true);
-                                }}
-                            />
-                        ) : (
-                            <FontAwesomeIcon
-                                icon="fa-times"
-                                className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                onClick={() => {
-                                    setAddNewSubLocation(false);
-                                }}
-                            />
-                        )}
+                        <span
+                            className="add-new-data"
+                            id="add-new-sub-location"
+                            data-testid="add new sub-location icon"
+                            onClick={() => {
+                                setAddNewSubLocation(!addNewSubLocation);
+                            }}
+                        >
+                            {addNewSubLocation === false ? (
+                                <FontAwesomeIcon
+                                    icon="fa-plus"
+                                    className="location-notes-fa-icon h3 location-notes-fa-plus"
+                                />
+                            ) : (
+                                <FontAwesomeIcon
+                                    icon="fa-times"
+                                    className="location-notes-fa-icon h3 location-notes-fa-cross"
+                                />
+                            )}
+                        </span>
                     </>
                 ) : (
                     <>
