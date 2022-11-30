@@ -147,8 +147,11 @@ const LocationNotes = (props) => {
             </div>
             <div id="location-notes-data" className="description-section">
                 {locationNotes.desc
-                    ? splitParas(locationNotes.desc).map((para) => (
-                          <p className="location-notes-description-paragraph">
+                    ? splitParas(locationNotes.desc).map((para, index) => (
+                          <p
+                              className="location-notes-description-paragraph"
+                              key={index}
+                          >
                               {he.decode(para)}
                           </p>
                       ))
