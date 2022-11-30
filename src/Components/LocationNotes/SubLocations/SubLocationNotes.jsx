@@ -267,8 +267,11 @@ const SubLocationNotes = (props) => {
                     <div className="location-notes-open-details-wrapper ">
                         <Separator />
                         <div className="location-notes-details-data-section">
-                            {splitParas(subLocation.desc).map((para) => (
-                                <p className="location-notes-description-paragraph">
+                            {splitParas(subLocation.desc).map((para, index) => (
+                                <p
+                                    key={index}
+                                    className="location-notes-description-paragraph"
+                                >
                                     {he.decode(para)}
                                 </p>
                             ))}
