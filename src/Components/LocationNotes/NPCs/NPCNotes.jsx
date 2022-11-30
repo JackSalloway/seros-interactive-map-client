@@ -440,8 +440,11 @@ const NPCNotes = (props) => {
                         <Separator />
                         <div className="location-notes-details-data-section description-section">
                             <h5>Description:</h5>
-                            {splitParas(npc.desc).map((para) => (
-                                <p className="location-notes-description-paragraph">
+                            {splitParas(npc.desc).map((para, index) => (
+                                <p
+                                    key={index}
+                                    className="location-notes-description-paragraph"
+                                >
                                     {he.decode(para)}
                                 </p>
                             ))}
@@ -463,7 +466,9 @@ const NPCNotes = (props) => {
                                 <h5>Relevant Quests:</h5>
                                 <ul>
                                     {npc.quests.map((quest) => (
-                                        <li>{he.decode(quest.name)}</li>
+                                        <li key={quest._id}>
+                                            {he.decode(quest.name)}
+                                        </li>
                                     ))}
                                 </ul>
                             </div>
