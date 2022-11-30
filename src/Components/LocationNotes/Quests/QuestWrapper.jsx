@@ -94,23 +94,24 @@ const QuestWrapper = (props) => {
                             />
                         ))}
                         {/* Has new quest been clicked? */}
-                        {addNewQuest === false ? (
-                            <FontAwesomeIcon
-                                icon="fa-plus"
-                                className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                onClick={() => {
-                                    setAddNewQuest(true);
-                                }}
-                            />
-                        ) : (
-                            <FontAwesomeIcon
-                                icon="fa-times"
-                                className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                onClick={() => {
-                                    setAddNewQuest(false);
-                                }}
-                            />
-                        )}
+                        <span
+                            className="add-new-data"
+                            onClick={() => {
+                                setAddNewQuest(!addNewQuest);
+                            }}
+                        >
+                            {addNewQuest === false ? (
+                                <FontAwesomeIcon
+                                    icon="fa-plus"
+                                    className="location-notes-fa-icon h3 location-notes-fa-plus"
+                                />
+                            ) : (
+                                <FontAwesomeIcon
+                                    icon="fa-times"
+                                    className="location-notes-fa-icon h3 location-notes-fa-cross"
+                                />
+                            )}
+                        </span>
                     </>
                 ) : (
                     <>

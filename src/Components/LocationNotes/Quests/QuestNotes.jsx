@@ -306,70 +306,79 @@ const QuestNotes = (props) => {
                 onMouseLeave={() => setHover(false)}
                 style={{ backgroundImage: `url(./images/papyr.jpg)` }}
             >
-                <div className="location-notes-details-header details-open">
-                    <div className="location-notes-details-data-section name-section">
-                        <h4>{he.decode(quest.name)}</h4>
-                        {quest.completed === true ? (
-                            <p>Quest completed!</p>
+                <div className="details-open">
+                    <div className="location-notes-open-header-wrapper">
+                        <div className="location-notes-details-data-section name-section">
+                            <h4>{he.decode(quest.name)}</h4>
+                            {quest.completed === true ? (
+                                <p>Quest completed!</p>
+                            ) : (
+                                <p>Quest Incomplete</p>
+                            )}
+                        </div>
+                    </div>
+                    <div className="location-notes-open-icons-wrapper">
+                        <FontAwesomeIcon
+                            icon="chevron-up"
+                            className="journal-fa-icon"
+                            onClick={() => {
+                                setSelected(!selected);
+                            }}
+                        />
+                        {hover === true ? (
+                            <div className="notes-button-wrapper hovered">
+                                <FontAwesomeIcon
+                                    icon="pencil"
+                                    className="journal-fa-icon"
+                                    onClick={() => setEditing(true)}
+                                />
+                                <FontAwesomeIcon
+                                    icon="trash-can"
+                                    className="journal-fa-icon"
+                                    onClick={() => setDeleteData(quest)}
+                                />
+                            </div>
                         ) : (
-                            <p>Quest Incomplete</p>
+                            <div className="notes-button-wrapper unhovered">
+                                <FontAwesomeIcon
+                                    icon="pencil"
+                                    className="journal-fa-icon"
+                                />
+                                <FontAwesomeIcon
+                                    icon="trash-can"
+                                    className="journal-fa-icon"
+                                />
+                            </div>
                         )}
                     </div>
-                    <FontAwesomeIcon
-                        icon="chevron-up"
-                        className="journal-fa-icon"
-                        onClick={() => {
-                            setSelected(!selected);
-                        }}
-                    />
-                    {hover === true ? (
-                        <div className="notes-button-wrapper hovered">
-                            <FontAwesomeIcon
-                                icon="pencil"
-                                className="journal-fa-icon"
-                                onClick={() => setEditing(true)}
-                            />
-                            <FontAwesomeIcon
-                                icon="trash-can"
-                                className="journal-fa-icon"
-                                onClick={() => setDeleteData(quest)}
-                            />
+                    <div className="location-notes-open-details-wrapper">
+                        <Separator />
+                        <div className="location-notes-details-data-section description-section">
+                            <h5>Quest Description:</h5>
+                            {/* <p>{he.decode(quest.desc)}</p> */}
+                            {splitParas(quest.desc).map((para, index) => (
+                                <p
+                                    key={index}
+                                    className="location-notes-description-paragraph"
+                                >
+                                    {he.decode(para)}
+                                </p>
+                            ))}
                         </div>
-                    ) : (
-                        <div className="notes-button-wrapper unhovered">
-                            <FontAwesomeIcon
-                                icon="pencil"
-                                className="journal-fa-icon"
-                            />
-                            <FontAwesomeIcon
-                                icon="trash-can"
-                                className="journal-fa-icon"
-                            />
+                        <Separator />
+                        <div className="location-notes-details-data-section associated-locations-section">
+                            <h5>Relevant Locations:</h5>
+                            <ul>
+                                {quest.associated_locations.map((location) => (
+                                    <li key={location._id}>
+                                        {he.decode(location.name)}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
-                    )}
+                        <Separator />
+                    </div>
                 </div>
-                <Separator />
-                <div className="location-notes-details-data-section description-section">
-                    <h5>Quest Description:</h5>
-                    {/* <p>{he.decode(quest.desc)}</p> */}
-                    {splitParas(quest.desc).map((para) => (
-                        <p className="location-notes-description-paragraph">
-                            {he.decode(para)}
-                        </p>
-                    ))}
-                </div>
-                <Separator />
-                <div className="location-notes-details-data-section associated-locations-section">
-                    <h5>Relevant Locations:</h5>
-                    <ul>
-                        {quest.associated_locations.map((location) => (
-                            <li key={location._id}>
-                                {he.decode(location.name)}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <Separator />
             </div>
             <div
                 className="location-notes-details-border bottom"
