@@ -70,26 +70,31 @@
     font-size: 1.5rem;
 }
 
-.location-notes-fa-icon.location-notes-fa-plus,
-.location-notes-fa-icon.location-notes-fa-cross {
+.add-new-data {
+    /* position: relative; */
     margin-right: 1rem;
     margin-left: auto;
+}
+
+.location-notes-fa-icon.location-notes-fa-plus,
+.location-notes-fa-icon.location-notes-fa-cross {
+    /* margin-right: 1rem;
+    margin-left: auto; */
 }
 
 .description-section {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    /* gap: 0.5rem; */
 }
 
 h4 {
     font-size: 1.5em;
-    /* text-decoration: underline; */
 }
 
-h5 {
+/* h5 {
     font-size: 1.3rem;
-}
+} */
 
 p,
 ul {
@@ -173,9 +178,9 @@ button {
     align-self: center;
 }
 
-.location-notes-open-internal {
+/* .location-notes-open-internal {
     padding-bottom: 0.7rem;
-}
+} */
 
 .location-notes-details-border {
     background-color: #e69a28;
@@ -212,23 +217,54 @@ button {
 }
 
 .location-notes-details-data-section {
-    padding: 0.7rem 0.2rem;
+    padding: 0.7rem 0;
     /* border-bottom: solid red 2px; */
     font-family: "Noto Sans", sans-serif;
 }
 
-.details-closed,
+/* .details-closed,
 .name-section {
     font-family: "Libre Baskerville", serif;
-}
+} */
 
 .name-section > p {
     margin-top: 0.2rem;
 }
 
-/* .details-open {
-    border-bottom: solid red 2px;
-} */
+/* LOCATION NOTES OPEN STYLES START */
+.details-open {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr auto;
+    grid-template-areas:
+        "header icons"
+        "details details";
+    padding: 0.7rem 0.2rem;
+    grid-row-gap: 0.35rem;
+}
+
+.location-notes-open-header-wrapper {
+    grid-area: header;
+}
+
+.location-notes-open-header-wrapper > h4 {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.location-notes-open-icons-wrapper {
+    grid-area: icons;
+    align-self: center;
+    /* justify-self: center; */
+    display: flex;
+}
+
+.location-notes-open-details-wrapper {
+    grid-area: details;
+    /* justify-self: stretch; */
+}
+
+/* LOCATION NOTES OPEN STYLES END */
 
 .location-notes-details-data-section.name-section {
     border-bottom: none;
