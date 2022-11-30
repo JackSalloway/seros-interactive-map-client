@@ -104,17 +104,11 @@ const NPCWrapper = (props) => {
                                 <FontAwesomeIcon
                                     icon="fa-plus"
                                     className="location-notes-fa-icon h3 location-notes-fa-plus"
-                                    onClick={() => {
-                                        setAddNewNPC(true);
-                                    }}
                                 />
                             ) : (
                                 <FontAwesomeIcon
                                     icon="fa-times"
                                     className="location-notes-fa-icon h3 location-notes-fa-cross"
-                                    onClick={() => {
-                                        setAddNewNPC(false);
-                                    }}
                                 />
                             )}
                         </span>
