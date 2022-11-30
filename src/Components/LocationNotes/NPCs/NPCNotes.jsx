@@ -391,10 +391,7 @@ const NPCNotes = (props) => {
                 style={{ backgroundImage: `url(./images/papyr.jpg)` }}
             >
                 <div className="details-open">
-                    <div
-                        className="location-notes-open-header-wrapper"
-                        // className="location-notes-details-data-section name-section"
-                    >
+                    <div className="location-notes-open-header-wrapper">
                         <h4>{he.decode(npc.name)}</h4>
                         <p>
                             {npc.race}, {npc.disposition.toLowerCase()},{" "}
