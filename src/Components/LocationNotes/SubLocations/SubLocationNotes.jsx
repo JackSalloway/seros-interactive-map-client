@@ -54,13 +54,17 @@ const SubLocationNotes = (props) => {
                     style={{ backgroundImage: `url(./images/papyr.jpg)` }}
                 >
                     <h4>{he.decode(subLocation.name)}</h4>
-                    <FontAwesomeIcon
-                        icon="chevron-down"
-                        className="journal-fa-icon"
+                    <span
+                        data-testid="expand sub-location icon"
                         onClick={() => {
                             setSelected(!selected);
                         }}
-                    />
+                    >
+                        <FontAwesomeIcon
+                            icon="chevron-down"
+                            className="journal-fa-icon"
+                        />
+                    </span>
                 </div>
                 <div
                     className="location-notes-details-border bottom"
@@ -131,13 +135,15 @@ const SubLocationNotes = (props) => {
                 >
                     <div className="location-notes-details-data-section name-section editing">
                         <h4>{he.decode(subLocation.name)}</h4>
-                        <FontAwesomeIcon
-                            icon="times"
+                        <span
+                            data-testid="cancel edit sub-location icon"
                             className="journal-fa-icon cancel-edit"
                             onClick={() => {
                                 setEditing(false);
                             }}
-                        />
+                        >
+                            <FontAwesomeIcon icon="times" />
+                        </span>
                     </div>
                     <form
                         onSubmit={updateSubLocationData}
@@ -203,49 +209,68 @@ const SubLocationNotes = (props) => {
                 onMouseLeave={() => setHover(false)}
                 style={{ backgroundImage: `url(./images/papyr.jpg)` }}
             >
-                <div className="location-notes-details-header details-open">
-                    <div className="location-notes-details-data-section name-section description-section">
-                        <h4>{he.decode(subLocation.name)}</h4>
+                <div className="details-open">
+                    <div className="location-notes-open-header-wrapper">
+                        {he.decode(subLocation.name)}
+                    </div>
+                    <div className="location-notes-open-icons-wrapper">
+                        <span
+                            data-testid="collapse sub-location icon"
+                            onClick={() => {
+                                setSelected(!selected);
+                            }}
+                        >
+                            <FontAwesomeIcon
+                                icon="chevron-up"
+                                className="journal-fa-icon"
+                            />
+                        </span>
+                        {hover === true ? (
+                            <div className="notes-button-wrapper hovered">
+                                <span
+                                    data-testid="edit sub-location icon"
+                                    onClick={() => setEditing(true)}
+                                >
+                                    <FontAwesomeIcon
+                                        icon="pencil"
+                                        className="journal-fa-icon"
+                                    />
+                                </span>
+                                <span
+                                    data-testid="delete sub-location icon"
+                                    onClick={() => setDeleteData(subLocation)}
+                                >
+                                    <FontAwesomeIcon
+                                        icon="trash-can"
+                                        className="journal-fa-icon"
+                                    />
+                                </span>
+                            </div>
+                        ) : (
+                            <div className="notes-button-wrapper unhovered">
+                                <span data-testid="edit sub-location icon">
+                                    <FontAwesomeIcon
+                                        icon="pencil"
+                                        className="journal-fa-icon"
+                                    />
+                                </span>
+                                <span data-testid="delete sub-location icon">
+                                    <FontAwesomeIcon
+                                        icon="trash-can"
+                                        className="journal-fa-icon"
+                                    />
+                                </span>
+                            </div>
+                        )}
+                    </div>
+                    <div className="location-notes-open-details-wrapper">
                         {splitParas(subLocation.desc).map((para) => (
                             <p className="location-notes-description-paragraph">
                                 {he.decode(para)}
                             </p>
                         ))}
                     </div>
-                    <FontAwesomeIcon
-                        icon="chevron-up"
-                        className="journal-fa-icon"
-                        onClick={() => {
-                            setSelected(!selected);
-                        }}
-                    />
-                    {hover === true ? (
-                        <div className="notes-button-wrapper hovered">
-                            <FontAwesomeIcon
-                                icon="pencil"
-                                className="journal-fa-icon"
-                                onClick={() => setEditing(true)}
-                            />
-                            <FontAwesomeIcon
-                                icon="trash-can"
-                                className="journal-fa-icon"
-                                onClick={() => setDeleteData(subLocation)}
-                            />
-                        </div>
-                    ) : (
-                        <div className="notes-button-wrapper unhovered">
-                            <FontAwesomeIcon
-                                icon="pencil"
-                                className="journal-fa-icon"
-                            />
-                            <FontAwesomeIcon
-                                icon="trash-can"
-                                className="journal-fa-icon"
-                            />
-                        </div>
-                    )}
                 </div>
-                <Separator />
             </div>
             <div
                 className="location-notes-details-border bottom"
