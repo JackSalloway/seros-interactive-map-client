@@ -211,7 +211,7 @@ const SubLocationNotes = (props) => {
             >
                 <div className="details-open">
                     <div className="location-notes-open-header-wrapper">
-                        {he.decode(subLocation.name)}
+                        <h4>{he.decode(subLocation.name)}</h4>
                     </div>
                     <div className="location-notes-open-icons-wrapper">
                         <span
@@ -263,12 +263,18 @@ const SubLocationNotes = (props) => {
                             </div>
                         )}
                     </div>
-                    <div className="location-notes-open-details-wrapper">
-                        {splitParas(subLocation.desc).map((para) => (
-                            <p className="location-notes-description-paragraph">
-                                {he.decode(para)}
-                            </p>
-                        ))}
+
+                    <div className="location-notes-open-details-wrapper ">
+                        <Separator />
+                        <div className="location-notes-details-data-section">
+                            {splitParas(subLocation.desc).map((para) => (
+                                <p className="location-notes-description-paragraph">
+                                    {he.decode(para)}
+                                </p>
+                            ))}
+                        </div>
+
+                        <Separator />
                     </div>
                 </div>
             </div>
