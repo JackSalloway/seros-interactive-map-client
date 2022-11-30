@@ -78,6 +78,7 @@ const CreateSubLocation = (props) => {
                             <input
                                 id="sub-location-name"
                                 type="string"
+                                placeholder="Sub-location name"
                                 required
                                 onChange={({ target }) => {
                                     setNewSubLocationName(target.value);
@@ -92,6 +93,7 @@ const CreateSubLocation = (props) => {
                             <textarea
                                 id="sub-location-desc"
                                 type="text"
+                                placeholder="Sub-location description"
                                 required
                                 onChange={({ target }) => {
                                     setNewSubLocationDesc(target.value);
