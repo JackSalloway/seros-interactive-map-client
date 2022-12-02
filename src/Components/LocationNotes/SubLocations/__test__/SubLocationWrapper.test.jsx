@@ -90,7 +90,7 @@ describe("Header", () => {
 });
 
 // EXPAND/COLLAPSE CHEVRON ICON
-describe("Sub-locations expand/collapse chevron", () => {
+describe("Sub-locations wrapper expand/collapse chevron", () => {
     it("Renders expand/collapse chevron span element", async () => {
         render(
             <MockSubLocationWrapper
