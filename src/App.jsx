@@ -149,14 +149,16 @@ function App() {
                 setUserAuthenticated(res);
             })
             .catch((err) => {
-                const notificationsCopy = dataNotifications;
-                notificationsCopy.push({
-                    message: err.message,
-                    important: true,
-                });
-                setDataNotifications(notificationsCopy);
+                // const notificationsCopy = dataNotifications;
+                // notificationsCopy.push();
+                setDataNotifications([
+                    {
+                        message: err.message,
+                        important: true,
+                    },
+                ]);
             });
-    }, [dataNotifications]);
+    }, []);
 
     library.add(
         faChevronRight,
