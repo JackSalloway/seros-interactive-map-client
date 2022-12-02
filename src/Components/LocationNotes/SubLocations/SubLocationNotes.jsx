@@ -40,6 +40,7 @@ const SubLocationNotes = (props) => {
         }
     }, [editing, subLocation.name, subLocation.desc]);
 
+    // Expand chevron has not been clicked so render sub-location banner
     if (selected === false) {
         return (
             <div className="location-notes-details">
@@ -119,6 +120,7 @@ const SubLocationNotes = (props) => {
         setEditing(false);
     };
 
+    // Edit icon has been clicked so render sub-location edit form
     // Return a form with values set to sub location values for the user to update
     if (editing === true) {
         return (
@@ -134,7 +136,7 @@ const SubLocationNotes = (props) => {
                     style={{ backgroundImage: `url(./images/papyr.jpg)` }}
                 >
                     <div className="location-notes-details-data-section name-section editing">
-                        <h4>{he.decode(subLocation.name)}</h4>
+                        <h4>Update: {he.decode(subLocation.name)}</h4>
                         <span
                             data-testid="cancel edit sub-location icon"
                             className="journal-fa-icon cancel-edit"
@@ -157,6 +159,7 @@ const SubLocationNotes = (props) => {
                                     value={updatedSubLocationName}
                                     type="string"
                                     required
+                                    placeholder="Sub-location name"
                                     onChange={({ target }) => {
                                         setUpdatedSubLocationName(target.value);
                                     }}
@@ -172,6 +175,7 @@ const SubLocationNotes = (props) => {
                                     value={updatedSubLocationDescription}
                                     type="text"
                                     required
+                                    placeholder="Sub-location description"
                                     onChange={({ target }) => {
                                         setUpdatedSubLocationDescription(
                                             target.value
@@ -196,6 +200,7 @@ const SubLocationNotes = (props) => {
         );
     }
 
+    // Sub-location expand chevron has been clicked, render sub-location details
     return (
         <div className="location-notes-details">
             <div
@@ -248,13 +253,19 @@ const SubLocationNotes = (props) => {
                             </div>
                         ) : (
                             <div className="notes-button-wrapper unhovered">
-                                <span data-testid="edit sub-location icon">
+                                <span
+                                    data-testid="edit sub-location icon"
+                                    onClick={() => setEditing(true)}
+                                >
                                     <FontAwesomeIcon
                                         icon="pencil"
                                         className="journal-fa-icon"
                                     />
                                 </span>
-                                <span data-testid="delete sub-location icon">
+                                <span
+                                    data-testid="delete sub-location icon"
+                                    onClick={() => setDeleteData(subLocation)}
+                                >
                                     <FontAwesomeIcon
                                         icon="trash-can"
                                         className="journal-fa-icon"
