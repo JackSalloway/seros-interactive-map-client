@@ -76,12 +76,6 @@
     margin-left: auto;
 }
 
-.location-notes-fa-icon.location-notes-fa-plus,
-.location-notes-fa-icon.location-notes-fa-cross {
-    /* margin-right: 1rem;
-    margin-left: auto; */
-}
-
 .description-section {
     display: flex;
     flex-direction: column;
