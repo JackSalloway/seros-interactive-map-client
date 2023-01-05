@@ -52,7 +52,12 @@ const LoginUserForm = (props) => {
             })
             .catch(function (error) {
                 if (error.response && error.response.status === 400) {
-                    setLoginResMes(error.response.data);
+                    const notificationsCopy = dataNotifications;
+                    notificationsCopy.push({
+                        message: error.response.data,
+                        important: true,
+                    });
+                    setDataNotifications([...notificationsCopy]);
                     return;
                 }
                 setLoginResMes("Oops, something went wrong.");
