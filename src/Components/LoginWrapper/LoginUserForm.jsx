@@ -13,8 +13,6 @@ const LoginUserForm = (props) => {
         setUserAuthenticated,
         dataNotifications,
         setDataNotifications,
-        loginResMsg,
-        setLoginResMes,
         setNewUser,
     } = props;
 
@@ -60,13 +58,16 @@ const LoginUserForm = (props) => {
                     setDataNotifications([...notificationsCopy]);
                     return;
                 }
-                setLoginResMes("Oops, something went wrong.");
             });
     };
 
     return (
-        <>
-            <form onSubmit={userLogin} className="user-form-inputs">
+        <div className="user-form-wrapper">
+            <form
+                onSubmit={userLogin}
+                className="user-form-inputs"
+                id="user-form-inputs-login"
+            >
                 <fieldset>
                     <legend>Login!</legend>
                     <label htmlFor="login-name">
@@ -105,12 +106,11 @@ const LoginUserForm = (props) => {
                 id="no-account-button"
                 onClick={() => {
                     setNewUser(true);
-                    setLoginResMes(null);
                 }}
             >
                 Don't have an account?
             </button>
-        </>
+        </div>
     );
 };
 

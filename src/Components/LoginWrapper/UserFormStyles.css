@@ -1,7 +1,14 @@
-.user-form-inputs {
+.user-form-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 1rem;
+}
+
+.user-form-inputs {
+    grid-area: form;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
 }
 
 .user-form-inputs > fieldset {
@@ -10,12 +17,12 @@
     padding: 1rem;
     border: 3px solid rgb(10, 16, 22);
     border-radius: 1rem;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 0.5rem;
 }
 
 .user-form-inputs > fieldset > legend {
-    /* background-color: blue; */
     color: white;
     padding: 0.5rem;
     font-size: 1.2rem;
@@ -28,6 +35,59 @@
     flex-direction: column;
 }
 
+/* LOGIN FORM STYLES */
+#user-form-inputs-login > fieldset {
+    grid-template-areas:
+        "username password"
+        "button button";
+}
+
+#login-name {
+    grid-area: username;
+}
+
+#login-password {
+    grid-area: password;
+}
+
+#sign-in-button {
+    grid-area: button;
+    align-self: center;
+}
+
+/* REGISTER FORM STYLES */
+#user-form-inputs-register > fieldset {
+    grid-template-areas:
+        "username email"
+        "password button";
+}
+
+#register-name {
+    grid-area: username;
+}
+
+#register-password {
+    grid-area: password;
+}
+
+#register-email {
+    grid-area: email;
+}
+
+#create-account-button {
+    grid-area: button;
+    align-self: center;
+}
+
+.user-form-buttons {
+    grid-area: buttons;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
 .user-form-button {
+    width: 8rem;
+    height: fit-content;
     margin: 0 auto;
 }

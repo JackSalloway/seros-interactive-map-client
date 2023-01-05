@@ -87,4 +87,7 @@
 /* LOGIN WRAPPER STYLES */
 #login-screen-content-display-wrapper {
     grid-area: login;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

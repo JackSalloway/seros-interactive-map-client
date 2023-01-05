@@ -60,16 +60,21 @@ const CreateUserForm = (props) => {
     };
 
     return (
-        <>
-            <form onSubmit={createUser} className="user-form-inputs">
+        <div className="user-form-wrapper">
+            <form
+                onSubmit={createUser}
+                className="user-form-inputs"
+                id="user-form-inputs-register"
+            >
                 <fieldset>
                     <legend>Create an account!</legend>
-                    <label htmlFor="login-name">
+                    <label htmlFor="register-name">
                         Username
                         <input
                             type="text"
-                            id="login-name"
+                            id="register-name"
                             required
+                            minLength={3}
                             placeholder="username"
                             value={username}
                             onChange={({ target }) => {
@@ -77,11 +82,11 @@ const CreateUserForm = (props) => {
                             }}
                         />
                     </label>
-                    <label htmlFor="login-email">
+                    <label htmlFor="register-email">
                         Email
                         <input
                             type="email"
-                            id="login_email"
+                            id="register_email"
                             required
                             placeholder="email"
                             value={email}
@@ -90,11 +95,11 @@ const CreateUserForm = (props) => {
                             }}
                         />
                     </label>
-                    <label htmlFor="login-password">
+                    <label htmlFor="register-password">
                         Password
                         <input
                             type="password"
-                            id="login-password"
+                            id="register-password"
                             required
                             placeholder="password"
                             value={password}
@@ -121,7 +126,7 @@ const CreateUserForm = (props) => {
             >
                 Already have an account?
             </button>
-        </>
+        </div>
     );
 };
 
