@@ -36,40 +36,49 @@ const LoginWrapper = (props) => {
             </div>
             <div id="login-screen-wrapper">
                 {/* Header wrapper */}
-                <div id="login-screen-header-wrapper"></div>
+                <div id="login-screen-header-wrapper">
+                    <h1>The Seros Project</h1>
+                </div>
+
+                {/* Subheader wrapper */}
+                <div id="login-screen-subheader-wrapper">
+                    <h2 id="login-screen-subheader">Remember every step.</h2>
+                    <h3 id="login-screen-subheader-text">
+                        A dungeons and dragons interactive map and note tracker
+                        companion app.
+                    </h3>
+                </div>
 
                 {/* Content Wrapper */}
                 <div id="login-screen-content-display-wrapper">
-                    <div id="login-screen-content-display-wrapper">
-                        {newUser === false ? (
-                            <LoginUserForm
-                                username={username}
-                                setUsername={setUsername}
-                                password={password}
-                                setPassword={setPassword}
-                                setUserAuthenticated={setUserAuthenticated}
-                                dataNotifications={dataNotifications}
-                                setDataNotifications={setDataNotifications}
-                                loginResMsg={loginResMsg}
-                                setLoginResMes={setLoginResMes}
-                                setNewUser={setNewUser}
-                            />
-                        ) : (
-                            <CreateUserForm
-                                username={username}
-                                setUsername={setUsername}
-                                email={email}
-                                setEmail={setEmail}
-                                password={password}
-                                setPassword={setPassword}
-                                setNewUser={setNewUser}
-                                loginResMsg={loginResMsg}
-                                setLoginResMes={setLoginResMes}
-                                dataNotifications={dataNotifications}
-                                setDataNotifications={setDataNotifications}
-                            />
-                        )}
-                    </div>
+                    {newUser === false ? (
+                        <LoginUserForm
+                            username={username}
+                            setUsername={setUsername}
+                            password={password}
+                            setPassword={setPassword}
+                            setUserAuthenticated={setUserAuthenticated}
+                            dataNotifications={dataNotifications}
+                            setDataNotifications={setDataNotifications}
+                            loginResMsg={loginResMsg}
+                            setLoginResMes={setLoginResMes}
+                            setNewUser={setNewUser}
+                        />
+                    ) : (
+                        <CreateUserForm
+                            username={username}
+                            setUsername={setUsername}
+                            email={email}
+                            setEmail={setEmail}
+                            password={password}
+                            setPassword={setPassword}
+                            setNewUser={setNewUser}
+                            loginResMsg={loginResMsg}
+                            setLoginResMes={setLoginResMes}
+                            dataNotifications={dataNotifications}
+                            setDataNotifications={setDataNotifications}
+                        />
+                    )}
                 </div>
 
                 {/* Arrow wrappers */}
