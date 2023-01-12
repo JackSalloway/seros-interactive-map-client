@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import he from "he";
 
+import "./Banner.css";
+
 const Banner = (props) => {
     const {
         name,

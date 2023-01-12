@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Banner from "./Banner";
+import CreateCampaignBannerForm from "./CreateCampaignBannerForm";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const Dashboard = (props) => {
@@ -15,17 +16,23 @@ const Dashboard = (props) => {
         campaigns,
         setCampaign,
         renderCampaignForm,
-        setRenderCampaignForm,
         renderCampaignSettings,
         setRenderCampaignSettings,
         dataNotifications,
         setDataNotifications,
     } = props;
 
+    // State for rendering CreateCampaignBannerForm in place of CreateCampaignBanner
+    const [renderCreateCampaignBannerForm, setRenderCreateCampaignBannerForm] =
+        useState(false);
+
+    // States for Increasing banner size scales on hover
     const [createCampaignScale, setCreateCampaignScale] = useState(1);
     const [joinCampaignScale, setJoinCampaignScale] = useState(1);
-    const [inviteCode, setInviteCode] = useState("");
-    const [validCode, setValidCode] = useState(false);
+
+    // States related to invite codes Invite codes
+    const [inviteCode, setInviteCode] = useState(""); // Used to update invite code input value
+    const [validCode, setValidCode] = useState(false); // Used to enable join campaign button when code is valid
 
     useEffect(() => {
         const regex = /^[a-z,0-9,-]{36,36}$/; // Not the best regex expression, but will prevent user from spamming join
@@ -51,10 +58,9 @@ const Dashboard = (props) => {
                 <div className="dashboard-banner-image">
                     <button
                         onClick={() => {
-                            setRenderCampaignForm(true);
+                            setRenderCreateCampaignBannerForm(true);
                             setRenderCampaignSettings(null);
                         }}
-                        disabled={renderCampaignForm}
                     >
                         Add new Campaign!
                     </button>
@@ -65,18 +71,10 @@ const Dashboard = (props) => {
 
     // Function to fire request for user to join a new campaign
     const joinCampaign = async () => {
-        // console.log(userAuthenticated);
-
         const joinCampaignData = {
             username: userAuthenticated.username,
             invite_code: inviteCode,
         };
-
-        // const subLocationData = {
-        //     sub_location_name: newSubLocationName,
-        //     sub_location_desc: newSubLocationDesc,
-        //     parent_location_id: locationNotes._id,
-        // };
 
         const init = {
             method: "POST",
@@ -93,11 +91,6 @@ const Dashboard = (props) => {
                     const message = await res.text();
                     throw Error(message);
                 }
-                // if (res.status === 404) {
-                //     throw Error(
-                //         "Invite code invalid, no relevant campaign found"
-                //     );
-                // }
                 return res.json();
             })
             .then((returnedData) => {
@@ -182,7 +175,19 @@ const Dashboard = (props) => {
                       );
                   })
                 : null}
-            {createCampaignBanner()}
+            {renderCreateCampaignBannerForm ? (
+                <CreateCampaignBannerForm
+                    userAuthenticated={userAuthenticated}
+                    setUserAuthenticated={setUserAuthenticated}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
+                    setRenderCreateCampaignBannerForm={
+                        setRenderCreateCampaignBannerForm
+                    }
+                />
+            ) : (
+                createCampaignBanner()
+            )}
             {joinCampaignBanner()}
         </div>
     );
