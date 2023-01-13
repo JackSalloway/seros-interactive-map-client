@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
@@ -9,6 +9,7 @@ const HeaderBar = (props) => {
     const {
         username,
         setUserAuthenticated,
+        campaign,
         setCampaign,
         setSerosLocations,
         setSerosNPCs,
@@ -18,6 +19,8 @@ const HeaderBar = (props) => {
 
     // User bar buttons styles
     const [logoutHovered, setLogoutHovered] = useState(false);
+    const [returnToDashboardHovered, setReturnToDashboardHovered] =
+        useState(false);
 
     // User logout function
     const logout = async () => {
@@ -44,11 +47,43 @@ const HeaderBar = (props) => {
             <div id="header-bar-user-wrapper">
                 <h2 id="header-bar-user-greeting">Welcome, {username}!</h2>
                 <div id="header-bar-user-buttons">
+                    {/* If a campaign is selected, render the return to dashboard icon */}
+                    {/* Return to dashboard icon */}
+                    {campaign === null ? null : (
+                        <div
+                            id="header-bar-user-return-to-dashboard-button"
+                            className="header-bar-user-buttons-div"
+                            onMouseEnter={() =>
+                                setReturnToDashboardHovered(true)
+                            }
+                            onMouseLeave={() =>
+                                setReturnToDashboardHovered(false)
+                            }
+                            onClick={() => {
+                                setReturnToDashboardHovered(false); // Added this line as the return to dashboard icon retained its green color for some reason
+                                setCampaign(null);
+                            }}
+                        >
+                            Return to Dashboard
+                            <FontAwesomeIcon
+                                icon="house-user"
+                                className="header-bar-user-icon"
+                                style={
+                                    returnToDashboardHovered === false
+                                        ? { color: "white" }
+                                        : { color: "green" }
+                                }
+                            />
+                        </div>
+                    )}
+
+                    {/* Logout icon */}
                     <div
                         id="header-bar-user-logout-button"
                         className="header-bar-user-buttons-div"
                         onMouseEnter={() => setLogoutHovered(true)}
                         onMouseLeave={() => setLogoutHovered(false)}
+                        onClick={() => logout()}
                     >
                         Logout
                         <FontAwesomeIcon
@@ -59,7 +94,6 @@ const HeaderBar = (props) => {
                                     ? { color: "white" }
                                     : { color: "red" }
                             }
-                            onClick={() => logout()}
                         />
                     </div>
                 </div>

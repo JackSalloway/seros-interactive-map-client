@@ -22,7 +22,6 @@ const Journal = (props) => {
         setSerosQuests,
         setDeleteData,
         userAuthenticated,
-        setUserAuthenticated,
         setRenderCreationMarker,
         renderCreationMarker,
         creationMarkerLatLng,
@@ -36,11 +35,6 @@ const Journal = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        // renderCampaignForm,
-        // setRenderCampaignForm,
-        setCampaign,
-        // renderCampaignSettings,
-        setRenderCampaignSettings,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -51,21 +45,6 @@ const Journal = (props) => {
         }
     }, [markerBeingEdited]);
 
-    const logout = async () => {
-        await axios({
-            method: "get",
-            withCredentials: true,
-            url: `${process.env.REACT_APP_API_URL}/logout`,
-        });
-        // Set value to true
-        setUserAuthenticated({});
-        setCampaign(null);
-        setSerosLocations(null);
-        setSerosNPCs(null);
-        setSerosQuests(null);
-        setRenderCampaignSettings(null);
-    };
-
     if (Object.keys(userAuthenticated).length === 0) {
         return null;
     }
@@ -74,41 +53,7 @@ const Journal = (props) => {
     if (locationNotes === null) {
         return (
             <div id="journal-front-page-container" className="journal">
-                <div className="login-status">
-                    <p id="status-username">{userAuthenticated.username}</p>
-                    <button
-                        id="logout-button"
-                        onClick={() => {
-                            logout();
-                        }}
-                    >
-                        Logout
-                    </button>
-                    {campaign !== null ? (
-                        <button
-                            id="return-to-dashboard-button"
-                            onClick={() => {
-                                setCampaign(null);
-                                setSerosLocations(null);
-                                setSerosNPCs(null);
-                                setSerosQuests(null);
-                            }}
-                        >
-                            Return to Dashboard
-                        </button>
-                    ) : null}
-                </div>
                 {campaign === null ? null : (
-                    // <DashboardJournal
-                    //     userAuthenticated={userAuthenticated}
-                    //     setUserAuthenticated={setUserAuthenticated}
-                    //     renderCampaignForm={renderCampaignForm}
-                    //     setRenderCampaignForm={setRenderCampaignForm}
-                    //     renderCampaignSettings={renderCampaignSettings}
-                    //     setRenderCampaignSettings={setRenderCampaignSettings}
-                    //     dataNotifications={dataNotifications}
-                    //     setDataNotifications={setDataNotifications}
-                    // />
                     <div id="journal-front-page-menu">
                         <div id="journal-front-page-menu-header">
                             <JournalMenuHeaderBox

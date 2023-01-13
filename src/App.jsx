@@ -15,6 +15,7 @@ import {
     faInfoCircle,
     faCog,
     faRightFromBracket,
+    faHouseUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 // Component imports
@@ -172,7 +173,8 @@ function App() {
         faPencil,
         faInfoCircle,
         faCog,
-        faRightFromBracket
+        faRightFromBracket,
+        faHouseUser
     ); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
 
     // if (startupComplete === false) {
@@ -211,6 +213,7 @@ function App() {
                 <HeaderBar
                     username={userAuthenticated.username}
                     setUserAuthenticated={setUserAuthenticated}
+                    campaign={campaign}
                     setCampaign={setCampaign}
                     setSerosLocations={setSerosLocations}
                     setSerosNPCs={setSerosNPCs}
@@ -229,13 +232,37 @@ function App() {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                 />
+                {/* If there is an object within the dataNotifications state, render dataNotification component () */}
+                {dataNotifications.length !== 0
+                    ? dataNotifications.map((notification, index) => {
+                          return (
+                              <DataNotification
+                                  dataNotifications={dataNotifications}
+                                  setDataNotifications={setDataNotifications}
+                                  notification={notification}
+                                  index={index}
+                                  key={`${notification.message} ${index}`}
+                              />
+                          );
+                      })
+                    : null}
             </div>
         );
     }
 
     // Campaign has been selected so render a map and a journal sidebar
     return (
-        <div className="home-page-wrapper">
+        <div className="map-screen-wrapper">
+            <HeaderBar
+                username={userAuthenticated.username}
+                setUserAuthenticated={setUserAuthenticated}
+                campaign={campaign}
+                setCampaign={setCampaign}
+                setSerosLocations={setSerosLocations}
+                setSerosNPCs={setSerosNPCs}
+                setSerosQuests={setSerosQuests}
+                setRenderCampaignSettings={setRenderCampaignSettings}
+            />
             <MapBox
                 serosLocations={serosLocations}
                 serosNPCs={serosNPCs}
@@ -262,7 +289,6 @@ function App() {
                 setEditMarkerType={setEditMarkerType}
                 setDeleteData={setDeleteData}
             />
-
             <Journal
                 locationNotes={serosLocations?.[selectedLocationNotes] || null}
                 setLocationNotes={setSelectedLocationNotes}
@@ -298,7 +324,6 @@ function App() {
                 renderCampaignSettings={renderCampaignSettings}
                 setRenderCampaignSettings={setRenderCampaignSettings}
             />
-
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (
                 <DeletionModal
@@ -317,7 +342,6 @@ function App() {
                     setDataNotifications={setDataNotifications}
                 />
             ) : null}
-
             {/* If there is an object within the dataNotifications state, render dataNotification component () */}
             {dataNotifications.length !== 0
                 ? dataNotifications.map((notification, index) => {

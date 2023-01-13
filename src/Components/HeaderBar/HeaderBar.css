@@ -9,6 +9,8 @@
     position: sticky;
     top: 0;
     z-index: 1;
+    grid-area: header;
+    box-sizing: border-box;
 }
 
 /* TITLE STYLES */
@@ -34,12 +36,32 @@
     gap: 0.5rem;
 }
 
-#header-bar-user-greeting {
+/* #header-bar-user-greeting {
+} */
+
+#header-bar-user-buttons {
+    width: auto;
+    display: flex;
+    /* gap: 1rem; */
+}
+
+#header-bar-user-buttons :not(:last-child) {
+    border-right: 1px solid white;
+    padding: 0 0.7rem;
+}
+
+#header-bar-user-buttons :last-child {
+    /* border-right: 1px solid white; */
+    padding: 0 0 0 0.7rem;
 }
 
 .header-bar-user-buttons-div {
+    cursor: pointer;
     display: flex;
-    gap: 0.5rem;
+}
+
+.header-bar-user-buttons-div:hover {
+    text-decoration: underline;
 }
 
 .header-bar-user-icon {

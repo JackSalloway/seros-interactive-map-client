@@ -12,11 +12,9 @@
 
 #journal-front-page-container {
     width: 30vw;
-    display: grid;
+    /* display: grid;
     grid-template-rows: 1fr 2fr;
-    grid-template-areas:
-        "login"
-        "menu";
+    grid-template-areas: "menu"; */
     align-items: center;
     justify-content: center;
     /* gap: 2rem; */
