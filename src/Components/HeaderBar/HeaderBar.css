@@ -1,0 +1,48 @@
+#header-bar-wrapper {
+    height: 10vh;
+    padding: 0 2rem;
+    background-color: rgba(14, 22, 31, 1);
+    border-bottom: 4px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+/* TITLE STYLES */
+#header-bar-title-wrapper {
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#header-bar-logo {
+    height: 5rem;
+    width: auto;
+}
+
+/* USER BAR STYLES */
+#header-bar-user-wrapper {
+    font-size: 1.2rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+#header-bar-user-greeting {
+}
+
+.header-bar-user-buttons-div {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.header-bar-user-icon {
+    transition: color 0.2s linear;
+    cursor: pointer;
+}

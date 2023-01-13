@@ -12,6 +12,7 @@
 }
 
 .dashboard-banner-text {
+    min-height: 8rem;
     grid-area: text;
     display: flex;
     flex-direction: column;

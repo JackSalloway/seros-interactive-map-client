@@ -141,6 +141,10 @@ body {
     color: white;
 }
 
+#campaign-select-wrapper {
+    position: relative;
+}
+
 /* Use the following code to make the map box and notes appear next to each other, however this results in the map box not functioning correctly - so have taken this away for now */
 .home-page-wrapper {
     width: 100vw;

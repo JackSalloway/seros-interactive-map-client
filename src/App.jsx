@@ -20,6 +20,7 @@ import {
 // Component imports
 // import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
 import LoginWrapper from "./Components/LoginWrapper/LoginWrapper";
+import HeaderBar from "./Components/HeaderBar/HeaderBar";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
@@ -203,125 +204,135 @@ function App() {
         );
     }
 
-    return (
-        <>
-            {/* This div was used to make the map box and location notes appear next to each other on the same row, however this made the map box function incorreclty due to it not resizing properly so have commented it out for now */}
-            <div className="home-page-wrapper">
-                {campaign === null ? (
-                    <Dashboard
-                        userAuthenticated={userAuthenticated}
-                        setUserAuthenticated={setUserAuthenticated}
-                        campaigns={userAuthenticated.campaigns ?? []}
-                        setCampaign={setCampaign}
-                        renderCampaignForm={renderCampaignForm}
-                        setRenderCampaignForm={setRenderCampaignForm}
-                        renderCampaignSettings={renderCampaignSettings}
-                        setRenderCampaignSettings={setRenderCampaignSettings}
-                        dataNotifications={dataNotifications}
-                        setDataNotifications={setDataNotifications}
-                    />
-                ) : (
-                    <MapBox
-                        serosLocations={serosLocations}
-                        serosNPCs={serosNPCs}
-                        serosQuests={serosQuests}
-                        setSerosLocations={setSerosLocations}
-                        map={map}
-                        renderCreationMarker={renderCreationMarker}
-                        creationMarkerLatLng={creationMarkerLatLng}
-                        creationMarkerType={creationMarkerType}
-                        setCreationMarkerLatLng={setCreationMarkerLatLng}
-                        selectedLocationNotes={
-                            serosLocations?.[selectedLocationNotes] || null
-                        }
-                        setSelectedLocationNotes={setSelectedLocationNotes}
-                        setSelectedLocationQuests={setSelectedLocationQuests}
-                        setSelectedLocationNPCs={setSelectedLocationNPCs}
-                        userAuthenticated={userAuthenticated}
-                        markerBeingEdited={markerBeingEdited}
-                        setMarkerBeingEdited={setMarkerBeingEdited}
-                        setEditLocationDetails={setEditLocationDetails}
-                        editMarkerLatLng={editMarkerLatLng}
-                        setEditMarkerLatLng={setEditMarkerLatLng}
-                        editMarkerType={editMarkerType}
-                        setEditMarkerType={setEditMarkerType}
-                        setDeleteData={setDeleteData}
-                    />
-                )}
-
-                {map ? (
-                    <Journal
-                        locationNotes={
-                            serosLocations?.[selectedLocationNotes] || null
-                        }
-                        setLocationNotes={setSelectedLocationNotes}
-                        serosNPCs={serosNPCs}
-                        setSerosNPCs={setSerosNPCs}
-                        locationNPCs={selectedLocationNPCs}
-                        setLocationNPCs={setSelectedLocationNPCs}
-                        locationQuests={selectedLocationQuests}
-                        setLocationQuests={setSelectedLocationQuests}
-                        serosLocations={serosLocations}
-                        setSerosLocations={setSerosLocations}
-                        serosQuests={serosQuests}
-                        setSerosQuests={setSerosQuests}
-                        setDeleteData={setDeleteData}
-                        userAuthenticated={userAuthenticated}
-                        setUserAuthenticated={setUserAuthenticated}
-                        renderCreationMarker={renderCreationMarker}
-                        setRenderCreationMarker={setRenderCreationMarker}
-                        creationMarkerLatLng={creationMarkerLatLng}
-                        setCreationMarkerType={setCreationMarkerType}
-                        map={map}
-                        markerBeingEdited={markerBeingEdited}
-                        setMarkerBeingEdited={setMarkerBeingEdited}
-                        editLocationDetails={editLocationDetails}
-                        editMarkerLatLng={editMarkerLatLng}
-                        setEditMarkerType={setEditMarkerType}
-                        dataNotifications={dataNotifications}
-                        setDataNotifications={setDataNotifications}
-                        campaign={campaign}
-                        setCampaign={setCampaign}
-                        renderCampaignForm={renderCampaignForm}
-                        setRenderCampaignForm={setRenderCampaignForm}
-                        renderCampaignSettings={renderCampaignSettings}
-                        setRenderCampaignSettings={setRenderCampaignSettings}
-                    />
-                ) : null}
-
-                {deleteData !== null ? (
-                    <DeletionModal
-                        data={deleteData}
-                        setDeleteData={setDeleteData}
-                        selectedLocationNotes={
-                            serosLocations?.[selectedLocationNotes] || null
-                        }
-                        serosLocations={serosLocations}
-                        setSerosLocations={setSerosLocations}
-                        serosNPCs={serosNPCs}
-                        setSerosNPCs={setSerosNPCs}
-                        serosQuests={serosQuests}
-                        setSerosQuests={setSerosQuests}
-                        dataNotifications={dataNotifications}
-                        setDataNotifications={setDataNotifications}
-                    />
-                ) : null}
-
-                {dataNotifications.length !== 0
-                    ? dataNotifications.map((notification, index) => {
-                          return (
-                              <DataNotification
-                                  dataNotifications={dataNotifications}
-                                  setDataNotifications={setDataNotifications}
-                                  notification={notification}
-                                  index={index}
-                                  key={`${notification.message} ${index}`}
-                              />
-                          );
-                      })
-                    : null}
+    // No campaign has been selected so render the campaign select screen
+    if (campaign === null) {
+        return (
+            <div id="campaign-select-wrapper">
+                <HeaderBar
+                    username={userAuthenticated.username}
+                    setUserAuthenticated={setUserAuthenticated}
+                    setCampaign={setCampaign}
+                    setSerosLocations={setSerosLocations}
+                    setSerosNPCs={setSerosNPCs}
+                    setSerosQuests={setSerosQuests}
+                    setRenderCampaignSettings={setRenderCampaignSettings}
+                />
+                <Dashboard
+                    userAuthenticated={userAuthenticated}
+                    setUserAuthenticated={setUserAuthenticated}
+                    campaigns={userAuthenticated.campaigns ?? []}
+                    setCampaign={setCampaign}
+                    renderCampaignForm={renderCampaignForm}
+                    setRenderCampaignForm={setRenderCampaignForm}
+                    renderCampaignSettings={renderCampaignSettings}
+                    setRenderCampaignSettings={setRenderCampaignSettings}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
+                />
             </div>
-        </>
+        );
+    }
+
+    // Campaign has been selected so render a map and a journal sidebar
+    return (
+        <div className="home-page-wrapper">
+            <MapBox
+                serosLocations={serosLocations}
+                serosNPCs={serosNPCs}
+                serosQuests={serosQuests}
+                setSerosLocations={setSerosLocations}
+                map={map}
+                renderCreationMarker={renderCreationMarker}
+                creationMarkerLatLng={creationMarkerLatLng}
+                creationMarkerType={creationMarkerType}
+                setCreationMarkerLatLng={setCreationMarkerLatLng}
+                selectedLocationNotes={
+                    serosLocations?.[selectedLocationNotes] || null
+                }
+                setSelectedLocationNotes={setSelectedLocationNotes}
+                setSelectedLocationQuests={setSelectedLocationQuests}
+                setSelectedLocationNPCs={setSelectedLocationNPCs}
+                userAuthenticated={userAuthenticated}
+                markerBeingEdited={markerBeingEdited}
+                setMarkerBeingEdited={setMarkerBeingEdited}
+                setEditLocationDetails={setEditLocationDetails}
+                editMarkerLatLng={editMarkerLatLng}
+                setEditMarkerLatLng={setEditMarkerLatLng}
+                editMarkerType={editMarkerType}
+                setEditMarkerType={setEditMarkerType}
+                setDeleteData={setDeleteData}
+            />
+
+            <Journal
+                locationNotes={serosLocations?.[selectedLocationNotes] || null}
+                setLocationNotes={setSelectedLocationNotes}
+                serosNPCs={serosNPCs}
+                setSerosNPCs={setSerosNPCs}
+                locationNPCs={selectedLocationNPCs}
+                setLocationNPCs={setSelectedLocationNPCs}
+                locationQuests={selectedLocationQuests}
+                setLocationQuests={setSelectedLocationQuests}
+                serosLocations={serosLocations}
+                setSerosLocations={setSerosLocations}
+                serosQuests={serosQuests}
+                setSerosQuests={setSerosQuests}
+                setDeleteData={setDeleteData}
+                userAuthenticated={userAuthenticated}
+                setUserAuthenticated={setUserAuthenticated}
+                renderCreationMarker={renderCreationMarker}
+                setRenderCreationMarker={setRenderCreationMarker}
+                creationMarkerLatLng={creationMarkerLatLng}
+                setCreationMarkerType={setCreationMarkerType}
+                map={map}
+                markerBeingEdited={markerBeingEdited}
+                setMarkerBeingEdited={setMarkerBeingEdited}
+                editLocationDetails={editLocationDetails}
+                editMarkerLatLng={editMarkerLatLng}
+                setEditMarkerType={setEditMarkerType}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+                campaign={campaign}
+                setCampaign={setCampaign}
+                renderCampaignForm={renderCampaignForm}
+                setRenderCampaignForm={setRenderCampaignForm}
+                renderCampaignSettings={renderCampaignSettings}
+                setRenderCampaignSettings={setRenderCampaignSettings}
+            />
+
+            {/* If deleteData state has is not null render the DeletionModal */}
+            {deleteData !== null ? (
+                <DeletionModal
+                    data={deleteData}
+                    setDeleteData={setDeleteData}
+                    selectedLocationNotes={
+                        serosLocations?.[selectedLocationNotes] || null
+                    }
+                    serosLocations={serosLocations}
+                    setSerosLocations={setSerosLocations}
+                    serosNPCs={serosNPCs}
+                    setSerosNPCs={setSerosNPCs}
+                    serosQuests={serosQuests}
+                    setSerosQuests={setSerosQuests}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
+                />
+            ) : null}
+
+            {/* If there is an object within the dataNotifications state, render dataNotification component () */}
+            {dataNotifications.length !== 0
+                ? dataNotifications.map((notification, index) => {
+                      return (
+                          <DataNotification
+                              dataNotifications={dataNotifications}
+                              setDataNotifications={setDataNotifications}
+                              notification={notification}
+                              index={index}
+                              key={`${notification.message} ${index}`}
+                          />
+                      );
+                  })
+                : null}
+        </div>
     );
 }
 

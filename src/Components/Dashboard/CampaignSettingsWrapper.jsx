@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 import dayjs from "dayjs";
-import "./CampaignSettings.css";
 
-const CampaignSettings = (props) => {
-    const { renderCampaignSettings, setRenderCampaignSettings } = props;
+// Style imports
+import "./CampaignSettingsWrapper.css";
+
+const CampaignSettingsWrapper = (props) => {
+    const { campaignID } = props;
 
     const [campaignSettings, setCampaignSettings] = useState(null);
     const [invite, setInvite] = useState(null);
@@ -13,7 +15,7 @@ const CampaignSettings = (props) => {
     useEffect(() => {
         // Fetch campaign settings from backend
         fetch(
-            `${process.env.REACT_APP_API_URL}/campaign_settings/?campaign_id=${renderCampaignSettings}`,
+            `${process.env.REACT_APP_API_URL}/campaign_settings/?campaign_id=${campaignID}`,
             {
                 method: "GET",
                 mode: "cors",
@@ -26,7 +28,7 @@ const CampaignSettings = (props) => {
                 setInvite(data.invite[0]); // If there is no invite code found, data.invite[0] === undefined
                 setCampaignUsers(data.campaignUsers);
             });
-    }, [renderCampaignSettings]);
+    }, [campaignID]);
 
     const createInviteCode = () => {
         console.log("creating invite code");
@@ -50,10 +52,18 @@ const CampaignSettings = (props) => {
     }
 
     return (
-        <div className="campaign-settings-wrapper">
-            <h2>Campaign Settings</h2>
-            <h2>Name: {campaignSettings.name}</h2>
-            <h2>Description: {campaignSettings.desc}</h2>
+        <div className="dashboard-banner-campaign-settings">
+            <div>
+                <h2>Campaign Settings</h2>
+            </div>
+            <div>
+                <h2>Name:</h2>
+                <p>{campaignSettings.name}</p>
+            </div>
+            <div>
+                <h2>Description:</h2>
+                <p>{campaignSettings.desc}</p>
+            </div>
             <div>
                 <h2>Users:</h2>
                 {campaignUsers.map((user) => {
@@ -71,7 +81,6 @@ const CampaignSettings = (props) => {
                                     ? " - Admin"
                                     : null}
                             </p>
-                            <p></p>
                         </div>
                     );
                 })}
@@ -93,15 +102,8 @@ const CampaignSettings = (props) => {
                     </h2>
                 </>
             )}
-            <button
-                onClick={() => {
-                    setRenderCampaignSettings(null);
-                }}
-            >
-                Close Settings
-            </button>
         </div>
     );
 };
 
-export default CampaignSettings;
+export default CampaignSettingsWrapper;

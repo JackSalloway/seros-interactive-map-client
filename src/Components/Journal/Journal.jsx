@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Journal.css";
 import LocationNotes from "../LocationNotes/LocationNotes";
-import DashboardJournal from "../DashboardJournal/DashboardJournal";
+// import DashboardJournal from "../DashboardJournal/DashboardJournal";
 import JournalMenuHeaderBox from "../JournalMenu/JournalMenuHeaderBox";
 import JournalMenuContent from "../JournalMenu/JournalMenuContent";
 
@@ -36,10 +36,10 @@ const Journal = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        renderCampaignForm,
-        setRenderCampaignForm,
+        // renderCampaignForm,
+        // setRenderCampaignForm,
         setCampaign,
-        renderCampaignSettings,
+        // renderCampaignSettings,
         setRenderCampaignSettings,
     } = props;
 
@@ -98,18 +98,17 @@ const Journal = (props) => {
                         </button>
                     ) : null}
                 </div>
-                {campaign === null ? (
-                    <DashboardJournal
-                        userAuthenticated={userAuthenticated}
-                        setUserAuthenticated={setUserAuthenticated}
-                        renderCampaignForm={renderCampaignForm}
-                        setRenderCampaignForm={setRenderCampaignForm}
-                        renderCampaignSettings={renderCampaignSettings}
-                        setRenderCampaignSettings={setRenderCampaignSettings}
-                        dataNotifications={dataNotifications}
-                        setDataNotifications={setDataNotifications}
-                    />
-                ) : (
+                {campaign === null ? null : (
+                    // <DashboardJournal
+                    //     userAuthenticated={userAuthenticated}
+                    //     setUserAuthenticated={setUserAuthenticated}
+                    //     renderCampaignForm={renderCampaignForm}
+                    //     setRenderCampaignForm={setRenderCampaignForm}
+                    //     renderCampaignSettings={renderCampaignSettings}
+                    //     setRenderCampaignSettings={setRenderCampaignSettings}
+                    //     dataNotifications={dataNotifications}
+                    //     setDataNotifications={setDataNotifications}
+                    // />
                     <div id="journal-front-page-menu">
                         <div id="journal-front-page-menu-header">
                             <JournalMenuHeaderBox

@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import he from "he";
 
+// Components
+import CampaignSettingsWrapper from "./CampaignSettingsWrapper";
+
+// Styles
 import "./Banner.css";
 
 const Banner = (props) => {
@@ -12,11 +16,13 @@ const Banner = (props) => {
         setCampaign,
         adminRights,
         renderCampaignForm,
-        // renderCampaignSettings,
-        setRenderCampaignSettings,
     } = props;
 
+    // Scale sizing state values
     const [scale, setScale] = useState(1);
+
+    // Campaign settings state values
+    const [renderCampaignSettings, setRenderCampaignSettings] = useState(false);
 
     const iconStyles = {
         filter: scale === 1 ? `opacity(20%)` : `opacity(100%)`,
@@ -51,7 +57,7 @@ const Banner = (props) => {
                                     );
                                     return;
                                 }
-                                setRenderCampaignSettings(campaignID);
+                                setRenderCampaignSettings(true);
                             }}
                         />
                         <FontAwesomeIcon
@@ -85,6 +91,9 @@ const Banner = (props) => {
                         Select campaign!
                     </button>
                 </div>
+                {renderCampaignSettings === true ? (
+                    <CampaignSettingsWrapper campaignID={campaignID} />
+                ) : null}
             </div>
         </div>
     );
