@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 import dayjs from "dayjs";
+import he from "he";
 
 // Style imports
 import "./CampaignSettingsWrapper.css";
@@ -45,8 +46,8 @@ const CampaignSettingsWrapper = (props) => {
                 setInvite(data.invite[0]); // If there is no invite code found, data.invite[0] === undefined
                 setCampaignUsers(data.campaignUsers);
                 // Set the campaign update values
-                setUpdatedCampaignName(data.campaign[0].name);
-                setUpdatedCampaignDesc(data.campaign[0].desc);
+                setUpdatedCampaignName(he.decode(data.campaign[0].name));
+                setUpdatedCampaignDesc(he.decode(data.campaign[0].desc));
                 setUpdatedCampaignUsers(data.campaignUsers);
             });
     }, [campaignID]);
