@@ -149,7 +149,7 @@ const LocationNotes = (props) => {
                 {locationNotes.desc
                     ? splitParas(locationNotes.desc).map((para, index) => (
                           <p
-                              className="location-notes-description-paragraph"
+                              className="location-notes-description-paragraph location-notes-location-description"
                               key={index}
                           >
                               {he.decode(para)}
