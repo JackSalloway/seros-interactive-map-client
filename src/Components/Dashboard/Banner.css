@@ -6,8 +6,11 @@
     border: 4px solid black;
     border-radius: 1rem;
     display: grid;
-    grid-template-areas: "text image";
+    grid-template-areas:
+        "text image"
+        "settings settings";
     grid-template-columns: 2fr 3fr;
+    grid-template-rows: auto auto;
     transition: transform 0.1s linear;
 }
 

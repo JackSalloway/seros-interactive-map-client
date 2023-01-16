@@ -16,6 +16,11 @@ const Banner = (props) => {
         setCampaign,
         adminRights,
         renderCampaignForm,
+        userAuthenticated,
+        setUserAuthenticated,
+        campaignIndex,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     // Scale sizing state values
@@ -92,7 +97,14 @@ const Banner = (props) => {
                     </button>
                 </div>
                 {renderCampaignSettings === true ? (
-                    <CampaignSettingsWrapper campaignID={campaignID} />
+                    <CampaignSettingsWrapper
+                        campaignID={campaignID}
+                        userAuthenticated={userAuthenticated}
+                        setUserAuthenticated={setUserAuthenticated}
+                        campaignIndex={campaignIndex}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
+                    />
                 ) : null}
             </div>
         </div>
