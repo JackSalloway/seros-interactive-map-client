@@ -101,22 +101,6 @@ const CampaignSettingsWrapper = (props) => {
         setDataNotifications([...notificationsCopy]);
     };
 
-    //     const returnedData = await result.json();
-    //     // console.log(returnedData);
-    //     // console.log(userAuthenticated);
-    //     const userCopy = userAuthenticated;
-    //     userCopy.campaigns = returnedData.campaigns;
-    //     console.log(userCopy);
-    //     setUserAuthenticated({ ...userCopy });
-    //     const notificationsCopy = dataNotifications;
-    //     notificationsCopy.push({
-    //         message: `Campaign: ${newCampaignName} successfully created!`,
-    //         important: false,
-    //     });
-    //     setDataNotifications([...notificationsCopy]);
-    //     setRenderCreateCampaignBannerForm(false);
-    // };
-
     // Create invite code
     const createInviteCode = () => {
         console.log("creating invite code");
