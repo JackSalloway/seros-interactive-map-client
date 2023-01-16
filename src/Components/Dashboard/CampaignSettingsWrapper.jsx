@@ -41,7 +41,6 @@ const CampaignSettingsWrapper = (props) => {
         )
             .then((res) => res.json())
             .then((data) => {
-                // console.log(data);
                 setCampaignSettings(data.campaign[0]);
                 setInvite(data.invite[0]); // If there is no invite code found, data.invite[0] === undefined
                 setCampaignUsers(data.campaignUsers);
@@ -85,14 +84,10 @@ const CampaignSettingsWrapper = (props) => {
             `${process.env.REACT_APP_API_URL}/update_campaign`,
             init
         );
-        console.log(result);
         const returnedData = await result.json();
-        console.log(returnedData);
         const userCopy = userAuthenticated;
-        console.log("userCopy", userCopy);
         userCopy.campaigns[campaignIndex] =
             returnedData.campaigns[campaignIndex];
-        // console.log(userCopy);
         setUserAuthenticated({ ...userCopy });
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
@@ -104,8 +99,6 @@ const CampaignSettingsWrapper = (props) => {
 
     // Create invite code
     const createInviteCode = () => {
-        console.log("creating invite code");
-        console.log(campaignSettings);
         fetch(`${process.env.REACT_APP_API_URL}/campaign_generate_code/`, {
             method: "PUT",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
@@ -115,7 +108,6 @@ const CampaignSettingsWrapper = (props) => {
         })
             .then((res) => res.json())
             .then((inviteCode) => {
-                console.log(inviteCode);
                 setInvite(inviteCode[0]);
             });
     };
