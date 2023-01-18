@@ -47,7 +47,7 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    height: 100%;
+    height: 90vh; /* Had issues with the previous value of 100% causing the last few entries to not appear on the screen when the user scrolled to the bottom */
     width: 30vw;
     overflow-y: auto;
 }
