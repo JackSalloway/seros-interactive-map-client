@@ -47,6 +47,7 @@ const JournalMenuContent = (props) => {
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
                 userAuthenticated={userAuthenticated}
+                setChangelogData={setChangelogData}
             />
         );
     }
@@ -67,6 +68,7 @@ const JournalMenuContent = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
+                setChangelogData={setChangelogData}
             />
         );
     };
