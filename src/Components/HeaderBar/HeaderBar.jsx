@@ -14,6 +14,7 @@ const HeaderBar = (props) => {
         setSerosLocations,
         setSerosNPCs,
         setSerosQuests,
+        setChangelogData,
         setRenderCampaignSettings,
     } = props;
 
@@ -35,6 +36,7 @@ const HeaderBar = (props) => {
         setSerosLocations(null);
         setSerosNPCs(null);
         setSerosQuests(null);
+        setChangelogData(null);
         setRenderCampaignSettings(null);
     };
 
@@ -62,6 +64,11 @@ const HeaderBar = (props) => {
                             onClick={() => {
                                 setReturnToDashboardHovered(false); // Added this line as the return to dashboard icon retained its green color for some reason
                                 setCampaign(null);
+                                setSerosLocations(null);
+                                setSerosNPCs(null);
+                                setSerosQuests(null);
+                                setChangelogData(null);
+                                setRenderCampaignSettings(null);
                             }}
                         >
                             Return to Dashboard

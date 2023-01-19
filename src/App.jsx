@@ -283,6 +283,7 @@ function App() {
                 setSerosLocations={setSerosLocations}
                 setSerosNPCs={setSerosNPCs}
                 setSerosQuests={setSerosQuests}
+                setChangelogData={setChangelogData}
                 setRenderCampaignSettings={setRenderCampaignSettings}
             />
             <MapBox
@@ -365,7 +366,6 @@ function App() {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     username={userAuthenticated.username}
-                    changelogData={changelogData}
                     setChangelogData={setChangelogData}
                 />
             ) : null}
