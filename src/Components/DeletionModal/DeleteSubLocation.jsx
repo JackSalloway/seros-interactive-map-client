@@ -12,6 +12,8 @@ const DeleteSubLocation = (props) => {
         setSerosLocations,
         dataNotifications,
         setDataNotifications,
+        username,
+        setChangelogData,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
@@ -31,6 +33,8 @@ const DeleteSubLocation = (props) => {
         const dataToDelete = {
             location_id: selectedLocationNotes._id,
             sub_location_name: data.name,
+            location_campaign_id: selectedLocationNotes.campaign,
+            username: username,
         };
 
         const init = {
@@ -48,9 +52,11 @@ const DeleteSubLocation = (props) => {
         let serosLocationsCopy = [...serosLocations];
         const indexToUpdate = serosLocationsCopy
             .map((location) => location._id)
-            .indexOf(returnedData._id);
+            .indexOf(returnedData.subLocationResult_id);
         const location = { ...serosLocationsCopy[indexToUpdate] };
-        location.sub_locations = [...returnedData.sub_locations];
+        location.sub_locations = [
+            ...returnedData.subLocationResult.sub_locations,
+        ];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
         const notificationsCopy = dataNotifications;
@@ -60,6 +66,9 @@ const DeleteSubLocation = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setDeleteData(null);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     return (
