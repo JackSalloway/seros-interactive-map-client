@@ -14,7 +14,6 @@ const SubLocationNotes = (props) => {
         index,
         locationNotes,
         setDeleteData,
-
         serosLocations,
         setSerosLocations,
         dataNotifications,

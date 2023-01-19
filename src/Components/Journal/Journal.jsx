@@ -129,6 +129,8 @@ const Journal = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
+                setChangelogData={setChangelogData}
+                username={userAuthenticated.username}
             />
         </div>
     );

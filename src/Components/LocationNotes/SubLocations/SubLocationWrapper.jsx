@@ -11,13 +11,15 @@ const SubLocationWrapper = (props) => {
         setShowSubLocations,
         locationNotes,
         setDeleteData,
-
         serosLocations,
         setSerosLocations,
         addNewSubLocation,
         setAddNewSubLocation,
         dataNotifications,
         setDataNotifications,
+        campaign,
+        setChangelogData,
+        username,
     } = props;
 
     return (
@@ -145,6 +147,9 @@ const SubLocationWrapper = (props) => {
                     setAddNewSubLocation={setAddNewSubLocation}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
+                    campaign={campaign}
+                    setChangelogData={setChangelogData}
+                    username={username}
                 />
             ) : null}
         </div>

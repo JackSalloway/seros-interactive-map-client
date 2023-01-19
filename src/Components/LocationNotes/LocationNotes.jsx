@@ -27,6 +27,8 @@ const LocationNotes = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        setChangelogData,
+        username,
     } = props;
 
     // Set states
@@ -168,6 +170,9 @@ const LocationNotes = (props) => {
                     setAddNewSubLocation={setAddNewSubLocation}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
+                    campaign={campaign}
+                    setChangelogData={setChangelogData}
+                    username={username}
                 />
 
                 <NPCWrapper

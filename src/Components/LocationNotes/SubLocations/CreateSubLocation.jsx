@@ -9,6 +9,9 @@ const CreateSubLocation = (props) => {
         setAddNewSubLocation,
         dataNotifications,
         setDataNotifications,
+        campaign,
+        setChangelogData,
+        username,
     } = props;
 
     // Set states
@@ -23,6 +26,8 @@ const CreateSubLocation = (props) => {
             sub_location_name: newSubLocationName,
             sub_location_desc: newSubLocationDesc,
             parent_location_id: locationNotes._id,
+            location_campaign_id: campaign.id,
+            username: username,
         };
 
         const init = {
@@ -38,12 +43,13 @@ const CreateSubLocation = (props) => {
             init
         );
         const data = await result.json();
+        console.log(data);
         let serosLocationsCopy = [...serosLocations];
         const indexToUpdate = serosLocationsCopy
             .map((location) => location._id)
-            .indexOf(data._id);
+            .indexOf(data.subLocationResult._id);
         const location = { ...serosLocationsCopy[indexToUpdate] };
-        location.sub_locations = [...data.sub_locations];
+        location.sub_locations = [...data.subLocationResult.sub_locations];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
         const notificationsCopy = dataNotifications;
@@ -53,6 +59,9 @@ const CreateSubLocation = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setAddNewSubLocation(false);
+
+        // Update changelog
+        setChangelogData(data.changelogResult.changes);
     };
 
     // Render sub location form
