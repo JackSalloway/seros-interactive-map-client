@@ -18,6 +18,9 @@ const SubLocationNotes = (props) => {
         setSerosLocations,
         dataNotifications,
         setDataNotifications,
+        campaign,
+        setChangelogData,
+        username,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -87,6 +90,8 @@ const SubLocationNotes = (props) => {
             sub_location_desc: subLocation.desc,
             updated_sub_location_name: updatedSubLocationName,
             updated_sub_location_desc: updatedSubLocationDescription,
+            location_campaign_id: campaign.id,
+            username: username,
         };
 
         const init = {
@@ -105,9 +110,11 @@ const SubLocationNotes = (props) => {
         let serosLocationsCopy = [...serosLocations];
         const indexToUpdate = serosLocationsCopy
             .map((location) => location._id)
-            .indexOf(returnedData._id);
+            .indexOf(returnedData.subLocationResult._id);
         const location = { ...serosLocationsCopy[indexToUpdate] };
-        location.sub_locations = [...returnedData.sub_locations];
+        location.sub_locations = [
+            ...returnedData.subLocationResult.sub_locations,
+        ];
         serosLocationsCopy[indexToUpdate] = location;
         setSerosLocations(serosLocationsCopy);
         const notificationsCopy = dataNotifications;
@@ -117,6 +124,9 @@ const SubLocationNotes = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setEditing(false);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     // Edit icon has been clicked so render sub-location edit form

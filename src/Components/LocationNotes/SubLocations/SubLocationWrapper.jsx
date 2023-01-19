@@ -89,6 +89,9 @@ const SubLocationWrapper = (props) => {
                                     setSerosLocations={setSerosLocations}
                                     dataNotifications={dataNotifications}
                                     setDataNotifications={setDataNotifications}
+                                    campaign={campaign}
+                                    setChangelogData={setChangelogData}
+                                    username={username}
                                 />
                             )
                         )}
