@@ -22,6 +22,7 @@ const EditLocation = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        userAuthenticated,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -68,6 +69,7 @@ const EditLocation = (props) => {
             location_sub_locations: editLocationDetails.sub_locations,
             location_campaign_id: campaign.id,
             location_id: editLocationDetails._id,
+            username: userAuthenticated.username,
         };
 
         const init = {
@@ -83,8 +85,9 @@ const EditLocation = (props) => {
             init
         );
         const returnedData = await result.json();
+        console.log(returnedData);
         let serosLocationsCopy = [...serosLocations];
-        serosLocationsCopy[markerBeingEdited] = returnedData;
+        serosLocationsCopy[markerBeingEdited] = returnedData.locationResult;
         setSerosLocations(serosLocationsCopy);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({

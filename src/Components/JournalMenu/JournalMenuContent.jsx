@@ -44,6 +44,7 @@ const JournalMenuContent = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
+                userAuthenticated={userAuthenticated}
             />
         );
     }
