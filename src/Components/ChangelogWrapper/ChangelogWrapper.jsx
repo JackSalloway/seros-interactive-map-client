@@ -22,8 +22,6 @@ const changelogDiv = (
 const ChangelogWrapper = (props) => {
     const { campaign, changelogData, setChangeLogData } = props;
 
-    console.log(changelogData);
-
     if (changelogData === null) {
         return <p>Loading changelog data...</p>;
     }
