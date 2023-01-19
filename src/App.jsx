@@ -364,6 +364,9 @@ function App() {
                     setSerosQuests={setSerosQuests}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
+                    username={userAuthenticated.username}
+                    changelogData={changelogData}
+                    setChangelogData={setChangelogData}
                 />
             ) : null}
             {/* If there is an object within the dataNotifications state, render dataNotification component () */}

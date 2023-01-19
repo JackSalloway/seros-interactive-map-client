@@ -13,6 +13,9 @@ const DeleteLocation = (props) => {
         setSerosQuests, // This would be for removing assocaited locations from Quests after deleting a location
         dataNotifications,
         setDataNotifications,
+        username,
+        changelogData,
+        setChangelogData,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
@@ -33,6 +36,9 @@ const DeleteLocation = (props) => {
 
         const dataToDelete = {
             location_id: data._id,
+            location_campaign_id: data.campaign,
+            location_name: data.name,
+            username: username,
         };
 
         const init = {
@@ -66,6 +72,11 @@ const DeleteLocation = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setDeleteData(null);
+
+        console.log(returnedData);
+
+        // Update changelogData
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     return (

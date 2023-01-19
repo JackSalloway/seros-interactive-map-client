@@ -20,6 +20,9 @@ const DeletionModal = (props) => {
         setSerosQuests,
         dataNotifications,
         setDataNotifications,
+        username,
+        changelogData,
+        setChangelogData,
     } = props;
 
     const [dataType, setDataType] = useState(null);
@@ -47,6 +50,9 @@ const DeletionModal = (props) => {
                 setSerosQuests={setSerosQuests}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
+                username={username}
+                changelogData={changelogData}
+                setChangelogData={setChangelogData}
             />
         );
     } else if (dataType === "NPC") {
@@ -58,6 +64,9 @@ const DeletionModal = (props) => {
                 setSerosNPCs={setSerosNPCs}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
+                username={username}
+                changelogData={changelogData}
+                setChangelogData={setChangelogData}
             />
         );
     } else if (dataType === "Quest") {
@@ -70,6 +79,9 @@ const DeletionModal = (props) => {
                 setSerosNPCs={setSerosNPCs}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
+                username={username}
+                changelogData={changelogData}
+                setChangelogData={setChangelogData}
             />
         );
     } else if (dataType === "Sub Location") {
@@ -82,6 +94,9 @@ const DeletionModal = (props) => {
                 setSerosLocations={setSerosLocations}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
+                username={username}
+                changelogData={changelogData}
+                setChangelogData={setChangelogData}
             />
         );
     }
