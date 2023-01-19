@@ -23,6 +23,7 @@ const EditLocation = (props) => {
         setDataNotifications,
         campaign,
         userAuthenticated,
+        setChangelogData,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -85,7 +86,6 @@ const EditLocation = (props) => {
             init
         );
         const returnedData = await result.json();
-        console.log(returnedData);
         let serosLocationsCopy = [...serosLocations];
         serosLocationsCopy[markerBeingEdited] = returnedData.locationResult;
         setSerosLocations(serosLocationsCopy);
@@ -96,6 +96,9 @@ const EditLocation = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setMarkerBeingEdited(null);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     // Type selection box variables
