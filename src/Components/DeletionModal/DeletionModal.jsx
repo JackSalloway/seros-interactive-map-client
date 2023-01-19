@@ -21,7 +21,7 @@ const DeletionModal = (props) => {
         dataNotifications,
         setDataNotifications,
         username,
-        changelogData,
+
         setChangelogData,
     } = props;
 
@@ -51,7 +51,6 @@ const DeletionModal = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
-                changelogData={changelogData}
                 setChangelogData={setChangelogData}
             />
         );
@@ -65,7 +64,6 @@ const DeletionModal = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
-                changelogData={changelogData}
                 setChangelogData={setChangelogData}
             />
         );
@@ -80,7 +78,6 @@ const DeletionModal = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
-                changelogData={changelogData}
                 setChangelogData={setChangelogData}
             />
         );
@@ -95,7 +92,6 @@ const DeletionModal = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
-                changelogData={changelogData}
                 setChangelogData={setChangelogData}
             />
         );

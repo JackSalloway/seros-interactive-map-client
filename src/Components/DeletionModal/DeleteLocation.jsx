@@ -14,7 +14,6 @@ const DeleteLocation = (props) => {
         dataNotifications,
         setDataNotifications,
         username,
-        changelogData,
         setChangelogData,
     } = props;
 
