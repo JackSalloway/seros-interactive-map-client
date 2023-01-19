@@ -43,6 +43,7 @@ function App() {
     const [serosLocations, setSerosLocations] = useState(null);
     const [serosQuests, setSerosQuests] = useState(null);
     const [serosNPCs, setSerosNPCs] = useState(null);
+    const [changelogData, setChangelogData] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
 
     // Selected data states
     const [selectedLocationNotes, setSelectedLocationNotes] = useState(null);
@@ -133,6 +134,27 @@ function App() {
             .then((response) => response.json())
             .then((NPCs) => setSerosNPCs(NPCs));
     }, [serosNPCs, setSerosNPCs, campaign]);
+
+    // Fetch changelog data from database
+    useEffect(() => {
+        if (changelogData !== null) {
+            return;
+        }
+
+        if (campaign === null) {
+            return; // Checks if the user has selected a campaign or not
+        }
+
+        fetch(
+            `${process.env.REACT_APP_API_URL}/changelog_data/?campaign_id=${campaign.id}`,
+            {
+                method: "GET",
+                mode: "cors",
+            }
+        )
+            .then((response) => response.json())
+            .then((changelog) => setChangelogData(changelog.changes));
+    }, [changelogData, campaign]);
 
     // Check cookies on startup to see if user was logged in last time they used the site and their refresh token is still valid.
     useEffect(() => {
@@ -323,6 +345,8 @@ function App() {
                 setRenderCampaignForm={setRenderCampaignForm}
                 renderCampaignSettings={renderCampaignSettings}
                 setRenderCampaignSettings={setRenderCampaignSettings}
+                changelogData={changelogData}
+                setChangelogData={setChangelogData}
             />
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (

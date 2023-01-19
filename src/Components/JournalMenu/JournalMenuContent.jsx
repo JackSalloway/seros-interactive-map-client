@@ -3,7 +3,7 @@ import "./JournalMenuContent.css";
 import LocationListWrapper from "../LocationList/LocationListWrapper";
 import QuestListWrapper from "../QuestList/QuestListWrapper";
 import NPCListWrapper from "../NPCList/NPCListWrapper";
-import FrontPageWrapper from "../FrontPageWrapper/FrontPageWrapper";
+import ChangelogWrapper from "../ChangelogWrapper/ChangelogWrapper";
 import EditLocation from "../EditLocation/EditLocation";
 
 const JournalMenuContent = (props) => {
@@ -28,6 +28,8 @@ const JournalMenuContent = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        changelogData,
+        setChangelogData,
     } = props;
 
     if (markerBeingEdited !== null) {
@@ -104,10 +106,12 @@ const JournalMenuContent = (props) => {
             return npcListContent();
         }
 
+        // No tab has been selected, render changelog instead
         return (
-            <FrontPageWrapper
-                markerBeingEdited={markerBeingEdited}
-                setMarkerBeingEdited={setMarkerBeingEdited}
+            <ChangelogWrapper
+                campaign={campaign}
+                changelogData={changelogData}
+                setChangelogData={setChangelogData}
             />
         );
     };

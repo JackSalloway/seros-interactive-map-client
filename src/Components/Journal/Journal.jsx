@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./Journal.css";
 import LocationNotes from "../LocationNotes/LocationNotes";
 // import DashboardJournal from "../DashboardJournal/DashboardJournal";
@@ -35,6 +34,8 @@ const Journal = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        changelogData,
+        setChangelogData,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -99,6 +100,8 @@ const Journal = (props) => {
                             dataNotifications={dataNotifications}
                             setDataNotifications={setDataNotifications}
                             campaign={campaign}
+                            changelogData={changelogData}
+                            setChangelogData={setChangelogData}
                         />
                     </div>
                 )}
