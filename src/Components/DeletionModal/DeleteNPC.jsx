@@ -11,6 +11,8 @@ const DeleteNPC = (props) => {
         setSerosNPCs,
         dataNotifications,
         setDataNotifications,
+        setChangelogData,
+        username,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
@@ -28,8 +30,10 @@ const DeleteNPC = (props) => {
         e.preventDefault();
 
         const dataToDelete = {
-            data_name: data.name,
-            data_id: data._id,
+            npc_name: data.name,
+            npc_id: data._id,
+            username: username,
+            npc_campaign: data.campaign,
         };
 
         const init = {
@@ -39,8 +43,11 @@ const DeleteNPC = (props) => {
             mode: "cors",
             credentials: "include",
         };
-        await fetch(`${process.env.REACT_APP_API_URL}/delete_npc`, init);
-        // const returnedData = await result.json();
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/delete_npc`,
+            init
+        );
+        const returnedData = await result.json();
         // setSerosNPCs(returnedData);
         let serosNPCsCopy = [...serosNPCs];
         const npcToRemove = serosNPCs.map((npc) => npc._id).indexOf(data._id);
@@ -53,6 +60,9 @@ const DeleteNPC = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setDeleteData(null);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     return (

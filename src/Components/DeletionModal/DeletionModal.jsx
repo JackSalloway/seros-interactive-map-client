@@ -21,7 +21,6 @@ const DeletionModal = (props) => {
         dataNotifications,
         setDataNotifications,
         username,
-
         setChangelogData,
     } = props;
 
