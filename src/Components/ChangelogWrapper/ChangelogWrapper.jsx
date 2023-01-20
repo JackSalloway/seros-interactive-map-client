@@ -30,15 +30,19 @@ const ChangelogWrapper = (props) => {
         <div>
             <h2>{campaign.name}</h2>
             <h3>changelog</h3>
-            {changelogData.map((change) => {
-                return changelogDiv(
-                    change.username,
-                    change.operation_type,
-                    change.data_affected,
-                    change.data_name,
-                    change.created_at
-                );
-            })}
+            {changelogData.length === 0 ? (
+                <h3>No changes yet</h3>
+            ) : (
+                changelogData.map((change) => {
+                    return changelogDiv(
+                        change.username,
+                        change.operation_type,
+                        change.data_affected,
+                        change.data_name,
+                        change.created_at
+                    );
+                })
+            )}
         </div>
     );
 };
