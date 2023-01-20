@@ -15,13 +15,14 @@ const NPCNotes = (props) => {
         setDeleteData,
         questList,
         locationList,
-
         serosNPCs,
         setSerosNPCs,
         originalIndex,
         dataNotifications,
         setDataNotifications,
         campaign,
+        setChangelogData,
+        username,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -216,6 +217,7 @@ const NPCNotes = (props) => {
             npc_quests: updatedNPCQuests.map((quest) => quest.value),
             npc_campaign: campaign.id,
             npc_id: npc._id,
+            username: username,
         };
 
         const init = {
@@ -232,7 +234,7 @@ const NPCNotes = (props) => {
         );
         const returnedData = await result.json();
         let serosNPCsCopy = [...serosNPCs];
-        serosNPCsCopy[originalIndex] = returnedData;
+        serosNPCsCopy[originalIndex] = returnedData.npcResult;
         setSerosNPCs(serosNPCsCopy);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
@@ -241,6 +243,9 @@ const NPCNotes = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setEditing(false);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     if (editing === true) {

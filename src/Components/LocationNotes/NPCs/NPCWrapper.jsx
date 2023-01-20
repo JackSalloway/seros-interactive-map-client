@@ -92,6 +92,8 @@ const NPCWrapper = (props) => {
                                 dataNotifications={dataNotifications}
                                 setDataNotifications={setDataNotifications}
                                 campaign={campaign}
+                                setChangelogData={setChangelogData}
+                                username={username}
                             />
                         ))}
                         {/* Has add new NPC been clicked? */}
