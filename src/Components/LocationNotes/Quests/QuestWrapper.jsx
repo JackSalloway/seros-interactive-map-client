@@ -92,6 +92,8 @@ const QuestWrapper = (props) => {
                                 dataNotifications={dataNotifications}
                                 setDataNotifications={setDataNotifications}
                                 campaign={campaign}
+                                setChangelogData={setChangelogData}
+                                username={username}
                             />
                         ))}
                         {/* Has new quest been clicked? */}

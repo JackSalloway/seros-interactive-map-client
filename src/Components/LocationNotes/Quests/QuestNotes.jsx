@@ -15,7 +15,6 @@ const QuestNotes = (props) => {
         originalIndex,
         setDeleteData,
         locationList,
-
         serosQuests,
         setSerosQuests,
         setQuestUpdated,
@@ -23,6 +22,8 @@ const QuestNotes = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        setChangelogData,
+        username,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -123,6 +124,7 @@ const QuestNotes = (props) => {
             quest_associated_locations: updatedQuestSelectedLocationsData,
             quest_campaign: campaign.id,
             quest_id: quest._id,
+            username: username,
         };
 
         const init = {
@@ -142,15 +144,15 @@ const QuestNotes = (props) => {
         // The following assignment is needed due to how the latlng values were being returned as they were being returned like this:
         // {latlng: { lat: {$numberDecimal: LAT_VALUE}, lng: {$numberDecimal: LNG_VALUE} }}
         // I suspect this has something to do with the way the backend is returning the mongodb document - however this works for now.
-        returnedData.questResult.associated_locations[0].latlng = {
-            lat: returnedData.questResult.associated_locations[0].latlng.lat
-                .$numberDecimal,
-            lng: returnedData.questResult.associated_locations[0].latlng.lng
-                .$numberDecimal,
+        returnedData.result.questResult.associated_locations[0].latlng = {
+            lat: returnedData.result.questResult.associated_locations[0].latlng
+                .lat.$numberDecimal,
+            lng: returnedData.result.questResult.associated_locations[0].latlng
+                .lng.$numberDecimal,
         };
-        serosQuestsCopy[originalIndex] = returnedData.questResult;
+        serosQuestsCopy[originalIndex] = returnedData.result.questResult;
         setSerosQuests(serosQuestsCopy);
-        setSerosNPCs(returnedData.npcResult);
+        setSerosNPCs(returnedData.result.npcResult);
         setQuestUpdated(true);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
@@ -159,6 +161,9 @@ const QuestNotes = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setEditing(false);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     // Function to handle changes in the selection box
