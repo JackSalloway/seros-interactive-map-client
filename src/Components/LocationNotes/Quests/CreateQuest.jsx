@@ -16,6 +16,8 @@ const CreateQuest = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        setChangelogData,
+        username,
     } = props;
 
     // Set states
@@ -41,6 +43,7 @@ const CreateQuest = (props) => {
                 (location) => location.value
             ),
             quest_campaign: campaign.id,
+            username: username,
         };
 
         const init = {
@@ -56,7 +59,7 @@ const CreateQuest = (props) => {
             init
         );
         const returnedData = await result.json();
-        setSerosQuests([...serosQuests, ...returnedData]);
+        setSerosQuests([...serosQuests, ...returnedData.questResult]);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
             message: `Quest: ${newQuestName}, successfully created!`,
@@ -64,6 +67,9 @@ const CreateQuest = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setAddNewQuest(false);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     // Function to handle changes in the selection box

@@ -13,7 +13,6 @@ const QuestWrapper = (props) => {
         locationQuests,
         setDeleteData,
         locationList,
-
         serosQuests,
         setSerosQuests,
         setSerosNPCs,
@@ -23,6 +22,8 @@ const QuestWrapper = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        setChangelogData,
+        username,
     } = props;
     return (
         <div
@@ -148,6 +149,8 @@ const QuestWrapper = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
+                    setChangelogData={setChangelogData}
+                    username={username}
                 />
             ) : null}
         </div>
