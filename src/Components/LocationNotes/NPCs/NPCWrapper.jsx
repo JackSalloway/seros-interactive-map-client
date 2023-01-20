@@ -14,7 +14,6 @@ const NPCWrapper = (props) => {
         setDeleteData,
         questList,
         locationList,
-
         serosNPCs,
         setSerosNPCs,
         addNewNPC,
@@ -22,6 +21,8 @@ const NPCWrapper = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        setChangelogData,
+        username,
     } = props;
 
     return (
@@ -149,6 +150,8 @@ const NPCWrapper = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
+                    setChangelogData={setChangelogData}
+                    username={username}
                 />
             ) : null}
         </div>

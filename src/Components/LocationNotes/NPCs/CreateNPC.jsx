@@ -17,6 +17,8 @@ const CreateNPC = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
+        setChangelogData,
+        username,
     } = props;
 
     // Set states
@@ -48,6 +50,7 @@ const CreateNPC = (props) => {
             ),
             npc_quests: newNPCQuests,
             npc_campaign: campaign.id,
+            username: username,
         };
 
         const init = {
@@ -63,7 +66,7 @@ const CreateNPC = (props) => {
             init
         );
         const returnedData = await result.json();
-        setSerosNPCs([...serosNPCs, ...returnedData]);
+        setSerosNPCs([...serosNPCs, ...returnedData.npcResult]);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
             message: `NPC: ${newNPCName}, successfully created!`,
@@ -71,6 +74,9 @@ const CreateNPC = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setAddNewNPC(false);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     // Function to handle changes inside the npc race selection box
