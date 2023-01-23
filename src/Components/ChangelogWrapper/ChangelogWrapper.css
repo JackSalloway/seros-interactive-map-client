@@ -1,0 +1,49 @@
+#changelog-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: static;
+}
+
+.changelog-div {
+    /* color: red; */
+    margin: 0.5rem 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    background-color: rgba(14, 22, 31, 0.5);
+    transition: transform 0.1s linear;
+}
+
+.changelog-div:hover {
+    transform: scale(1.01);
+}
+
+#changelog-wrapper-header {
+    width: 100%;
+    padding: 0.5rem 0;
+    background-color: rgba(14, 22, 31, 1);
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    align-self: center;
+    text-align: center;
+    position: sticky;
+    top: 0rem; /* This is needed to apply the sticky positioning style */
+    z-index: 1;
+}
+
+#changelog-wrapper-header > h2 {
+    font-size: 2rem;
+}
+
+#changelog-wrapper-header > h3 {
+    font-size: 1.5rem;
+}
+
+#changelog-empty {
+    align-self: center;
+    padding: 1rem;
+}
+
+.changelog-div-content {
+    padding: 0.5rem 0 0 1rem;
+}
