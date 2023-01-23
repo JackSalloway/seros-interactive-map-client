@@ -153,7 +153,7 @@ function App() {
             }
         )
             .then((response) => response.json())
-            .then((changelog) => setChangelogData(changelog.changes));
+            .then((changelog) => setChangelogData(changelog.changes.reverse()));
     }, [changelogData, campaign]);
 
     // Check cookies on startup to see if user was logged in last time they used the site and their refresh token is still valid.
