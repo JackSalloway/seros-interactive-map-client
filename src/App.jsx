@@ -158,7 +158,7 @@ function App() {
                     setChangelogData([]);
                     return;
                 }
-                setChangelogData(changelog.changes.reverse());
+                setChangelogData(changelog.changes);
             });
     }, [changelogData, campaign]);
 
