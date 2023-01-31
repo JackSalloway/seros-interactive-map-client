@@ -105,7 +105,6 @@ const NPCListNotes = (props) => {
             init
         );
         const returnedData = await result.json();
-        console.log(returnedData);
         let serosNPCsCopy = [...serosNPCs];
         serosNPCsCopy[originalIndex] = returnedData.npcResult;
         setSerosNPCs(serosNPCsCopy);
