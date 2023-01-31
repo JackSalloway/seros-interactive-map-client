@@ -3,12 +3,31 @@ import "./NPCListWrapper.css";
 import NPCListNotes from "./NPCListNotes";
 
 const NPCListWrapper = (props) => {
-    const { serosLocations, setLocationNotes, serosNPCs, map } = props;
+    const {
+        serosLocations,
+        setLocationNotes,
+        serosNPCs,
+        setSerosNPCs,
+        map,
+        campaign,
+        userAuthenticated,
+        dataNotifications,
+        setDataNotifications,
+    } = props;
 
     // Create shallow copy variable for reuse
-    const shallowCopy = Array.from(serosNPCs).sort(function (a, b) {
-        var npcA = a.name.toUpperCase();
-        var npcB = b.name.toUpperCase();
+    // Perhaps this is where I could insert the original index value?
+
+    const [sortedNPCArray, setSortedNPCArray] = useState([]);
+
+    // Extract the original index from the returned npc data request
+    const fetchOriginalIndex = serosNPCs.reduce((prevNPCs, npcData, index) => {
+        return [...prevNPCs, { npcData, originalIndex: index }];
+    }, []);
+
+    const shallowCopy = Array.from(fetchOriginalIndex).sort(function (a, b) {
+        var npcA = a.npcData.name.toUpperCase();
+        var npcB = b.npcData.name.toUpperCase();
         return npcA < npcB ? -1 : npcA > npcB ? 1 : 0;
     });
 
@@ -21,6 +40,9 @@ const NPCListWrapper = (props) => {
     // const [hostileSearchValue, setHostileSearchValue] = useState("");
 
     // Filter the friendly npc list whenever the user edits the friendlySearchValue state
+    // This is the use effect causing infinite renders when the deletion modal is rendered.
+    // NOTE this only happens when the npc list is active, I assume that it will also apply to the queset list in that case.
+
     useEffect(() => {
         if (searchValue === "") {
             setNPCList(shallowCopy);
@@ -53,6 +75,9 @@ const NPCListWrapper = (props) => {
     //     }
     // }, [hostileSearchValue, shallowCopy]);
 
+    // if (npcList === undefined) return null;
+    console.log(npcList);
+
     return (
         <div id="npc-list-wrapper">
             <div className="npc-list-wrapper-category" id="npc-list-friendly">
@@ -67,11 +92,18 @@ const NPCListWrapper = (props) => {
                 </div>
                 {npcList.map((npc) => (
                     <NPCListNotes
-                        npc={npc}
-                        key={npc._id}
+                        npc={npc.npcData}
+                        originalIndex={npc.originalIndex}
+                        key={npc.npcData._id}
                         map={map}
                         serosLocations={serosLocations}
                         setLocationNotes={setLocationNotes}
+                        campaignID={campaign.id}
+                        username={userAuthenticated.username}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
+                        serosNPCs={serosNPCs}
+                        setSerosNPCs={setSerosNPCs}
                     />
                 ))}
             </div>

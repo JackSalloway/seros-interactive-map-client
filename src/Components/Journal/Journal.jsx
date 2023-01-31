@@ -87,6 +87,7 @@ const Journal = (props) => {
                             selectedTab={selectedTab}
                             serosQuests={serosQuests}
                             serosNPCs={serosNPCs}
+                            setSerosNPCs={setSerosNPCs}
                             renderCreationMarker={renderCreationMarker}
                             setRenderCreationMarker={setRenderCreationMarker}
                             creationMarkerLatLng={creationMarkerLatLng}

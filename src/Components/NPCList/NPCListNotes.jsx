@@ -9,18 +9,26 @@ import {
 import "./NPCListNotes.css";
 
 const NPCListNotes = (props) => {
-    const { npc, map, serosLocations, setLocationNotes } = props;
+    const {
+        npc,
+        originalIndex,
+        map,
+        serosLocations,
+        setLocationNotes,
+        campaignID,
+        username,
+        dataNotifications,
+        setDataNotifications,
+        serosNPCs,
+        setSerosNPCs,
+    } = props;
 
     const [selected, setSelected] = useState(false);
 
     // Update "locationless" npc states
     const [locationList, setLocationList] = useState([]);
-    const [newNPCSelectedLocations, setNewNPCSelectedLocations] = useState([
-        // {
-        //     value: he.decode(locationNotes._id),
-        //     label: he.decode(locationNotes.name),
-        // },
-    ]);
+    const [updatedNPCSelectedLocations, setUpdatedNPCSelectedLocations] =
+        useState([]);
 
     // Populate locationList with locations
     useEffect(() => {
@@ -34,6 +42,8 @@ const NPCListNotes = (props) => {
             ]);
         }
     }, [serosLocations, locationList]);
+
+    // console.log(campaignID, username, npc);
 
     const expandDownChevron = (
         <FontAwesomeIcon
@@ -73,14 +83,45 @@ const NPCListNotes = (props) => {
     const npcBriefDesc = he.decode(npc.desc.split(".")[0] + "...");
 
     // POST request to update a locationless npc and assign locations to it.
-    const assignLocationsToNPC = (e) => {
-        e.preventDefault();
+    const assignLocationsToNPC = async () => {
+        const updatedNPCData = {
+            npc_associated_locations: updatedNPCSelectedLocations.map(
+                (location) => location.value
+            ),
+            npc_id: npc._id,
+            npc_name: npc.name,
+            npc_campaign: campaignID,
+            username: username,
+        };
+        const init = {
+            method: "POST",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify(updatedNPCData),
+            mode: "cors",
+            credentials: "include",
+        };
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/locationless_npc`, // Added locationless on the end to differentiate from other update npc route
+            init
+        );
+        const returnedData = await result.json();
+        console.log(returnedData);
+        let serosNPCsCopy = [...serosNPCs];
+        serosNPCsCopy[originalIndex] = returnedData.npcResult;
+        setSerosNPCs(serosNPCsCopy);
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `NPC: ${npc.name} successfully updated!`,
+            important: false,
+        });
+        setDataNotifications([...notificationsCopy]);
+        setSelected(false);
     };
 
     // Function to handle changes inside the npc associated locations box
     const handleNPCLocationChange = (value) => {
         // Having issues keeping the location that is already selected in the selection box (not allowing it to be removed)
-        setNewNPCSelectedLocations(
+        setUpdatedNPCSelectedLocations(
             value.map((location) => {
                 return {
                     value: he.decode(location.value),
@@ -97,7 +138,7 @@ const NPCListNotes = (props) => {
             menuPlacement="auto" // This prevents the menu from increasing the page size if it is at the bottom of the journal component. It does this by placing the menu above the options box
             menuPortalTarget={document.body} // This is used to give the menu a z-index to prevent it being hidden by other elements
             options={locationList}
-            defaultValue={newNPCSelectedLocations}
+            defaultValue={updatedNPCSelectedLocations}
             isMulti={true}
             onChange={handleNPCLocationChange}
             styles={customStyles}
@@ -117,11 +158,20 @@ const NPCListNotes = (props) => {
                             There are no locations available, create one first.
                         </div>
                     ) : (
-                        npcLocationSelection()
+                        <>
+                            {npcLocationSelection()}
+                            <button
+                                disabled={
+                                    updatedNPCSelectedLocations.length === 0
+                                        ? true
+                                        : false
+                                }
+                                onClick={assignLocationsToNPC}
+                            >
+                                Update npc
+                            </button>
+                        </>
                     )}
-                    {/* {if (locationList.length === 0) {
-                        return (<div></div>)
-                    }} */}
                 </div>
             );
         } else {

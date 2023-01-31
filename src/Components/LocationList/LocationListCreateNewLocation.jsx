@@ -63,7 +63,6 @@ const LocationListCreateNewLocation = (props) => {
             init
         );
         const returnedData = await result.json();
-        console.log(returnedData);
         let serosLocationsCopy = [...serosLocations];
         serosLocationsCopy.push(returnedData.locationResult);
         setSerosLocations(serosLocationsCopy);
