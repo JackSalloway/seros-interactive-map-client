@@ -15,11 +15,6 @@ const NPCListWrapper = (props) => {
         setDataNotifications,
     } = props;
 
-    // Create shallow copy variable for reuse
-    // Perhaps this is where I could insert the original index value?
-
-    const [sortedNPCArray, setSortedNPCArray] = useState([]);
-
     // Extract the original index from the returned npc data request
     const fetchOriginalIndex = serosNPCs.reduce((prevNPCs, npcData, index) => {
         return [...prevNPCs, { npcData, originalIndex: index }];
@@ -34,10 +29,6 @@ const NPCListWrapper = (props) => {
     // const [NPCList, setNPCList] = useState(serosNPCs);
     const [npcList, setNPCList] = useState(shallowCopy);
     const [searchValue, setFriendlySearchValue] = useState("");
-    // const [hostileNPCList, setHostileNPCList] = useState(
-    //     shallowCopy.filter((npc) => npc.disposition === "Hostile")
-    // );
-    // const [hostileSearchValue, setHostileSearchValue] = useState("");
 
     // Filter the friendly npc list whenever the user edits the friendlySearchValue state
     // This is the use effect causing infinite renders when the deletion modal is rendered.
@@ -55,28 +46,6 @@ const NPCListWrapper = (props) => {
             );
         }
     }, [searchValue, shallowCopy]);
-
-    // Filter the hostile npc list whenever the user edits the hostileSearchValue state
-    // useEffect(() => {
-    //     if (hostileSearchValue === "") {
-    //         setHostileNPCList(
-    //             shallowCopy.filter((npc) => npc.disposition === "Hostile") // Think this still works as .sort actually edits the array
-    //         );
-    //     } else {
-    //         setHostileNPCList(
-    //             shallowCopy
-    //                 .filter((npc) => npc.disposition === "Hostile")
-    //                 .filter((npc) =>
-    //                     npc.name
-    //                         .toLowerCase()
-    //                         .includes(hostileSearchValue.toLowerCase())
-    //                 )
-    //         );
-    //     }
-    // }, [hostileSearchValue, shallowCopy]);
-
-    // if (npcList === undefined) return null;
-    console.log(npcList);
 
     return (
         <div id="npc-list-wrapper">
