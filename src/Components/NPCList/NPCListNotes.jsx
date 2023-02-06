@@ -44,8 +44,6 @@ const NPCListNotes = (props) => {
         }
     }, [serosLocations, locationList]);
 
-    // console.log(campaignID, username, npc);
-
     const expandDownChevron = (
         <FontAwesomeIcon
             icon="chevron-down"
