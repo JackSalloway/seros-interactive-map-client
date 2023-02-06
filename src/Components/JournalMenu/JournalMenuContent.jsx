@@ -97,6 +97,7 @@ const JournalMenuContent = (props) => {
                 userAuthenticated={userAuthenticated}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
+                setChangelogData={setChangelogData}
             />
         );
     };

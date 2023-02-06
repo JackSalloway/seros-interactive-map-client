@@ -21,6 +21,7 @@ const NPCListNotes = (props) => {
         setDataNotifications,
         serosNPCs,
         setSerosNPCs,
+        setChangelogData,
     } = props;
 
     const [selected, setSelected] = useState(false);
@@ -115,6 +116,9 @@ const NPCListNotes = (props) => {
         });
         setDataNotifications([...notificationsCopy]);
         setSelected(false);
+
+        // Update changelog
+        setChangelogData(returnedData.changelogResult.changes);
     };
 
     // Function to handle changes inside the npc associated locations box

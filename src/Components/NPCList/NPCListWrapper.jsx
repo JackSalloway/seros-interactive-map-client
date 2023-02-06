@@ -13,6 +13,7 @@ const NPCListWrapper = (props) => {
         userAuthenticated,
         dataNotifications,
         setDataNotifications,
+        setChangelogData,
     } = props;
 
     // Extract the original index from the returned npc data request
@@ -73,6 +74,7 @@ const NPCListWrapper = (props) => {
                         setDataNotifications={setDataNotifications}
                         serosNPCs={serosNPCs}
                         setSerosNPCs={setSerosNPCs}
+                        setChangelogData={setChangelogData}
                     />
                 ))}
             </div>
