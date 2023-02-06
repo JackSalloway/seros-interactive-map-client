@@ -59,11 +59,10 @@ const DeleteLocation = (props) => {
         // const location = { ...serosLocationsCopy[indexToUpdate] };
         // location.sub_locations = [...returnedData.sub_locations];
         // serosLocationsCopy[indexToUpdate] = location;
-        // setSerosNPCs(result.newNPCs);
-        // setSerosQuests(result.newQuests);
         serosLocationsCopy.splice(indexToRemove, 1);
-
         setSerosLocations(serosLocationsCopy);
+        setSerosNPCs([...returnedData.updatedNPCList]);
+        setSerosQuests([...returnedData.updatedQuestList]);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
             message: `Location: ${data.name}, successfully deleted.`,
@@ -71,8 +70,6 @@ const DeleteLocation = (props) => {
         });
         setDataNotifications(notificationsCopy);
         setDeleteData(null);
-
-        console.log(returnedData);
 
         // Update changelogData
         setChangelogData(returnedData.changelogResult.changes);
