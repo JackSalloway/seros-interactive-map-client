@@ -289,6 +289,9 @@ function App() {
                 setSerosLocations={setSerosLocations}
                 setSerosNPCs={setSerosNPCs}
                 setSerosQuests={setSerosQuests}
+                setSelectedLocationNotes={setSelectedLocationNotes}
+                setSelectedLocationNPCs={setSelectedLocationNPCs}
+                setSelectedLocationQuests={setSelectedLocationQuests}
                 setChangelogData={setChangelogData}
                 setRenderCampaignSettings={setRenderCampaignSettings}
             />

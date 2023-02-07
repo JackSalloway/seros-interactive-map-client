@@ -14,6 +14,9 @@ const HeaderBar = (props) => {
         setSerosLocations,
         setSerosNPCs,
         setSerosQuests,
+        setSelectedLocationNotes,
+        setSelectedLocationNPCs,
+        setSelectedLocationQuests,
         setChangelogData,
         setRenderCampaignSettings,
     } = props;
@@ -67,6 +70,9 @@ const HeaderBar = (props) => {
                                 setSerosLocations(null);
                                 setSerosNPCs(null);
                                 setSerosQuests(null);
+                                setSelectedLocationNotes(null);
+                                setSelectedLocationNPCs(null);
+                                setSelectedLocationQuests(null);
                                 setChangelogData(null);
                                 setRenderCampaignSettings(null);
                             }}
