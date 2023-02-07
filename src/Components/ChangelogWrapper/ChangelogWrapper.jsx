@@ -1,5 +1,6 @@
 import React from "react";
 import dayjs from "dayjs";
+import he from "he";
 
 // Style imports
 import "./ChangelogWrapper.css";
@@ -14,12 +15,12 @@ const changelogDiv = (
     return (
         <div className="changelog-div" key={date}>
             <div className="changelog-div-header">
-                {username} {dayjs(date).format("DD/MM/YYYY")}
+                {he.decode(username)} {dayjs(date).format("DD/MM/YYYY")}
                 {" at "}
                 {dayjs(date).format("HH:mm:ss")}
             </div>
             <div className="changelog-div-content">
-                {operationType} {dataAffected}: {dataName}
+                {operationType} {dataAffected}: {he.decode(dataName)}
             </div>
         </div>
     );
