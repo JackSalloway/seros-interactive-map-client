@@ -6,12 +6,31 @@ import "./QuestListWrapper.css";
 import QuestListNotes from "./QuestListNotes";
 
 const QuestListWrapper = (props) => {
-    const { serosLocations, setLocationNotes, serosQuests, map } = props;
+    const {
+        serosLocations,
+        setLocationNotes,
+        serosQuests,
+        setSerosQuests,
+        map,
+        campaign,
+        userAuthenticated,
+        dataNotifications,
+        setDataNotifications,
+        setChangelogData,
+    } = props;
+
+    // Extract the original index from the returned npc data request
+    const fetchOriginalIndex = serosQuests.reduce(
+        (prevQuests, questData, index) => {
+            return [...prevQuests, { questData, originalIndex: index }];
+        },
+        []
+    );
 
     // Create shallow copy variable for reuse
-    const shallowCopy = Array.from(serosQuests).sort(function (a, b) {
-        var questA = a.name.toUpperCase();
-        var questB = b.name.toUpperCase();
+    const shallowCopy = Array.from(fetchOriginalIndex).sort(function (a, b) {
+        var questA = a.questData.name.toUpperCase();
+        var questB = b.questData.name.toUpperCase();
         return questA < questB ? -1 : questA > questB ? 1 : 0;
     });
 
@@ -65,11 +84,19 @@ const QuestListWrapper = (props) => {
 
             {questList.map((quest) => (
                 <QuestListNotes
-                    quest={quest}
+                    quest={quest.questData}
+                    originalIndex={quest.originalIndex}
                     key={quest._id}
                     map={map}
                     serosLocations={serosLocations}
                     setLocationNotes={setLocationNotes}
+                    campaignID={campaign.id}
+                    username={userAuthenticated.username}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
+                    serosQuests={serosQuests}
+                    setSerosQuests={setSerosQuests}
+                    setChangelogData={setChangelogData}
                 />
             ))}
             {/* Removed the tooltip toggle logic for now, plan to implement it again at a later date within in this and other wrapper components */}

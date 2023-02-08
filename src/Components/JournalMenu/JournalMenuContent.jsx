@@ -14,6 +14,7 @@ const JournalMenuContent = (props) => {
         userAuthenticated,
         selectedTab,
         serosQuests,
+        setSerosQuests,
         serosNPCs,
         setSerosNPCs,
         renderCreationMarker,
@@ -80,7 +81,13 @@ const JournalMenuContent = (props) => {
                 serosLocations={serosLocations}
                 setLocationNotes={setLocationNotes}
                 serosQuests={serosQuests}
+                setSerosQuests={setSerosQuests}
                 map={map}
+                campaign={campaign}
+                userAuthenticated={userAuthenticated}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+                setChangelogData={setChangelogData}
             />
         );
     };
