@@ -334,6 +334,7 @@ function App() {
                 setSerosLocations={setSerosLocations}
                 serosQuests={serosQuests}
                 setSerosQuests={setSerosQuests}
+                deleteData={deleteData}
                 setDeleteData={setDeleteData}
                 userAuthenticated={userAuthenticated}
                 setUserAuthenticated={setUserAuthenticated}

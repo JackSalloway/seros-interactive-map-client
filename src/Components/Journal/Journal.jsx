@@ -19,6 +19,7 @@ const Journal = (props) => {
         setSerosLocations,
         serosQuests,
         setSerosQuests,
+        deleteData,
         setDeleteData,
         userAuthenticated,
         setRenderCreationMarker,
@@ -39,6 +40,14 @@ const Journal = (props) => {
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
+
+    // useEffect to render the changelog section (frontpage) when a user clicks delete location whilst location notes is not selected.
+    useEffect(() => {
+        if (locationNotes === null && deleteData !== null) {
+            setSelectedTab("Front Page");
+            return;
+        }
+    }, [deleteData, locationNotes]);
 
     useEffect(() => {
         if (markerBeingEdited !== null) {
