@@ -11,7 +11,6 @@ import "./NPCListNotes.css";
 const NPCListNotes = (props) => {
     const {
         npc,
-        // originalIndex,
         map,
         serosLocations,
         setLocationNotes,
@@ -108,7 +107,6 @@ const NPCListNotes = (props) => {
         const npcIndexToUpdate = serosNPCsCopy.findIndex(
             (originalNPC) => originalNPC._id === npc._id
         );
-        console.log(npcIndexToUpdate);
         serosNPCsCopy[npcIndexToUpdate] = returnedData.npcResult;
         setSerosNPCs(serosNPCsCopy);
         const notificationsCopy = dataNotifications;

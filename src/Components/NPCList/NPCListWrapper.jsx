@@ -17,24 +17,14 @@ const NPCListWrapper = (props) => {
         setChangelogData,
     } = props;
 
-    // Extract the original index from the returned npc data request
-    // const fetchOriginalIndex = serosNPCs.reduce((prevNPCs, npcData, index) => {
-    //     return [...prevNPCs, { npcData, originalIndex: index }];
-    // }, []);
-
     const shallowCopy = serosNPCsFiltered.sort(function (a, b) {
         var npcA = a.name.toUpperCase();
         var npcB = b.name.toUpperCase();
         return npcA < npcB ? -1 : npcA > npcB ? 1 : 0;
     });
 
-    // const [NPCList, setNPCList] = useState(serosNPCs);
     const [npcList, setNPCList] = useState(shallowCopy);
     const [searchValue, setFriendlySearchValue] = useState("");
-
-    // Filter the friendly npc list whenever the user edits the friendlySearchValue state
-    // This is the use effect causing infinite renders when the deletion modal is rendered.
-    // NOTE this only happens when the npc list is active, I assume that it will also apply to the queset list in that case.
 
     useEffect(() => {
         if (searchValue === "") {

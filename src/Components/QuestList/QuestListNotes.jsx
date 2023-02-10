@@ -11,7 +11,6 @@ import "./QuestListNotes.css";
 const QuestListNotes = (props) => {
     const {
         quest,
-        // originalIndex,
         map,
         serosLocations,
         setLocationNotes,
@@ -23,20 +22,6 @@ const QuestListNotes = (props) => {
         setSerosQuests,
         setChangelogData,
     } = props;
-
-    // quest={quest.questData}
-    // originalIndex={quest.originalIndex}
-    // key={quest._id}
-    // map={map}
-    // serosLocations={serosLocations}
-    // setLocationNotes={setLocationNotes}
-    // campaignID={campaign.id}
-    // username={userAuthenticated.username}
-    // dataNotifications={dataNotifications}
-    // setDataNotifications={setDataNotifications}
-    // serosQuests={serosQuests}
-    // setSerosQuests={setSerosQuests}
-    // setChangelogData={setChangelogData}
 
     const [selected, setSelected] = useState(false);
 
@@ -136,13 +121,6 @@ const QuestListNotes = (props) => {
         const questIndexToUpdate = serosQuestsCopy.findIndex(
             (originalQuest) => originalQuest._id === quest._id
         );
-        console.log(questIndexToUpdate);
-
-        // npcData.associated_locations.findIndex(
-        //     (npcLocation) =>
-        //         npcLocation._id === selectedLocationNotes._id
-        // ) !== -1
-
         serosQuestsCopy[questIndexToUpdate] = returnedData.questResult;
         setSerosQuests(serosQuestsCopy);
         // Update notifications values

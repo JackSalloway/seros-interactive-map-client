@@ -20,14 +20,6 @@ const QuestListWrapper = (props) => {
         setChangelogData,
     } = props;
 
-    // Extract the original index from the returned npc data request
-    // const fetchOriginalIndex = serosQuests.reduce(
-    //     (prevQuests, questData, index) => {
-    //         return [...prevQuests, { questData, originalIndex: index }];
-    //     },
-    //     []
-    // );
-
     // Create shallow copy variable for reuse
     const shallowCopy = serosQuestsFiltered.sort(function (a, b) {
         var questA = a.name.toUpperCase();
@@ -86,7 +78,6 @@ const QuestListWrapper = (props) => {
             {questList.map((quest) => (
                 <QuestListNotes
                     quest={quest}
-                    // originalIndex={quest.originalIndex}
                     key={quest._id}
                     map={map}
                     serosLocations={serosLocations}
