@@ -13,6 +13,7 @@ const LocationListCreateNewLocation = (props) => {
         map,
         setRenderCreationMarker,
         creationMarkerLatLng,
+        setCreationMarkerLatLng,
         setCreationMarkerType,
         serosLocations,
         setSerosLocations,
@@ -33,7 +34,7 @@ const LocationListCreateNewLocation = (props) => {
     const [locationMarked, setLocationMarked] = useState(false);
     const [locationVisited, setLocationVisited] = useState(false);
 
-    // Create post request
+    // POST request to create a new location
     const postData = async (e) => {
         e.preventDefault();
 
@@ -72,7 +73,10 @@ const LocationListCreateNewLocation = (props) => {
             important: false,
         });
         setDataNotifications(notificationsCopy);
+        // Cleanup creation marker map states for next creation marker
         setRenderCreationMarker(false);
+        setCreationMarkerLatLng([0, 0]);
+        setCreationMarkerType("miscellaneous");
         setChangelogData(returnedData.changelogResult.changes);
     };
 

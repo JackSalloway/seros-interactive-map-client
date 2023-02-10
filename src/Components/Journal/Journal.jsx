@@ -25,6 +25,7 @@ const Journal = (props) => {
         setRenderCreationMarker,
         renderCreationMarker,
         creationMarkerLatLng,
+        setCreationMarkerLatLng,
         setCreationMarkerType,
         map,
         markerBeingEdited,
@@ -101,6 +102,7 @@ const Journal = (props) => {
                             renderCreationMarker={renderCreationMarker}
                             setRenderCreationMarker={setRenderCreationMarker}
                             creationMarkerLatLng={creationMarkerLatLng}
+                            setCreationMarkerLatLng={setCreationMarkerLatLng}
                             setCreationMarkerType={setCreationMarkerType}
                             map={map}
                             markerBeingEdited={markerBeingEdited}

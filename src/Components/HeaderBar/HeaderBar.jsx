@@ -19,6 +19,9 @@ const HeaderBar = (props) => {
         setSelectedLocationQuests,
         setChangelogData,
         setRenderCampaignSettings,
+        setRenderCreationMarker,
+        setCreationMarkerLatLng,
+        setCreationMarkerType,
     } = props;
 
     // User bar buttons styles
@@ -33,7 +36,7 @@ const HeaderBar = (props) => {
             withCredentials: true,
             url: `${process.env.REACT_APP_API_URL}/logout`,
         });
-        // Set value to true
+        // Reset values when a user logsout
         setUserAuthenticated({});
         setCampaign(null);
         setSerosLocations(null);
@@ -41,6 +44,9 @@ const HeaderBar = (props) => {
         setSerosQuests(null);
         setChangelogData(null);
         setRenderCampaignSettings(null);
+        setRenderCreationMarker(false);
+        setCreationMarkerLatLng([0, 0]);
+        setCreationMarkerType("miscellaneous");
     };
 
     return (
@@ -75,6 +81,9 @@ const HeaderBar = (props) => {
                                 setSelectedLocationQuests(null);
                                 setChangelogData(null);
                                 setRenderCampaignSettings(null);
+                                setRenderCreationMarker(false);
+                                setCreationMarkerLatLng([0, 0]);
+                                setCreationMarkerType("miscellaneous");
                             }}
                         >
                             Return to Dashboard

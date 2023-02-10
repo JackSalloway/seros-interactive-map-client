@@ -247,6 +247,9 @@ function App() {
                     setSerosNPCs={setSerosNPCs}
                     setSerosQuests={setSerosQuests}
                     setRenderCampaignSettings={setRenderCampaignSettings}
+                    setRenderCreationMarker={setRenderCreationMarker}
+                    setCreationMarkerLatLng={setCreationMarkerLatLng}
+                    setCreationMarkerType={setCreationMarkerType}
                 />
                 <Dashboard
                     userAuthenticated={userAuthenticated}
@@ -294,6 +297,9 @@ function App() {
                 setSelectedLocationQuests={setSelectedLocationQuests}
                 setChangelogData={setChangelogData}
                 setRenderCampaignSettings={setRenderCampaignSettings}
+                setRenderCreationMarker={setRenderCreationMarker}
+                setCreationMarkerLatLng={setCreationMarkerLatLng}
+                setCreationMarkerType={setCreationMarkerType}
             />
             <MapBox
                 serosLocations={serosLocations}
@@ -341,6 +347,7 @@ function App() {
                 renderCreationMarker={renderCreationMarker}
                 setRenderCreationMarker={setRenderCreationMarker}
                 creationMarkerLatLng={creationMarkerLatLng}
+                setCreationMarkerLatLng={setCreationMarkerLatLng}
                 setCreationMarkerType={setCreationMarkerType}
                 map={map}
                 markerBeingEdited={markerBeingEdited}
