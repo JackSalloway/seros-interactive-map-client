@@ -51,11 +51,8 @@ const CreateCampaignBannerForm = (props) => {
             init
         );
         const returnedData = await result.json();
-        // console.log(returnedData);
-        // console.log(userAuthenticated);
         const userCopy = userAuthenticated;
         userCopy.campaigns = returnedData.campaigns;
-        console.log(userCopy);
         setUserAuthenticated({ ...userCopy });
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
