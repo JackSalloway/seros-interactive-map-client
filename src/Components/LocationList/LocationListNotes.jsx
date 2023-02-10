@@ -7,7 +7,7 @@ const LocationListNotes = (props) => {
     const {
         location,
         unfilteredSerosLocations,
-        serosLocations,
+        // serosLocations,
         setLocationNotes,
         map,
     } = props;
