@@ -33,7 +33,6 @@ const LoginUserForm = (props) => {
                 if (response.status === 200) {
                     // response.data looks like:
                     // { username: STRING, privileged: BOOL}
-                    console.log(response.data);
                     setUserAuthenticated(response.data);
                     const notificationsCopy = dataNotifications;
                     // const errorIndex = notificationsCopy.findIndex(

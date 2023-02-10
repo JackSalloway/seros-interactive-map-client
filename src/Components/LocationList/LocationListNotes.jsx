@@ -63,7 +63,6 @@ const LocationListNotes = (props) => {
                         .map((serosLocation) => serosLocation._id)
                         .indexOf(location._id)
                 );
-                console.log(location);
             }}
         >
             Jump to location!

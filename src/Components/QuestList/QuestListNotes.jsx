@@ -115,7 +115,6 @@ const QuestListNotes = (props) => {
             init
         );
         const returnedData = await result.json();
-        console.log(returnedData);
         // Update quests values
         let serosQuestsCopy = [...serosQuests];
         const questIndexToUpdate = serosQuestsCopy.findIndex(

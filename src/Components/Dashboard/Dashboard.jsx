@@ -86,7 +86,6 @@ const Dashboard = (props) => {
 
         fetch(`${process.env.REACT_APP_API_URL}/join_campaign`, init)
             .then(async (res) => {
-                console.log(res);
                 if (res.status === 400) {
                     const message = await res.text();
                     throw Error(message);
@@ -96,7 +95,6 @@ const Dashboard = (props) => {
             .then((returnedData) => {
                 const userCopy = userAuthenticated;
                 userCopy.campaigns = returnedData.campaigns;
-                // console.log(userCopy);
                 setUserAuthenticated({ ...userCopy });
                 setInviteCode(""); // Reset the invite code to an empty string
                 const notificationsCopy = dataNotifications;
@@ -107,7 +105,6 @@ const Dashboard = (props) => {
                 setDataNotifications([...notificationsCopy]);
             })
             .catch((err) => {
-                console.log(err);
                 const notificationsCopy = dataNotifications;
                 notificationsCopy.push({
                     message: err.message,

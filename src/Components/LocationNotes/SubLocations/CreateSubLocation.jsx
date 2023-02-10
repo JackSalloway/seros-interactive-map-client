@@ -43,7 +43,6 @@ const CreateSubLocation = (props) => {
             init
         );
         const data = await result.json();
-        console.log(data);
         let serosLocationsCopy = [...serosLocations];
         const indexToUpdate = serosLocationsCopy
             .map((location) => location._id)
