@@ -100,6 +100,7 @@ const JournalMenuContent = (props) => {
                 setLocationNotes={setLocationNotes}
                 serosNPCs={serosNPCs}
                 setSerosNPCs={setSerosNPCs}
+                serosNPCsFiltered={Array.from(serosNPCs)}
                 map={map}
                 campaign={campaign}
                 userAuthenticated={userAuthenticated}

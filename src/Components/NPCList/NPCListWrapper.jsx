@@ -8,6 +8,7 @@ const NPCListWrapper = (props) => {
         setLocationNotes,
         serosNPCs,
         setSerosNPCs,
+        serosNPCsFiltered,
         map,
         campaign,
         userAuthenticated,
@@ -17,13 +18,13 @@ const NPCListWrapper = (props) => {
     } = props;
 
     // Extract the original index from the returned npc data request
-    const fetchOriginalIndex = serosNPCs.reduce((prevNPCs, npcData, index) => {
-        return [...prevNPCs, { npcData, originalIndex: index }];
-    }, []);
+    // const fetchOriginalIndex = serosNPCs.reduce((prevNPCs, npcData, index) => {
+    //     return [...prevNPCs, { npcData, originalIndex: index }];
+    // }, []);
 
-    const shallowCopy = Array.from(fetchOriginalIndex).sort(function (a, b) {
-        var npcA = a.npcData.name.toUpperCase();
-        var npcB = b.npcData.name.toUpperCase();
+    const shallowCopy = serosNPCsFiltered.sort(function (a, b) {
+        var npcA = a.name.toUpperCase();
+        var npcB = b.name.toUpperCase();
         return npcA < npcB ? -1 : npcA > npcB ? 1 : 0;
     });
 
@@ -62,9 +63,8 @@ const NPCListWrapper = (props) => {
                 </div>
                 {npcList.map((npc) => (
                     <NPCListNotes
-                        npc={npc.npcData}
-                        originalIndex={npc.originalIndex}
-                        key={npc.npcData._id}
+                        npc={npc}
+                        key={npc._id}
                         map={map}
                         serosLocations={serosLocations}
                         setLocationNotes={setLocationNotes}
