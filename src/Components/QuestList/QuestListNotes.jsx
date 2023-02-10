@@ -11,7 +11,7 @@ import "./QuestListNotes.css";
 const QuestListNotes = (props) => {
     const {
         quest,
-        originalIndex,
+        // originalIndex,
         map,
         serosLocations,
         setLocationNotes,
@@ -133,7 +133,17 @@ const QuestListNotes = (props) => {
         console.log(returnedData);
         // Update quests values
         let serosQuestsCopy = [...serosQuests];
-        serosQuestsCopy[originalIndex] = returnedData.questResult;
+        const questIndexToUpdate = serosQuestsCopy.findIndex(
+            (originalQuest) => originalQuest._id === quest._id
+        );
+        console.log(questIndexToUpdate);
+
+        // npcData.associated_locations.findIndex(
+        //     (npcLocation) =>
+        //         npcLocation._id === selectedLocationNotes._id
+        // ) !== -1
+
+        serosQuestsCopy[questIndexToUpdate] = returnedData.questResult;
         setSerosQuests(serosQuestsCopy);
         // Update notifications values
         const notificationsCopy = dataNotifications;

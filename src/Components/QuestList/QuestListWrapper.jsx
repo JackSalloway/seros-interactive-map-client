@@ -9,8 +9,9 @@ const QuestListWrapper = (props) => {
     const {
         serosLocations,
         setLocationNotes,
-        serosQuests,
+        serosQuests, // Created from a new array instance using the serosQuests value
         setSerosQuests,
+        serosQuestsFiltered,
         map,
         campaign,
         userAuthenticated,
@@ -20,17 +21,17 @@ const QuestListWrapper = (props) => {
     } = props;
 
     // Extract the original index from the returned npc data request
-    const fetchOriginalIndex = serosQuests.reduce(
-        (prevQuests, questData, index) => {
-            return [...prevQuests, { questData, originalIndex: index }];
-        },
-        []
-    );
+    // const fetchOriginalIndex = serosQuests.reduce(
+    //     (prevQuests, questData, index) => {
+    //         return [...prevQuests, { questData, originalIndex: index }];
+    //     },
+    //     []
+    // );
 
     // Create shallow copy variable for reuse
-    const shallowCopy = Array.from(fetchOriginalIndex).sort(function (a, b) {
-        var questA = a.questData.name.toUpperCase();
-        var questB = b.questData.name.toUpperCase();
+    const shallowCopy = serosQuestsFiltered.sort(function (a, b) {
+        var questA = a.name.toUpperCase();
+        var questB = b.name.toUpperCase();
         return questA < questB ? -1 : questA > questB ? 1 : 0;
     });
 
@@ -84,8 +85,8 @@ const QuestListWrapper = (props) => {
 
             {questList.map((quest) => (
                 <QuestListNotes
-                    quest={quest.questData}
-                    originalIndex={quest.originalIndex}
+                    quest={quest}
+                    // originalIndex={quest.originalIndex}
                     key={quest._id}
                     map={map}
                     serosLocations={serosLocations}
