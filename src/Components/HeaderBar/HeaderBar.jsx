@@ -53,7 +53,7 @@ const HeaderBar = (props) => {
         <div id="header-bar-wrapper">
             <div id="header-bar-title-wrapper">
                 <img src="images/SerosLogo2.png" id="header-bar-logo" alt="" />
-                <h1>Seros Project</h1>
+                <h1>Tactical Journal</h1>
             </div>
             <div id="header-bar-user-wrapper">
                 <h2 id="header-bar-user-greeting">Welcome, {username}!</h2>

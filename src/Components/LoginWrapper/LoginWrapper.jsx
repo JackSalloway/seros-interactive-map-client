@@ -37,7 +37,7 @@ const LoginWrapper = (props) => {
             <div id="login-screen-wrapper">
                 {/* Header wrapper */}
                 <div id="login-screen-header-wrapper">
-                    <h1>The Seros Project</h1>
+                    <h1>Tactical Journal</h1>
                 </div>
 
                 {/* Subheader wrapper */}
