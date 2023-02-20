@@ -1,7 +1,7 @@
 // React imports
 import React from "react";
 
-import axios from "axios";
+import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 // Style imports
 import "./UserFormStyles.css";
@@ -22,26 +22,26 @@ const LoginUserForm = (props) => {
     const userLogin = async (e) => {
         e.preventDefault();
 
-        axios({
-            method: "post",
-            data: {
-                username: username,
-                password: password,
-            },
-            withCredentials: true,
-            url: `${process.env.REACT_APP_API_URL}/login`,
-        })
+        const loginUserData = {
+            username: username,
+            password: password,
+        };
+
+        const init = {
+            method: "POST",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify(loginUserData),
+            mode: "cors",
+            credentials: "include",
+        };
+
+        fetch(`${process.env.REACT_APP_API_URL}/login`, init)
             .then((response) => {
                 if (response.status === 200) {
                     // response.data looks like:
                     // { username: STRING, privileged: BOOL}
                     setUserAuthenticated(response.data);
                     const notificationsCopy = dataNotifications;
-                    // const errorIndex = notificationsCopy.findIndex(
-                    //     (notification) =>
-                    //         notification.message ===
-                    //         "Session timed out, please login again."
-                    // );
                     notificationsCopy.push({
                         message: "Login successful!",
                         important: false,
