@@ -5,7 +5,13 @@ import "./App.css";
 import { useState, useEffect, useRef } from "react";
 
 // React-Router imports
-import { Routes, Route } from "react-router-dom";
+import {
+    createBrowserRouter,
+    createRoutesFromElements,
+    Route,
+    RouterProvider,
+    redirect,
+} from "react-router-dom";
 
 // Component (page) imports
 import Login from "./pages/Login";
@@ -38,6 +44,7 @@ import MapBox from "./Components/MapBox/MapBox";
 import Journal from "./Components/Journal/Journal";
 import DeletionModal from "./Components/DeletionModal/DeletionModal";
 import DataNotification from "./Components/Notifications/DataNotification";
+import Navbar from "./layouts/Navbar";
 
 // function App() {
 //     // Set states
@@ -58,9 +65,6 @@ import DataNotification from "./Components/Notifications/DataNotification";
 //     const [selectedLocationQuests, setSelectedLocationQuests] = useState(null);
 //     const [selectedLocationNPCs, setSelectedLocationNPCs] = useState(null);
 
-//     // User states
-//     const [userAuthenticated, setUserAuthenticated] = useState({});
-
 //     // Map marker states
 //     const map = useRef();
 //     const [renderCreationMarker, setRenderCreationMarker] = useState(false);
@@ -74,9 +78,6 @@ import DataNotification from "./Components/Notifications/DataNotification";
 //     const [editMarkerType, setEditMarkerType] = useState(null);
 
 //     const [deleteData, setDeleteData] = useState(null);
-
-//     // Notification message state
-//     const [dataNotifications, setDataNotifications] = useState([]);
 
 //     // Render data states
 
@@ -198,49 +199,24 @@ import DataNotification from "./Components/Notifications/DataNotification";
 //             });
 //     }, []);
 
-//     library.add(
-//         faChevronRight,
-//         faChevronLeft,
-//         faChevronDown,
-//         faChevronUp,
-//         faPlus,
-//         faTimes,
-//         faTrashCan,
-//         faPencil,
-//         faInfoCircle,
-//         faCog,
-//         faRightFromBracket,
-//         faHouseUser
-//     ); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
+library.add(
+    faChevronRight,
+    faChevronLeft,
+    faChevronDown,
+    faChevronUp,
+    faPlus,
+    faTimes,
+    faTrashCan,
+    faPencil,
+    faInfoCircle,
+    faCog,
+    faRightFromBracket,
+    faHouseUser
+); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
 
 //     // if (startupComplete === false) {
 //     //     return <LoadingScreen />;
 //     // }
-
-//     if (Object.keys(userAuthenticated).length === 0) {
-//         return (
-//             <>
-//                 <LoginWrapper
-//                     setUserAuthenticated={setUserAuthenticated}
-//                     dataNotifications={dataNotifications}
-//                     setDataNotifications={setDataNotifications}
-//                 />
-//                 {dataNotifications.length !== 0
-//                     ? dataNotifications.map((notification, index) => {
-//                           return (
-//                               <DataNotification
-//                                   dataNotifications={dataNotifications}
-//                                   setDataNotifications={setDataNotifications}
-//                                   notification={notification}
-//                                   index={index}
-//                                   key={`${notification.message} ${index}`}
-//                               />
-//                           );
-//                       })
-//                     : null}
-//             </>
-//         );
-//     }
 
 //     // No campaign has been selected so render the campaign select screen
 //     if (campaign === null) {
@@ -413,14 +389,47 @@ import DataNotification from "./Components/Notifications/DataNotification";
 // }
 
 // New routes code
-function App() {
-    return (
-        <Routes>
-            <Route path="/login" element={<Login />} />
+
+// User states
+
+// Loader functions
+// Function to check user cookies on initial render of application
+const fetchAuthentication = async ({ props }) => {
+    // console.log(props);
+    return fetch(`${process.env.REACT_APP_API_URL}/startup`, {
+        method: "GET",
+        mode: "cors",
+        credentials: "include",
+    })
+        .then(async (res) => {
+            // Check if the user object returned has timed out or there are no cookies present
+            if (res.status === 401) {
+                const errorMessage = await res.text();
+                console.log("Error hit:", errorMessage);
+                return errorMessage;
+            }
+
+            return await res.json();
+        })
+        .catch((err) => {
+            console.log(err.message);
+            return err.message;
+        });
+};
+
+const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route path="/" loader={fetchAuthentication} element={<Navbar />}>
+            <Route index element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/campaign/:campaignId" element={<Campaign />} />
-        </Routes>
-    );
+        </Route>
+    )
+);
+
+function App() {
+    // console.log(router);
+    return <RouterProvider router={router} />;
 }
 
 export default App;

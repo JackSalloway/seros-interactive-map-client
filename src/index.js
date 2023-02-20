@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // disabled React.StrictMode as is caused issues due to calling routes twice through useEffects
@@ -10,14 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // root.render(<App />);
 
-// Re-enabled React.StrictMode to try and implement React-Router
-root.render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </React.StrictMode>
-);
+root.render(<App />);
 
 // if (module.hot) {
 //     module.hot.accept();
