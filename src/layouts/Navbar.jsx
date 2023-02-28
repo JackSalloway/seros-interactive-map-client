@@ -40,11 +40,9 @@ const Navbar = () => {
         }
     }, [user, location, navigate]);
 
-    console.log(user);
-
     return (
         <>
-            <HeaderBar username={user[0].username} />
+            <HeaderBar user={user[0]} />
 
             <main>
                 <Outlet context={userData} />
