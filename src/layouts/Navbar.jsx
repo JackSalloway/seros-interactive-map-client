@@ -22,13 +22,6 @@ const Navbar = () => {
         .filter((match) => Boolean(match.handle?.user))
         .map((match) => match.data);
 
-    // console.log(user);
-
-    // CANT GET THE LOADER FROM '/' ROUTE TO APPLY IT'S DATA TO THE matches[1].data VALUES
-    // TRY CHANGING THE ROUTE VALUE ON THE LOGIN COMPONENT
-    // console.log(matches);
-    // console.log(matches[1]);
-
     // Redirect user to login screen if no cookies have been detected
     useEffect(() => {
         if (
@@ -40,23 +33,12 @@ const Navbar = () => {
         }
     }, [user, location, navigate]);
 
-    // Redirect user to dashboard if the cookies have their user data store
+    // Redirect user to dashboard if the cookies have their user data stored
     useEffect(() => {
         if (user[0].userId && location.pathname === "/") {
             navigate("/dashboard");
         }
     }, [user, location, navigate]);
-
-    // if (!matches[1]) {
-    //     return null;
-    // }
-
-    // Redirect user to dashboard screen after they have successfully logged in
-    // useEffect(() => {
-    //     if (userData.userId && location.pathname === "/") {
-    //         navigate("/dashboard");
-    //     }
-    // }, [userData, location, navigate]);
 
     return (
         <>
@@ -73,13 +55,6 @@ const Navbar = () => {
             // setCreationMarkerLatLng={setCreationMarkerLatLng}
             // setCreationMarkerType={setCreationMarkerType}
             />
-            {/* <header>
-                <nav>
-                    <h1>test navbar</h1>
-                    <NavLink to={"/login"}>Login</NavLink>
-                    <NavLink to={"/dashboard"}>About</NavLink>
-                </nav>
-            </header> */}
 
             <main>
                 <Outlet context={userData} />
