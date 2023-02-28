@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
@@ -24,6 +25,8 @@ const HeaderBar = (props) => {
         setCreationMarkerType,
     } = props;
 
+    const navigate = useNavigate();
+
     // User bar buttons styles
     const [logoutHovered, setLogoutHovered] = useState(false);
     const [returnToDashboardHovered, setReturnToDashboardHovered] =
@@ -37,16 +40,17 @@ const HeaderBar = (props) => {
             url: `${process.env.REACT_APP_API_URL}/logout`,
         });
         // Reset values when a user logsout
-        setUserAuthenticated({});
-        setCampaign(null);
-        setSerosLocations(null);
-        setSerosNPCs(null);
-        setSerosQuests(null);
-        setChangelogData(null);
-        setRenderCampaignSettings(null);
-        setRenderCreationMarker(false);
-        setCreationMarkerLatLng([0, 0]);
-        setCreationMarkerType("miscellaneous");
+        // setUserAuthenticated({});
+        // setCampaign(null);
+        // setSerosLocations(null);
+        // setSerosNPCs(null);
+        // setSerosQuests(null);
+        // setChangelogData(null);
+        // setRenderCampaignSettings(null);
+        // setRenderCreationMarker(false);
+        // setCreationMarkerLatLng([0, 0]);
+        // setCreationMarkerType("miscellaneous");
+        navigate("/");
     };
 
     return (
@@ -71,19 +75,20 @@ const HeaderBar = (props) => {
                                 setReturnToDashboardHovered(false)
                             }
                             onClick={() => {
-                                setReturnToDashboardHovered(false); // Added this line as the return to dashboard icon retained its green color for some reason
-                                setCampaign(null);
-                                setSerosLocations(null);
-                                setSerosNPCs(null);
-                                setSerosQuests(null);
-                                setSelectedLocationNotes(null);
-                                setSelectedLocationNPCs(null);
-                                setSelectedLocationQuests(null);
-                                setChangelogData(null);
-                                setRenderCampaignSettings(null);
-                                setRenderCreationMarker(false);
-                                setCreationMarkerLatLng([0, 0]);
-                                setCreationMarkerType("miscellaneous");
+                                // setReturnToDashboardHovered(false); // Added this line as the return to dashboard icon retained its green color for some reason
+                                // setCampaign(null);
+                                // setSerosLocations(null);
+                                // setSerosNPCs(null);
+                                // setSerosQuests(null);
+                                // setSelectedLocationNotes(null);
+                                // setSelectedLocationNPCs(null);
+                                // setSelectedLocationQuests(null);
+                                // setChangelogData(null);
+                                // setRenderCampaignSettings(null);
+                                // setRenderCreationMarker(false);
+                                // setCreationMarkerLatLng([0, 0]);
+                                // setCreationMarkerType("miscellaneous");
+                                navigate("/dashboard");
                             }}
                         >
                             Return to Dashboard

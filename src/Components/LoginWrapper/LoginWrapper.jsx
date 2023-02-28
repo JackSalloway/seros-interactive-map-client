@@ -8,8 +8,7 @@ import LoginUserForm from "./LoginUserForm";
 import CreateUserForm from "./CreateUserForm";
 
 const LoginWrapper = (props) => {
-    const { setUserAuthenticated, dataNotifications, setDataNotifications } =
-        props;
+    const { dataNotifications, setDataNotifications } = props;
 
     // User login/register states
     const [newUser, setNewUser] = useState(false);
@@ -57,7 +56,6 @@ const LoginWrapper = (props) => {
                             setUsername={setUsername}
                             password={password}
                             setPassword={setPassword}
-                            setUserAuthenticated={setUserAuthenticated}
                             dataNotifications={dataNotifications}
                             setDataNotifications={setDataNotifications}
                             loginResMsg={loginResMsg}

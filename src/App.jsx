@@ -14,7 +14,7 @@ import {
 } from "react-router-dom";
 
 // Component (page) imports
-import Login from "./pages/Login";
+import Login from "./pages/login-screen/Login"; // action as loginAction, // loader as loginLoader,
 import Dashboard from "./pages/Dashboard";
 import Campaign from "./pages/Campaign";
 
@@ -392,10 +392,11 @@ library.add(
 
 // User states
 
-// Loader functions
-// Function to check user cookies on initial render of application
-const fetchAuthentication = async ({ props }) => {
-    // console.log(props);
+// Matches
+
+// Loader to check users cookies for authorized users values
+const startupLoader = async () => {
+    // fetch startup route from api
     return fetch(`${process.env.REACT_APP_API_URL}/startup`, {
         method: "GET",
         mode: "cors",
@@ -408,7 +409,7 @@ const fetchAuthentication = async ({ props }) => {
                 console.log("Error hit:", errorMessage);
                 return errorMessage;
             }
-
+            // Response value is valid, return as loader value
             return await res.json();
         })
         .catch((err) => {
@@ -419,8 +420,21 @@ const fetchAuthentication = async ({ props }) => {
 
 const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" loader={fetchAuthentication} element={<Navbar />}>
-            <Route index element={<Login />} />
+        <Route
+            path="/"
+            loader={startupLoader}
+            element={<Navbar />}
+            handle={{
+                user: (data) => data,
+            }}
+        >
+            <Route
+                index
+                // path=""
+                // loader={loginLoader}
+                // action={loginAction}
+                element={<Login />}
+            />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/campaign/:campaignId" element={<Campaign />} />
         </Route>
