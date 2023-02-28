@@ -7,7 +7,7 @@ import axios from "axios";
 import "./HeaderBar.css";
 
 const HeaderBar = (props) => {
-    const { user, campaign } = props;
+    const { user, location, campaign } = props;
 
     const navigate = useNavigate();
 
@@ -44,12 +44,16 @@ const HeaderBar = (props) => {
                 <h1>Tactical Journal</h1>
             </div>
             <div id="header-bar-user-wrapper">
-                {}
-                <h2 id="header-bar-user-greeting">Welcome, {user.username}!</h2>
+                {user.username ? (
+                    <h2 id="header-bar-user-greeting">
+                        Welcome, {user.username}!
+                    </h2>
+                ) : null}
+
                 <div id="header-bar-user-buttons">
                     {/* If a campaign is selected, render the return to dashboard icon */}
                     {/* Return to dashboard icon */}
-                    {campaign === null ? null : (
+                    {user.username && location.pathname !== "/dashboard" ? (
                         // Dashboard icon
                         <div
                             id="header-bar-user-return-to-dashboard-button"
@@ -75,27 +79,29 @@ const HeaderBar = (props) => {
                                 }
                             />
                         </div>
-                    )}
+                    ) : null}
 
                     {/* Logout icon */}
-                    <div
-                        id="header-bar-user-logout-button"
-                        className="header-bar-user-buttons-div"
-                        onMouseEnter={() => setLogoutHovered(true)}
-                        onMouseLeave={() => setLogoutHovered(false)}
-                        onClick={() => logout()}
-                    >
-                        Logout
-                        <FontAwesomeIcon
-                            icon="right-from-bracket"
-                            className="header-bar-user-icon"
-                            style={
-                                logoutHovered === false
-                                    ? { color: "white" }
-                                    : { color: "red" }
-                            }
-                        />
-                    </div>
+                    {user.username ? (
+                        <div
+                            id="header-bar-user-logout-button"
+                            className="header-bar-user-buttons-div"
+                            onMouseEnter={() => setLogoutHovered(true)}
+                            onMouseLeave={() => setLogoutHovered(false)}
+                            onClick={() => logout()}
+                        >
+                            Logout
+                            <FontAwesomeIcon
+                                icon="right-from-bracket"
+                                className="header-bar-user-icon"
+                                style={
+                                    logoutHovered === false
+                                        ? { color: "white" }
+                                        : { color: "red" }
+                                }
+                            />
+                        </div>
+                    ) : null}
                 </div>
             </div>
         </div>

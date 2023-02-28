@@ -42,7 +42,7 @@ const Navbar = () => {
 
     return (
         <>
-            <HeaderBar user={user[0]} />
+            <HeaderBar user={user[0]} location={location} />
 
             <main>
                 <Outlet context={userData} />
