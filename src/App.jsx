@@ -14,9 +14,12 @@ import {
 } from "react-router-dom";
 
 // Component (page) imports
-import Login from "./pages/login-screen/Login"; // action as loginAction, // loader as loginLoader,
+import Login from "./pages/login-screen/Login";
 import Dashboard from "./pages/Dashboard";
 import Campaign from "./pages/Campaign";
+
+// Request content type import
+import { CONTENT_TYPE_APPLICATION_JSON } from "./imports/imports";
 
 // Font Awesome imports
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -394,6 +397,7 @@ library.add(
 
 // Matches
 
+// Root route options
 // Loader to check users cookies for authorized users values
 const startupLoader = async () => {
     // fetch startup route from api
@@ -418,10 +422,51 @@ const startupLoader = async () => {
         });
 };
 
+// Action to refresh the loader state value when a login request is recieved
+const loginAction = async ({ request }) => {
+    const data = await request.formData();
+    console.log(request);
+    const loginUserData = {
+        username: data.get("username"),
+        password: data.get("password"),
+    };
+    console.log(loginUserData);
+
+    const init = {
+        method: "POST",
+        headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+        body: JSON.stringify(loginUserData),
+        mode: "cors",
+        credentials: "include",
+    };
+
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, init)
+        .then((response) => {
+            // Unsure if something should be put here, but as it is this just updates the loader value which then causes a re-render
+            // if (response.status === 200) {
+            //     // return null;
+            //     // return redirect("/dashboard");
+            // }
+        })
+        .catch(function (error) {
+            console.log(error);
+            console.log("error logging in");
+
+            if (error.response.status === 400) {
+                console.log("error");
+                return null;
+            }
+            return null;
+        });
+    console.log(res);
+    return null;
+};
+
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route
             path="/"
+            action={loginAction}
             loader={startupLoader}
             element={<Navbar />}
             handle={{
