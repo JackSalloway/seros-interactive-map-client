@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
@@ -7,23 +7,7 @@ import axios from "axios";
 import "./HeaderBar.css";
 
 const HeaderBar = (props) => {
-    const {
-        username,
-        setUserAuthenticated,
-        campaign,
-        setCampaign,
-        setSerosLocations,
-        setSerosNPCs,
-        setSerosQuests,
-        setSelectedLocationNotes,
-        setSelectedLocationNPCs,
-        setSelectedLocationQuests,
-        setChangelogData,
-        setRenderCampaignSettings,
-        setRenderCreationMarker,
-        setCreationMarkerLatLng,
-        setCreationMarkerType,
-    } = props;
+    const { user, campaign } = props;
 
     const navigate = useNavigate();
 
@@ -60,11 +44,13 @@ const HeaderBar = (props) => {
                 <h1>Tactical Journal</h1>
             </div>
             <div id="header-bar-user-wrapper">
-                <h2 id="header-bar-user-greeting">Welcome, {username}!</h2>
+                {}
+                <h2 id="header-bar-user-greeting">Welcome, {user.username}!</h2>
                 <div id="header-bar-user-buttons">
                     {/* If a campaign is selected, render the return to dashboard icon */}
                     {/* Return to dashboard icon */}
                     {campaign === null ? null : (
+                        // Dashboard icon
                         <div
                             id="header-bar-user-return-to-dashboard-button"
                             className="header-bar-user-buttons-div"
@@ -75,19 +61,6 @@ const HeaderBar = (props) => {
                                 setReturnToDashboardHovered(false)
                             }
                             onClick={() => {
-                                // setReturnToDashboardHovered(false); // Added this line as the return to dashboard icon retained its green color for some reason
-                                // setCampaign(null);
-                                // setSerosLocations(null);
-                                // setSerosNPCs(null);
-                                // setSerosQuests(null);
-                                // setSelectedLocationNotes(null);
-                                // setSelectedLocationNPCs(null);
-                                // setSelectedLocationQuests(null);
-                                // setChangelogData(null);
-                                // setRenderCampaignSettings(null);
-                                // setRenderCreationMarker(false);
-                                // setCreationMarkerLatLng([0, 0]);
-                                // setCreationMarkerType("miscellaneous");
                                 navigate("/dashboard");
                             }}
                         >
@@ -124,18 +97,6 @@ const HeaderBar = (props) => {
                         />
                     </div>
                 </div>
-
-                {/* {showUserDropdown === false ? (
-                    <FontAwesomeIcon
-                        icon="chevron-down"
-                        onClick={() => setShowUserDropdown(!showUserDropdown)}
-                    />
-                ) : (
-                    <FontAwesomeIcon
-                        icon="chevron-up"
-                        onClick={() => setShowUserDropdown(!showUserDropdown)}
-                    />
-                )} */}
             </div>
         </div>
     );
