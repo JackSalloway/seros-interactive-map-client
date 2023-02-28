@@ -50,7 +50,7 @@ const HeaderBar = (props) => {
         // setRenderCreationMarker(false);
         // setCreationMarkerLatLng([0, 0]);
         // setCreationMarkerType("miscellaneous");
-        navigate("/");
+        navigate(0);
     };
 
     return (
