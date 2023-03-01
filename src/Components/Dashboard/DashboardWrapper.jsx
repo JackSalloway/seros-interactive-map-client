@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import Banner from "./Banner";
 import CreateCampaignBannerForm from "./CreateCampaignBannerForm";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
+import { useNavigate } from "react-router-dom";
 
 const DashboardWrapper = (props) => {
     // Plan is to render out multiple banners that display the name, description and a portion of the image (styled somehow).
@@ -12,17 +13,13 @@ const DashboardWrapper = (props) => {
 
     const {
         userAuthenticated,
-        setUserAuthenticated,
         campaigns,
-        setCampaign,
         renderCampaignForm,
         renderCampaignSettings,
         setRenderCampaignSettings,
         dataNotifications,
         setDataNotifications,
     } = props;
-
-    console.log(userAuthenticated);
 
     // State for rendering CreateCampaignBannerForm in place of CreateCampaignBanner
     const [renderCreateCampaignBannerForm, setRenderCreateCampaignBannerForm] =
@@ -35,6 +32,8 @@ const DashboardWrapper = (props) => {
     // States related to invite codes Invite codes
     const [inviteCode, setInviteCode] = useState(""); // Used to update invite code input value
     const [validCode, setValidCode] = useState(false); // Used to enable join campaign button when code is valid
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const regex = /^[a-z,0-9,-]{36,36}$/; // Not the best regex expression, but will prevent user from spamming join
@@ -95,24 +94,30 @@ const DashboardWrapper = (props) => {
                 return res.json();
             })
             .then((returnedData) => {
-                const userCopy = userAuthenticated;
-                userCopy.campaigns = returnedData.campaigns;
-                setUserAuthenticated({ ...userCopy });
-                setInviteCode(""); // Reset the invite code to an empty string
-                const notificationsCopy = dataNotifications;
-                notificationsCopy.push({
-                    message: "New campaign successfully joined!",
-                    important: false,
-                });
-                setDataNotifications([...notificationsCopy]);
+                navigate(0);
+
+                // Old code used to update the campaign value of the user object without refreshing the page
+                // I would like to use this, but am unsure how to update the loader value that it uses
+                // The loader value comes from the Navbar component
+
+                // const userCopy = userAuthenticated;
+                // userCopy.campaigns = returnedData.campaigns;
+                // setUserAuthenticated({ ...userCopy });
+                // setInviteCode(""); // Reset the invite code to an empty string
+                // const notificationsCopy = dataNotifications;
+                // notificationsCopy.push({
+                //     message: "New campaign successfully joined!",
+                //     important: false,
+                // });
+                // setDataNotifications([...notificationsCopy]);
             })
             .catch((err) => {
-                const notificationsCopy = dataNotifications;
-                notificationsCopy.push({
-                    message: err.message,
-                    important: true,
-                });
-                setDataNotifications([...notificationsCopy]);
+                // const notificationsCopy = dataNotifications;
+                // notificationsCopy.push({
+                //     message: err.message,
+                //     important: true,
+                // });
+                // setDataNotifications([...notificationsCopy]);
             });
     };
 
@@ -164,14 +169,14 @@ const DashboardWrapper = (props) => {
                               description={campaign.campaign.desc}
                               campaignID={campaign.campaign._id}
                               adminRights={campaign.admin}
-                              setCampaign={setCampaign}
+                              //   setCampaign={setCampaign}
                               renderCampaignForm={renderCampaignForm} // Used to disable campaign settings/deletion buttons if campaign creation form is open
                               renderCampaignSettings={renderCampaignSettings}
                               setRenderCampaignSettings={
                                   setRenderCampaignSettings
                               }
                               userAuthenticated={userAuthenticated}
-                              setUserAuthenticated={setUserAuthenticated}
+                              //   setUserAuthenticated={setUserAuthenticated}
                               campaignIndex={index}
                               dataNotifications={dataNotifications}
                               setDataNotifications={setDataNotifications}
@@ -182,7 +187,7 @@ const DashboardWrapper = (props) => {
             {renderCreateCampaignBannerForm ? (
                 <CreateCampaignBannerForm
                     userAuthenticated={userAuthenticated}
-                    setUserAuthenticated={setUserAuthenticated}
+                    // setUserAuthenticated={setUserAuthenticated}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     setRenderCreateCampaignBannerForm={

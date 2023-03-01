@@ -16,7 +16,7 @@ import {
 // Component (page) imports
 import Login from "./pages/login-screen/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
-import Campaign from "./pages/Campaign";
+import Campaign from "./pages/campaign/Campaign";
 
 // Request content type import
 import { CONTENT_TYPE_APPLICATION_JSON } from "./imports/imports";
@@ -40,13 +40,13 @@ import {
 
 // Component imports
 // import LoadingScreen from "./Components/LoadingScreen/LoadingScreen";
-import LoginWrapper from "./Components/LoginWrapper/LoginWrapper";
-import HeaderBar from "./Components/HeaderBar/HeaderBar";
+// import LoginWrapper from "./Components/LoginWrapper/LoginWrapper";
+// import HeaderBar from "./Components/HeaderBar/HeaderBar";
 // import Dashboard from "./Components/Dashboard/Dashboard";
-import MapBox from "./Components/MapBox/MapBox";
-import Journal from "./Components/Journal/Journal";
-import DeletionModal from "./Components/DeletionModal/DeletionModal";
-import DataNotification from "./Components/Notifications/DataNotification";
+// import MapBox from "./Components/MapBox/MapBox";
+// import Journal from "./Components/Journal/Journal";
+// import DeletionModal from "./Components/DeletionModal/DeletionModal";
+// import DataNotification from "./Components/Notifications/DataNotification";
 import Navbar from "./layouts/Navbar";
 
 // function App() {
@@ -83,7 +83,6 @@ import Navbar from "./layouts/Navbar";
 //     const [deleteData, setDeleteData] = useState(null);
 
 //     // Render data states
-
 //     // Fetch location data from database
 //     useEffect(() => {
 //         if (serosLocations !== null) {

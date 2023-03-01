@@ -7,27 +7,30 @@ import CampaignSettingsWrapper from "./CampaignSettingsWrapper";
 
 // Styles
 import "./Banner.css";
+import { useNavigate } from "react-router-dom";
 
 const Banner = (props) => {
     const {
         name,
         description,
         campaignID,
-        setCampaign,
         adminRights,
         renderCampaignForm,
         userAuthenticated,
-        setUserAuthenticated,
         campaignIndex,
         dataNotifications,
         setDataNotifications,
     } = props;
+
+    console.log(campaignID);
 
     // Scale sizing state values
     const [scale, setScale] = useState(1);
 
     // Campaign settings state values
     const [renderCampaignSettings, setRenderCampaignSettings] = useState(false);
+
+    const navigate = useNavigate();
 
     const iconStyles = {
         filter: scale === 1 ? `opacity(20%)` : `opacity(100%)`,
@@ -90,7 +93,8 @@ const Banner = (props) => {
                 >
                     <button
                         onClick={() => {
-                            setCampaign({ name, description, id: campaignID });
+                            navigate(`../campaign/${campaignID}`);
+                            // setCampaign({ name, description, id: campaignID });
                         }}
                     >
                         Select campaign!
@@ -100,7 +104,6 @@ const Banner = (props) => {
                     <CampaignSettingsWrapper
                         campaignID={campaignID}
                         userAuthenticated={userAuthenticated}
-                        setUserAuthenticated={setUserAuthenticated}
                         campaignIndex={campaignIndex}
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}
