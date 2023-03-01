@@ -15,7 +15,7 @@ import {
 
 // Component (page) imports
 import Login from "./pages/login-screen/Login";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 import Campaign from "./pages/Campaign";
 
 // Request content type import
@@ -473,13 +473,7 @@ const router = createBrowserRouter(
                 user: (data) => data,
             }}
         >
-            <Route
-                index
-                // path=""
-                // loader={loginLoader}
-                // action={loginAction}
-                element={<Login />}
-            />
+            <Route index element={<Login />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/campaign/:campaignId" element={<Campaign />} />
         </Route>

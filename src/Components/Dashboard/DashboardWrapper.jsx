@@ -4,7 +4,7 @@ import Banner from "./Banner";
 import CreateCampaignBannerForm from "./CreateCampaignBannerForm";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
-const Dashboard = (props) => {
+const DashboardWrapper = (props) => {
     // Plan is to render out multiple banners that display the name, description and a portion of the image (styled somehow).
     // The user can then click a button on these banners to select that campaign.
     // Campaigns will be stored in the user data (currenty userAuthenticated state value) as an array of strings that will link to relevant campaign documents
@@ -21,6 +21,8 @@ const Dashboard = (props) => {
         dataNotifications,
         setDataNotifications,
     } = props;
+
+    console.log(userAuthenticated);
 
     // State for rendering CreateCampaignBannerForm in place of CreateCampaignBanner
     const [renderCreateCampaignBannerForm, setRenderCreateCampaignBannerForm] =
@@ -196,4 +198,4 @@ const Dashboard = (props) => {
     // createCampaignBanner();
 };
 
-export default Dashboard;
+export default DashboardWrapper;
