@@ -34,6 +34,7 @@ const HeaderBar = (props) => {
         // setRenderCreationMarker(false);
         // setCreationMarkerLatLng([0, 0]);
         // setCreationMarkerType("miscellaneous");
+        navigate("/");
         navigate(0);
     };
 
@@ -65,6 +66,7 @@ const HeaderBar = (props) => {
                                 setReturnToDashboardHovered(false)
                             }
                             onClick={() => {
+                                setReturnToDashboardHovered(false); // Added this is the hover state persisted on re-render.
                                 navigate("/dashboard");
                             }}
                         >
@@ -88,7 +90,10 @@ const HeaderBar = (props) => {
                             className="header-bar-user-buttons-div"
                             onMouseEnter={() => setLogoutHovered(true)}
                             onMouseLeave={() => setLogoutHovered(false)}
-                            onClick={() => logout()}
+                            onClick={() => {
+                                setLogoutHovered(false); // Added this is the hover state persisted on re-render
+                                logout();
+                            }}
                         >
                             Logout
                             <FontAwesomeIcon
