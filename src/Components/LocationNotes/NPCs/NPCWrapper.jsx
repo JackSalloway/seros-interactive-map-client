@@ -31,18 +31,6 @@ const NPCWrapper = (props) => {
             style={{ backgroundImage: `url(./images/papyr.jpg)` }}
         >
             <div className="location-notes-category-header">
-                <div className="location-notes-category-wrapper-images-wrapper">
-                    <img
-                        className="location-notes-category-wrapper-image"
-                        src="images/wizard-face.png"
-                        alt="wizard face icon"
-                    />
-                    {/* <img
-                        className="location-notes-category-wrapper-image"
-                        src="images/dwarf-face.png"
-                        alt="dwarf face icon"
-                    /> */}
-                </div>
                 <h3>NPCs</h3>
                 {showNPCs === false ? (
                     <FontAwesomeIcon
@@ -61,18 +49,6 @@ const NPCWrapper = (props) => {
                         }}
                     />
                 )}
-                <div className="location-notes-category-wrapper-images-wrapper">
-                    {/* <img
-                        className="location-notes-category-wrapper-image"
-                        src="images/woman-elf-face.png"
-                        alt="woman elf face icon"
-                    /> */}
-                    <img
-                        className="location-notes-category-wrapper-image"
-                        src="images/visored-helm.png"
-                        alt="visored helm icon"
-                    />
-                </div>
             </div>
             {/* Has NPCs dropdown been clicked? */}
             {showNPCs === true ? (

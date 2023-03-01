@@ -31,18 +31,6 @@ const QuestWrapper = (props) => {
             style={{ backgroundImage: `url(./images/papyr.jpg)` }}
         >
             <div className="location-notes-category-header">
-                <div className="location-notes-category-wrapper-images-wrapper">
-                    <img
-                        className="location-notes-category-wrapper-image"
-                        src="images/tied-scroll.png"
-                        alt="tied scroll icon"
-                    />
-                    {/* <img
-                        className="location-notes-category-wrapper-image"
-                        src="images/relic-blade.png"
-                        alt="relic blade icon"
-                    /> */}
-                </div>
                 <h3>Quests</h3>
                 {showQuests === false ? (
                     <FontAwesomeIcon
@@ -61,18 +49,6 @@ const QuestWrapper = (props) => {
                         }}
                     />
                 )}
-                <div className="location-notes-category-wrapper-images-wrapper">
-                    {/* <img
-                        className="location-notes-category-wrapper-image"
-                        src="images/rupee.png"
-                        alt="rupee icon"
-                    /> */}
-                    <img
-                        className="location-notes-category-wrapper-image"
-                        src="images/treasure-map.png"
-                        alt="treasure map icon"
-                    />
-                </div>
             </div>
             {/* Has quests dropdown been clicked? */}
             {showQuests === true ? (
