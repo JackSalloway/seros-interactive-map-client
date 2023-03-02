@@ -21,6 +21,8 @@ const CreateNPC = (props) => {
         username,
     } = props;
 
+    console.log(campaign);
+
     // Set states
     const [newNPCName, setNewNPCName] = useState("");
     const [newNPCRace, setNewNPCRace] = useState("");
@@ -49,7 +51,7 @@ const CreateNPC = (props) => {
                 (location) => location.value
             ),
             npc_quests: newNPCQuests,
-            npc_campaign: campaign.campaign.id,
+            npc_campaign: campaign.campaign._id,
             username: username,
         };
 

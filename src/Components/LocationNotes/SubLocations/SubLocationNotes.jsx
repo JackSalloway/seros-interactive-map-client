@@ -90,7 +90,7 @@ const SubLocationNotes = (props) => {
             sub_location_desc: subLocation.desc,
             updated_sub_location_name: updatedSubLocationName,
             updated_sub_location_desc: updatedSubLocationDescription,
-            location_campaign_id: campaign.campaign.id,
+            location_campaign_id: campaign.campaign._id,
             username: username,
         };
 

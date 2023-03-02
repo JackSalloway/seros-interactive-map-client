@@ -215,7 +215,7 @@ const NPCNotes = (props) => {
                 (location) => location.value
             ),
             npc_quests: updatedNPCQuests.map((quest) => quest.value),
-            npc_campaign: campaign.campaign.id,
+            npc_campaign: campaign.campaign._id,
             npc_id: npc._id,
             username: username,
         };
