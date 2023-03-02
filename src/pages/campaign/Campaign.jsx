@@ -212,8 +212,8 @@ const Campaign = () => {
                     setSerosNPCs={setSerosNPCs}
                     serosQuests={serosQuests}
                     setSerosQuests={setSerosQuests}
-                    // dataNotifications={dataNotifications}
-                    // setDataNotifications={setDataNotifications}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                     username={user.username}
                     setChangelogData={setChangelogData}
                 />
