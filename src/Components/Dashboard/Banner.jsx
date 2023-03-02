@@ -22,8 +22,6 @@ const Banner = (props) => {
         setDataNotifications,
     } = props;
 
-    console.log(campaignID);
-
     // Scale sizing state values
     const [scale, setScale] = useState(1);
 
