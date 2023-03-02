@@ -122,7 +122,7 @@ const QuestNotes = (props) => {
             quest_desc: updatedQuestDescription,
             quest_completed: updatedQuestStatus,
             quest_associated_locations: updatedQuestSelectedLocationsData,
-            quest_campaign: campaign.id,
+            quest_campaign: campaign.campaign.id,
             quest_id: quest._id,
             username: username,
         };

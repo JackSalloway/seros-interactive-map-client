@@ -26,7 +26,7 @@ const CreateSubLocation = (props) => {
             sub_location_name: newSubLocationName,
             sub_location_desc: newSubLocationDesc,
             parent_location_id: locationNotes._id,
-            location_campaign_id: campaign.id,
+            location_campaign_id: campaign.campaign.id,
             username: username,
         };
 

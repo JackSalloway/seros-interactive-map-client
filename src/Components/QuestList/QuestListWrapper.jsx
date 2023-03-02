@@ -82,7 +82,7 @@ const QuestListWrapper = (props) => {
                     map={map}
                     serosLocations={serosLocations}
                     setLocationNotes={setLocationNotes}
-                    campaignID={campaign.id}
+                    campaignID={campaign.campaign.id}
                     username={userAuthenticated.username}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}

@@ -49,7 +49,7 @@ const CreateNPC = (props) => {
                 (location) => location.value
             ),
             npc_quests: newNPCQuests,
-            npc_campaign: campaign.id,
+            npc_campaign: campaign.campaign.id,
             username: username,
         };
 

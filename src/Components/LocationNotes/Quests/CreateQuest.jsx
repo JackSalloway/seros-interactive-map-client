@@ -42,7 +42,7 @@ const CreateQuest = (props) => {
             quest_associated_locations: newQuestSelectedLocations.map(
                 (location) => location.value
             ),
-            quest_campaign: campaign.id,
+            quest_campaign: campaign.campaign.id,
             username: username,
         };
 
