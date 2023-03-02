@@ -52,7 +52,7 @@ const DeleteSubLocation = (props) => {
         let serosLocationsCopy = [...serosLocations];
         const indexToUpdate = serosLocationsCopy
             .map((location) => location._id)
-            .indexOf(returnedData.subLocationResult_id);
+            .indexOf(returnedData.subLocationResult._id);
         const location = { ...serosLocationsCopy[indexToUpdate] };
         location.sub_locations = [
             ...returnedData.subLocationResult.sub_locations,
