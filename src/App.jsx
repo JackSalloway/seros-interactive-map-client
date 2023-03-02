@@ -424,13 +424,10 @@ const startupLoader = async () => {
 // Action to refresh the loader state value when a login request is recieved
 const loginAction = async ({ request }) => {
     const data = await request.formData();
-    console.log(request);
     const loginUserData = {
         username: data.get("username"),
         password: data.get("password"),
     };
-    console.log(loginUserData);
-
     const init = {
         method: "POST",
         headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
