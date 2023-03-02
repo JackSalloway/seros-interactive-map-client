@@ -21,9 +21,7 @@ const Campaign = () => {
     const campaign = user.campaigns.filter(
         (campaign) => campaign.campaign._id === campaignParams.campaignId
     )[0];
-    console.log(campaign);
 
-    // console.log(user);
     // Data states
     const [serosLocations, setSerosLocations] = useState(null);
     const [serosQuests, setSerosQuests] = useState(null);
