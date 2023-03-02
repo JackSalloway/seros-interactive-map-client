@@ -24,6 +24,9 @@ const LocationListCreateNewLocation = (props) => {
         setChangelogData,
     } = props;
 
+    console.log(campaign);
+    console.log(dataNotifications);
+
     const [showGuide, setShowGuide] = useState(false);
 
     // Create location state values
@@ -47,7 +50,7 @@ const LocationListCreateNewLocation = (props) => {
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
-            location_campaign_id: campaign.id,
+            location_campaign_id: campaign.campaign._id,
             username: userAuthenticated.username,
         };
 

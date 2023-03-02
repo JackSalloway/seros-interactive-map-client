@@ -8,6 +8,7 @@ import { useParams, useMatches } from "react-router-dom";
 import MapBox from "../../Components/MapBox/MapBox";
 import Journal from "../../Components/Journal/Journal";
 import DeletionModal from "../../Components/DeletionModal/DeletionModal";
+import DataNotification from "../../Components/Notifications/DataNotification";
 
 const Campaign = () => {
     let campaignParams = useParams();
@@ -33,7 +34,7 @@ const Campaign = () => {
     const [selectedLocationQuests, setSelectedLocationQuests] = useState(null);
     const [selectedLocationNPCs, setSelectedLocationNPCs] = useState(null);
 
-    //     // Map marker states
+    // Map marker states
     const map = useRef();
     const [renderCreationMarker, setRenderCreationMarker] = useState(false);
     const [creationMarkerLatLng, setCreationMarkerLatLng] = useState([0, 0]);
@@ -46,6 +47,9 @@ const Campaign = () => {
     const [editMarkerType, setEditMarkerType] = useState(null);
 
     const [deleteData, setDeleteData] = useState(null);
+
+    // Data notification states
+    const [dataNotifications, setDataNotifications] = useState([]);
 
     // Render data states
     //     // Fetch location data from database
@@ -188,8 +192,8 @@ const Campaign = () => {
                 editLocationDetails={editLocationDetails}
                 editMarkerLatLng={editMarkerLatLng}
                 setEditMarkerType={setEditMarkerType}
-                // dataNotifications={dataNotifications}
-                // setDataNotifications={setDataNotifications}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
                 campaign={campaign}
                 changelogData={changelogData}
                 setChangelogData={setChangelogData}
@@ -215,7 +219,7 @@ const Campaign = () => {
                 />
             ) : null}
             {/* If there is an object within the dataNotifications state, render dataNotification component () */}
-            {/* {dataNotifications.length !== 0
+            {dataNotifications.length !== 0
                 ? dataNotifications.map((notification, index) => {
                       return (
                           <DataNotification
@@ -227,7 +231,7 @@ const Campaign = () => {
                           />
                       );
                   })
-                : null} */}
+                : null}
         </div>
     );
 };
