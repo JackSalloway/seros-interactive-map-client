@@ -54,11 +54,6 @@ const Campaign = () => {
             return;
         }
 
-        // Don't think this one is needed anymore
-        // if (campaignParams.campaignId) {
-        //     return; // Checks if the user has selected a campaign or not
-        // }
-
         fetch(
             `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaignParams.campaignId}`,
             {
@@ -75,11 +70,6 @@ const Campaign = () => {
         if (serosQuests !== null) {
             return;
         }
-
-        // Don't think this one is needed anymore
-        // if (campaignParams.campaignId === null) {
-        //     return; // Checks if the user has selected a campaign or not
-        // }
 
         fetch(
             `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaignParams.campaignId}`,
@@ -145,23 +135,6 @@ const Campaign = () => {
     // Campaign has been selected so render a map and a journal sidebar
     return (
         <div className="map-screen-wrapper">
-            {/* <HeaderBar
-                username={userAuthenticated.username}
-                setUserAuthenticated={setUserAuthenticated}
-                campaign={campaign}
-                setCampaign={setCampaign}
-                setSerosLocations={setSerosLocations}
-                setSerosNPCs={setSerosNPCs}
-                setSerosQuests={setSerosQuests}
-                setSelectedLocationNotes={setSelectedLocationNotes}
-                setSelectedLocationNPCs={setSelectedLocationNPCs}
-                setSelectedLocationQuests={setSelectedLocationQuests}
-                setChangelogData={setChangelogData}
-                setRenderCampaignSettings={setRenderCampaignSettings}
-                setRenderCreationMarker={setRenderCreationMarker}
-                setCreationMarkerLatLng={setCreationMarkerLatLng}
-                setCreationMarkerType={setCreationMarkerType}
-            /> */}
             <MapBox
                 serosLocations={serosLocations}
                 serosNPCs={serosNPCs}
@@ -218,11 +191,6 @@ const Campaign = () => {
                 // dataNotifications={dataNotifications}
                 // setDataNotifications={setDataNotifications}
                 campaign={campaign}
-                // setCampaign={setCampaign}
-                // renderCampaignForm={renderCampaignForm}
-                // setRenderCampaignForm={setRenderCampaignForm}
-                // renderCampaignSettings={renderCampaignSettings}
-                // setRenderCampaignSettings={setRenderCampaignSettings}
                 changelogData={changelogData}
                 setChangelogData={setChangelogData}
             />
