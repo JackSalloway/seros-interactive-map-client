@@ -61,6 +61,7 @@ library.add(
 // Loader to check users cookies for authorized users values
 const startupLoader = async () => {
     // fetch startup route from api
+    console.log("Startup loader hit"); // NEED TO HANDLE A VERY SPECIFIC ERROR WHERE USERS CAN NAVIGATE BACK AFTER LOGGING OUT AND THEIR COOKIES PERSIST.
     return fetch(`${process.env.REACT_APP_API_URL}/startup`, {
         method: "GET",
         mode: "cors",

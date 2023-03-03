@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // React Router imports
 import {
     Outlet,
@@ -9,7 +9,12 @@ import {
     useMatches,
 } from "react-router-dom";
 
+// Socket.io imports
+import io from "socket.io-client";
+
 import HeaderBar from "../Components/HeaderBar/HeaderBar";
+
+const socket = io("http://localhost:5000");
 
 const Navbar = () => {
     const userData = useLoaderData();
@@ -21,6 +26,35 @@ const Navbar = () => {
     let user = matches
         .filter((match) => Boolean(match.handle?.user))
         .map((match) => match.data);
+
+    // Socket.io states
+    const [isConnected, setIsConnected] = useState(socket.connected);
+    const [lastPong, setLastPong] = useState(null);
+
+    useEffect(() => {
+        socket.on("connect", () => {
+            setIsConnected(true);
+        });
+
+        socket.on("disconnect", () => {
+            setIsConnected(false);
+        });
+
+        socket.on("pong", (data) => {
+            console.log(data);
+            setLastPong(new Date().toISOString());
+        });
+
+        return () => {
+            socket.off("connect");
+            socket.off("disconnect");
+            socket.off("pong");
+        };
+    }, []);
+
+    const sendPing = () => {
+        socket.emit("ping");
+    };
 
     // Redirect user to login screen if no cookies have been detected
     useEffect(() => {
@@ -43,7 +77,11 @@ const Navbar = () => {
     return (
         <>
             <HeaderBar user={user[0]} location={location} />
-
+            <div>
+                <p>Connected: {"" + isConnected}</p>
+                <p>Last pong: {lastPong || "-"}</p>
+                <button onClick={sendPing}>Send ping</button>
+            </div>
             <main>
                 <Outlet context={userData} />
             </main>
