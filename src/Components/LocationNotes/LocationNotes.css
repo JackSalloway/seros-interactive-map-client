@@ -23,7 +23,6 @@
     width: 100%;
     font-size: 4em;
     align-self: center;
-    /* padding: 0 calc(100vw - width); */
     position: sticky;
     top: 0;
     z-index: 10;
@@ -32,7 +31,7 @@
     align-items: center;
     text-align: center;
     background-color: rgba(14, 22, 31, 1);
-    /* border-radius: 5rem; */
+    border-bottom: 1px solid black;
 }
 
 .location-notes-title-content-wrapper {
