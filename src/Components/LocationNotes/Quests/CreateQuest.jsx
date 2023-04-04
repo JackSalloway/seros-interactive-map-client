@@ -106,12 +106,12 @@ const CreateQuest = (props) => {
             <div
                 className="location-notes-details-border top"
                 style={{
-                    backgroundImage: `url(./images/statblockbar.jpg)`,
+                    backgroundImage: `url(/images/statblockbar.jpg)`,
                 }}
             />
             <div
                 className="location-notes-details location-notes-brighter-filter"
-                style={{ backgroundImage: `url(./images/papyr.jpg)` }}
+                style={{ backgroundImage: `url(/images/papyr.jpg)` }}
             >
                 <form
                     onSubmit={postQuestData}
@@ -180,7 +180,7 @@ const CreateQuest = (props) => {
             <div
                 className="location-notes-details-border bottom"
                 style={{
-                    backgroundImage: `url(./images/statblockbar.jpg)`,
+                    backgroundImage: `url(/images/statblockbar.jpg)`,
                 }}
             />
         </div>

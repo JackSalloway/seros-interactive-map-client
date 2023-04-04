@@ -86,7 +86,7 @@ const Banner = (props) => {
                 <div
                     className="dashboard-banner-image"
                     style={{
-                        backgroundImage: `url(./images/Seros_FotE_banner.png)`,
+                        backgroundImage: `url(/images/Seros_FotE_banner.png)`,
                     }}
                 >
                     <button

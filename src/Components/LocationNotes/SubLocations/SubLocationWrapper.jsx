@@ -25,7 +25,7 @@ const SubLocationWrapper = (props) => {
     return (
         <div
             className="location-notes-category-wrapper"
-            style={{ backgroundImage: `url(./images/papyr.jpg)` }}
+            style={{ backgroundImage: `url(/images/papyr.jpg)` }}
         >
             <div className="location-notes-category-header">
                 <h3>Sub Locations</h3>

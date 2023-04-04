@@ -87,12 +87,12 @@ const QuestNotes = (props) => {
                 <div
                     className="location-notes-details-border top"
                     style={{
-                        backgroundImage: `url(./images/statblockbar.jpg)`,
+                        backgroundImage: `url(/images/statblockbar.jpg)`,
                     }}
                 />
                 <div
                     className="location-notes-details-header details-closed location-notes-brighter-filter"
-                    style={{ backgroundImage: `url(./images/papyr.jpg)` }}
+                    style={{ backgroundImage: `url(/images/papyr.jpg)` }}
                 >
                     <h4>{he.decode(quest.name)}</h4>
                     <FontAwesomeIcon
@@ -106,7 +106,7 @@ const QuestNotes = (props) => {
                 <div
                     className="location-notes-details-border bottom"
                     style={{
-                        backgroundImage: `url(./images/statblockbar.jpg)`,
+                        backgroundImage: `url(/images/statblockbar.jpg)`,
                     }}
                 />
             </div>
@@ -203,12 +203,12 @@ const QuestNotes = (props) => {
                 <div
                     className="location-notes-details-border top"
                     style={{
-                        backgroundImage: `url(./images/statblockbar.jpg)`,
+                        backgroundImage: `url(/images/statblockbar.jpg)`,
                     }}
                 />
                 <div
                     className="location-notes-details location-notes-brighter-filter"
-                    style={{ backgroundImage: `url(./images/papyr.jpg)` }}
+                    style={{ backgroundImage: `url(/images/papyr.jpg)` }}
                 >
                     <div className="location-notes-details-data-section name-section editing">
                         <h4>{he.decode(quest.name)}</h4>
@@ -291,7 +291,7 @@ const QuestNotes = (props) => {
                 <div
                     className="location-notes-details-border bottom"
                     style={{
-                        backgroundImage: `url(./images/statblockbar.jpg)`,
+                        backgroundImage: `url(/images/statblockbar.jpg)`,
                     }}
                 />
             </div>
@@ -302,14 +302,14 @@ const QuestNotes = (props) => {
         <div className="location-notes-details">
             <div
                 className="location-notes-details-border top"
-                style={{ backgroundImage: `url(./images/statblockbar.jpg)` }}
+                style={{ backgroundImage: `url(/images/statblockbar.jpg)` }}
             />
             <div
                 className="location-notes-details location-notes-brighter-filter location-notes-open-internal"
                 key={quest.name}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
-                style={{ backgroundImage: `url(./images/papyr.jpg)` }}
+                style={{ backgroundImage: `url(/images/papyr.jpg)` }}
             >
                 <div className="details-open">
                     <div className="location-notes-open-header-wrapper">
@@ -387,7 +387,7 @@ const QuestNotes = (props) => {
             </div>
             <div
                 className="location-notes-details-border bottom"
-                style={{ backgroundImage: `url(./images/statblockbar.jpg)` }}
+                style={{ backgroundImage: `url(/images/statblockbar.jpg)` }}
             />
         </div>
     );
