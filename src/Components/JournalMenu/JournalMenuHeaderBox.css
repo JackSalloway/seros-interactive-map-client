@@ -1,28 +1,42 @@
 .journal-front-page-instruction-header-box {
-    width: calc(100% / 3);
-    height: 100%;
+    flex-grow: 1;
+    padding: 0.3rem 0;
     position: sticky;
     display: flex;
     cursor: pointer;
     text-align: center;
+    align-items: center;
+    justify-content: center;
     line-height: 3rem;
     font-size: 1rem;
     z-index: 1;
+    transition: flex 0.8s ease-in-out;
+}
+
+.journal-front-page-instruction-header-box:hover {
+    flex-grow: 6;
+    gap: 1rem;
 }
 
 .journal-front-page-instruction-header-box > h2 {
     align-self: center;
-    margin: auto;
+    color: white;
+    font-size: 0rem;
+    transition: all 0.8s;
 }
 
-.instruction-header-box-end {
+.journal-front-page-instruction-header-box:hover > h2 {
+    font-size: 1.5rem;
+}
+
+.instruction-header-box-borders {
     border-bottom: 1px solid black;
     border-left: 1px solid black;
     border-right: 1px solid black;
 }
 
-.instruction-header-box-middle {
-    border-bottom: 1px solid black;
+.journal-front-page-instruction-header-box-icon {
+    font-size: 1.5rem;
 }
 
 #menu-tab-tooltip-icon {

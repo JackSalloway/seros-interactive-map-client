@@ -67,25 +67,50 @@ const Journal = (props) => {
                 {campaign === null ? null : (
                     <div id="journal-front-page-menu">
                         <div id="journal-front-page-menu-header">
+                            {/* faChartBar,
+    faHourglass,
+    faUsers,
+    faCircleExclamation,
+    faMapLocationDot */}
+
                             <JournalMenuHeaderBox
                                 selectedTab={selectedTab}
                                 setSelectedTab={setSelectedTab}
-                                headerValue={"Location List"}
-                                boxPosition={"instruction-header-box-end"}
+                                headerValue={"Changelog"}
+                                iconValue={"hourglass"}
+                                boxPosition={"instruction-header-box-borders"}
                                 markerBeingEdited={markerBeingEdited}
                             />
                             <JournalMenuHeaderBox
                                 selectedTab={selectedTab}
                                 setSelectedTab={setSelectedTab}
-                                headerValue={"Quest list"}
+                                headerValue={"Location list"}
+                                iconValue={"map-location-dot"}
                                 boxPosition={"instruction-header-box-middle"}
                                 markerBeingEdited={markerBeingEdited}
                             />
                             <JournalMenuHeaderBox
                                 selectedTab={selectedTab}
                                 setSelectedTab={setSelectedTab}
+                                headerValue={"Quest list"}
+                                iconValue={"circle-exclamation"}
+                                boxPosition={"instruction-header-box-borders"}
+                                markerBeingEdited={markerBeingEdited}
+                            />
+                            <JournalMenuHeaderBox
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
                                 headerValue={"NPC list"}
-                                boxPosition={"instruction-header-box-end"}
+                                iconValue={"users"}
+                                boxPosition={"instruction-header-box-middle"}
+                                markerBeingEdited={markerBeingEdited}
+                            />
+                            <JournalMenuHeaderBox
+                                selectedTab={selectedTab}
+                                setSelectedTab={setSelectedTab}
+                                headerValue={"DPS meter"}
+                                iconValue={"chart-bar"}
+                                boxPosition={"instruction-header-box-borders"}
                                 markerBeingEdited={markerBeingEdited}
                             />
                         </div>

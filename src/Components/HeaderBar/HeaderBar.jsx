@@ -7,7 +7,7 @@ import axios from "axios";
 import "./HeaderBar.css";
 
 const HeaderBar = (props) => {
-    const { user, location, campaign } = props;
+    const { user, location } = props;
 
     const navigate = useNavigate();
 

@@ -114,7 +114,7 @@ const JournalMenuContent = (props) => {
     };
 
     const conditionalRender = () => {
-        if (selectedTab === "Location List") {
+        if (selectedTab === "Location list") {
             return locationListContent();
         }
 

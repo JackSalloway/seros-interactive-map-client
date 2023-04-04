@@ -32,6 +32,11 @@ import {
     faCog,
     faRightFromBracket,
     faHouseUser,
+    faChartBar,
+    faHourglass,
+    faUsers,
+    faCircleExclamation,
+    faMapLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 
 import Navbar from "./layouts/Navbar";
@@ -48,7 +53,12 @@ library.add(
     faInfoCircle,
     faCog,
     faRightFromBracket,
-    faHouseUser
+    faHouseUser,
+    faChartBar,
+    faHourglass,
+    faUsers,
+    faCircleExclamation,
+    faMapLocationDot
 ); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
 
 // New routes code
