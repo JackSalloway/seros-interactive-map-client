@@ -2,7 +2,7 @@
     height: 10vh;
     padding: 0 2rem;
     background-color: rgba(14, 22, 31, 1);
-    border-bottom: 4px solid black;
+    border-bottom: 1px solid black;
     display: flex;
     align-items: center;
     justify-content: space-between;
