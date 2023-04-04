@@ -66,55 +66,49 @@ const CreateUserForm = (props) => {
                 className="user-form-inputs"
                 id="user-form-inputs-register"
             >
-                <fieldset>
-                    <legend>Create an account!</legend>
-                    <label htmlFor="register-name">
-                        Username
-                        <input
-                            type="text"
-                            id="register-name"
-                            required
-                            minLength={3}
-                            placeholder="username"
-                            value={username}
-                            onChange={({ target }) => {
-                                setUsername(target.value);
-                            }}
-                        />
-                    </label>
-                    <label htmlFor="register-email">
-                        Email
-                        <input
-                            type="email"
-                            id="register_email"
-                            required
-                            placeholder="email"
-                            value={email}
-                            onChange={({ target }) => {
-                                setEmail(target.value);
-                            }}
-                        />
-                    </label>
-                    <label htmlFor="register-password">
-                        Password
-                        <input
-                            type="password"
-                            id="register-password"
-                            required
-                            placeholder="password"
-                            value={password}
-                            onChange={({ target }) => {
-                                setPassword(target.value);
-                            }}
-                        />
-                    </label>
-                    <button
-                        className="user-form-button"
-                        id="create-account-button"
-                    >
-                        Create account!
-                    </button>
-                </fieldset>
+                <label htmlFor="register-name">
+                    Username
+                    <input
+                        type="text"
+                        id="register-name"
+                        required
+                        minLength={3}
+                        placeholder="username"
+                        value={username}
+                        onChange={({ target }) => {
+                            setUsername(target.value);
+                        }}
+                    />
+                </label>
+                <label htmlFor="register-email">
+                    Email
+                    <input
+                        type="email"
+                        id="register_email"
+                        required
+                        placeholder="email"
+                        value={email}
+                        onChange={({ target }) => {
+                            setEmail(target.value);
+                        }}
+                    />
+                </label>
+                <label htmlFor="register-password">
+                    Password
+                    <input
+                        type="password"
+                        id="register-password"
+                        required
+                        placeholder="password"
+                        value={password}
+                        onChange={({ target }) => {
+                            setPassword(target.value);
+                        }}
+                    />
+                </label>
+                <button className="user-form-button" id="create-account-button">
+                    Create account!
+                </button>
             </form>
             <button
                 className="user-form-button"

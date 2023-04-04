@@ -1,14 +1,13 @@
 #video-background-wrapper {
     width: 100vw;
-    /* height: 101vh; */
+    position: absolute;
+    height: inherit;
     overflow: hidden;
-    /* bottom: 1rem; */
 }
 
 #login-wrapper {
-    height: 100vh;
+    height: 90vh;
     width: 100%;
-    /* padding: 0 5rem; */
     position: relative;
     box-sizing: border-box;
     display: flex;
@@ -25,11 +24,6 @@
 .login-response-message {
     margin: auto;
 }
-
-#video-background-wrapper {
-    position: relative;
-}
-
 #login-screen-wrapper {
     display: grid;
     grid-template-areas:
