@@ -140,9 +140,9 @@ const router = createBrowserRouter(
                 user: (data) => data,
             }}
         >
+            <Route path="/dashboard" exact element={<Dashboard />} />
+            <Route path="/campaign/:campaignId" exact element={<Campaign />} />
             <Route index element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/campaign/:campaignId" element={<Campaign />} />
         </Route>
     )
 );
