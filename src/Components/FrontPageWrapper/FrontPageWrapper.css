@@ -1,22 +1,19 @@
 #journal-front-page-wrapper {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     gap: 1rem;
     margin: auto;
 }
 
-#journal-front-page-title {
-    height: fit-content;
-    width: fit-content;
-    text-align: center;
-    grid-area: title;
+#journal-front-page-wrapper > h2 {
+    font-size: 3rem;
 }
 
-#journal-front-page-title > h1 {
-    font-size: 4rem;
-}
-
-#journal-front-page-title > h2 {
-    font-size: 1.5rem;
+#journal-front-page-wrapper > p {
+    font-size: 1rem;
 }
