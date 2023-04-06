@@ -108,7 +108,7 @@ const Journal = (props) => {
                             <JournalMenuHeaderBox
                                 selectedTab={selectedTab}
                                 setSelectedTab={setSelectedTab}
-                                headerValue={"DPS meter"}
+                                headerValue={"Combat Instances"}
                                 iconValue={"chart-bar"}
                                 boxPosition={"instruction-header-box-borders"}
                                 markerBeingEdited={markerBeingEdited}

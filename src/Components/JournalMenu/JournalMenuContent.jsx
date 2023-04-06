@@ -4,7 +4,9 @@ import LocationListWrapper from "../LocationList/LocationListWrapper";
 import QuestListWrapper from "../QuestList/QuestListWrapper";
 import NPCListWrapper from "../NPCList/NPCListWrapper";
 import ChangelogWrapper from "../ChangelogWrapper/ChangelogWrapper";
+import CombatInstancesWrapper from "../CombatInstanceWrapper/CombatInstanceWrapper";
 import EditLocation from "../EditLocation/EditLocation";
+import FrontPageWrapper from "../FrontPageWrapper/FrontPageWrapper";
 
 const JournalMenuContent = (props) => {
     const {
@@ -54,6 +56,16 @@ const JournalMenuContent = (props) => {
             />
         );
     }
+
+    const ChangelogContent = () => {
+        return (
+            <ChangelogWrapper
+                campaign={campaign}
+                changelogData={changelogData}
+                setChangelogData={setChangelogData}
+            />
+        );
+    };
 
     const locationListContent = () => {
         return (
@@ -113,7 +125,15 @@ const JournalMenuContent = (props) => {
         );
     };
 
+    const combatInstancesContent = () => {
+        return <CombatInstancesWrapper />;
+    };
+
     const conditionalRender = () => {
+        if (selectedTab === "Changelog") {
+            return ChangelogContent();
+        }
+
         if (selectedTab === "Location list") {
             return locationListContent();
         }
@@ -126,14 +146,12 @@ const JournalMenuContent = (props) => {
             return npcListContent();
         }
 
-        // No tab has been selected, render changelog instead
-        return (
-            <ChangelogWrapper
-                campaign={campaign}
-                changelogData={changelogData}
-                setChangelogData={setChangelogData}
-            />
-        );
+        if (selectedTab === "Combat Instances") {
+            return combatInstancesContent();
+        }
+
+        // No tab has been selected so return frontpage
+        return <FrontPageWrapper campaign={campaign} />;
     };
 
     return (

@@ -1,14 +1,14 @@
 import React from "react";
+import he from "he";
 import "./FrontPageWrapper.css";
 
-const FrontPageWrapper = () => {
+const FrontPageWrapper = ({ campaign }) => {
+    console.log(campaign);
+
     return (
         <div id="journal-front-page-wrapper">
             <div id="journal-front-page-title">
-                <h1>Tactical Journal</h1>
-            </div>
-            <div id="journal-front-page-logo">
-                <img src="images/SerosLogo2.png" alt="" id="seros-logo" />
+                <h1>{he.decode(campaign.campaign.name)}</h1>
             </div>
         </div>
     );

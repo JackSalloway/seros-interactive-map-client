@@ -1,0 +1,11 @@
+/* Styles are subject to change */
+.combat-instance-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.combat-instance-wrapper > h2 {
+    font-size: 2rem;
+}
