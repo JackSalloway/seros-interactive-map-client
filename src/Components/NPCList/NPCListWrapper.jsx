@@ -63,7 +63,7 @@ const NPCListWrapper = (props) => {
                         map={map}
                         serosLocations={serosLocations}
                         setLocationNotes={setLocationNotes}
-                        campaignID={campaign.campaign.id}
+                        campaignID={campaign.campaign._id}
                         username={userAuthenticated.username}
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}

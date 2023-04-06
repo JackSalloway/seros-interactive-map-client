@@ -68,7 +68,7 @@ const EditLocation = (props) => {
             location_marked: locationMarked,
             location_visited: locationVisited,
             location_sub_locations: editLocationDetails.sub_locations,
-            location_campaign_id: campaign.id,
+            location_campaign_id: campaign.campaign._id,
             location_id: editLocationDetails._id,
             username: userAuthenticated.username,
         };
