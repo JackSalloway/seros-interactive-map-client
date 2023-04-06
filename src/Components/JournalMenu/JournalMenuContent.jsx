@@ -126,7 +126,7 @@ const JournalMenuContent = (props) => {
     };
 
     const combatInstancesContent = () => {
-        return <CombatInstancesWrapper />;
+        return <CombatInstancesWrapper campaign={campaign} />;
     };
 
     const conditionalRender = () => {

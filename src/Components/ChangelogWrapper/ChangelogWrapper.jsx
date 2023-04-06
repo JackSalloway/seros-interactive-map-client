@@ -33,16 +33,11 @@ const ChangelogWrapper = (props) => {
         return <p>Loading changelog data...</p>;
     }
 
-    // if ()
-
-    // Need to style the changes so they look presentable - thinking something like discord messages styling
-    // Need to edit the backend so the changes are limited to a certain amount
-
     return (
         <div id="changelog-wrapper">
-            <div id="changelog-wrapper-header">
-                <h2>{campaign.name}</h2>
-                <h3>changelog</h3>
+            <div className="content-wrapper-header">
+                <h2>{campaign.campaign.name}</h2>
+                <h3>Changelog</h3>
             </div>
             {changelogData.length === 0 ? (
                 <div id="changelog-empty">

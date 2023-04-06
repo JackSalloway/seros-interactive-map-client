@@ -66,8 +66,13 @@ const QuestListWrapper = (props) => {
     // };
 
     return (
-        <div id="quest-list-wrapper">
-            <div id="quest-list-wrapper-header">
+        <div id="quest-list-wrapper" className="journal-content-wrapper">
+            <div
+                id="quest-list-wrapper-header"
+                className="content-wrapper-header"
+            >
+                <h2>{campaign.campaign.name}</h2>
+                <h3>Quest List</h3>
                 <input
                     type="text"
                     placeholder="Search for a quest!"

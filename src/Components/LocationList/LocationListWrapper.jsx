@@ -90,15 +90,20 @@ const LocationListWrapper = (props) => {
     );
 
     return (
-        <div id="location-list-wrapper">
-            {createLocationWrapper}
-            <div id="location-list-wrapper-header">
+        <div id="location-list-wrapper" className="journal-content-wrapper">
+            <div
+                id="location-list-wrapper-header"
+                className="content-wrapper-header"
+            >
+                <h2>{campaign.campaign.name}</h2>
+                <h3>Location List</h3>
                 <input
                     type="text"
                     placeholder="Search for a location!"
                     onChange={({ target }) => setSearchValue(target.value)}
                 />
             </div>
+            {createLocationWrapper}
             {locationList.map((location) => (
                 <LocationListNotes
                     location={location}

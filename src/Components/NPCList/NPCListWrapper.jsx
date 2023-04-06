@@ -40,9 +40,14 @@ const NPCListWrapper = (props) => {
     }, [searchValue, shallowCopy]);
 
     return (
-        <div id="npc-list-wrapper">
+        <div id="npc-list-wrapper" className="journal-content-wrapper">
             <div className="npc-list-wrapper-category" id="npc-list-friendly">
-                <div id="npc-list-wrapper-header">
+                <div
+                    id="npc-list-wrapper-header"
+                    className="content-wrapper-header"
+                >
+                    <h2>{campaign.campaign.name}</h2>
+                    <h3>NPC List</h3>
                     <input
                         type="text"
                         placeholder="Search for an NPC!"

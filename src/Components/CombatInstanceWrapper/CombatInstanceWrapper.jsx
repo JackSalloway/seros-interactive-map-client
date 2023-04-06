@@ -1,10 +1,13 @@
 import "./CombatInstanceWrapper.css";
 
-const CombatInstancesWrapper = () => {
+const CombatInstancesWrapper = ({ campaign }) => {
     return (
         <div className="combat-instance-wrapper">
-            <h2>Combat Instances</h2>
-            <p>Combat Instance logging coming soon!</p>
+            <div className="content-wrapper-header">
+                <h2>{campaign.campaign.name}</h2>
+                <h3>Combat Instances</h3>
+            </div>
+            <p>Combat instance logging coming soon!</p>
         </div>
     );
 };
