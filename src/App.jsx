@@ -14,6 +14,9 @@ import Login from "./pages/login-screen/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Campaign from "./pages/campaign/Campaign";
 
+// Error components imports
+import GenericError from "./Components/ErrorElements/GenericError";
+
 // Request content type import
 import { CONTENT_TYPE_APPLICATION_JSON } from "./imports/imports";
 
@@ -139,6 +142,7 @@ const router = createBrowserRouter(
             handle={{
                 user: (data) => data,
             }}
+            errorElement={<GenericError />}
         >
             <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/campaign/:campaignId" exact element={<Campaign />} />
