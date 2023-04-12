@@ -144,9 +144,9 @@ const router = createBrowserRouter(
             }}
             errorElement={<GenericError />}
         >
+            <Route index element={<Login />} />
             <Route path="/dashboard" exact element={<Dashboard />} />
             <Route path="/campaign/:campaignId" exact element={<Campaign />} />
-            <Route index element={<Login />} />
         </Route>
     )
 );
