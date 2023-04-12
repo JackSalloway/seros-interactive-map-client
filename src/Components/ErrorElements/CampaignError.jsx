@@ -9,8 +9,10 @@ const CampaignError = () => {
         .filter((match) => Boolean(match.handle?.user))
         .map((match) => match.data)[0];
 
+    console.log(user);
+
     // Check if the user is actually logged in and send the generic error if they are not.
-    if (user.campaigns === undefined) {
+    if (user === "No cookies detected, please login to view this page.") {
         return <GenericError />;
     }
 
