@@ -1,20 +1,16 @@
-import GenericError from "./GenericError";
-
 import "./CampaignError.css";
-import { Link, useMatches } from "react-router-dom";
+import {
+    Link,
+    // useMatches
+} from "react-router-dom";
 
 const CampaignError = () => {
-    let matches = useMatches();
-    let user = matches
-        .filter((match) => Boolean(match.handle?.user))
-        .map((match) => match.data)[0];
+    // let matches = useMatches();
+    // let user = matches
+    //     .filter((match) => Boolean(match.handle?.user))
+    //     .map((match) => match.data)[0];
 
-    console.log(user);
-
-    // Check if the user is actually logged in and send the generic error if they are not.
-    if (user === "No cookies detected, please login to view this page.") {
-        return <GenericError />;
-    }
+    // console.log(user);
 
     return (
         <div id="campaign-error-element-wrapper">
