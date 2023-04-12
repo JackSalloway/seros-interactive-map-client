@@ -20,10 +20,10 @@ const GenericError = () => {
     }, [seconds, navigate]);
 
     return (
-        <div className="error-element-wrapper">
-            <p>Oops! We've encountered an error!</p>
+        <div id="error-element-wrapper">
+            <h2>Oops! We've encountered an error!</h2>
             <p>
-                Redirecting you to the <Link to={"/"}>login page</Link> in{" "}
+                Redirecting you to the <Link to={"/"}>home page</Link> in{" "}
                 {seconds} seconds.
             </p>
             <p>Sorry for any inconvenience caused!</p>

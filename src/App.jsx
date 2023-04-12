@@ -13,9 +13,11 @@ import {
 import Login from "./pages/login-screen/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Campaign from "./pages/campaign/Campaign";
+import PageNotFound from "./pages/page-not-found/PageNotFound";
 
 // Error components imports
 import GenericError from "./Components/ErrorElements/GenericError";
+import CampaignError from "./Components/ErrorElements/CampaignError";
 
 // Request content type import
 import { CONTENT_TYPE_APPLICATION_JSON } from "./imports/imports";
@@ -145,8 +147,14 @@ const router = createBrowserRouter(
             errorElement={<GenericError />}
         >
             <Route index element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
             <Route path="/dashboard" exact element={<Dashboard />} />
-            <Route path="/campaign/:campaignId" exact element={<Campaign />} />
+            <Route
+                path="/campaign/:campaignId"
+                exact
+                element={<Campaign />}
+                errorElement={<CampaignError />}
+            />
         </Route>
     )
 );
