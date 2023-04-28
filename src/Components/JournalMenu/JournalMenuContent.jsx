@@ -4,7 +4,7 @@ import LocationListWrapper from "../LocationList/LocationListWrapper";
 import QuestListWrapper from "../QuestList/QuestListWrapper";
 import NPCListWrapper from "../NPCList/NPCListWrapper";
 import ChangelogWrapper from "../ChangelogWrapper/ChangelogWrapper";
-import CombatInstancesWrapper from "../CombatInstanceWrapper/CombatInstanceWrapper";
+import CombatInstancesList from "../CombatInstanceList/CombatInstanceList";
 import EditLocation from "../EditLocation/EditLocation";
 import FrontPageWrapper from "../FrontPageWrapper/FrontPageWrapper";
 
@@ -126,7 +126,7 @@ const JournalMenuContent = (props) => {
     };
 
     const combatInstancesContent = () => {
-        return <CombatInstancesWrapper campaign={campaign} />;
+        return <CombatInstancesList campaign={campaign} />;
     };
 
     const conditionalRender = () => {

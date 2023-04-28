@@ -1,4 +1,4 @@
-import "./CombatInstanceWrapper.css";
+import "./CombatInstanceList.css";
 
 const CombatInstancesWrapper = ({ campaign }) => {
     return (
