@@ -35,6 +35,8 @@ const JournalMenuContent = (props) => {
         campaign,
         changelogData,
         setChangelogData,
+        combatInstanceData,
+        setCombatInstanceData,
     } = props;
 
     if (markerBeingEdited !== null) {
@@ -126,7 +128,12 @@ const JournalMenuContent = (props) => {
     };
 
     const combatInstancesContent = () => {
-        return <CombatInstancesList campaign={campaign} />;
+        return (
+            <CombatInstancesList
+                campaign={campaign}
+                combatInstanceData={combatInstanceData}
+            />
+        );
     };
 
     const conditionalRender = () => {

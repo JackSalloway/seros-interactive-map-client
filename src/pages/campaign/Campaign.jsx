@@ -28,6 +28,7 @@ const Campaign = () => {
     const [serosQuests, setSerosQuests] = useState(null);
     const [serosNPCs, setSerosNPCs] = useState(null);
     const [changelogData, setChangelogData] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
+    const [combatInstanceData, setCombatInstanceData] = useState(null);
 
     //     // Selected data states
     const [selectedLocationNotes, setSelectedLocationNotes] = useState(null);
@@ -136,6 +137,29 @@ const Campaign = () => {
             });
     }, [changelogData, campaignParams]);
 
+    // Fetch combat instance data from database
+    useEffect(() => {
+        if (combatInstanceData !== null) {
+            return;
+        }
+
+        fetch(
+            `${process.env.REACT_APP_API_URL}/combat_instance_data/?campaign_id=${campaignParams.campaignId}`,
+            {
+                method: "GET",
+                mode: "cors",
+            }
+        )
+            .then((response) => response.json())
+            .then((combatInstances) => {
+                if (combatInstances === null) {
+                    setCombatInstanceData([]);
+                    return;
+                }
+                setCombatInstanceData(combatInstances);
+            });
+    });
+
     // Campaign has been selected so render a map and a journal sidebar
     return (
         <div className="map-screen-wrapper">
@@ -197,6 +221,8 @@ const Campaign = () => {
                 campaign={campaign}
                 changelogData={changelogData}
                 setChangelogData={setChangelogData}
+                combatInstanceData={combatInstanceData}
+                setCombatInstanceDat={setCombatInstanceData}
             />
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (
