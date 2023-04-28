@@ -36,8 +36,8 @@ const LocationNotes = (props) => {
     const [showSubLocations, setShowSubLocations] = useState(false);
     const [showNPCs, setShowNPCs] = useState(false);
     const [showQuests, setShowQuests] = useState(false);
-    const [locationList, setLocationList] = useState([]);
-    const [questList, setQuestList] = useState([]);
+    const [locationList, setLocationList] = useState([]); // Used for adding locations to new npcs/quests
+    const [questList, setQuestList] = useState([]); // Used for adding quests to new npcs/locations
 
     // Sub Location states
     const [addNewSubLocation, setAddNewSubLocation] = useState(false);
