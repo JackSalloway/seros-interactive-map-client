@@ -20,6 +20,8 @@ const LocationNotes = (props) => {
         setLocationNPCs,
         locationQuests,
         setLocationQuests,
+        locationCombatInstances,
+        setLocationCombatInstances,
         serosLocations,
         setSerosLocations,
         serosQuests,
@@ -117,6 +119,7 @@ const LocationNotes = (props) => {
         setLocationNotes(null);
         setLocationNPCs(null);
         setLocationQuests(null);
+        setLocationCombatInstances(null);
     };
 
     // If data hasn't been fetched yet, don't render data
@@ -219,6 +222,8 @@ const LocationNotes = (props) => {
                 <CombatInstancesWrapper
                     showCombatInstances={showCombatInstances}
                     setShowCombatInstances={setShowCombatInstances}
+                    locationNotes={locationNotes}
+                    locationCombatInstances={locationCombatInstances}
                 />
             </div>
         </div>

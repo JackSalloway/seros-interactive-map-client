@@ -1,7 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const CombatInstancesWrapper = (props) => {
-    const { showCombatInstances, setShowCombatInstances } = props;
+    const {
+        showCombatInstances,
+        setShowCombatInstances,
+        locationNotes,
+        locationCombatInstances,
+    } = props;
 
     return (
         <div
@@ -28,6 +33,7 @@ const CombatInstancesWrapper = (props) => {
                     />
                 )}
             </div>
+            {/* Has combat instances dropdown been clicked? */}
         </div>
     );
 };

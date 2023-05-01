@@ -29,6 +29,7 @@ function MapBox(props) {
         serosLocations,
         serosNPCs,
         serosQuests,
+        combatInstanceData,
         map,
         renderCreationMarker,
         creationMarkerLatLng,
@@ -38,6 +39,7 @@ function MapBox(props) {
         setSelectedLocationNotes,
         setSelectedLocationNPCs,
         setSelectedLocationQuests,
+        setSelectedLocationCombatInstances,
         userAuthenticated,
         markerBeingEdited,
         setMarkerBeingEdited,
@@ -108,9 +110,38 @@ function MapBox(props) {
             },
             []
         );
-
         setSelectedLocationQuests(reduceQuests);
     }, [serosQuests, selectedLocationNotes, setSelectedLocationQuests]);
+
+    // Select relevant combat instances when a location is selected
+    useEffect(() => {
+        if (selectedLocationNotes === null) {
+            return;
+        }
+        // Filter through combatInstanceData to find the combat instances relevant to the selected location.
+        const reduceCombatInstances = combatInstanceData.reduce(
+            (prevInstances, instanceData, index) => {
+                if (
+                    instanceData.associated_locations.findIndex(
+                        (instanceLocation) =>
+                            instanceLocation._id === selectedLocationNotes._id
+                    ) !== -1
+                ) {
+                    return [
+                        ...prevInstances,
+                        { instanceData, originalIndex: index },
+                    ];
+                }
+                return prevInstances;
+            },
+            []
+        );
+        setSelectedLocationCombatInstances(reduceCombatInstances);
+    }, [
+        combatInstanceData,
+        selectedLocationNotes,
+        setSelectedLocationCombatInstances,
+    ]);
 
     // Renders layer check boxes tied to each type of location, then calls the renderMarker function to render each relevant marker.
     var layerType = (type, locations) => {

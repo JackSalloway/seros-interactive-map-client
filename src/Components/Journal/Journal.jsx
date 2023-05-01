@@ -15,6 +15,8 @@ const Journal = (props) => {
         setLocationNPCs,
         locationQuests,
         setLocationQuests,
+        locationCombatInstances,
+        setLocationCombatInstances,
         serosLocations,
         setSerosLocations,
         serosQuests,
@@ -162,6 +164,8 @@ const Journal = (props) => {
                 setLocationNPCs={setLocationNPCs}
                 locationQuests={locationQuests}
                 setLocationQuests={setLocationQuests}
+                locationCombatInstances={locationCombatInstances}
+                setLocationCombatInstances={setLocationCombatInstances}
                 serosLocations={serosLocations}
                 setSerosLocations={setSerosLocations}
                 serosQuests={serosQuests}

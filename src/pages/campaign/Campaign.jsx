@@ -34,6 +34,10 @@ const Campaign = () => {
     const [selectedLocationNotes, setSelectedLocationNotes] = useState(null);
     const [selectedLocationQuests, setSelectedLocationQuests] = useState(null);
     const [selectedLocationNPCs, setSelectedLocationNPCs] = useState(null);
+    const [
+        selectedLocationCombatInstances,
+        setSelectedLocationCombatInstances,
+    ] = useState(null);
 
     // Map marker states
     const map = useRef();
@@ -167,6 +171,7 @@ const Campaign = () => {
                 serosLocations={serosLocations}
                 serosNPCs={serosNPCs}
                 serosQuests={serosQuests}
+                combatInstanceData={combatInstanceData}
                 setSerosLocations={setSerosLocations}
                 map={map}
                 renderCreationMarker={renderCreationMarker}
@@ -179,6 +184,9 @@ const Campaign = () => {
                 setSelectedLocationNotes={setSelectedLocationNotes}
                 setSelectedLocationQuests={setSelectedLocationQuests}
                 setSelectedLocationNPCs={setSelectedLocationNPCs}
+                setSelectedLocationCombatInstances={
+                    setSelectedLocationCombatInstances
+                }
                 userAuthenticated={user}
                 markerBeingEdited={markerBeingEdited}
                 setMarkerBeingEdited={setMarkerBeingEdited}
@@ -198,6 +206,8 @@ const Campaign = () => {
                 setLocationNPCs={setSelectedLocationNPCs}
                 locationQuests={selectedLocationQuests}
                 setLocationQuests={setSelectedLocationQuests}
+                locationCombatInstances={selectedLocationCombatInstances}
+                setLocationCombatInstances={setSelectedLocationCombatInstances}
                 serosLocations={serosLocations}
                 setSerosLocations={setSerosLocations}
                 serosQuests={serosQuests}
