@@ -1,4 +1,5 @@
 import "./CombatInstanceList.css";
+import dayjs from "dayjs";
 
 const CombatInstancesWrapper = (props) => {
     const { campaign, combatInstanceData } = props;
@@ -16,7 +17,18 @@ const CombatInstancesWrapper = (props) => {
                     to see them here!
                 </p>
             ) : (
-                <p>Combat instances found</p>
+                combatInstanceData.map((instance) => {
+                    return (
+                        <div key={instance.created_at}>
+                            <p>{instance.name}</p>
+                            <p>
+                                {dayjs(instance.created_at).format(
+                                    "DD/MM/YYYY"
+                                )}
+                            </p>
+                        </div>
+                    );
+                })
             )}
         </div>
     );

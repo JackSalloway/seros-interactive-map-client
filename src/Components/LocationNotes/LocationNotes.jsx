@@ -225,6 +225,7 @@ const LocationNotes = (props) => {
                     setShowCombatInstances={setShowCombatInstances}
                     locationNotes={locationNotes}
                     locationCombatInstances={locationCombatInstances}
+                    setDeleteData={setDeleteData}
                 />
             </div>
         </div>
