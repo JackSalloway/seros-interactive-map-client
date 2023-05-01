@@ -11,7 +11,10 @@ const CombatInstancesWrapper = (props) => {
             </div>
             <p>Combat instance logging coming soon!</p>
             {combatInstanceData.length === 0 ? (
-                <p>Add combat instances to see them here!</p>
+                <p>
+                    No combat instances found, head to a location and create one
+                    to see them here!
+                </p>
             ) : (
                 <p>Combat instances found</p>
             )}
