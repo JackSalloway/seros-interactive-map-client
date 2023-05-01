@@ -21,8 +21,6 @@ const CreateNPC = (props) => {
         username,
     } = props;
 
-    console.log(campaign);
-
     // Set states
     const [newNPCName, setNewNPCName] = useState("");
     const [newNPCRace, setNewNPCRace] = useState("");

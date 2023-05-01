@@ -5,13 +5,6 @@ import {
 } from "react-router-dom";
 
 const CampaignError = () => {
-    // let matches = useMatches();
-    // let user = matches
-    //     .filter((match) => Boolean(match.handle?.user))
-    //     .map((match) => match.data)[0];
-
-    // console.log(user);
-
     return (
         <div id="campaign-error-element-wrapper">
             <h2>Oops!</h2>
