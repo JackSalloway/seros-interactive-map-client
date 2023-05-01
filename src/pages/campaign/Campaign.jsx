@@ -30,7 +30,7 @@ const Campaign = () => {
     const [changelogData, setChangelogData] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
     const [combatInstanceData, setCombatInstanceData] = useState(null);
 
-    //     // Selected data states
+    // Selected data states
     const [selectedLocationNotes, setSelectedLocationNotes] = useState(null);
     const [selectedLocationQuests, setSelectedLocationQuests] = useState(null);
     const [selectedLocationNPCs, setSelectedLocationNPCs] = useState(null);
