@@ -91,6 +91,7 @@ const LocationNotes = (props) => {
         setShowSubLocations(false);
         setShowNPCs(false);
         setShowQuests(false);
+        setShowCombatInstances(false);
     }, [locationNotes._id]);
 
     // Close Sub Location form if the parent category is closed
