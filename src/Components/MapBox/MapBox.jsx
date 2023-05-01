@@ -135,7 +135,6 @@ function MapBox(props) {
             },
             []
         );
-        console.log(reduceCombatInstances);
         setSelectedLocationCombatInstances(reduceCombatInstances);
     }, [
         combatInstanceData,
