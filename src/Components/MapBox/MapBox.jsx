@@ -122,10 +122,9 @@ function MapBox(props) {
         const reduceCombatInstances = combatInstanceData.reduce(
             (prevInstances, instanceData, index) => {
                 if (
-                    instanceData.associated_locations.findIndex(
-                        (instanceLocation) =>
-                            instanceLocation._id === selectedLocationNotes._id
-                    ) !== -1
+                    (instanceData.associated_location ===
+                        selectedLocationNotes._id) ===
+                    true
                 ) {
                     return [
                         ...prevInstances,
@@ -136,6 +135,7 @@ function MapBox(props) {
             },
             []
         );
+        console.log(reduceCombatInstances);
         setSelectedLocationCombatInstances(reduceCombatInstances);
     }, [
         combatInstanceData,
