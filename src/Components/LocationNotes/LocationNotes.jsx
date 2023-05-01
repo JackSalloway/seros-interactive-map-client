@@ -8,6 +8,7 @@ import { splitParas } from "../../imports/imports";
 import SubLocationWrapper from "./SubLocations/SubLocationWrapper";
 import NPCWrapper from "./NPCs/NPCWrapper";
 import QuestWrapper from "./Quests/QuestWrapper";
+import CombatInstancesWrapper from "./CombatInstances/CombatInstancesWrapper";
 
 const LocationNotes = (props) => {
     const {
@@ -36,6 +37,7 @@ const LocationNotes = (props) => {
     const [showSubLocations, setShowSubLocations] = useState(false);
     const [showNPCs, setShowNPCs] = useState(false);
     const [showQuests, setShowQuests] = useState(false);
+    const [showCombatInstances, setShowCombatInstances] = useState(false);
     const [locationList, setLocationList] = useState([]); // Used for adding locations to new npcs/quests
     const [questList, setQuestList] = useState([]); // Used for adding quests to new npcs/locations
 
@@ -212,6 +214,11 @@ const LocationNotes = (props) => {
                     campaign={campaign}
                     setChangelogData={setChangelogData}
                     username={username}
+                />
+
+                <CombatInstancesWrapper
+                    showCombatInstances={showCombatInstances}
+                    setShowCombatInstances={setShowCombatInstances}
                 />
             </div>
         </div>

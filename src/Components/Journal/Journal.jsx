@@ -173,6 +173,8 @@ const Journal = (props) => {
                 campaign={campaign}
                 setChangelogData={setChangelogData}
                 username={userAuthenticated.username}
+                combatInstanceData={combatInstanceData}
+                setCombatInstanceData={setCombatInstanceData}
             />
         </div>
     );
