@@ -63,7 +63,7 @@ const CombatInstancesWrapper = (props) => {
             {/* Has combat instances dropdown been clicked? */}
             {showCombatInstances === true ? (
                 // Are there more than 0 Combat Instances at this location?
-                locationCombatInstances.legnth > 0 ? (
+                locationCombatInstances.length > 0 ? (
                     <>
                         {locationCombatInstances.map((instance) => {
                             return (
