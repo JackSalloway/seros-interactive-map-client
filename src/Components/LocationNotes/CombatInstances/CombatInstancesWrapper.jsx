@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Component imports
 import CombatInstanceNotes from "./CombatInstanceNotes";
+import CreateCombatInstance from "./CreateCombatInstance";
 
 const CombatInstancesWrapper = (props) => {
     const {
@@ -99,6 +100,8 @@ const CombatInstancesWrapper = (props) => {
                     </>
                 )
             ) : null}
+            {/* Has add a new Combat Instance been clicked? */}
+            {addNewInstance === true ? <CreateCombatInstance /> : null}
         </div>
     );
 };
