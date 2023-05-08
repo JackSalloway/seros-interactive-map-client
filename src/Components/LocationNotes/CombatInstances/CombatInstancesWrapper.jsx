@@ -74,17 +74,29 @@ const CombatInstancesWrapper = (props) => {
                                 />
                             );
                         })}
+                        {/* Has add new Combat Instance been clicked? */}
+                        <span
+                            className="add-new-data"
+                            onClick={() => {
+                                setAddNewInstance(!addNewInstance);
+                            }}
+                        >
+                            {toggleNewInstanceButton()}
+                        </span>
                     </>
                 ) : (
-                    // Has add new Combat Instance been clicked?
-                    <span
-                        className="add-new-data"
-                        onClick={() => {
-                            setAddNewInstance(!addNewInstance);
-                        }}
-                    >
-                        {toggleNewInstanceButton()}
-                    </span>
+                    <>
+                        <p>There are no combat instances at this location...</p>
+                        {/* Has add new Combat Instance been clicked? */}
+                        <span
+                            className="add-new-data"
+                            onClick={() => {
+                                setAddNewInstance(!addNewInstance);
+                            }}
+                        >
+                            {toggleNewInstanceButton()}
+                        </span>
+                    </>
                 )
             ) : null}
         </div>
