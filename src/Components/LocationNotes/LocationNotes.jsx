@@ -53,6 +53,9 @@ const LocationNotes = (props) => {
     const [addNewQuest, setAddNewQuest] = useState(false);
     const [questUpdated, setQuestUpdated] = useState(false);
 
+    // Combat Instance states
+    const [addNewInstance, setAddNewInstance] = useState(false);
+
     // Ensure data is loaded before rendering quest notes
     useEffect(() => {
         if (locationNPCs === null && locationQuests === null) {
@@ -223,9 +226,14 @@ const LocationNotes = (props) => {
                 <CombatInstancesWrapper
                     showCombatInstances={showCombatInstances}
                     setShowCombatInstances={setShowCombatInstances}
+                    addNewInstance={addNewInstance}
+                    setAddnewInstance={setAddNewInstance}
                     locationNotes={locationNotes}
                     locationCombatInstances={locationCombatInstances}
                     setDeleteData={setDeleteData}
+                    campaign={campaign}
+                    setChangelogData={setChangelogData}
+                    username={username}
                 />
             </div>
         </div>
