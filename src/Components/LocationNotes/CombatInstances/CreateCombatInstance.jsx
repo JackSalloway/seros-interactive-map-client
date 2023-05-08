@@ -153,7 +153,7 @@ const CreateCombatInstance = (props) => {
         { value: "Sorcerer", label: "Sorcerer" },
         { value: "Warlock", label: "Warlock" },
         { value: "Wizard", label: "Wizard" },
-        { value: "unknown", label: "unknown" },
+        { value: "Unknown", label: "Unknown" },
     ];
 
     const newCharacterClassSelection = () => {
@@ -195,7 +195,7 @@ const CreateCombatInstance = (props) => {
                 isMulti={false}
                 onChange={handleNewCharacterTypeChange}
                 styles={customStyles}
-                placeholder="Select a class..."
+                placeholder="Should this character be remembered for next time?"
             />
         );
     };
