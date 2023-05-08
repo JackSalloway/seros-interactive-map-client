@@ -17,6 +17,24 @@ const CombatInstancesWrapper = (props) => {
         username,
     } = props;
 
+    const toggleNewInstanceButton = () => {
+        if (addNewInstance === false) {
+            return (
+                <FontAwesomeIcon
+                    icon="fa-plus"
+                    className="location-notes-fa-icon h3 location-notes-fa-plus"
+                />
+            );
+        } else {
+            return (
+                <FontAwesomeIcon
+                    icon="fa-times"
+                    className="location-notes-fa-icon h3 location-notes-fa-cross"
+                />
+            );
+        }
+    };
+
     return (
         <div
             className="location-notes-category-wrapper"
@@ -58,7 +76,15 @@ const CombatInstancesWrapper = (props) => {
                         })}
                     </>
                 ) : (
-                    <p>There are no combat instances at this location...</p>
+                    // Has add new Combat Instance been clicked?
+                    <span
+                        className="add-new-data"
+                        onClick={() => {
+                            setAddNewInstance(!addNewInstance);
+                        }}
+                    >
+                        {toggleNewInstanceButton()}
+                    </span>
                 )
             ) : null}
         </div>

@@ -227,7 +227,7 @@ const LocationNotes = (props) => {
                     showCombatInstances={showCombatInstances}
                     setShowCombatInstances={setShowCombatInstances}
                     addNewInstance={addNewInstance}
-                    setAddnewInstance={setAddNewInstance}
+                    setAddNewInstance={setAddNewInstance}
                     locationNotes={locationNotes}
                     locationCombatInstances={locationCombatInstances}
                     setDeleteData={setDeleteData}
