@@ -7,9 +7,14 @@ const CombatInstancesWrapper = (props) => {
     const {
         showCombatInstances,
         setShowCombatInstances,
+        addNewInstance,
+        setAddNewInstance,
         locationNotes,
         locationCombatInstances,
         setDeleteData,
+        campaign,
+        setChangelogData,
+        username,
     } = props;
 
     return (
@@ -39,17 +44,22 @@ const CombatInstancesWrapper = (props) => {
             </div>
             {/* Has combat instances dropdown been clicked? */}
             {showCombatInstances === true ? (
-                <>
-                    {locationCombatInstances.map((instance) => {
-                        return (
-                            <CombatInstanceNotes
-                                key={instance.instanceData.created_at}
-                                instance={instance.instanceData}
-                                setDeleteData={setDeleteData}
-                            />
-                        );
-                    })}
-                </>
+                // Are there more than 0 Combat Instances at this location?
+                locationCombatInstances.legnth > 0 ? (
+                    <>
+                        {locationCombatInstances.map((instance) => {
+                            return (
+                                <CombatInstanceNotes
+                                    key={instance.instanceData.created_at}
+                                    instance={instance.instanceData}
+                                    setDeleteData={setDeleteData}
+                                />
+                            );
+                        })}
+                    </>
+                ) : (
+                    <p>There are no combat instances at this location...</p>
+                )
             ) : null}
         </div>
     );
