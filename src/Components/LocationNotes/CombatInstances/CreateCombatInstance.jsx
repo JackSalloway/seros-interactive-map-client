@@ -75,8 +75,10 @@ const CreateCombatInstance = (props) => {
     }, [newCharacterName, newCharacterClass, newCharacterIsPlayerCharacter]);
 
     // Send POST request to create a new Combat Instance at this location
-    const postInstanceData = async (e) => {
-        e.preventDefault();
+    const postInstanceData = async () => {
+        // e.preventDefault();
+
+        console.log(playerList);
 
         const instanceData = {
             instance_name: InstanceName,
@@ -104,7 +106,7 @@ const CreateCombatInstance = (props) => {
 
     // Function to handle changes inside the player selection box
     const handleSelectedPlayersChange = (selectedPlayerList) => {
-        console.log(selectedPlayerList);
+        // console.log(selectedPlayerList);
         return;
     };
 
@@ -123,6 +125,7 @@ const CreateCombatInstance = (props) => {
     };
 
     const addNewCharacterValues = () => {
+        // Update player list state value
         setPlayerList([
             ...playerList,
             {
@@ -131,6 +134,13 @@ const CreateCombatInstance = (props) => {
                 player_character: newCharacterIsPlayerCharacter,
             },
         ]);
+        // Reset new character state values
+        // THIS DOES NOT WORK, MIGHT HAVE TO MAKE THIS AN ACTUAL COMPONENT THAT RENDERS WHEN A USER CLICKS
+        // ADD NEW CHARACTER, AND DE-RENDERS WHEN THEY CLICK THE ADD NEW CHARACTER BUTTON
+        // THAT WAY THE VALUES SHOULD BE ABLE TO BE RESET
+        setNewCharacterName("");
+        setNewCharacterClass("");
+        setNewCharacterIsPlayerCharacter(null);
     };
 
     // New character class selection options
@@ -233,6 +243,9 @@ const CreateCombatInstance = (props) => {
                     {newCharacterInvalidInputs === true
                         ? "Missing new character values"
                         : "Add character!"}
+                </button>
+                <button onClick={() => postInstanceData()}>
+                    Create Instance!
                 </button>
             </div>
         </>
