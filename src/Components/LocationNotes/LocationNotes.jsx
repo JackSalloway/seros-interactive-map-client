@@ -32,6 +32,8 @@ const LocationNotes = (props) => {
         campaign,
         setChangelogData,
         username,
+        combatInstanceData,
+        setCombatInstanceData,
     } = props;
 
     // Set states
@@ -226,6 +228,8 @@ const LocationNotes = (props) => {
                 <CombatInstancesWrapper
                     showCombatInstances={showCombatInstances}
                     setShowCombatInstances={setShowCombatInstances}
+                    combatInstanceData={combatInstanceData}
+                    setCombatInstanceData={setCombatInstanceData}
                     addNewInstance={addNewInstance}
                     setAddNewInstance={setAddNewInstance}
                     locationNotes={locationNotes}

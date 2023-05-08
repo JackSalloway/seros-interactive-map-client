@@ -8,6 +8,8 @@ const CombatInstancesWrapper = (props) => {
     const {
         showCombatInstances,
         setShowCombatInstances,
+        combatInstanceData,
+        setCombatInstanceData,
         addNewInstance,
         setAddNewInstance,
         locationNotes,
@@ -101,7 +103,16 @@ const CombatInstancesWrapper = (props) => {
                 )
             ) : null}
             {/* Has add a new Combat Instance been clicked? */}
-            {addNewInstance === true ? <CreateCombatInstance /> : null}
+            {addNewInstance === true ? (
+                <CreateCombatInstance
+                    locationNotes={locationNotes}
+                    campaign={campaign}
+                    setChangelogData={setChangelogData}
+                    username={username}
+                    combatInstanceDat={combatInstanceData}
+                    setCombatInstanceDat={setCombatInstanceData}
+                />
+            ) : null}
         </div>
     );
 };
