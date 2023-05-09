@@ -238,6 +238,8 @@ const LocationNotes = (props) => {
                     campaign={campaign}
                     setChangelogData={setChangelogData}
                     username={username}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                 />
             </div>
         </div>

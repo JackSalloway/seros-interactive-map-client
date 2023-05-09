@@ -18,6 +18,8 @@ const CombatInstancesWrapper = (props) => {
         campaign,
         setChangelogData,
         username,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     const toggleNewInstanceButton = () => {
@@ -111,6 +113,8 @@ const CombatInstancesWrapper = (props) => {
                     username={username}
                     combatInstanceDat={combatInstanceData}
                     setCombatInstanceDat={setCombatInstanceData}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                 />
             ) : null}
         </div>

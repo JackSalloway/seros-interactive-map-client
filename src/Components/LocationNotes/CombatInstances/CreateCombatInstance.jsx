@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Select from "react-select";
-import he from "he";
 import {
     CONTENT_TYPE_APPLICATION_JSON,
     customStyles,
 } from "../../../imports/imports";
+
+// Component imports
+import AddNewCharacter from "./AddNewCharacter";
 
 const CreateCombatInstance = (props) => {
     // required inputs fields
@@ -26,10 +28,12 @@ const CreateCombatInstance = (props) => {
     const {
         locationNotes,
         campaign,
-        setChangelogData,
+        // setChangelogData,
         username,
-        combatInstanceData,
-        setCombatInstanceData,
+        // combatInstanceData,
+        // setCombatInstanceData,
+        dataNotifications,
+        setDataNotifications,
     } = props;
 
     // Instance data states
@@ -50,29 +54,16 @@ const CreateCombatInstance = (props) => {
     );
 
     // New Character values states
+    const [renderNewCharacterForm, setRenderNewCharacterForm] = useState(false);
     const [newCharacterName, setNewCharacterName] = useState("");
     const [newCharacterClass, setNewCharacterClass] = useState("");
     const [newCharacterIsPlayerCharacter, setNewCharacterIsPlayerCharacter] =
         useState(null);
-    const [newCharacterInvalidInputs, setNewCharacterInvalidInputs] =
-        useState(true); // Used to disable to add new character button if inputs are not valid
 
     // POST data states
     const [InstanceName, setInstanceName] = useState("");
     const [InstanceDescritption, setInstanceDescription] = useState("");
     const [instanceDetails, setInstanceDetails] = useState({});
-
-    // Update newCharacterInvalidInputs state value when the inputs are considered valid
-    useEffect(() => {
-        if (
-            newCharacterName === "" ||
-            newCharacterClass === "" ||
-            newCharacterIsPlayerCharacter === null
-        ) {
-            setNewCharacterInvalidInputs(true);
-            return;
-        } else setNewCharacterInvalidInputs(false);
-    }, [newCharacterName, newCharacterClass, newCharacterIsPlayerCharacter]);
 
     // Send POST request to create a new Combat Instance at this location
     const postInstanceData = async () => {
@@ -134,80 +125,15 @@ const CreateCombatInstance = (props) => {
                 player_character: newCharacterIsPlayerCharacter,
             },
         ]);
-        // Reset new character state values
-        // THIS DOES NOT WORK, MIGHT HAVE TO MAKE THIS AN ACTUAL COMPONENT THAT RENDERS WHEN A USER CLICKS
-        // ADD NEW CHARACTER, AND DE-RENDERS WHEN THEY CLICK THE ADD NEW CHARACTER BUTTON
-        // THAT WAY THE VALUES SHOULD BE ABLE TO BE RESET
-        setNewCharacterName("");
-        setNewCharacterClass("");
-        setNewCharacterIsPlayerCharacter(null);
-    };
-
-    // New character class selection options
-    const handleNewCharacterClassChange = (characterClass) => {
-        setNewCharacterClass(characterClass.value);
-    };
-
-    const fifthEditionClasses = [
-        { value: "Artificer", label: "Artificer" },
-        { value: "Barbarian", label: "Barbarian" },
-        { value: "Bard", label: "Bard" },
-        { value: "Blood Hunter", label: "Blood Hunter" },
-        { value: "Cleric", label: "Cleric" },
-        { value: "Druid", label: "Druid" },
-        { value: "Fighter", label: "Fighter" },
-        { value: "Monk", label: "Monk" },
-        { value: "Paladin", label: "Paladin" },
-        { value: "Ranger", label: "Ranger" },
-        { value: "Rogue", label: "Rogue" },
-        { value: "Sorcerer", label: "Sorcerer" },
-        { value: "Warlock", label: "Warlock" },
-        { value: "Wizard", label: "Wizard" },
-        { value: "Unknown", label: "Unknown" },
-    ];
-
-    const newCharacterClassSelection = () => {
-        return (
-            <Select
-                menuShouldBlockScroll={true} // This prevents scrolling within the journal component whilst a dropdown menu is open, which is needed due to the dropdown menu staying in a fixed position, rather than being relative to it's parent
-                menuPlacement="auto" // This prevents the menu from increasing the page size if it is at the bottom of the journal component. It does this by placing the menu above the options box
-                menuPortalTarget={document.body} // This is used to give the menu a z-index to prevent it being hidden by other elements
-                options={fifthEditionClasses}
-                isMulti={false}
-                onChange={handleNewCharacterClassChange}
-                styles={customStyles}
-                placeholder="Select a class..."
-            />
-        );
-    };
-
-    // Remember new character selection options - wether or not the character should be added to the list of players in the campaign
-    const handleNewCharacterTypeChange = (input) => {
-        setNewCharacterIsPlayerCharacter(input.value);
-    };
-
-    const newCharacterTypeSelection = () => {
-        return (
-            <Select
-                menuShouldBlockScroll={true} // This prevents scrolling within the journal component whilst a dropdown menu is open, which is needed due to the dropdown menu staying in a fixed position, rather than being relative to it's parent
-                menuPlacement="auto" // This prevents the menu from increasing the page size if it is at the bottom of the journal component. It does this by placing the menu above the options box
-                menuPortalTarget={document.body} // This is used to give the menu a z-index to prevent it being hidden by other elements
-                options={[
-                    {
-                        value: true,
-                        label: "Player Character (remember for next time)",
-                    },
-                    {
-                        value: false,
-                        label: "Non-player Character (do not remember for next time)",
-                    },
-                ]}
-                isMulti={false}
-                onChange={handleNewCharacterTypeChange}
-                styles={customStyles}
-                placeholder="Should this character be remembered for next time?"
-            />
-        );
+        // Add notification to let user know new character has been added
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `${newCharacterName} has been added to the select players list!`,
+            important: false,
+        });
+        setDataNotifications([...notificationsCopy]);
+        // De-render AddNewCharacter component and reset all relevant state values
+        setRenderNewCharacterForm(false);
     };
 
     return (
@@ -217,37 +143,29 @@ const CreateCombatInstance = (props) => {
                     Select players:
                     {playerSelection()}
                 </label>
-            </div>
-            <div className="location-notes-create add-new-character-inputs">
-                <h3>Add a new character:</h3>
-                <label htmlFor="new-character-name">
-                    New character name:
-                    <input
-                        id="new-character-name"
-                        type="string"
-                        onChange={({ target }) => {
-                            setNewCharacterName(target.value);
-                        }}
-                    />
-                </label>
-                <label htmlFor="new-character-class">
-                    New character class:{newCharacterClassSelection()}
-                </label>
-                <label htmlFor="new-character-remember">
-                    Player character or NPC:{newCharacterTypeSelection()}
-                </label>
-                <button
-                    disabled={newCharacterInvalidInputs}
-                    onClick={() => addNewCharacterValues()}
-                >
-                    {newCharacterInvalidInputs === true
-                        ? "Missing new character values"
-                        : "Add character!"}
-                </button>
-                <button onClick={() => postInstanceData()}>
-                    Create Instance!
+                <p>Missing a character?</p>
+                <button onClick={() => setRenderNewCharacterForm(true)}>
+                    Add them here!
                 </button>
             </div>
+            {/* Has the add new character button been clicked? */}
+            {renderNewCharacterForm === true ? (
+                <AddNewCharacter
+                    newCharacterName={newCharacterName}
+                    setNewCharacterName={setNewCharacterName}
+                    newCharacterClass={newCharacterClass}
+                    setNewCharacterClass={setNewCharacterClass}
+                    newCharacterIsPlayerCharacter={
+                        newCharacterIsPlayerCharacter
+                    }
+                    setNewCharacterIsPlayerCharacter={
+                        setNewCharacterIsPlayerCharacter
+                    }
+                    addNewCharacterValues={addNewCharacterValues}
+                />
+            ) : null}
+
+            <button onClick={() => postInstanceData()}>Create Instance!</button>
         </>
     );
 };
