@@ -11,6 +11,7 @@ const AddNewCharacter = (props) => {
         newCharacterIsPlayerCharacter,
         setNewCharacterIsPlayerCharacter,
         addNewCharacterValues,
+        setRenderNewCharacterForm,
     } = props;
 
     const [newCharacterInvalidInputs, setNewCharacterInvalidInputs] =
@@ -27,6 +28,14 @@ const AddNewCharacter = (props) => {
             return;
         } else setNewCharacterInvalidInputs(false);
     }, [newCharacterName, newCharacterClass, newCharacterIsPlayerCharacter]);
+
+    // Reset state values and close form on button click
+    const closeForm = () => {
+        setNewCharacterName("");
+        setNewCharacterClass("");
+        setNewCharacterIsPlayerCharacter(null);
+        setRenderNewCharacterForm(false);
+    };
 
     // New character class selection options
     const handleNewCharacterClassChange = (characterClass) => {
@@ -119,8 +128,11 @@ const AddNewCharacter = (props) => {
                     onClick={() => addNewCharacterValues()}
                 >
                     {newCharacterInvalidInputs === true
-                        ? "Missing new character values"
+                        ? "Invalid new character values"
                         : "Add character!"}
+                </button>
+                <button onClick={() => closeForm()}>
+                    Cancel character creation
                 </button>
             </div>
         </>

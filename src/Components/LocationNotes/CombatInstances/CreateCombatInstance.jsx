@@ -165,6 +165,7 @@ const CreateCombatInstance = (props) => {
                         setNewCharacterIsPlayerCharacter
                     }
                     addNewCharacterValues={addNewCharacterValues}
+                    setRenderNewCharacterForm={setRenderNewCharacterForm}
                 />
             ) : null}
 
