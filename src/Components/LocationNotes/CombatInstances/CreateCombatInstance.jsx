@@ -111,6 +111,7 @@ const CreateCombatInstance = (props) => {
                 isMulti={true}
                 onChange={handleSelectedPlayersChange}
                 styles={customStyles}
+                placeholder="Select involved players..."
             />
         );
     };
@@ -140,37 +141,55 @@ const CreateCombatInstance = (props) => {
     };
 
     return (
-        <>
-            <div className="location-notes-create">
-                <label htmlFor="instance-players">
-                    Select players:
-                    {playerSelection()}
-                </label>
-                <p>Missing a character?</p>
-                <button onClick={() => setRenderNewCharacterForm(true)}>
-                    Add them here!
-                </button>
-            </div>
-            {/* Has the add new character button been clicked? */}
-            {renderNewCharacterForm === true ? (
-                <AddNewCharacter
-                    newCharacterName={newCharacterName}
-                    setNewCharacterName={setNewCharacterName}
-                    newCharacterClass={newCharacterClass}
-                    setNewCharacterClass={setNewCharacterClass}
-                    newCharacterIsPlayerCharacter={
-                        newCharacterIsPlayerCharacter
-                    }
-                    setNewCharacterIsPlayerCharacter={
-                        setNewCharacterIsPlayerCharacter
-                    }
-                    addNewCharacterValues={addNewCharacterValues}
-                    setRenderNewCharacterForm={setRenderNewCharacterForm}
-                />
-            ) : null}
+        <div className="location-notes-details">
+            <div
+                className="location-notes-details-border top"
+                style={{ backgroundImage: `url(/images/statblockbar.jpg)` }}
+            />
+            <div className="location-notes-details location-notes-brighter-filter">
+                <div className="location-notes-form combat-instance-form">
+                    <div className="location-notes-create">
+                        <label htmlFor="instance-players">
+                            Select players:
+                            {playerSelection()}
+                        </label>
+                        <p>Missing a character?</p>
+                        <button onClick={() => setRenderNewCharacterForm(true)}>
+                            Add them here!
+                        </button>
+                    </div>
+                    {/* Has the add new character button been clicked? */}
+                    {renderNewCharacterForm === true ? (
+                        <AddNewCharacter
+                            newCharacterName={newCharacterName}
+                            setNewCharacterName={setNewCharacterName}
+                            newCharacterClass={newCharacterClass}
+                            setNewCharacterClass={setNewCharacterClass}
+                            newCharacterIsPlayerCharacter={
+                                newCharacterIsPlayerCharacter
+                            }
+                            setNewCharacterIsPlayerCharacter={
+                                setNewCharacterIsPlayerCharacter
+                            }
+                            addNewCharacterValues={addNewCharacterValues}
+                            setRenderNewCharacterForm={
+                                setRenderNewCharacterForm
+                            }
+                        />
+                    ) : null}
 
-            <button onClick={() => postInstanceData()}>Create Instance!</button>
-        </>
+                    <button onClick={() => postInstanceData()}>
+                        Create Instance!
+                    </button>
+                </div>
+            </div>
+            <div
+                className="location-notes-details-border bottom"
+                style={{
+                    backgroundImage: `url(/images/statblockbar.jpg)`,
+                }}
+            />
+        </div>
     );
 };
 
