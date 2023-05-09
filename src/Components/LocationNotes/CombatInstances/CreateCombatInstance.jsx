@@ -228,10 +228,17 @@ const CreateCombatInstance = (props) => {
                             ) : null}{" "}
                         </>
                     ) : (
-                        <TurnStatsForm />
+                        <TurnStatsForm
+                            turns={turns}
+                            setTurns={setTurns}
+                            instancePlayerDetails={instancePlayerDetails}
+                            setInstancePlayerDetails={setInstancePlayerDetails}
+                            postInstanceData={postInstanceData}
+                        />
                     )}
 
                     {/* Form progression buttons */}
+                    {/* Need to add logic to prevent user from moving to second step if no players are added into the list */}
                     <button
                         disabled={step === 1 ? true : false}
                         onClick={() => setStep(1)}
