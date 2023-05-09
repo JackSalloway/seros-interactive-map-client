@@ -7,6 +7,7 @@ import {
 
 // Component imports
 import AddNewCharacter from "./AddNewCharacter";
+import { text } from "@fortawesome/fontawesome-svg-core";
 
 const CreateCombatInstance = (props) => {
     // required inputs fields
@@ -149,6 +150,31 @@ const CreateCombatInstance = (props) => {
             <div className="location-notes-details location-notes-brighter-filter">
                 <div className="location-notes-form combat-instance-form">
                     <div className="location-notes-create">
+                        <label htmlFor="instance-name">
+                            Instance name:
+                            <input
+                                id="instance-name"
+                                type="string"
+                                required
+                                onChange={({ target }) => {
+                                    setInstanceName(target.value);
+                                }}
+                            />
+                        </label>
+                    </div>
+                    <div className="location-notes-create">
+                        <label htmlFor="instance-description">
+                            Instance Description:
+                            <textarea
+                                id="instance-description"
+                                type="text"
+                                onChange={({ target }) => {
+                                    setInstanceDescription(target.value);
+                                }}
+                            />
+                        </label>
+                    </div>
+                    <div className="location-notes-create">
                         <label htmlFor="instance-players">
                             Select players:
                             {playerSelection()}
@@ -179,7 +205,7 @@ const CreateCombatInstance = (props) => {
                     ) : null}
 
                     <button onClick={() => postInstanceData()}>
-                        Create Instance!
+                        Log turns!
                     </button>
                 </div>
             </div>
