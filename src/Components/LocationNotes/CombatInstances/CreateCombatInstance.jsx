@@ -134,6 +134,9 @@ const CreateCombatInstance = (props) => {
         setDataNotifications([...notificationsCopy]);
         // De-render AddNewCharacter component and reset all relevant state values
         setRenderNewCharacterForm(false);
+        setNewCharacterName("");
+        setNewCharacterClass("");
+        setNewCharacterIsPlayerCharacter(null);
     };
 
     return (
