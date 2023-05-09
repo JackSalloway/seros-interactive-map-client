@@ -49,13 +49,16 @@ const CreateCombatInstance = (props) => {
                 value: {
                     name: player.name,
                     class: player.class,
-                    // _id: player._id,
+                    turns: {
+                        damage: [],
+                        healing: [],
+                    },
                 },
                 label: player.name,
             };
         })
     );
-    const [playerListDetails, setPlayerListDetails] = useState([]);
+    // const [playerListDetails, setPlayerListDetails] = useState([]);
 
     // New Character values states
     const [renderNewCharacterForm, setRenderNewCharacterForm] = useState(false);
@@ -67,7 +70,7 @@ const CreateCombatInstance = (props) => {
     // POST data states
     const [instanceName, setInstanceName] = useState("");
     const [instanceDescription, setInstanceDescription] = useState("");
-    const [instanceDetails, setInstanceDetails] = useState({});
+    const [instancePlayerDetails, setInstancePlayerDetails] = useState({});
 
     // Send POST request to create a new Combat Instance at this location
     const postInstanceData = async () => {
@@ -78,7 +81,7 @@ const CreateCombatInstance = (props) => {
         const instanceData = {
             instance_name: instanceName,
             instance_desc: instanceDescription,
-            instance_details: instanceDetails,
+            instance_details: instancePlayerDetails,
             instance_location_id: locationNotes._id,
             instance_campaign_id: campaign.campaign._id,
             username: username,
@@ -101,8 +104,9 @@ const CreateCombatInstance = (props) => {
 
     // Function to handle changes inside the player selection box
     const handleSelectedPlayersChange = (selectedPlayerList) => {
-        console.log(selectedPlayerList);
-        setPlayerListDetails(selectedPlayerList);
+        setInstancePlayerDetails(
+            selectedPlayerList.map((player) => player.value)
+        );
         return;
     };
 
@@ -117,7 +121,7 @@ const CreateCombatInstance = (props) => {
                 onChange={handleSelectedPlayersChange}
                 styles={customStyles}
                 placeholder="Select involved players..."
-                defaultValue={null ?? playerListDetails}
+                defaultValue={null ?? instancePlayerDetails}
             />
         );
     };
