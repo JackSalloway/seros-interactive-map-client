@@ -65,8 +65,6 @@ const CreateCombatInstance = (props) => {
     const postInstanceData = async () => {
         // e.preventDefault();
 
-        console.log(playerList);
-
         const instanceData = {
             instance_name: instanceName,
             instance_desc: instanceDescription,
@@ -95,7 +93,6 @@ const CreateCombatInstance = (props) => {
     const handleSelectedPlayersChange = (selectedPlayerList) => {
         setInstancePlayerDetails(
             selectedPlayerList.map((player) => {
-                console.log(player.value);
                 // Add right amount of turns for damage and healing arrays.
                 if (player.value.turns.damage.length !== turns.length) {
                     player.value.turns.damage.length = turns.length;
