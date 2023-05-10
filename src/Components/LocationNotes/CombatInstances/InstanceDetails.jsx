@@ -110,7 +110,7 @@ const InstanceDetails = (props) => {
                 </label>
             </div>
             <div className="location-notes-create">
-                <label htmlFor="instance-players">
+                <label>
                     Select players:
                     {playerSelection()}
                 </label>

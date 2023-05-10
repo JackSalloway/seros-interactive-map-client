@@ -117,10 +117,10 @@ const AddNewCharacter = (props) => {
                         }}
                     />
                 </label>
-                <label htmlFor="new-character-class">
+                <label>
                     New character class:{newCharacterClassSelection()}
                 </label>
-                <label htmlFor="new-character-remember">
+                <label>
                     Player character or NPC:{newCharacterTypeSelection()}
                 </label>
                 <button
