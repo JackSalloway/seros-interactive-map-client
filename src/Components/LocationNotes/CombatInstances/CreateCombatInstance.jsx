@@ -6,9 +6,8 @@ import {
 } from "../../../imports/imports";
 
 // Component imports
-import AddNewCharacter from "./AddNewCharacter";
-import { text } from "@fortawesome/fontawesome-svg-core";
 import TurnStatsForm from "./TurnStatsForm";
+import InstanceDetailsForm from "./InstanceDetailsForm";
 
 const CreateCombatInstance = (props) => {
     // required inputs fields
@@ -70,7 +69,7 @@ const CreateCombatInstance = (props) => {
     // POST data states
     const [instanceName, setInstanceName] = useState("");
     const [instanceDescription, setInstanceDescription] = useState("");
-    const [instancePlayerDetails, setInstancePlayerDetails] = useState({});
+    const [instancePlayerDetails, setInstancePlayerDetails] = useState(null);
 
     // Send POST request to create a new Combat Instance at this location
     const postInstanceData = async () => {
@@ -107,47 +106,6 @@ const CreateCombatInstance = (props) => {
         setInstancePlayerDetails(
             selectedPlayerList.map((player) => player.value)
         );
-        return;
-    };
-
-    const playerSelection = () => {
-        return (
-            <Select
-                menuShouldBlockScroll={true} // This prevents scrolling within the journal component whilst a dropdown menu is open, which is needed due to the dropdown menu staying in a fixed position, rather than being relative to it's parent
-                menuPlacement="auto" // This prevents the menu from increasing the page size if it is at the bottom of the journal component. It does this by placing the menu above the options box
-                menuPortalTarget={document.body} // This is used to give the menu a z-index to prevent it being hidden by other elements
-                options={playerList}
-                isMulti={true}
-                onChange={handleSelectedPlayersChange}
-                styles={customStyles}
-                placeholder="Select involved players..."
-                defaultValue={null ?? instancePlayerDetails}
-            />
-        );
-    };
-
-    const addNewCharacterValues = () => {
-        // Update player list state value
-        setPlayerList([
-            ...playerList,
-            {
-                value: { name: newCharacterName, class: newCharacterClass },
-                label: newCharacterName,
-                player_character: newCharacterIsPlayerCharacter,
-            },
-        ]);
-        // Add notification to let user know new character has been added
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
-            message: `${newCharacterName} has been added to the select players list!`,
-            important: false,
-        });
-        setDataNotifications([...notificationsCopy]);
-        // De-render AddNewCharacter component and reset all relevant state values
-        setRenderNewCharacterForm(false);
-        setNewCharacterName("");
-        setNewCharacterClass("");
-        setNewCharacterIsPlayerCharacter(null);
     };
 
     return (
@@ -160,73 +118,24 @@ const CreateCombatInstance = (props) => {
                 <div className="location-notes-form combat-instance-form">
                     {/* Render relevant form step */}
                     {step === 1 ? (
-                        <>
-                            {" "}
-                            <div className="location-notes-create">
-                                <label htmlFor="instance-name">
-                                    Instance name:
-                                    <input
-                                        id="instance-name"
-                                        type="string"
-                                        required
-                                        defaultValue={instanceName}
-                                        onChange={({ target }) => {
-                                            setInstanceName(target.value);
-                                        }}
-                                    />
-                                </label>
-                            </div>
-                            <div className="location-notes-create">
-                                <label htmlFor="instance-description">
-                                    Instance Description:
-                                    <textarea
-                                        id="instance-description"
-                                        type="text"
-                                        defaultValue={instanceDescription}
-                                        onChange={({ target }) => {
-                                            setInstanceDescription(
-                                                target.value
-                                            );
-                                        }}
-                                    />
-                                </label>
-                            </div>
-                            <div className="location-notes-create">
-                                <label htmlFor="instance-players">
-                                    Select players:
-                                    {playerSelection()}
-                                </label>
-                                <p>Missing a character?</p>
-                                <button
-                                    onClick={() =>
-                                        setRenderNewCharacterForm(true)
-                                    }
-                                >
-                                    Add them here!
-                                </button>
-                            </div>
-                            {/* Has the add new character button been clicked? */}
-                            {renderNewCharacterForm === true ? (
-                                <AddNewCharacter
-                                    newCharacterName={newCharacterName}
-                                    setNewCharacterName={setNewCharacterName}
-                                    newCharacterClass={newCharacterClass}
-                                    setNewCharacterClass={setNewCharacterClass}
-                                    newCharacterIsPlayerCharacter={
-                                        newCharacterIsPlayerCharacter
-                                    }
-                                    setNewCharacterIsPlayerCharacter={
-                                        setNewCharacterIsPlayerCharacter
-                                    }
-                                    addNewCharacterValues={
-                                        addNewCharacterValues
-                                    }
-                                    setRenderNewCharacterForm={
-                                        setRenderNewCharacterForm
-                                    }
-                                />
-                            ) : null}{" "}
-                        </>
+                        <InstanceDetailsForm
+                            instanceName={instanceName}
+                            setInstanceName={setInstanceName}
+                            instanceDescription={instanceDescription}
+                            setInstanceDescription={setInstanceDescription}
+                            playerList={playerList}
+                            setPlayerList={setPlayerList}
+                            handleSelectedPlayersChange={
+                                handleSelectedPlayersChange
+                            }
+                            instancePlayerDetails={instancePlayerDetails}
+                            renderNewCharacterForm={renderNewCharacterForm}
+                            setRenderNewCharacterForm={
+                                setRenderNewCharacterForm
+                            }
+                            dataNotifications={dataNotifications}
+                            setDataNotifications={setDataNotifications}
+                        />
                     ) : (
                         <TurnStatsForm
                             turns={turns}
