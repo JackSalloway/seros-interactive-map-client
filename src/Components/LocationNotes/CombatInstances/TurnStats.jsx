@@ -59,8 +59,27 @@ const TurnStats = (props) => {
         setCurrentTurn(currentTurn - 1);
     };
 
+    const updatePlayerDamage = (inputValue, playerIndex, stat) => {
+        // console.log(number);
+        // console.log(playerIndex);
+        const instancePlayerDetailsCopy = instancePlayerDetails;
+        console.log(
+            instancePlayerDetailsCopy[playerIndex].turns[stat][currentTurn]
+        );
+        instancePlayerDetailsCopy[playerIndex].turns[stat][currentTurn] =
+            Number(inputValue);
+        setInstancePlayerDetails([...instancePlayerDetailsCopy]);
+    };
+
+    const updatePlayerHealing = () => {};
+
     if (instancePlayerDetails === null)
         return <div>Add a player to log data!</div>;
+
+    // Having an issue updating the input values as the turns progress/regress.
+    // Obviously they should update to reflect whatever the current turns input value is within each instancePlayerDetails player object
+    // Maybe I will have to use a useEffect hook
+    // Or perhaps make components for each one of the inputs to allow for them to re-render
 
     return (
         <div>
@@ -105,7 +124,16 @@ const TurnStats = (props) => {
                                 <input
                                     id={player.name + "-damage"}
                                     type="number"
-                                    defaultValue={0}
+                                    defaultValue={
+                                        0 ?? player.turn.damage[currentTurn]
+                                    }
+                                    onChange={({ target }) =>
+                                        updatePlayerDamage(
+                                            target.value,
+                                            index,
+                                            "damage"
+                                        )
+                                    }
                                 />
                             </label>
                         </div>
@@ -115,7 +143,10 @@ const TurnStats = (props) => {
                                 <input
                                     id={player.name + "-healing"}
                                     type="number"
-                                    defaultValue={0}
+                                    onChange={() => updatePlayerHealing()}
+                                    defaultValue={
+                                        0 ?? player.turn.healing[currentTurn]
+                                    }
                                 />
                             </label>
                         </div>
