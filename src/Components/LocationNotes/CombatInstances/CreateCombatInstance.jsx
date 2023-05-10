@@ -38,7 +38,7 @@ const CreateCombatInstance = (props) => {
     } = props;
 
     // Instance data states
-    const [turns, setTurns] = useState(1);
+    const [turns, setTurns] = useState([1]);
     const [playerList, setPlayerList] = useState(
         campaign.campaign.players.map((player) => {
             return {
