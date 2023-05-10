@@ -46,8 +46,8 @@ const CreateCombatInstance = (props) => {
                     name: player.name,
                     class: player.class,
                     turns: {
-                        damage: [],
-                        healing: [],
+                        damage: [0],
+                        healing: [0],
                     },
                 },
                 label: player.name,

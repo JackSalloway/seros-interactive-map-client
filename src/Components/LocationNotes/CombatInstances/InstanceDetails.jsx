@@ -51,7 +51,7 @@ const InstanceDetails = (props) => {
                     name: newCharacterName,
                     class: newCharacterClass,
                     player_character: newCharacterIsPlayerCharacter,
-                    turns: { damage: [], healing: [] },
+                    turns: { damage: [0], healing: [0] },
                 },
                 label: newCharacterName,
             },
