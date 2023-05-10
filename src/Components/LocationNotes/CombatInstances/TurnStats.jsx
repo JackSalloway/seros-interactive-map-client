@@ -25,10 +25,22 @@ const TurnStats = (props) => {
         <div>
             <div>Turn {turns[currentTurn]} </div>
             <div id="turn-buttons-wrapper">
-                <button>Remove turn</button>
+                <button
+                    disabled={turns.length === 1 ? true : false}
+                    onClick={() => {
+                        if (turns.length === 1) return; // Prevent user removing turns if there is only one turn
+                        const turnsCopy = turns;
+                        turnsCopy.pop();
+                        setTurns([...turnsCopy]);
+                    }}
+                >
+                    Remove turn
+                </button>
                 <button>Previous turn</button>
                 <button>Next turn</button>
-                <button>Add turn</button>
+                <button onClick={() => setTurns([...turns, turns.length + 1])}>
+                    Add turn
+                </button>
             </div>
             {instancePlayerDetails.map((player, index) => {
                 return (
