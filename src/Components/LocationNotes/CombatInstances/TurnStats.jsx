@@ -21,12 +21,20 @@ const TurnStats = (props) => {
     const addTurn = () => {
         setTurns([...turns, turns.length + 1]);
     };
-
     const removeTurn = () => {
-        if (turns.length === 1) return; // Prevent user removing turns if there is only one turn
+        if (turns.length === 1) return; // Prevent user removing turns if only one turn exists
+        if (currentTurn === turns.length - 1) setCurrentTurn(currentTurn - 1); // Update the current turn state value if the user is on the last turn
         const turnsCopy = turns;
         turnsCopy.pop();
         setTurns([...turnsCopy]);
+    };
+    const nextTurn = () => {
+        if (turns.length === currentTurn - 1) return; // Prevent user from going to next turn if they are on the last turn
+        setCurrentTurn(currentTurn + 1);
+    };
+    const previousTurn = () => {
+        if (turns.length === 1) return; // Prevent user from going to previous turn if only one turn exists
+        setCurrentTurn(currentTurn - 1);
     };
 
     if (instancePlayerDetails === null)
@@ -44,8 +52,25 @@ const TurnStats = (props) => {
                 >
                     Remove turn
                 </button>
-                <button>Previous turn</button>
-                <button>Next turn</button>
+
+                <button
+                    disabled={currentTurn === 0 ? true : false}
+                    onClick={() => {
+                        previousTurn();
+                    }}
+                >
+                    Previous turn
+                </button>
+
+                <button
+                    disabled={turns.length === currentTurn + 1 ? true : false}
+                    onClick={() => {
+                        nextTurn();
+                    }}
+                >
+                    Next turn
+                </button>
+
                 <button onClick={() => addTurn()}>Add turn</button>
             </div>
             {instancePlayerDetails.map((player, index) => {
