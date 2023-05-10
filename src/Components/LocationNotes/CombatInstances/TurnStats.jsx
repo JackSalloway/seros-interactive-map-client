@@ -19,7 +19,11 @@ const TurnStats = (props) => {
     const [currentTurn, setCurrentTurn] = useState(0);
 
     const addTurn = () => {
+        // Add new index to turns array
         setTurns([...turns, turns.length + 1]);
+        // Set current turn to latest turn (this change may be reverted later)
+        setCurrentTurn(turns.length);
+        // Add another value to both damage and healing arrays for all characters
         const instancePlayerDetailsCopy = instancePlayerDetails;
         instancePlayerDetailsCopy.map((player) => {
             player.turns.damage.push(0);
@@ -29,11 +33,22 @@ const TurnStats = (props) => {
         setInstancePlayerDetails(instancePlayerDetailsCopy);
     };
     const removeTurn = () => {
-        if (turns.length === 1) return; // Prevent user removing turns if only one turn exists
-        if (currentTurn === turns.length - 1) setCurrentTurn(currentTurn - 1); // Update the current turn state value if the user is on the last turn
+        // Prevent user removing turns if only one turn exists
+        if (turns.length === 1) return;
+        // Update the current turn state value if the user is on the last turn
+        if (currentTurn === turns.length - 1) setCurrentTurn(currentTurn - 1);
+        // Remove the last index from the turns array
         const turnsCopy = turns;
         turnsCopy.pop();
         setTurns([...turnsCopy]);
+        // Remove last index from player damage / healing arrays
+        const instancePlayerDetailsCopy = instancePlayerDetails;
+        instancePlayerDetailsCopy.map((player) => {
+            player.turns.damage.pop();
+            player.turns.healing.pop();
+            return player;
+        });
+        setInstancePlayerDetails(instancePlayerDetailsCopy);
     };
     const nextTurn = () => {
         if (turns.length === currentTurn - 1) return; // Prevent user from going to next turn if they are on the last turn
@@ -57,7 +72,7 @@ const TurnStats = (props) => {
                         removeTurn();
                     }}
                 >
-                    Remove turn
+                    Remove last turn
                 </button>
 
                 <button
