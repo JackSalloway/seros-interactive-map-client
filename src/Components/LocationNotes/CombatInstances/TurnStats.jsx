@@ -18,6 +18,17 @@ const TurnStats = (props) => {
 
     const [currentTurn, setCurrentTurn] = useState(0);
 
+    const addTurn = () => {
+        setTurns([...turns, turns.length + 1]);
+    };
+
+    const removeTurn = () => {
+        if (turns.length === 1) return; // Prevent user removing turns if there is only one turn
+        const turnsCopy = turns;
+        turnsCopy.pop();
+        setTurns([...turnsCopy]);
+    };
+
     if (instancePlayerDetails === null)
         return <div>Add a player to log data!</div>;
 
@@ -28,19 +39,14 @@ const TurnStats = (props) => {
                 <button
                     disabled={turns.length === 1 ? true : false}
                     onClick={() => {
-                        if (turns.length === 1) return; // Prevent user removing turns if there is only one turn
-                        const turnsCopy = turns;
-                        turnsCopy.pop();
-                        setTurns([...turnsCopy]);
+                        removeTurn();
                     }}
                 >
                     Remove turn
                 </button>
                 <button>Previous turn</button>
                 <button>Next turn</button>
-                <button onClick={() => setTurns([...turns, turns.length + 1])}>
-                    Add turn
-                </button>
+                <button onClick={() => addTurn()}>Add turn</button>
             </div>
             {instancePlayerDetails.map((player, index) => {
                 return (
