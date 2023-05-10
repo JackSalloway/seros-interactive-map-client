@@ -6,8 +6,8 @@ import {
 } from "../../../imports/imports";
 
 // Component imports
-import TurnStatsForm from "./TurnStatsForm";
-import InstanceDetailsForm from "./InstanceDetailsForm";
+import TurnStats from "./TurnStats";
+import InstanceDetails from "./InstanceDetails";
 
 const CreateCombatInstance = (props) => {
     // required inputs fields
@@ -118,7 +118,7 @@ const CreateCombatInstance = (props) => {
                 <div className="location-notes-form combat-instance-form">
                     {/* Render relevant form step */}
                     {step === 1 ? (
-                        <InstanceDetailsForm
+                        <InstanceDetails
                             instanceName={instanceName}
                             setInstanceName={setInstanceName}
                             instanceDescription={instanceDescription}
@@ -137,7 +137,7 @@ const CreateCombatInstance = (props) => {
                             setDataNotifications={setDataNotifications}
                         />
                     ) : (
-                        <TurnStatsForm
+                        <TurnStats
                             turns={turns}
                             setTurns={setTurns}
                             instancePlayerDetails={instancePlayerDetails}

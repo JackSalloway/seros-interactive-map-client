@@ -4,7 +4,7 @@ import { customStyles } from "../../../imports/imports";
 
 import AddNewCharacter from "./AddNewCharacter";
 
-const InstanceDetailsForm = (props) => {
+const InstanceDetails = (props) => {
     const {
         instanceName,
         setInstanceName,
@@ -131,4 +131,4 @@ const InstanceDetailsForm = (props) => {
     );
 };
 
-export default InstanceDetailsForm;
+export default InstanceDetails;

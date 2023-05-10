@@ -1,4 +1,4 @@
-const TurnStatsForm = (props) => {
+const TurnStats = (props) => {
     const {
         turns,
         setTurns,
@@ -17,4 +17,4 @@ const TurnStatsForm = (props) => {
     return <div>Turn stats!</div>;
 };
 
-export default TurnStatsForm;
+export default TurnStats;
