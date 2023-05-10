@@ -10,6 +10,7 @@ const InstanceDetails = (props) => {
         setInstanceName,
         instanceDescription,
         setInstanceDescription,
+        turns,
         playerList,
         setPlayerList,
         handleSelectedPlayersChange,
@@ -44,6 +45,14 @@ const InstanceDetails = (props) => {
 
     const addNewCharacterValues = () => {
         // Update player list state value
+        // Create damage array with correct ammount of turns
+        const damageArray = [];
+        damageArray.length = turns.length;
+        damageArray.fill(0);
+        // Create healing array with correct ammount of turns
+        const healingArray = [];
+        healingArray.length = turns.length;
+        healingArray.fill(0);
         setPlayerList([
             ...playerList,
             {
@@ -51,7 +60,7 @@ const InstanceDetails = (props) => {
                     name: newCharacterName,
                     class: newCharacterClass,
                     player_character: newCharacterIsPlayerCharacter,
-                    turns: { damage: [0], healing: [0] },
+                    turns: { damage: damageArray, healing: healingArray },
                 },
                 label: newCharacterName,
             },

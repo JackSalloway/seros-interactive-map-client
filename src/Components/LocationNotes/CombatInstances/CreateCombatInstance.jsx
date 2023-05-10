@@ -94,7 +94,18 @@ const CreateCombatInstance = (props) => {
     // Function to handle changes inside the player selection box
     const handleSelectedPlayersChange = (selectedPlayerList) => {
         setInstancePlayerDetails(
-            selectedPlayerList.map((player) => player.value)
+            selectedPlayerList.map((player) => {
+                console.log(player.value);
+                // Add right amount of turns for damage and healing arrays.
+                if (player.value.turns.damage.length !== turns.length) {
+                    player.value.turns.damage.length = turns.length;
+                    player.value.turns.damage.fill(0);
+                    player.value.turns.healing.length = turns.length;
+                    player.value.turns.healing.fill(0);
+                }
+
+                return player.value;
+            })
         );
     };
 
@@ -111,6 +122,7 @@ const CreateCombatInstance = (props) => {
                         setInstanceName={setInstanceName}
                         instanceDescription={instanceDescription}
                         setInstanceDescription={setInstanceDescription}
+                        turns={turns}
                         playerList={playerList}
                         setPlayerList={setPlayerList}
                         handleSelectedPlayersChange={
