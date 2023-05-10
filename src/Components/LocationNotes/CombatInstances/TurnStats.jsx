@@ -20,6 +20,13 @@ const TurnStats = (props) => {
 
     const addTurn = () => {
         setTurns([...turns, turns.length + 1]);
+        const instancePlayerDetailsCopy = instancePlayerDetails;
+        instancePlayerDetailsCopy.map((player) => {
+            player.turns.damage.push(0);
+            player.turns.healing.push(0);
+            return player;
+        });
+        setInstancePlayerDetails(instancePlayerDetailsCopy);
     };
     const removeTurn = () => {
         if (turns.length === 1) return; // Prevent user removing turns if only one turn exists
