@@ -37,9 +37,6 @@ const CreateCombatInstance = (props) => {
         setDataNotifications,
     } = props;
 
-    // Form step state
-    const [step, setStep] = useState(1);
-
     // Instance data states
     const [turns, setTurns] = useState(1);
     const [playerList, setPlayerList] = useState(
@@ -116,50 +113,29 @@ const CreateCombatInstance = (props) => {
             />
             <div className="location-notes-details location-notes-brighter-filter">
                 <div className="location-notes-form combat-instance-form">
-                    {/* Render relevant form step */}
-                    {step === 1 ? (
-                        <InstanceDetails
-                            instanceName={instanceName}
-                            setInstanceName={setInstanceName}
-                            instanceDescription={instanceDescription}
-                            setInstanceDescription={setInstanceDescription}
-                            playerList={playerList}
-                            setPlayerList={setPlayerList}
-                            handleSelectedPlayersChange={
-                                handleSelectedPlayersChange
-                            }
-                            instancePlayerDetails={instancePlayerDetails}
-                            renderNewCharacterForm={renderNewCharacterForm}
-                            setRenderNewCharacterForm={
-                                setRenderNewCharacterForm
-                            }
-                            dataNotifications={dataNotifications}
-                            setDataNotifications={setDataNotifications}
-                        />
-                    ) : (
-                        <TurnStats
-                            turns={turns}
-                            setTurns={setTurns}
-                            instancePlayerDetails={instancePlayerDetails}
-                            setInstancePlayerDetails={setInstancePlayerDetails}
-                            postInstanceData={postInstanceData}
-                        />
-                    )}
-
-                    {/* Form progression buttons */}
-                    {/* Need to add logic to prevent user from moving to second step if no players are added into the list */}
-                    <button
-                        disabled={step === 1 ? true : false}
-                        onClick={() => setStep(1)}
-                    >
-                        Previous step!
-                    </button>
-                    <button
-                        disabled={step === 2 ? true : false}
-                        onClick={() => setStep(2)}
-                    >
-                        Next step!
-                    </button>
+                    <InstanceDetails
+                        instanceName={instanceName}
+                        setInstanceName={setInstanceName}
+                        instanceDescription={instanceDescription}
+                        setInstanceDescription={setInstanceDescription}
+                        playerList={playerList}
+                        setPlayerList={setPlayerList}
+                        handleSelectedPlayersChange={
+                            handleSelectedPlayersChange
+                        }
+                        instancePlayerDetails={instancePlayerDetails}
+                        renderNewCharacterForm={renderNewCharacterForm}
+                        setRenderNewCharacterForm={setRenderNewCharacterForm}
+                        dataNotifications={dataNotifications}
+                        setDataNotifications={setDataNotifications}
+                    />
+                    <TurnStats
+                        turns={turns}
+                        setTurns={setTurns}
+                        instancePlayerDetails={instancePlayerDetails}
+                        setInstancePlayerDetails={setInstancePlayerDetails}
+                        postInstanceData={postInstanceData}
+                    />
                 </div>
             </div>
             <div
