@@ -54,19 +54,12 @@ const CreateCombatInstance = (props) => {
             };
         })
     );
-    // const [playerListDetails, setPlayerListDetails] = useState([]);
-
-    // New Character values states
-    const [renderNewCharacterForm, setRenderNewCharacterForm] = useState(false);
-    const [newCharacterName, setNewCharacterName] = useState("");
-    const [newCharacterClass, setNewCharacterClass] = useState("");
-    const [newCharacterIsPlayerCharacter, setNewCharacterIsPlayerCharacter] =
-        useState(null);
-
-    // POST data states
     const [instanceName, setInstanceName] = useState("");
     const [instanceDescription, setInstanceDescription] = useState("");
     const [instancePlayerDetails, setInstancePlayerDetails] = useState(null);
+
+    // Render new character inputs state value
+    const [renderNewCharacterForm, setRenderNewCharacterForm] = useState(false);
 
     // Send POST request to create a new Combat Instance at this location
     const postInstanceData = async () => {
