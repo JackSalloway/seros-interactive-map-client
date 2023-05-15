@@ -27,8 +27,8 @@ const CreateCombatInstance = (props) => {
         campaign.campaign.players.map((player) => {
             return {
                 value: {
-                    name: player.name,
-                    class: player.class,
+                    player_name: player.name,
+                    player_class: player.class,
                     turns: {
                         damage: [0],
                         healing: [0],
