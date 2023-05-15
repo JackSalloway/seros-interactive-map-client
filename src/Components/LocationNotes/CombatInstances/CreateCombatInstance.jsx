@@ -136,7 +136,12 @@ const CreateCombatInstance = (props) => {
                         setInstancePlayerDetails={setInstancePlayerDetails}
                         postInstanceData={postInstanceData}
                     />
-                    <button disabled={!validFormData}>Create instance!</button>
+                    <button
+                        disabled={!validFormData}
+                        onClick={() => postInstanceData()}
+                    >
+                        Create instance!
+                    </button>
                 </div>
             </div>
             <div
