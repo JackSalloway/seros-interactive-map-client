@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 import {
     CONTENT_TYPE_APPLICATION_JSON,
@@ -10,22 +10,6 @@ import TurnStats from "./TurnStats";
 import InstanceDetails from "./InstanceDetails";
 
 const CreateCombatInstance = (props) => {
-    // required inputs fields
-    // name: STRING
-    // description: STRING
-    // combat_details: [
-    //     {
-    //         player_name: STRING,
-    //         player_class: STRING,
-    //         turns: {
-    //             damage: [NUM],
-    //             healing: [NUM],
-    //         }
-    //     }
-    // ]
-
-    // campaignId & locationId will be obtained from state values passed into this component
-
     const {
         locationNotes,
         campaign,
@@ -60,6 +44,18 @@ const CreateCombatInstance = (props) => {
 
     // Render new character inputs state value
     const [renderNewCharacterForm, setRenderNewCharacterForm] = useState(false);
+
+    // Valid form values state
+    const [validFormData, setValidFormData] = useState(false);
+
+    // Check if form values are valid to disable/enable form submit button
+    useEffect(() => {
+        if (instanceName.length > 0 && instancePlayerDetails !== null) {
+            setValidFormData(true);
+        } else {
+            setValidFormData(false);
+        }
+    }, [instanceName, instancePlayerDetails]);
 
     // Send POST request to create a new Combat Instance at this location
     const postInstanceData = async () => {
@@ -138,6 +134,7 @@ const CreateCombatInstance = (props) => {
                         setInstancePlayerDetails={setInstancePlayerDetails}
                         postInstanceData={postInstanceData}
                     />
+                    <button disabled={!validFormData}>Create instance!</button>
                 </div>
             </div>
             <div

@@ -149,39 +149,6 @@ const TurnStats = (props) => {
                                 }
                             )}
                         </div>
-                        {/* 
-                        <div>
-                            <label htmlFor={player.name + "-damage"}>
-                                damage
-                                <input
-                                    id={player.name + "-damage"}
-                                    type="number"
-                                    defaultValue={
-                                        0 ?? player.turn.damage[currentTurn]
-                                    }
-                                    onChange={({ target }) =>
-                                        updatePlayerDamage(
-                                            target.value,
-                                            index,
-                                            "damage"
-                                        )
-                                    }
-                                />
-                            </label>
-                        </div>
-                        <div>
-                            <label htmlFor={player.name + "-healing"}>
-                                healing
-                                <input
-                                    id={player.name + "-healing"}
-                                    type="number"
-                                    onChange={() => updatePlayerHealing()}
-                                    defaultValue={
-                                        0 ?? player.turn.healing[currentTurn]
-                                    }
-                                />
-                            </label>
-                        </div> */}
                     </div>
                 );
             })}
