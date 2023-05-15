@@ -51,6 +51,8 @@ const CreateCombatInstance = (props) => {
     // Check if form values are valid to disable/enable form submit button
     useEffect(() => {
         if (instanceName.length > 0 && instancePlayerDetails !== null) {
+            // Might need to validate the damage/healing values as at least one number above 0 may be necessary to render the stat bars.
+            // Just leaving it at this for now however.
             setValidFormData(true);
         } else {
             setValidFormData(false);
