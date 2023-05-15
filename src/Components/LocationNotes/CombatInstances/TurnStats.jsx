@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import PlayerTurnInputs from "./PlayerTurnInputs";
+
 const TurnStats = (props) => {
     const {
         turns,
@@ -59,19 +61,12 @@ const TurnStats = (props) => {
         setCurrentTurn(currentTurn - 1);
     };
 
-    const updatePlayerDamage = (inputValue, playerIndex, stat) => {
-        // console.log(number);
-        // console.log(playerIndex);
+    const updatePlayerTurnDetail = (inputValue, playerIndex, stat) => {
         const instancePlayerDetailsCopy = instancePlayerDetails;
-        console.log(
-            instancePlayerDetailsCopy[playerIndex].turns[stat][currentTurn]
-        );
         instancePlayerDetailsCopy[playerIndex].turns[stat][currentTurn] =
             Number(inputValue);
         setInstancePlayerDetails([...instancePlayerDetailsCopy]);
     };
-
-    const updatePlayerHealing = () => {};
 
     if (instancePlayerDetails === null)
         return <div>Add a player to log data!</div>;
@@ -114,10 +109,47 @@ const TurnStats = (props) => {
 
                 <button onClick={() => addTurn()}>Add turn</button>
             </div>
-            {instancePlayerDetails.map((player, index) => {
+            {instancePlayerDetails.map((player, playerIndex) => {
                 return (
-                    <div key={player.name + index}>
+                    <div key={player.name + playerIndex}>
                         <p>{player.name}</p>
+                        <div>
+                            {/* Render damage inputs */}
+                            {player.turns.damage.map((turnValue, turnIndex) => {
+                                if (turnIndex === currentTurn) {
+                                    return (
+                                        <PlayerTurnInputs
+                                            player={player}
+                                            turnType={"damage"}
+                                            turnValue={turnValue}
+                                            playerIndex={playerIndex}
+                                            updatePlayerTurnDetail={
+                                                updatePlayerTurnDetail
+                                            }
+                                        />
+                                    );
+                                } else return null;
+                            })}
+                            {/* Render healing inputs */}
+                            {player.turns.healing.map(
+                                (turnValue, turnIndex) => {
+                                    if (turnIndex === currentTurn) {
+                                        return (
+                                            <PlayerTurnInputs
+                                                player={player}
+                                                turnType={"healing"}
+                                                turnValue={turnValue}
+                                                playerIndex={playerIndex}
+                                                updatePlayerTurnDetail={
+                                                    updatePlayerTurnDetail
+                                                }
+                                            />
+                                        );
+                                    } else return null;
+                                }
+                            )}
+                        </div>
+                        {/* 
                         <div>
                             <label htmlFor={player.name + "-damage"}>
                                 damage
@@ -149,7 +181,7 @@ const TurnStats = (props) => {
                                     }
                                 />
                             </label>
-                        </div>
+                        </div> */}
                     </div>
                 );
             })}
