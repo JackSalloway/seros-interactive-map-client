@@ -115,6 +115,7 @@ const CombatInstancesWrapper = (props) => {
                     setCombatInstanceDat={setCombatInstanceData}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
+                    setAddNewInstance={setAddNewInstance}
                 />
             ) : null}
         </div>

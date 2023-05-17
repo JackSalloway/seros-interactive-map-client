@@ -19,6 +19,7 @@ const CreateCombatInstance = (props) => {
         // setCombatInstanceData,
         dataNotifications,
         setDataNotifications,
+        setAddNewInstance,
     } = props;
 
     // Instance data states
@@ -84,7 +85,11 @@ const CreateCombatInstance = (props) => {
             `${process.env.REACT_APP_API_URL}/create_combat_instance`,
             init
         );
-        // await returned data here
+        const returnedData = await result.json();
+
+        console.log(returnedData);
+        // De-render the new instance form
+        // setAddNewInstance(false);
     };
 
     // Function to handle changes inside the player selection box
