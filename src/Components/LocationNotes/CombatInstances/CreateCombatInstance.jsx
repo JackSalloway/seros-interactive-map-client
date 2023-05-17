@@ -89,7 +89,7 @@ const CreateCombatInstance = (props) => {
 
         console.log(returnedData);
         // De-render the new instance form
-        // setAddNewInstance(false);
+        setAddNewInstance(false);
     };
 
     // Function to handle changes inside the player selection box
