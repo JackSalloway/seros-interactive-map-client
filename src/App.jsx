@@ -130,7 +130,7 @@ const loginAction = async ({ request }) => {
             }
             return null;
         });
-    console.log(res);
+    console.log("login result:", res);
     return null;
 };
 
