@@ -13,10 +13,10 @@ const CreateCombatInstance = (props) => {
     const {
         locationNotes,
         campaign,
-        // setChangelogData,
+        setChangelogData,
         username,
-        // combatInstanceData,
-        // setCombatInstanceData,
+        combatInstanceData,
+        setCombatInstanceData,
         dataNotifications,
         setDataNotifications,
         setAddNewInstance,
@@ -81,13 +81,30 @@ const CreateCombatInstance = (props) => {
             credentials: "include",
         };
 
+        // Await and update combat instance data for the campaign
         const result = await fetch(
             `${process.env.REACT_APP_API_URL}/create_combat_instance`,
             init
         );
         const returnedData = await result.json();
 
+        console.log(combatInstanceData);
         console.log(returnedData);
+        setCombatInstanceData([
+            ...combatInstanceData,
+            returnedData.instanceResult,
+        ]);
+
+        // Add notification on successful combat instance creation
+        const notificationsCopy = dataNotifications;
+        notificationsCopy.push({
+            message: `Combat log: ${instanceName} successfully created!`,
+            important: false,
+        });
+        setDataNotifications(notificationsCopy);
+
+        // Update changelog values
+        setChangelogData(returnedData.changelogResult.changes);
         // De-render the new instance form
         setAddNewInstance(false);
     };

@@ -112,7 +112,7 @@ const CombatInstancesWrapper = (props) => {
                     setChangelogData={setChangelogData}
                     username={username}
                     combatInstanceData={combatInstanceData}
-                    setCombatInstanceDat={setCombatInstanceData}
+                    setCombatInstanceData={setCombatInstanceData}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     setAddNewInstance={setAddNewInstance}

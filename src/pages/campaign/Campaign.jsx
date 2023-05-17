@@ -232,7 +232,7 @@ const Campaign = () => {
                 changelogData={changelogData}
                 setChangelogData={setChangelogData}
                 combatInstanceData={combatInstanceData}
-                setCombatInstanceDat={setCombatInstanceData}
+                setCombatInstanceData={setCombatInstanceData}
             />
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (
