@@ -4,6 +4,8 @@ import he from "he";
 import dayjs from "dayjs";
 import Separator from "../Separator/Separator";
 
+import "./CombatInstanceNotes.css";
+
 const CombatInstanceNotes = (props) => {
     const { instance, setDeleteData } = props;
 
@@ -68,6 +70,13 @@ const CombatInstanceNotes = (props) => {
                         </div>
                     </div>
                     <div className="location-notes-open-icons-wrapper">
+                        <FontAwesomeIcon
+                            icon="chevron-up"
+                            className="journal-fa-icon"
+                            onClick={() => {
+                                setSelected(false);
+                            }}
+                        />
                         {hover === true ? (
                             <div className="notes-button-wrapper hovered">
                                 <FontAwesomeIcon
@@ -100,9 +109,38 @@ const CombatInstanceNotes = (props) => {
                             <p>{instance.description}</p>
                         ) : null}
                         {instance.combat_details.map((player) => {
+                            const lowerCaseClass = player.player_class
+                                .toLowerCase()
+                                .replace(" ", "-");
+
+                            const getTotal = (valueArray) => {
+                                return valueArray.reduce(
+                                    (prevValue, currentValue) => {
+                                        return prevValue + currentValue;
+                                    }
+                                );
+                            };
+
+                            const damageTotal = getTotal(player.turns.damage);
+                            const healingTotal = getTotal(player.turns.healing);
+
+                            console.log(
+                                player.player_name,
+                                "damage: ",
+                                damageTotal
+                            );
+                            console.log(
+                                player.player_name,
+                                "healing: ",
+                                healingTotal
+                            );
+
                             return (
                                 // this is just temporary code to display the values listed
-                                <div key={player._id}>
+                                <div
+                                    key={player._id}
+                                    className={lowerCaseClass}
+                                >
                                     <p>
                                         {player.player_name}:{" "}
                                         {player.player_class}
