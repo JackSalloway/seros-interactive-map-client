@@ -119,7 +119,11 @@ const TurnStats = (props) => {
                                 if (turnIndex === currentTurn) {
                                     return (
                                         <PlayerTurnInputs
-                                            key={player.player_name + "damage"}
+                                            key={
+                                                player.player_name +
+                                                "damage" +
+                                                turnIndex
+                                            }
                                             player={player}
                                             turnType={"damage"}
                                             turnValue={turnValue}
@@ -139,7 +143,8 @@ const TurnStats = (props) => {
                                             <PlayerTurnInputs
                                                 key={
                                                     player.player_name +
-                                                    "healing"
+                                                    "healing" +
+                                                    turnIndex
                                                 }
                                                 player={player}
                                                 turnType={"healing"}
