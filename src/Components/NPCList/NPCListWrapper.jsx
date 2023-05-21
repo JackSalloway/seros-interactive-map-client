@@ -24,7 +24,7 @@ const NPCListWrapper = (props) => {
     });
 
     const [npcList, setNPCList] = useState(shallowCopy);
-    const [searchValue, setFriendlySearchValue] = useState("");
+    const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
         if (searchValue === "") {
@@ -51,9 +51,7 @@ const NPCListWrapper = (props) => {
                     <input
                         type="text"
                         placeholder="Search for an NPC!"
-                        onChange={({ target }) =>
-                            setFriendlySearchValue(target.value)
-                        }
+                        onChange={({ target }) => setSearchValue(target.value)}
                     />
                 </div>
                 {npcList.map((npc) => (
