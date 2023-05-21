@@ -44,6 +44,8 @@ const Journal = (props) => {
         setCombatInstanceData,
     } = props;
 
+    console.log(locationCombatInstances);
+
     const [selectedTab, setSelectedTab] = useState("Front Page");
 
     // useEffect to render the changelog section (frontpage) when a user clicks delete location whilst location notes is not selected.

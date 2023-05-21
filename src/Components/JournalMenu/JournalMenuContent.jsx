@@ -4,9 +4,9 @@ import LocationListWrapper from "../LocationList/LocationListWrapper";
 import QuestListWrapper from "../QuestList/QuestListWrapper";
 import NPCListWrapper from "../NPCList/NPCListWrapper";
 import ChangelogWrapper from "../ChangelogWrapper/ChangelogWrapper";
-import CombatInstancesList from "../CombatInstanceList/CombatInstanceList";
 import EditLocation from "../EditLocation/EditLocation";
 import FrontPageWrapper from "../FrontPageWrapper/FrontPageWrapper";
+import CombatInstancesListWrapper from "../CombatInstanceList/CombatInstanceListWrapper";
 
 const JournalMenuContent = (props) => {
     const {
@@ -129,9 +129,13 @@ const JournalMenuContent = (props) => {
 
     const combatInstancesContent = () => {
         return (
-            <CombatInstancesList
-                campaign={campaign}
+            <CombatInstancesListWrapper
+                serosLocations={serosLocations}
+                setLocationNotes={setLocationNotes}
                 combatInstanceData={combatInstanceData}
+                combatInstanceDataFiltered={Array.from(combatInstanceData)}
+                map={map}
+                campaign={campaign}
             />
         );
     };

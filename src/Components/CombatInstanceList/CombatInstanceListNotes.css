@@ -1,0 +1,24 @@
+/* Styles are subject to change */
+.instance-list-notes-individual {
+    margin: 0.4rem;
+    display: flex;
+}
+
+.instance-list-notes-individual.instance-list-notes-individual-header {
+    gap: 0.5rem;
+}
+
+.instance-list-notes-individual.instance-list-notes-individual-information {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.instance-list-notes-locations {
+    display: flex;
+    gap: 1rem;
+}
+
+.instance-list-notes-locations-name {
+    width: 10rem;
+}

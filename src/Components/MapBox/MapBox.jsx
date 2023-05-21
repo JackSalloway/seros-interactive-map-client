@@ -122,7 +122,7 @@ function MapBox(props) {
         const reduceCombatInstances = combatInstanceData.reduce(
             (prevInstances, instanceData, index) => {
                 if (
-                    (instanceData.associated_location ===
+                    (instanceData.associated_location._id ===
                         selectedLocationNotes._id) ===
                     true
                 ) {
