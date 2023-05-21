@@ -1,9 +1,5 @@
 import { useState, useEffect } from "react";
-import Select from "react-select";
-import {
-    CONTENT_TYPE_APPLICATION_JSON,
-    customStyles,
-} from "../../../imports/imports";
+import { CONTENT_TYPE_APPLICATION_JSON } from "../../../imports/imports";
 
 // Component imports
 import TurnStats from "./TurnStats";

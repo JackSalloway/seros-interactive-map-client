@@ -1,0 +1,97 @@
+.player-meter-bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 1.5rem;
+    /* padding: 0 3%; */
+    box-sizing: border-box;
+    color: white;
+}
+
+.player-meter-bar-class {
+    /* position: absolute; */
+}
+
+.player-meter-bar-name {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    position: absolute;
+}
+
+.player-meter-bar-numbers {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 30%;
+    position: absolute;
+    right: 0;
+}
+
+/* All class colors are the class colors from WoW, with a few exceptions as some did not fit. A comment has been left if the D&D class name did not match the WoW class name */
+
+.artificer {
+    /* This is the Evoker class color from WoW */
+    background-color: rgb(51, 147, 127);
+}
+
+.barbarian {
+    /* This is the Death Knight class color from WoW */
+    background-color: rgb(196, 30, 58);
+}
+
+.bard {
+    /* Improvised class color for bard, subject to change */
+    background-color: rgb(143, 18, 112);
+}
+
+.blood-hunter {
+    /* This is the Demon Hunter class color from WoW */
+    background-color: rgb(163, 48, 201);
+}
+
+.cleric {
+    /* This was the Priest class color from WoW, had to change to a darker color due to it being too bright making the text unreadable */
+    background-color: rgb(160, 160, 160);
+}
+
+.druid {
+    background-color: rgb(255, 124, 10);
+}
+
+.fighter {
+    /* This is the Warrior class color from WoW */
+    background-color: rgb(198, 155, 109);
+}
+
+.monk {
+    background-color: rgb(0, 255, 152);
+}
+
+.paladin {
+    background-color: rgb(244, 140, 186);
+}
+
+.ranger {
+    /* This is the Hunter class color from WoW */
+    background-color: rgb(170, 211, 114);
+}
+
+.rogue {
+    background-color: rgb(255, 244, 104);
+}
+
+.sorcerer {
+    /* This is the Sorcerer class color from WoW */
+    background-color: rgb(0, 112, 221);
+}
+
+.warlock {
+    background-color: rgb(135, 136, 238);
+}
+
+.wizard {
+    /* This is the Mage class color from WoW */
+    background-color: rgb(63, 199, 235);
+}
