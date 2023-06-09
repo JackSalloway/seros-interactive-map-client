@@ -16,14 +16,7 @@ const PlayerBar = (props) => {
     const lowerCaseClass = player.player_class.toLowerCase().replace(" ", "-");
     const playerBarClassName = "player-meter-bar-class " + lowerCaseClass;
 
-    const getTotal = (valueArray) => {
-        return valueArray.reduce((prevValue, currentValue) => {
-            return prevValue + currentValue;
-        });
-    };
-
     // Damage stats
-    // const damageTotal = getTotal(player.turns.damage);
     const damagePerTurn = Number.parseFloat(
         player.damage_total / player.turns.damage.length
     ).toFixed(1);
@@ -34,7 +27,6 @@ const PlayerBar = (props) => {
         Number.parseFloat(player.damage_total / highestDamage) * 100 + "%";
 
     // Healing Stats
-    // const healingTotal = getTotal(player.turns.healing);
     const healingPerTurn = Number.parseFloat(
         player.healing_total / player.turns.healing.length
     ).toFixed(1);
