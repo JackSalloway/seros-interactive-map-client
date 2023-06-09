@@ -100,3 +100,8 @@
     /* This is the Mage class color from WoW */
     background-color: rgb(63, 199, 235);
 }
+
+.unknown {
+    /* No class color provided here as there no class to relate it to - just picked a color that wasnt used too often */
+    background-color: rgb(135, 206, 235);
+}
