@@ -36,11 +36,13 @@ const PlayerBar = (props) => {
     // Healing Stats
     // const healingTotal = getTotal(player.turns.healing);
     const healingPerTurn = player.healing_total / player.turns.healing.length;
-    const healingPercentage = Number.parseFloat(
+    let healingPercentage = Number.parseFloat(
         (player.healing_total / totalInstanceHealing) * 100
     ).toFixed(1);
     const healingBarLengthPercentage =
         Number.parseFloat(player.healing_total / highestHealing) * 100 + "%";
+
+    if (healingPercentage === "NaN") healingPercentage = 0;
 
     return (
         // this is just temporary code to display the values listed
