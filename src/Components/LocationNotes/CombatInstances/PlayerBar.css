@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 1.5rem;
+    height: 2rem;
     /* padding: 0 3%; */
     box-sizing: border-box;
     color: rgb(255, 255, 255);
@@ -14,12 +14,24 @@
     /* position: absolute; */
 }
 
+.player-meter-bar-class-icon {
+    width: 2rem;
+    height: 2rem;
+}
+
+.player-meter-bar-class-icon > div {
+    width: inherit;
+    height: inherit;
+    background-size: cover;
+}
+
 .player-meter-bar-name {
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 72%;
     position: absolute;
-    padding-left: 1rem;
+    /* padding-left: 1rem; */
     gap: 0.5rem;
 }
 

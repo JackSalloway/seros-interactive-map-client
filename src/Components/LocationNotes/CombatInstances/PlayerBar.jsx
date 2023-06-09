@@ -15,6 +15,11 @@ const PlayerBar = (props) => {
 
     const lowerCaseClass = player.player_class.toLowerCase().replace(" ", "-");
     const playerBarClassName = "player-meter-bar-class " + lowerCaseClass;
+    const playerBarClassIconName =
+        "player-meter-bar-class-icon " + lowerCaseClass;
+    const test = `/images/class-icons/${lowerCaseClass}`;
+
+    console.log(test);
 
     // Damage stats
     const damagePerTurn = Number.parseFloat(
@@ -50,11 +55,22 @@ const PlayerBar = (props) => {
                         selectedStat === "damage"
                             ? damageBarLengthPercentage
                             : healingBarLengthPercentage,
-                    height: "1.5rem",
+                    height: "2rem",
                 }}
             />
             <div className="player-meter-bar-name">
-                <p>{position}. </p>
+                <div
+                    className={playerBarClassIconName}
+                    title={player.player_class}
+                >
+                    <div
+                        className={lowerCaseClass}
+                        style={{
+                            backgroundImage: `url(/images/class-icons/${lowerCaseClass}.png)`,
+                        }}
+                    ></div>
+                </div>
+
                 <p>{player.player_name}</p>
             </div>
             {selectedStat === "damage" ? (
