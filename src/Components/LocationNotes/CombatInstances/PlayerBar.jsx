@@ -35,7 +35,9 @@ const PlayerBar = (props) => {
 
     // Healing Stats
     // const healingTotal = getTotal(player.turns.healing);
-    const healingPerTurn = player.healing_total / player.turns.healing.length;
+    const healingPerTurn = Number.parseFloat(
+        player.healing_total / player.turns.healing.length
+    ).toFixed(1);
     let healingPercentage = Number.parseFloat(
         (player.healing_total / totalInstanceHealing) * 100
     ).toFixed(1);
