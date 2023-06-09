@@ -7,7 +7,7 @@
     height: 1.5rem;
     /* padding: 0 3%; */
     box-sizing: border-box;
-    color: white;
+    color: rgb(255, 255, 255);
 }
 
 .player-meter-bar-class {
@@ -71,7 +71,11 @@
 }
 
 .monk {
-    background-color: rgb(0, 255, 152);
+    /* This was the Monk class from WoW, had to change to a slightly darker variant due to the orignal being too bright */
+    /* Original Color */
+    /* background-color: rgb(0, 255, 152); */
+    /* Updated Color */
+    background-color: rgb(18, 114, 76);
 }
 
 .paladin {
