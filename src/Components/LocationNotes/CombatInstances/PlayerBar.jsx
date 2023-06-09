@@ -5,7 +5,7 @@ import "./PlayerBar.css";
 const PlayerBar = (props) => {
     const {
         player,
-        position,
+        position, // Might add a button to toggle this and class icons
         selectedStat,
         totalInstanceDamage,
         totalInstanceHealing,
@@ -15,11 +15,6 @@ const PlayerBar = (props) => {
 
     const lowerCaseClass = player.player_class.toLowerCase().replace(" ", "-");
     const playerBarClassName = "player-meter-bar-class " + lowerCaseClass;
-    const playerBarClassIconName =
-        "player-meter-bar-class-icon " + lowerCaseClass;
-    const test = `/images/class-icons/${lowerCaseClass}`;
-
-    console.log(test);
 
     // Damage stats
     const damagePerTurn = Number.parseFloat(
@@ -60,11 +55,11 @@ const PlayerBar = (props) => {
             />
             <div className="player-meter-bar-name">
                 <div
-                    className={playerBarClassIconName}
+                    className="player-meter-bar-class-icon"
                     title={player.player_class}
                 >
                     <div
-                        className={lowerCaseClass}
+                        // className={lowerCaseClass}
                         style={{
                             backgroundImage: `url(/images/class-icons/${lowerCaseClass}.png)`,
                         }}
