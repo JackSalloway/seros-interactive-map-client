@@ -181,7 +181,6 @@ const CombatInstanceNotes = (props) => {
                             change stats
                         </button>
                         <div className="location-notes-instance-meters-wrapper">
-                            {/* {console.log(orderedInstanceDetails)} */}
                             {orderedInstanceDetails.map((player, index) => {
                                 return (
                                     <PlayerBar
