@@ -177,20 +177,11 @@ const CombatInstanceNotes = (props) => {
                                     ]);
                                 }
                             }}
-
-                            // useEffect(() => {
-                            //     console.log(orderedInstanceDetails);
-                            //     if (selectedStat === "damage") {
-                            //
-                            //     } else {
-                            //
-                            //     }
-                            // }, [selectedStat, orderedInstanceDetails]);
                         >
                             change stats
                         </button>
                         <div className="location-notes-instance-meters-wrapper">
-                            {console.log(orderedInstanceDetails)}
+                            {/* {console.log(orderedInstanceDetails)} */}
                             {orderedInstanceDetails.map((player, index) => {
                                 return (
                                     <PlayerBar
