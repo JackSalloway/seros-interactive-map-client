@@ -1,6 +1,21 @@
+.location-notes-instance-description-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.location-notes-instance-meter-header {
+    width: 100%;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .location-notes-instance-meters-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: black;
+    border: 5px solid red;
 }

@@ -155,34 +155,60 @@ const CombatInstanceNotes = (props) => {
                     <div className="location-notes-open-details-wrapper">
                         <Separator />
                         {instance.description ? (
-                            <p>{instance.description}</p>
+                            <div className="location-notes-instance-description-wrapper">
+                                <p>
+                                    {
+                                        instance.combat_details[0].turns.damage
+                                            .length
+                                    }{" "}
+                                    turn combat instance
+                                </p>
+                                <p>{instance.description}</p>
+                            </div>
                         ) : null}
-                        <button
-                            onClick={() => {
-                                if (selectedStat === "damage") {
-                                    setSelectedStat("healing");
-                                    console.log("Ordering by healing");
-                                    setOrderedInstanceDetails([
-                                        ...orderedInstanceDetails.sort(
-                                            compareHealing
-                                        ),
-                                    ]);
-                                } else {
-                                    setSelectedStat("damage");
-                                    console.log("Ordering by damage");
-                                    setOrderedInstanceDetails([
-                                        ...orderedInstanceDetails.sort(
-                                            compareDamage
-                                        ),
-                                    ]);
-                                }
-                            }}
-                        >
-                            {selectedStat === "damage"
-                                ? "Show heals"
-                                : "Show damage"}
-                        </button>
+
                         <div className="location-notes-instance-meters-wrapper">
+                            <div className="location-notes-instance-meter-header">
+                                <FontAwesomeIcon
+                                    icon="chevron-left"
+                                    className="journal-fa-icon"
+                                />
+                                <h4>
+                                    Turn{" "}
+                                    {
+                                        instance.combat_details[0].turns.damage
+                                            .length
+                                    }
+                                </h4>
+                                <FontAwesomeIcon
+                                    icon="chevron-right"
+                                    className="journal-fa-icon"
+                                />
+
+                                <button
+                                    onClick={() => {
+                                        if (selectedStat === "damage") {
+                                            setSelectedStat("healing");
+                                            setOrderedInstanceDetails([
+                                                ...orderedInstanceDetails.sort(
+                                                    compareHealing
+                                                ),
+                                            ]);
+                                        } else {
+                                            setSelectedStat("damage");
+                                            setOrderedInstanceDetails([
+                                                ...orderedInstanceDetails.sort(
+                                                    compareDamage
+                                                ),
+                                            ]);
+                                        }
+                                    }}
+                                >
+                                    {selectedStat === "damage"
+                                        ? "Show heals"
+                                        : "Show damage"}
+                                </button>
+                            </div>
                             {orderedInstanceDetails.map((player, index) => {
                                 return (
                                     <PlayerBar
