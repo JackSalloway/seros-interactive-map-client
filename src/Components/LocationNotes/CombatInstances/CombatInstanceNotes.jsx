@@ -178,7 +178,9 @@ const CombatInstanceNotes = (props) => {
                                 }
                             }}
                         >
-                            change stats
+                            {selectedStat === "damage"
+                                ? "Show heals"
+                                : "Show damage"}
                         </button>
                         <div className="location-notes-instance-meters-wrapper">
                             {orderedInstanceDetails.map((player, index) => {
