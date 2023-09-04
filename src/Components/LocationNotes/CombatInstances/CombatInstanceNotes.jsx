@@ -32,6 +32,10 @@ const CombatInstanceNotes = (props) => {
 
     const [selected, setSelected] = useState(false);
     const [hover, setHover] = useState(false);
+    const [totalTurns, setTotalTurns] = useState(
+        instance.combat_details[0].turns.damage.length
+    );
+    const [viewTurns, setViewTurns] = useState(totalTurns);
     const [orderedInstanceDetails, setOrderedInstanceDetails] = useState(
         instance.combat_details
             .map((player) => {
@@ -62,6 +66,19 @@ const CombatInstanceNotes = (props) => {
 
     const totalInstanceDamage = getTotalValue("damage");
     const totalInstanceHealing = getTotalValue("healing");
+
+    // Functions to increase/decrease viewTurns state value
+    const incrementViewTurns = () => {
+        if (viewTurns === totalTurns) return;
+        setViewTurns(viewTurns + 1);
+        return;
+    };
+
+    const decrementViewTurns = () => {
+        if (viewTurns === 1) return;
+        setViewTurns(viewTurns - 1);
+        return;
+    };
 
     // Combat instance has not been selected:
     if (selected === false) {
@@ -156,13 +173,7 @@ const CombatInstanceNotes = (props) => {
                         <Separator />
                         {instance.description ? (
                             <div className="location-notes-instance-description-wrapper">
-                                <p>
-                                    {
-                                        instance.combat_details[0].turns.damage
-                                            .length
-                                    }{" "}
-                                    turn combat instance
-                                </p>
+                                <p>{totalTurns} turn combat instance</p>
                                 <p>{instance.description}</p>
                             </div>
                         ) : null}
@@ -172,17 +183,13 @@ const CombatInstanceNotes = (props) => {
                                 <FontAwesomeIcon
                                     icon="chevron-left"
                                     className="journal-fa-icon"
+                                    onClick={() => decrementViewTurns()}
                                 />
-                                <h4>
-                                    Turn{" "}
-                                    {
-                                        instance.combat_details[0].turns.damage
-                                            .length
-                                    }
-                                </h4>
+                                <h4>Turn {viewTurns}</h4>
                                 <FontAwesomeIcon
                                     icon="chevron-right"
                                     className="journal-fa-icon"
+                                    onClick={() => incrementViewTurns()}
                                 />
 
                                 <button
