@@ -2,11 +2,13 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    padding: 0.7rem 0;
 }
 
 .location-notes-instance-meter-header {
     width: 100%;
     padding: 0 1rem;
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     gap: 0.5rem;
