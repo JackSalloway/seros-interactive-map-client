@@ -36,6 +36,24 @@ const CombatInstanceNotes = (props) => {
         instance.combat_details[0].turns.damage.length
     );
     const [viewTurns, setViewTurns] = useState(totalTurns);
+
+    // Function to get the overall value of damage/healing for the instance
+    const getTotalValue = (statValue) => {
+        return instance.combat_details
+            .map((player) => {
+                return player.turns[statValue].reduce(
+                    (prevNum, currentNum) => prevNum + currentNum
+                );
+            })
+            .reduce((prevNum, currentNum) => prevNum + currentNum);
+    };
+
+    const [totalInstanceDamage, setTotalInstanceDamage] = useState(
+        getTotalValue("damage")
+    );
+    const [totalInstanceHealing, setTotalInstanceHealing] = useState(
+        getTotalValue("healing")
+    );
     const [orderedInstanceDetails, setOrderedInstanceDetails] = useState(
         instance.combat_details
             .map((player) => {
@@ -53,16 +71,8 @@ const CombatInstanceNotes = (props) => {
 
     const [editing, setEditing] = useState(false);
 
-    // Function to get the overall value of damage/healing for the instance
-    const getTotalValue = (statValue) => {
-        return instance.combat_details
-            .map((player) => {
-                return player.turns[statValue].reduce(
-                    (prevNum, currentNum) => prevNum + currentNum
-                );
-            })
-            .reduce((prevNum, currentNum) => prevNum + currentNum);
-    };
+    // let totalInstanceDamage = getTotalValue("damage");
+    // let totalInstanceHealing = getTotalValue("healing");
 
     const totalInstanceDamage = getTotalValue("damage");
     const totalInstanceHealing = getTotalValue("healing");
