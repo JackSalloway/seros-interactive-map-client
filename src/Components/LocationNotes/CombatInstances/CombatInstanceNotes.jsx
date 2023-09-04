@@ -32,36 +32,93 @@ const CombatInstanceNotes = (props) => {
 
     const [selected, setSelected] = useState(false);
     const [hover, setHover] = useState(false);
-    const [orderedInstanceDetails, setOrderedInstanceDetails] = useState(
-        instance.combat_details
-            .map((player) => {
-                player.damage_total = player.turns.damage.reduce(
-                    (prev, current) => prev + current
-                );
-                player.healing_total = player.turns.healing.reduce(
-                    (prev, current) => prev + current
-                );
-                return player;
-            })
-            .sort(compareDamage)
+    const [totalTurns, setTotalTurns] = useState(
+        instance.combat_details[0].turns.damage.length
     );
+    const [viewTurns, setViewTurns] = useState(totalTurns);
+    const [totalInstanceDamage, setTotalInstanceDamage] = useState(0);
+    const [totalInstanceHealing, setTotalInstanceHealing] = useState(0);
+    const [orderedInstanceDetails, setOrderedInstanceDetails] = useState([]);
     const [selectedStat, setSelectedStat] = useState("damage");
-
     const [editing, setEditing] = useState(false);
 
-    // Function to get the overall value of damage/healing for the instance
-    const getTotalValue = (statValue) => {
-        return instance.combat_details
-            .map((player) => {
-                return player.turns[statValue].reduce(
-                    (prevNum, currentNum) => prevNum + currentNum
-                );
-            })
-            .reduce((prevNum, currentNum) => prevNum + currentNum);
+    // Effect to recalculate total values when the viewTurns state value is changed
+    useEffect(() => {
+        // Function to get the overall value of damage/healing for the instance
+        const getTotalValue = (statValue) => {
+            return instance.combat_details
+                .map((player) => {
+                    return player.turns[statValue].reduce(
+                        (prevNum, currentNum, currentIndex) => {
+                            if (viewTurns < currentIndex + 1) return prevNum;
+                            return prevNum + currentNum;
+                        }
+                    );
+                })
+                .reduce((prevNum, currentNum) => prevNum + currentNum);
+        };
+
+        setTotalInstanceDamage(getTotalValue("damage", viewTurns));
+        setTotalInstanceHealing(getTotalValue("healing", viewTurns));
+    }, [instance, viewTurns]);
+
+    // Effect to reorder instance details depending on highest dps/hps
+    useEffect(() => {
+        if (selectedStat === "damage") {
+            setOrderedInstanceDetails(
+                instance.combat_details
+                    .map((player) => {
+                        player.damage_total = player.turns.damage.reduce(
+                            (prev, current, currentIndex) => {
+                                if (viewTurns < currentIndex + 1) return prev;
+                                return prev + current;
+                            }
+                        );
+                        player.healing_total = player.turns.healing.reduce(
+                            (prev, current, currentIndex) => {
+                                if (viewTurns < currentIndex + 1) return prev;
+                                return prev + current;
+                            }
+                        );
+                        return player;
+                    })
+                    .sort(compareDamage)
+            );
+        } else {
+            setOrderedInstanceDetails(
+                instance.combat_details
+                    .map((player) => {
+                        player.damage_total = player.turns.damage.reduce(
+                            (prev, current, currentIndex) => {
+                                if (viewTurns < currentIndex + 1) return prev;
+                                return prev + current;
+                            }
+                        );
+                        player.healing_total = player.turns.healing.reduce(
+                            (prev, current, currentIndex) => {
+                                if (viewTurns < currentIndex + 1) return prev;
+                                return prev + current;
+                            }
+                        );
+                        return player;
+                    })
+                    .sort(compareHealing)
+            );
+        }
+    }, [instance, selectedStat, viewTurns]);
+
+    // Functions to increase/decrease viewTurns state value
+    const incrementViewTurns = () => {
+        if (viewTurns === totalTurns) return;
+        setViewTurns(viewTurns + 1);
+        return;
     };
 
-    const totalInstanceDamage = getTotalValue("damage");
-    const totalInstanceHealing = getTotalValue("healing");
+    const decrementViewTurns = () => {
+        if (viewTurns === 1) return;
+        setViewTurns(viewTurns - 1);
+        return;
+    };
 
     // Combat instance has not been selected:
     if (selected === false) {
@@ -155,42 +212,50 @@ const CombatInstanceNotes = (props) => {
                     <div className="location-notes-open-details-wrapper">
                         <Separator />
                         {instance.description ? (
-                            <p>{instance.description}</p>
+                            <div className="location-notes-instance-description-wrapper">
+                                <p>{totalTurns} turn combat instance</p>
+                                <p>{instance.description}</p>
+                            </div>
                         ) : null}
-                        <button
-                            onClick={() => {
-                                if (selectedStat === "damage") {
-                                    setSelectedStat("healing");
-                                    console.log("Ordering by healing");
-                                    setOrderedInstanceDetails([
-                                        ...orderedInstanceDetails.sort(
-                                            compareHealing
-                                        ),
-                                    ]);
-                                } else {
-                                    setSelectedStat("damage");
-                                    console.log("Ordering by damage");
-                                    setOrderedInstanceDetails([
-                                        ...orderedInstanceDetails.sort(
-                                            compareDamage
-                                        ),
-                                    ]);
-                                }
-                            }}
 
-                            // useEffect(() => {
-                            //     console.log(orderedInstanceDetails);
-                            //     if (selectedStat === "damage") {
-                            //
-                            //     } else {
-                            //
-                            //     }
-                            // }, [selectedStat, orderedInstanceDetails]);
-                        >
-                            change stats
-                        </button>
                         <div className="location-notes-instance-meters-wrapper">
-                            {console.log(orderedInstanceDetails)}
+                            <div className="location-notes-instance-meter-header">
+                                <FontAwesomeIcon
+                                    icon="chevron-left"
+                                    className="journal-fa-icon"
+                                    onClick={() => decrementViewTurns()}
+                                />
+                                <h4>Turn {viewTurns}</h4>
+                                <FontAwesomeIcon
+                                    icon="chevron-right"
+                                    className="journal-fa-icon"
+                                    onClick={() => incrementViewTurns()}
+                                />
+
+                                <button
+                                    onClick={() => {
+                                        if (selectedStat === "damage") {
+                                            setSelectedStat("healing");
+                                            setOrderedInstanceDetails([
+                                                ...orderedInstanceDetails.sort(
+                                                    compareHealing
+                                                ),
+                                            ]);
+                                        } else {
+                                            setSelectedStat("damage");
+                                            setOrderedInstanceDetails([
+                                                ...orderedInstanceDetails.sort(
+                                                    compareDamage
+                                                ),
+                                            ]);
+                                        }
+                                    }}
+                                >
+                                    {selectedStat === "damage"
+                                        ? "Show heals"
+                                        : "Show damage"}
+                                </button>
+                            </div>
                             {orderedInstanceDetails.map((player, index) => {
                                 return (
                                     <PlayerBar

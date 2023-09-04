@@ -28,7 +28,7 @@ const SubLocationWrapper = (props) => {
             style={{ backgroundImage: `url(/images/papyr.jpg)` }}
         >
             <div className="location-notes-category-header">
-                <h3>Sub Locations</h3>
+                <h3>Sublocations</h3>
                 <span
                     data-testid="expand/collapse sub-locations icon"
                     onClick={() => {

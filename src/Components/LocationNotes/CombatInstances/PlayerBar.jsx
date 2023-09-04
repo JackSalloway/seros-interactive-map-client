@@ -5,7 +5,7 @@ import "./PlayerBar.css";
 const PlayerBar = (props) => {
     const {
         player,
-        position,
+        position, // Might add a button to toggle this and class icons
         selectedStat,
         totalInstanceDamage,
         totalInstanceHealing,
@@ -16,31 +16,29 @@ const PlayerBar = (props) => {
     const lowerCaseClass = player.player_class.toLowerCase().replace(" ", "-");
     const playerBarClassName = "player-meter-bar-class " + lowerCaseClass;
 
-    const getTotal = (valueArray) => {
-        return valueArray.reduce((prevValue, currentValue) => {
-            return prevValue + currentValue;
-        });
-    };
-
     // Damage stats
-    // const damageTotal = getTotal(player.turns.damage);
     const damagePerTurn = Number.parseFloat(
         player.damage_total / player.turns.damage.length
     ).toFixed(1);
-    const damagePercentage = Number.parseFloat(
+    let damagePercentage = Number.parseFloat(
         (player.damage_total / totalInstanceDamage) * 100
     ).toFixed(1);
     const damageBarLengthPercentage =
         Number.parseFloat(player.damage_total / highestDamage) * 100 + "%";
 
     // Healing Stats
-    // const healingTotal = getTotal(player.turns.healing);
-    const healingPerTurn = player.healing_total / player.turns.healing.length;
-    const healingPercentage = Number.parseFloat(
+    const healingPerTurn = Number.parseFloat(
+        player.healing_total / player.turns.healing.length
+    ).toFixed(1);
+    let healingPercentage = Number.parseFloat(
         (player.healing_total / totalInstanceHealing) * 100
     ).toFixed(1);
     const healingBarLengthPercentage =
         Number.parseFloat(player.healing_total / highestHealing) * 100 + "%";
+
+    // Whilst these events are somewhat unlikely they render NaN as the respective text value which is not intended
+    if (damagePercentage === "NaN") damagePercentage = 0;
+    if (healingPercentage === "NaN") healingPercentage = 0;
 
     return (
         // this is just temporary code to display the values listed
@@ -52,11 +50,22 @@ const PlayerBar = (props) => {
                         selectedStat === "damage"
                             ? damageBarLengthPercentage
                             : healingBarLengthPercentage,
-                    height: "1.5rem",
+                    height: "2rem",
                 }}
             />
             <div className="player-meter-bar-name">
-                <p>{position}. </p>
+                <div
+                    className="player-meter-bar-class-icon"
+                    title={player.player_class}
+                >
+                    <div
+                        // className={lowerCaseClass}
+                        style={{
+                            backgroundImage: `url(/images/class-icons/${lowerCaseClass}.png)`,
+                        }}
+                    ></div>
+                </div>
+
                 <p>{player.player_name}</p>
             </div>
             {selectedStat === "damage" ? (
