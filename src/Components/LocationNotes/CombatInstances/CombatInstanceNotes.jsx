@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import he from "he";
 import dayjs from "dayjs";
@@ -36,46 +36,76 @@ const CombatInstanceNotes = (props) => {
         instance.combat_details[0].turns.damage.length
     );
     const [viewTurns, setViewTurns] = useState(totalTurns);
-
-    // Function to get the overall value of damage/healing for the instance
-    const getTotalValue = (statValue) => {
-        return instance.combat_details
-            .map((player) => {
-                return player.turns[statValue].reduce(
-                    (prevNum, currentNum) => prevNum + currentNum
-                );
-            })
-            .reduce((prevNum, currentNum) => prevNum + currentNum);
-    };
-
-    const [totalInstanceDamage, setTotalInstanceDamage] = useState(
-        getTotalValue("damage")
-    );
-    const [totalInstanceHealing, setTotalInstanceHealing] = useState(
-        getTotalValue("healing")
-    );
-    const [orderedInstanceDetails, setOrderedInstanceDetails] = useState(
-        instance.combat_details
-            .map((player) => {
-                player.damage_total = player.turns.damage.reduce(
-                    (prev, current) => prev + current
-                );
-                player.healing_total = player.turns.healing.reduce(
-                    (prev, current) => prev + current
-                );
-                return player;
-            })
-            .sort(compareDamage)
-    );
+    const [totalInstanceDamage, setTotalInstanceDamage] = useState(0);
+    const [totalInstanceHealing, setTotalInstanceHealing] = useState(0);
+    const [orderedInstanceDetails, setOrderedInstanceDetails] = useState([]);
     const [selectedStat, setSelectedStat] = useState("damage");
-
     const [editing, setEditing] = useState(false);
 
-    // let totalInstanceDamage = getTotalValue("damage");
-    // let totalInstanceHealing = getTotalValue("healing");
+    // Effect to recalculate total values when the viewTurns state value is changed
+    useEffect(() => {
+        // Function to get the overall value of damage/healing for the instance
+        const getTotalValue = (statValue) => {
+            return instance.combat_details
+                .map((player) => {
+                    return player.turns[statValue].reduce(
+                        (prevNum, currentNum, currentIndex) => {
+                            if (viewTurns < currentIndex + 1) return prevNum;
+                            return prevNum + currentNum;
+                        }
+                    );
+                })
+                .reduce((prevNum, currentNum) => prevNum + currentNum);
+        };
 
-    const totalInstanceDamage = getTotalValue("damage");
-    const totalInstanceHealing = getTotalValue("healing");
+        setTotalInstanceDamage(getTotalValue("damage", viewTurns));
+        setTotalInstanceHealing(getTotalValue("healing", viewTurns));
+    }, [instance, viewTurns]);
+
+    // Effect to reorder instance details depending on highest dps/hps
+    useEffect(() => {
+        if (selectedStat === "damage") {
+            setOrderedInstanceDetails(
+                instance.combat_details
+                    .map((player) => {
+                        player.damage_total = player.turns.damage.reduce(
+                            (prev, current, currentIndex) => {
+                                if (viewTurns < currentIndex + 1) return prev;
+                                return prev + current;
+                            }
+                        );
+                        player.healing_total = player.turns.healing.reduce(
+                            (prev, current, currentIndex) => {
+                                if (viewTurns < currentIndex + 1) return prev;
+                                return prev + current;
+                            }
+                        );
+                        return player;
+                    })
+                    .sort(compareDamage)
+            );
+        } else {
+            setOrderedInstanceDetails(
+                instance.combat_details
+                    .map((player) => {
+                        player.damage_total = player.turns.damage.reduce(
+                            (prev, current, currentIndex) => {
+                                if (viewTurns < currentIndex + 1) return prev;
+                                return prev + current;
+                            }
+                        );
+                        player.healing_total = player.turns.healing.reduce(
+                            (prev, current, currentIndex) => {
+                                if (viewTurns < currentIndex + 1) return prev;
+                                return prev + current;
+                            }
+                        );
+                        return player;
+                    })
+                    .sort(compareHealing)
+            );
+        }
+    }, [instance, selectedStat, viewTurns]);
 
     // Functions to increase/decrease viewTurns state value
     const incrementViewTurns = () => {
