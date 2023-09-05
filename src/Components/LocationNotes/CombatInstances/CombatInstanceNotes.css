@@ -5,19 +5,23 @@
     padding: 0.7rem 0;
 }
 
-.location-notes-instance-meter-header {
-    width: 100%;
-    padding: 0 1rem;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
 .location-notes-instance-meters-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: black;
-    border: 5px solid red;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top: 5px solid #941d05;
+    border-bottom: 5px solid #941d05;
+    margin-top: 0.7rem;
+}
+
+.location-notes-instance-meter-header {
+    width: 100%;
+    padding: 0.3rem 1rem;
+    box-sizing: border-box;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 2.5px solid #941d05;
 }

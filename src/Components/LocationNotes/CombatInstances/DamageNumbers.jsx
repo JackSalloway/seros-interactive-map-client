@@ -4,7 +4,7 @@ const DamageNumbers = (props) => {
         <div className="player-meter-bar-numbers">
             <p title="Total player damage">{damageTotal}</p>
             <p title="Player damage per turn, Player instance damage percentage">
-                ({damagePerTurn}, {damagePercentage}%)
+                ({damagePerTurn}, {damagePercentage})
             </p>
         </div>
     );
