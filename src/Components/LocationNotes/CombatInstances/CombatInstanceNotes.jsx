@@ -274,6 +274,10 @@ const CombatInstanceNotes = (props) => {
                     </div>
                 </div>
             </div>
+            <div
+                className="location-notes-details-border bottom"
+                style={{ backgroundImage: `url(/images/statblockbar.jpg)` }}
+            />
         </div>
     );
 };
