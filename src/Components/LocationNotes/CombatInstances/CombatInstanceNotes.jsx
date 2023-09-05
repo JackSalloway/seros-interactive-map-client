@@ -197,12 +197,15 @@ const CombatInstanceNotes = (props) => {
                     </div>
                     <div className="location-notes-open-details-wrapper">
                         <Separator />
-                        {instance.description ? (
-                            <div className="location-notes-instance-description-wrapper">
-                                <p>{totalTurns} turn combat instance</p>
+
+                        <div className="location-notes-instance-description-wrapper">
+                            <p>{totalTurns} turn combat instance</p>
+                            {instance.description ? (
                                 <p>{instance.description}</p>
-                            </div>
-                        ) : null}
+                            ) : null}
+                        </div>
+
+                        <Separator />
 
                         <div className="location-notes-instance-meters-wrapper">
                             <div className="location-notes-instance-meter-header">
