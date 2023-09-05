@@ -64,45 +64,31 @@ const CombatInstanceNotes = (props) => {
 
     // Effect to reorder instance details depending on highest dps/hps
     useEffect(() => {
+        const sortInstanceDetails = (instanceArray) => {
+            return instanceArray.combat_details.map((player) => {
+                player.damage_total = player.turns.damage.reduce(
+                    (prev, current, currentIndex) => {
+                        if (viewTurns < currentIndex + 1) return prev;
+                        return prev + current;
+                    }
+                );
+                player.healing_total = player.turns.healing.reduce(
+                    (prev, current, currentIndex) => {
+                        if (viewTurns < currentIndex + 1) return prev;
+                        return prev + current;
+                    }
+                );
+                return player;
+            });
+        };
+
         if (selectedStat === "damage") {
             setOrderedInstanceDetails(
-                instance.combat_details
-                    .map((player) => {
-                        player.damage_total = player.turns.damage.reduce(
-                            (prev, current, currentIndex) => {
-                                if (viewTurns < currentIndex + 1) return prev;
-                                return prev + current;
-                            }
-                        );
-                        player.healing_total = player.turns.healing.reduce(
-                            (prev, current, currentIndex) => {
-                                if (viewTurns < currentIndex + 1) return prev;
-                                return prev + current;
-                            }
-                        );
-                        return player;
-                    })
-                    .sort(compareDamage)
+                sortInstanceDetails(instance).sort(compareDamage)
             );
         } else {
             setOrderedInstanceDetails(
-                instance.combat_details
-                    .map((player) => {
-                        player.damage_total = player.turns.damage.reduce(
-                            (prev, current, currentIndex) => {
-                                if (viewTurns < currentIndex + 1) return prev;
-                                return prev + current;
-                            }
-                        );
-                        player.healing_total = player.turns.healing.reduce(
-                            (prev, current, currentIndex) => {
-                                if (viewTurns < currentIndex + 1) return prev;
-                                return prev + current;
-                            }
-                        );
-                        return player;
-                    })
-                    .sort(compareHealing)
+                sortInstanceDetails(instance).sort(compareHealing)
             );
         }
     }, [instance, selectedStat, viewTurns]);
