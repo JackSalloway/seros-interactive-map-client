@@ -64,45 +64,31 @@ const CombatInstanceNotes = (props) => {
 
     // Effect to reorder instance details depending on highest dps/hps
     useEffect(() => {
+        const sortInstanceDetails = (instanceArray) => {
+            return instanceArray.combat_details.map((player) => {
+                player.damage_total = player.turns.damage.reduce(
+                    (prev, current, currentIndex) => {
+                        if (viewTurns < currentIndex + 1) return prev;
+                        return prev + current;
+                    }
+                );
+                player.healing_total = player.turns.healing.reduce(
+                    (prev, current, currentIndex) => {
+                        if (viewTurns < currentIndex + 1) return prev;
+                        return prev + current;
+                    }
+                );
+                return player;
+            });
+        };
+
         if (selectedStat === "damage") {
             setOrderedInstanceDetails(
-                instance.combat_details
-                    .map((player) => {
-                        player.damage_total = player.turns.damage.reduce(
-                            (prev, current, currentIndex) => {
-                                if (viewTurns < currentIndex + 1) return prev;
-                                return prev + current;
-                            }
-                        );
-                        player.healing_total = player.turns.healing.reduce(
-                            (prev, current, currentIndex) => {
-                                if (viewTurns < currentIndex + 1) return prev;
-                                return prev + current;
-                            }
-                        );
-                        return player;
-                    })
-                    .sort(compareDamage)
+                sortInstanceDetails(instance).sort(compareDamage)
             );
         } else {
             setOrderedInstanceDetails(
-                instance.combat_details
-                    .map((player) => {
-                        player.damage_total = player.turns.damage.reduce(
-                            (prev, current, currentIndex) => {
-                                if (viewTurns < currentIndex + 1) return prev;
-                                return prev + current;
-                            }
-                        );
-                        player.healing_total = player.turns.healing.reduce(
-                            (prev, current, currentIndex) => {
-                                if (viewTurns < currentIndex + 1) return prev;
-                                return prev + current;
-                            }
-                        );
-                        return player;
-                    })
-                    .sort(compareHealing)
+                sortInstanceDetails(instance).sort(compareHealing)
             );
         }
     }, [instance, selectedStat, viewTurns]);
@@ -211,12 +197,15 @@ const CombatInstanceNotes = (props) => {
                     </div>
                     <div className="location-notes-open-details-wrapper">
                         <Separator />
-                        {instance.description ? (
-                            <div className="location-notes-instance-description-wrapper">
-                                <p>{totalTurns} turn combat instance</p>
+
+                        <div className="location-notes-instance-description-wrapper">
+                            <p>{totalTurns} turn combat instance</p>
+                            {instance.description ? (
                                 <p>{instance.description}</p>
-                            </div>
-                        ) : null}
+                            ) : null}
+                        </div>
+
+                        <Separator />
 
                         <div className="location-notes-instance-meters-wrapper">
                             <div className="location-notes-instance-meter-header">
@@ -288,6 +277,10 @@ const CombatInstanceNotes = (props) => {
                     </div>
                 </div>
             </div>
+            <div
+                className="location-notes-details-border bottom"
+                style={{ backgroundImage: `url(/images/statblockbar.jpg)` }}
+            />
         </div>
     );
 };

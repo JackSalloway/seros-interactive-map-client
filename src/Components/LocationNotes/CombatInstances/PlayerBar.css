@@ -23,6 +23,7 @@
     width: inherit;
     height: inherit;
     background-size: cover;
+    filter: brightness(0) invert(1);
 }
 
 .player-meter-bar-name {

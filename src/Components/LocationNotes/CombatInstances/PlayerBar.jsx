@@ -20,25 +20,33 @@ const PlayerBar = (props) => {
     const damagePerTurn = Number.parseFloat(
         player.damage_total / player.turns.damage.length
     ).toFixed(1);
-    let damagePercentage = Number.parseFloat(
-        (player.damage_total / totalInstanceDamage) * 100
-    ).toFixed(1);
-    const damageBarLengthPercentage =
+    let damagePercentage =
+        Number.parseFloat(
+            (player.damage_total / totalInstanceDamage) * 100
+        ).toFixed(1) + "%";
+    let damageBarLengthPercentage =
         Number.parseFloat(player.damage_total / highestDamage) * 100 + "%";
 
     // Healing Stats
     const healingPerTurn = Number.parseFloat(
         player.healing_total / player.turns.healing.length
     ).toFixed(1);
-    let healingPercentage = Number.parseFloat(
-        (player.healing_total / totalInstanceHealing) * 100
-    ).toFixed(1);
-    const healingBarLengthPercentage =
+    let healingPercentage =
+        Number.parseFloat(
+            (player.healing_total / totalInstanceHealing) * 100
+        ).toFixed(1) + "%";
+    let healingBarLengthPercentage =
         Number.parseFloat(player.healing_total / highestHealing) * 100 + "%";
 
     // Whilst these events are somewhat unlikely they render NaN as the respective text value which is not intended
-    if (damagePercentage === "NaN") damagePercentage = 0;
-    if (healingPercentage === "NaN") healingPercentage = 0;
+    if (damagePercentage === "NaN%") {
+        damagePercentage = "0%";
+        damageBarLengthPercentage = "0%";
+    }
+    if (healingPercentage === "NaN%") {
+        healingPercentage = "0%";
+        healingBarLengthPercentage = "0%";
+    }
 
     return (
         // this is just temporary code to display the values listed

@@ -5,7 +5,7 @@ const HealingNumbers = (props) => {
         <div className="player-meter-bar-numbers">
             <p title="Total player healing">{healingTotal}</p>
             <p title="Player healing per turn, Player instance healing percentage">
-                ({healingPerTurn}, {healingPercentage}%)
+                ({healingPerTurn}, {healingPercentage})
             </p>
         </div>
     );
