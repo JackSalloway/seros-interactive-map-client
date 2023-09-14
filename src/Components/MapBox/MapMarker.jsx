@@ -27,6 +27,11 @@ const MapMarker = (props) => {
         }
     }, [markerBeingEdited]);
 
+    // Take first sentence from location description
+    const locationBriefDesc = location.desc
+        ? he.decode(location.desc.split(".")[0] + "...")
+        : "This location has no description...";
+
     if (draggable === false) {
         return (
             <Marker
@@ -43,36 +48,41 @@ const MapMarker = (props) => {
                     <div className="popup-container">
                         <h2 className="popup-h2">{he.decode(location.name)}</h2>
                         {/* <h3 className="popup-h3">{titleCase(location.type)}</h3> */}
-                        <button
-                            onClick={() => {
-                                setSelectedLocationNotes(index);
-                                if (location.marked === true) {
-                                    map.current.closePopup();
-                                }
-                            }}
-                            disabled={markerBeingEdited}
-                        >
-                            Open notes!
-                        </button>
+                        <p>{locationBriefDesc}</p>
+                        <div className="popup-button-wrapper">
+                            <button
+                                onClick={() => {
+                                    setSelectedLocationNotes(index);
+                                    if (location.marked === true) {
+                                        map.current.closePopup();
+                                    }
+                                }}
+                                disabled={markerBeingEdited}
+                            >
+                                Open notes!
+                            </button>
 
-                        <button
-                            onClick={() => {
-                                setDraggable(true);
-                                setMarkerBeingEdited(index);
-                                setEditLocationDetails(location);
-                                setEditMarkerLatLng(location.latlng);
-                                setEditMarkerType(location.type);
-                                setSelectedLocationNotes(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
-                            }}
-                            disabled={markerBeingEdited === null ? false : true}
-                        >
-                            {markerBeingEdited === null
-                                ? "Edit Location!"
-                                : "Editing other location"}
-                        </button>
-                        <button onClick={() => setDeleteData(location)}>
-                            Delete Location
-                        </button>
+                            <button
+                                onClick={() => {
+                                    setDraggable(true);
+                                    setMarkerBeingEdited(index);
+                                    setEditLocationDetails(location);
+                                    setEditMarkerLatLng(location.latlng);
+                                    setEditMarkerType(location.type);
+                                    setSelectedLocationNotes(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
+                                }}
+                                disabled={
+                                    markerBeingEdited === null ? false : true
+                                }
+                            >
+                                {markerBeingEdited === null
+                                    ? "Edit Location!"
+                                    : "Editing other location"}
+                            </button>
+                            <button onClick={() => setDeleteData(location)}>
+                                Delete Location
+                            </button>
+                        </div>
                     </div>
                 </Popup>
                 {/* If location does not have a marked image on the map, display its name as a tooltip */}
