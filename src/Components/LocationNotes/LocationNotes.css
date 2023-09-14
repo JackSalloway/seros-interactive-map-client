@@ -33,9 +33,27 @@
 }
 
 .location-notes-title-content-wrapper {
-    /* width: 100%; */
+    width: 100%;
     -webkit-text-stroke: 2px black;
-    display: flex;
+    /* flex-direction: row; */
+    display: grid;
+    grid-template-areas:
+        "cross"
+        "title";
+}
+
+.location-notes-title-content-wrapper > h2 {
+    grid-area: title;
+    align-self: center;
+    justify-self: center;
+}
+
+.location-notes-title-content-wrapper > svg {
+    grid-area: cross;
+    justify-self: end;
+    position: relative;
+    right: 1rem;
+    top: 1rem;
 }
 
 #location-notes-data {
