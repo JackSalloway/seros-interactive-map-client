@@ -4,6 +4,7 @@ import he from "he";
 import dayjs from "dayjs";
 import Separator from "../Separator/Separator";
 import PlayerBar from "./PlayerBar";
+import { splitParas } from "../../../imports/imports";
 
 import "./CombatInstanceNotes.css";
 
@@ -200,9 +201,21 @@ const CombatInstanceNotes = (props) => {
 
                         <div className="location-notes-instance-description-wrapper">
                             <p>{totalTurns} turn combat instance</p>
-                            {instance.description ? (
-                                <p>{instance.description}</p>
-                            ) : null}
+                            {/* Check if there is a description for the instance present */}
+                            {instance.description
+                                ? splitParas(instance.description).map(
+                                      (para, index) => {
+                                          return (
+                                              <p
+                                                  key={index}
+                                                  className="location-notes-description-paragraph"
+                                              >
+                                                  {he.decode(para)}
+                                              </p>
+                                          );
+                                      }
+                                  )
+                                : null}
                         </div>
 
                         <Separator />
