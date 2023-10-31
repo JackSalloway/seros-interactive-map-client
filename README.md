@@ -2,6 +2,21 @@
 
 Seros Interactive Map Client is the front end for my Dungeons and Dragons companion app. Created to track various entries consisting of sublocations, characters, quests and combat instances all of which are assigned under the banner of a unique location represented by a pin on the map. It also allows for the creation of multiple campaigns so all created notes can be isolated to one campaign.
 
+## Scripts
+
+This app was created using Create React App, so any scripts that come with that are included. 
+
+In the project directory, you can run:
+
+### `npm install`
+
+Installs the relevant dependancies.
+
+### `npm start`
+
+Runs the app in the development mode with hot reloading enabled.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
 ## Tech
 
 This app was created with the following libraries/frameworks:
@@ -57,21 +72,6 @@ The map uses multiple layers of tiles created through parsing a larger image. to
   - A list of players that were present during the fight - each player has a name, a class, and an array of damage and healing values representing each turn of combat
   - A location that the combat instance is assocaited with
   - A timestamp that the combat instance was created at
-
-## Scripts
-
-This app was created using Create React App, so any scripts that come with that are included. 
-
-In the project directory, you can run:
-
-### `npm install`
-
-Installs the relevant dependancies.
-
-### `npm start`
-
-Runs the app in the development mode with hot reloading enabled.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## Relevant Links
 
