@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# seros-interactive-map-client
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Seros Interactive Map Client is the front end for my Dungeons and Dragons companion app. Created to track various entries consisting of sublocations, characters, quests and combat instances all of which are assigned under the banner of a unique location represented by a pin on the map. It also allows for the creation of multiple campaigns so all created notes can be isolated to one campaign.
 
-## Available Scripts
+## Data Structure
+
+- Campaigns - The main story applied to the adventure. Campaigns may contain the following:
+  - A name and a description
+  - A list of users
+  - A list of locations
+
+- Locations - Important places to be marked on the map. Locations may contain the following:
+  - A name and a description
+  - A pair of latitude and longitude coordinates
+  - A list of relevant characters
+  - A list of relevant quests
+  - A list of relevant combat instances
+
+- Sublocations - Buildings or places of interest that are found at each location. Sublocations may contain the following:
+  - A name and a description
+  - A location that the sublocaiton is associated with
+
+- NPCs (Non-Player Characters) - Characters that are found within each location. NPCs may contain the following:
+  - A name and a description
+  - A race
+  - A disposition towards the players
+  - A living status - whether the NPC is alive or deceased
+  - A list of associated locations - this allows the NPC entry to be found at multiple locations
+  - A list of associated quests
+
+- Quests - Missions created by the players. Quests may contain the following:
+  - A name and a description
+  - A list of associated locations - this allows the quest entry to be found at multiple locations
+  - A completion status - whether or not the quest is finished in the eyes of the player
+
+- Combat Instances - Whenever the players get into a fight in game. Combat instances may contain the following:
+  - A name and a description
+  - A list of players that were present during the fight - each player has a name, a class, and an array of damage and healing values representing each turn of combat
+  - A location that the combat instance is assocaited with
+  - A timestamp that the combat instance was created at
+
+## Scripts
+
+This app was created using Create React App, so any scripts that come with that are included. 
 
 In the project directory, you can run:
 
+### `npm install`
+
+Installs the relevant dependancies.
+
 ### `npm start`
 
-Runs the app in the development mode.\
+Runs the app in the development mode with hot reloading enabled.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Relevant Links
 
-### `npm test`
+seros-interactive-map-server repository: https://github.com/JackSalloway/seros-interactive-map-server
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Next steps
 
-### `npm run build`
+The things I would like to implement for the future of this app are as follows:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Typescript - To increase the manageability of the project
+- Webhooks - To allow users to see when another user is active in the same campaign. Features would include:
+  -  Representing the position of a user's cursor using latitude and longitude coordinates on the map
+  -  Showing which location a user is currently viewing
+  -  Showing if a user is creating a new entry
+- Testing - To increase efficiency when updating/creating new features
+  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
