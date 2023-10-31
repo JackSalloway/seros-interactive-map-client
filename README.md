@@ -21,9 +21,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 This app was created with the following libraries/frameworks:
 
-- React
-- React Leaflet
-- React Router
+React: https://legacy.reactjs.org/
+
+React Leaflet: https://react-leaflet.js.org/
+
+React Router: https://reactrouter.com/en/main
 
 ## Using The App
 
@@ -77,11 +79,7 @@ The map uses multiple layers of tiles created through parsing a larger image. to
 
 seros-interactive-map-server repository: https://github.com/JackSalloway/seros-interactive-map-server
 
-React: https://legacy.reactjs.org/
 
-React Leaflet: https://react-leaflet.js.org/
-
-React Router: https://reactrouter.com/en/main
 
 ## Next steps
 
