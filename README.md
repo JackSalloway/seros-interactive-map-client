@@ -35,7 +35,7 @@ To use this app you will have to create an account with an e-mail, username and 
 Once the previous steps have been completed you can create a campaign and generate an invite code to send to other users, or use a code you have recieved from someone else to join a campaign and begin populating the map
 
 ### Changing The Map
-The map uses multiple layers of tiles created through parsing a larger image. to change the original image you will need to have a parsed image file structure the same as the one found in `public/images/maps/seros/png-example`. See the link section for a link to the React Leaflet Documentation for further guidance.
+The map uses multiple layers of tiles created through parsing a larger image. to change the original image you will need to have a parsed image file structure the same as the one found in `public\images\maps\seros\png-example`. See the link section for a link to the React Leaflet Documentation for further guidance.
 
 ## Data Structure
 
