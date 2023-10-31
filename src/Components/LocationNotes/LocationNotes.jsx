@@ -146,7 +146,7 @@ const LocationNotes = (props) => {
                     backgroundPosition: "center center",
                 }}
             >
-                <span className="location-notes-title-content-wrapper">
+                <div className="location-notes-title-content-wrapper">
                     <h2>{he.decode(locationNotes.name)}</h2>
                     <FontAwesomeIcon
                         icon="times"
@@ -156,7 +156,7 @@ const LocationNotes = (props) => {
                             deselectLocation();
                         }}
                     />
-                </span>
+                </div>
             </div>
             <div id="location-notes-data" className="description-section">
                 {locationNotes.desc
