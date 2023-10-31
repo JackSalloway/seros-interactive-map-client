@@ -37,7 +37,7 @@ const MapMarker = (props) => {
             <Marker
                 position={[location.latlng.lat, location.latlng.lng]}
                 key={location._id}
-                icon={getIcon(location.type)}
+                // icon={getIcon(location.type)}
                 riseOnHover={true}
                 draggable={draggable}
             >

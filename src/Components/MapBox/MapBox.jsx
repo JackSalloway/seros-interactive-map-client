@@ -6,7 +6,11 @@ import LoadingScreen from "../LoadingScreen/LoadingScreen";
 import MapMarker from "./MapMarker";
 
 // Leaflet imports
-import L, { LatLng, LatLngBounds } from "leaflet";
+import {
+    // L,
+    LatLng,
+    LatLngBounds,
+} from "leaflet";
 import {
     MapContainer,
     TileLayer,
@@ -34,7 +38,7 @@ function MapBox(props) {
         renderCreationMarker,
         creationMarkerLatLng,
         setCreationMarkerLatLng,
-        creationMarkerType,
+        // creationMarkerType,
         selectedLocationNotes,
         setSelectedLocationNotes,
         setSelectedLocationNPCs,
@@ -176,7 +180,7 @@ function MapBox(props) {
                 location={location}
                 key={location._id}
                 index={index}
-                getIcon={getIcon}
+                // getIcon={getIcon}
                 map={map}
                 setSelectedLocationNotes={setSelectedLocationNotes}
                 userAuthenticated={userAuthenticated}
@@ -193,40 +197,40 @@ function MapBox(props) {
     };
 
     // This function is used to give each marker an icon dependant on its type. Only issue is - I need to find/create images that match these types before I can implement is
-    const getIcon = (iconType) => {
-        // set icon anchor values dependant on icon height
-        let iconHeight = 0;
-        let iconWidth = 0;
-        if (iconType === "city") {
-            iconHeight = 40;
-            iconWidth = 33;
-        } else if (iconType === "fort") {
-            iconHeight = 41;
-            iconWidth = 26;
-        } else if (iconType === "town") {
-            iconHeight = 42;
-            iconWidth = 31;
-        } else if (iconType === "dungeon") {
-            iconHeight = 43;
-            iconWidth = 30;
-        } else if (iconType === "natural_feature") {
-            iconHeight = 35;
-            iconWidth = 43;
-        } else if (iconType === "miscellaneous") {
-            iconHeight = 40;
-            iconWidth = 20;
-        } else {
-            iconHeight = 41;
-            iconWidth = 26;
-        }
+    // const getIcon = (iconType) => {
+    //     // set icon anchor values dependant on icon height
+    //     let iconHeight = 0;
+    //     let iconWidth = 0;
+    //     if (iconType === "city") {
+    //         iconHeight = 40;
+    //         iconWidth = 33;
+    //     } else if (iconType === "fort") {
+    //         iconHeight = 41;
+    //         iconWidth = 26;
+    //     } else if (iconType === "town") {
+    //         iconHeight = 42;
+    //         iconWidth = 31;
+    //     } else if (iconType === "dungeon") {
+    //         iconHeight = 43;
+    //         iconWidth = 30;
+    //     } else if (iconType === "natural_feature") {
+    //         iconHeight = 35;
+    //         iconWidth = 43;
+    //     } else if (iconType === "miscellaneous") {
+    //         iconHeight = 40;
+    //         iconWidth = 20;
+    //     } else {
+    //         iconHeight = 41;
+    //         iconWidth = 26;
+    //     }
 
-        return L.icon({
-            iconUrl: require(`./icons/${iconType}.svg`),
-            iconAnchor: L.point(iconWidth / 2, iconHeight),
-            popupAnchor: L.point(0, iconHeight * -1),
-            tooltipAnchor: L.point(iconWidth / 2, iconHeight * -0.65),
-        });
-    };
+    //     return L.icon({
+    //         iconUrl: require(`./icons/${iconType}.svg`),
+    //         iconAnchor: L.point(iconWidth / 2, iconHeight),
+    //         popupAnchor: L.point(0, iconHeight * -1),
+    //         tooltipAnchor: L.point(iconWidth / 2, iconHeight * -0.65),
+    //     });
+    // };
 
     // If data hasn't been fetched yet, don't render the map
     if (serosLocations === null) {
@@ -256,7 +260,7 @@ function MapBox(props) {
     const renderDraggableMarker = () => {
         return (
             <Marker
-                icon={getIcon(creationMarkerType)}
+                // icon={getIcon(creationMarkerType)}
                 position={creationMarkerLatLng}
                 draggable={true}
                 eventHandlers={{
