@@ -2,6 +2,24 @@
 
 Seros Interactive Map Client is the front end for my Dungeons and Dragons companion app. Created to track various entries consisting of sublocations, characters, quests and combat instances all of which are assigned under the banner of a unique location represented by a pin on the map. It also allows for the creation of multiple campaigns so all created notes can be isolated to one campaign.
 
+## Tech
+
+This app was created with the following libraries/frameworks:
+
+- React
+- React Leaflet
+- React Router
+
+## Using The App
+
+### Getting Started
+To use this app you will have to create an account with an e-mail, username and a password. You will also need a mongoDB database setup and ready. 
+
+Once the previous steps have been completed you can create a campaign and generate an invite code to send to other users, or use a code you have recieved from someone else to join a campaign and begin populating the map
+
+### Changing The Map
+The map uses multiple layers of tiles created through parsing a larger image. to change the original image you will need to have a parsed image file structure the same as the one found in `public/images/maps/seros/png-example`. See the link section for a link to the React Leaflet Documentation for further guidance.
+
 ## Data Structure
 
 - Campaigns - The main story applied to the adventure. Campaigns may contain the following:
@@ -58,6 +76,12 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ## Relevant Links
 
 seros-interactive-map-server repository: https://github.com/JackSalloway/seros-interactive-map-server
+
+React documentation: https://legacy.reactjs.org/docs/getting-started.html
+
+React Leaflet documentation: https://react-leaflet.js.org/
+
+React Router documentation: https://reactrouter.com/en/main
 
 ## Next steps
 
