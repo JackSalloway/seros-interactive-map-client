@@ -77,11 +77,11 @@ The map uses multiple layers of tiles created through parsing a larger image. to
 
 seros-interactive-map-server repository: https://github.com/JackSalloway/seros-interactive-map-server
 
-React documentation: https://legacy.reactjs.org/docs/getting-started.html
+React: https://legacy.reactjs.org/
 
-React Leaflet documentation: https://react-leaflet.js.org/
+React Leaflet: https://react-leaflet.js.org/
 
-React Router documentation: https://reactrouter.com/en/main
+React Router: https://reactrouter.com/en/main
 
 ## Next steps
 
