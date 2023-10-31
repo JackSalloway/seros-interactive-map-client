@@ -12,13 +12,14 @@ Seros Interactive Map Client is the front end for my Dungeons and Dragons compan
 - Locations - Important places to be marked on the map. Locations may contain the following:
   - A name and a description
   - A pair of latitude and longitude coordinates
+  - A list of relevant sublocations
   - A list of relevant characters
   - A list of relevant quests
   - A list of relevant combat instances
 
 - Sublocations - Buildings or places of interest that are found at each location. Sublocations may contain the following:
   - A name and a description
-  - A location that the sublocaiton is associated with
+  - A location that the sublocation is associated with
 
 - NPCs (Non-Player Characters) - Characters that are found within each location. NPCs may contain the following:
   - A name and a description
