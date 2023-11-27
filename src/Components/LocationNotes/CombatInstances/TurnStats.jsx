@@ -3,13 +3,8 @@ import { useState } from "react";
 import PlayerTurnInputs from "./PlayerTurnInputs";
 
 const TurnStats = (props) => {
-    const {
-        turns,
-        setTurns,
-        instancePlayerDetails,
-        setInstancePlayerDetails,
-        postInstanceData,
-    } = props;
+    const { turns, setTurns, instancePlayerDetails, setInstancePlayerDetails } =
+        props;
 
     // Need to loop over each instance of turns and render two sets of inputs for each player (damage & healing)
     // All inputs should have a default value of 0

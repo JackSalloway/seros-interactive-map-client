@@ -152,7 +152,6 @@ const CreateCombatInstance = (props) => {
                         setTurns={setTurns}
                         instancePlayerDetails={instancePlayerDetails}
                         setInstancePlayerDetails={setInstancePlayerDetails}
-                        postInstanceData={postInstanceData}
                     />
                     <button
                         disabled={!validFormData}
