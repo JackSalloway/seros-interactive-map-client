@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import PlayerTurnInputs from "./PlayerTurnInputs";
 
+import "./TurnStats.css";
+
 const TurnStats = (props) => {
     const { turns, setTurns, instancePlayerDetails, setInstancePlayerDetails } =
         props;
@@ -106,9 +108,12 @@ const TurnStats = (props) => {
             </div>
             {instancePlayerDetails.map((player, playerIndex) => {
                 return (
-                    <div key={player.player_name + playerIndex}>
+                    <div
+                        key={player.player_name + playerIndex}
+                        className="player-turn-inputs-wrapper"
+                    >
                         <p>{player.player_name}</p>
-                        <div>
+                        <div className="player-turn-input-wrapper">
                             {/* Render damage inputs */}
                             {player.turns.damage.map((turnValue, turnIndex) => {
                                 if (turnIndex === currentTurn) {

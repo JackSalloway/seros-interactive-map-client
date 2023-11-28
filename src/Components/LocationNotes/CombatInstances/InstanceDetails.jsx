@@ -82,7 +82,7 @@ const InstanceDetails = (props) => {
     return (
         <>
             {" "}
-            <div className="location-notes-create">
+            <div className="location-notes-create first-input">
                 <label htmlFor="instance-name">
                     Instance name:
                     <input

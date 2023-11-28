@@ -155,6 +155,7 @@ const CreateCombatInstance = (props) => {
                     />
                     <button
                         disabled={!validFormData}
+                        className="location-notes-submit"
                         onClick={() => postInstanceData()}
                     >
                         Create instance!

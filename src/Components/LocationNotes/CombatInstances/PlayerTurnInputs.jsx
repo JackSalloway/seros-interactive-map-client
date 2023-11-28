@@ -5,10 +5,14 @@ const PlayerTurnInputs = (props) => {
         props;
 
     return (
-        <label htmlFor={player.player_name + `-${turnType}`}>
+        <label
+            htmlFor={player.player_name + `-${turnType}`}
+            className="player-turn-input-label"
+        >
             {titleCase(turnType)}
             <input
                 id={player.player_name + `-${turnType}`}
+                className="player-turn-input-input"
                 type="number"
                 defaultValue={turnValue}
                 onChange={({ target }) =>

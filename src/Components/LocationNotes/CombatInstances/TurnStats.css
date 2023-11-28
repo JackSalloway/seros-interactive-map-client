@@ -1,0 +1,21 @@
+#turn-buttons-wrapper {
+    color: red;
+}
+
+.player-turn-inputs-wrapper {
+    border-top: solid 1px black;
+    padding-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.player-turn-input-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-turn-input-label {
+    display: flex;
+    flex-direction: column;
+    height: 2.7rem;
+    justify-content: space-around;
+}
