@@ -6,7 +6,7 @@ const MapMarker = (props) => {
     const {
         location,
         index,
-        getIcon,
+        // getIcon,
         map,
         setSelectedLocationNotes,
         markerBeingEdited,
@@ -98,7 +98,7 @@ const MapMarker = (props) => {
         <Marker
             position={editMarkerLatLng}
             key={location._id}
-            icon={getIcon(editMarkerType)}
+            // icon={getIcon(editMarkerType)}
             riseOnHover={true}
             draggable={draggable}
             eventHandlers={{
