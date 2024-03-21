@@ -30,7 +30,6 @@ const HeaderBar = (props) => {
         // setSerosNPCs(null);
         // setSerosQuests(null);
         // setChangelogData(null);
-        // setRenderCampaignSettings(null);
         // setRenderCreationMarker(false);
         // setCreationMarkerLatLng([0, 0]);
         // setCreationMarkerType("miscellaneous");

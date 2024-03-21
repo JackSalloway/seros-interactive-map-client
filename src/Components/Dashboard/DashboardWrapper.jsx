@@ -15,8 +15,6 @@ const DashboardWrapper = (props) => {
         userAuthenticated,
         campaigns,
         renderCampaignForm,
-        renderCampaignSettings,
-        setRenderCampaignSettings,
         dataNotifications,
         setDataNotifications,
     } = props;
@@ -60,7 +58,6 @@ const DashboardWrapper = (props) => {
                     <button
                         onClick={() => {
                             setRenderCreateCampaignBannerForm(true);
-                            setRenderCampaignSettings(null);
                         }}
                     >
                         Add new Campaign!
@@ -171,10 +168,6 @@ const DashboardWrapper = (props) => {
                               adminRights={campaign.admin}
                               //   setCampaign={setCampaign}
                               renderCampaignForm={renderCampaignForm} // Used to disable campaign settings/deletion buttons if campaign creation form is open
-                              renderCampaignSettings={renderCampaignSettings}
-                              setRenderCampaignSettings={
-                                  setRenderCampaignSettings
-                              }
                               userAuthenticated={userAuthenticated}
                               //   setUserAuthenticated={setUserAuthenticated}
                               campaignIndex={index}
