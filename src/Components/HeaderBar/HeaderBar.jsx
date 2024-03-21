@@ -23,16 +23,6 @@ const HeaderBar = (props) => {
             withCredentials: true,
             url: `${process.env.REACT_APP_API_URL}/logout`,
         });
-        // Reset values when a user logsout
-        // setUserAuthenticated({});
-        // setCampaign(null);
-        // setSerosLocations(null);
-        // setSerosNPCs(null);
-        // setSerosQuests(null);
-        // setChangelogData(null);
-        // setRenderCreationMarker(false);
-        // setCreationMarkerLatLng([0, 0]);
-        // setCreationMarkerType("miscellaneous");
         navigate("/");
         navigate(0);
     };

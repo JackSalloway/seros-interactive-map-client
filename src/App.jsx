@@ -66,12 +66,6 @@ library.add(
     faMapLocationDot
 ); // This is used so font awesome icons can be used globally across the app without having to import font awesome everytime.
 
-// New routes code
-
-// User states
-
-// Matches
-
 // Root route options
 // Loader to check users cookies for authorized users values
 const startupLoader = async () => {

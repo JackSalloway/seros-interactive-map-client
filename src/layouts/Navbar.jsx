@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import {
     Outlet,
     useLoaderData,
-    useActionData,
     useOutletContext,
     useLocation,
     useNavigate,
@@ -20,17 +19,14 @@ const Navbar = () => {
     // Get data values from login component (user values)
     let matches = useMatches();
 
-    // console.log(matches);
-
     let user = matches
         .filter((match) => Boolean(match.handle?.user))
-        .map((match) => match.data);
+        .map((match) => match.data)[0];
 
     // Redirect user to login screen if no cookies have been detected
     useEffect(() => {
         if (
-            user[0] ===
-                "No cookies detected, please login to view this page." &&
+            user === "No cookies detected, please login to view this page." &&
             location.pathname !== "/"
         ) {
             navigate("/");
@@ -39,14 +35,14 @@ const Navbar = () => {
 
     // Redirect user to dashboard if the cookies have their user data stored
     useEffect(() => {
-        if (user[0].userId && location.pathname === "/") {
+        if (user.userId && location.pathname === "/") {
             navigate("/dashboard");
         }
     }, [user, location, navigate]);
 
     return (
         <>
-            <HeaderBar user={user[0]} location={location} />
+            <HeaderBar user={user} location={location} />
 
             <main>
                 <Outlet context={userData} />
