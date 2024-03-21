@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import {
     Outlet,
     useLoaderData,
+    useActionData,
     useOutletContext,
     useLocation,
     useNavigate,
@@ -18,6 +19,9 @@ const Navbar = () => {
 
     // Get data values from login component (user values)
     let matches = useMatches();
+
+    // console.log(matches);
+
     let user = matches
         .filter((match) => Boolean(match.handle?.user))
         .map((match) => match.data);

@@ -113,25 +113,15 @@ const loginAction = async ({ request }) => {
     };
 
     const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, init)
-        .then((response) => {
-            // Unsure if something should be put here, but as it is this just updates the loader value which then causes a re-render
-            // if (response.status === 200) {
-            //     // return null;
-            //     // return redirect("/dashboard");
-            // }
+        .then((res) => {
+            return res;
         })
         .catch(function (error) {
             console.log(error);
             console.log("error logging in");
-
-            if (error.response.status === 400) {
-                console.log("error");
-                return null;
-            }
             return null;
         });
-    console.log("login result:", res);
-    return null;
+    return res;
 };
 
 const router = createBrowserRouter(

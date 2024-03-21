@@ -1,6 +1,7 @@
 // React Router imports
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
 import { useNavigate, redirect } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
@@ -19,6 +20,18 @@ const LoginUserForm = (props) => {
         setDataNotifications,
         setNewUser,
     } = props;
+
+    const actionData = useActionData();
+
+    const [loginMessage, setLoginMessage] = useState(null);
+
+    useEffect(() => {
+        if (actionData) {
+            if (actionData.isError) {
+                setLoginMessage(actionData.message);
+            }
+        }
+    }, [actionData]);
 
     // Login function taken from the attempt at making a react router action
     const userLogin = async ({ request }) => {
@@ -115,6 +128,7 @@ const LoginUserForm = (props) => {
 
     return (
         <div className="user-form-wrapper">
+            {loginMessage !== null ? <p>{loginMessage}</p> : null}
             <Form
                 method="post"
                 action={"/"}
