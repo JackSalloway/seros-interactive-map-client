@@ -5,32 +5,31 @@ const CombatInstanceListWrapper = (props) => {
     const {
         serosLocations,
         setLocationNotes,
-        combatInstanceData,
+        // combatInstanceData,
         combatInstanceDataFiltered,
         map,
         campaign,
     } = props;
 
-    // Order the combat instances from most recent date first
-    const shallowCopy = combatInstanceDataFiltered.reverse();
-
-    const [instanceList, setInstanceList] = useState(shallowCopy);
+    const [instanceList, setInstanceList] = useState(
+        combatInstanceDataFiltered
+    );
     const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
         if (searchValue === "") {
-            setInstanceList(shallowCopy);
+            setInstanceList(combatInstanceDataFiltered);
             return;
         } else {
             setInstanceList(
-                shallowCopy.filter((instance) =>
+                combatInstanceDataFiltered.filter((instance) =>
                     instance.name
                         .toLowerCase()
                         .includes(searchValue.toLowerCase())
                 )
             );
         }
-    }, [searchValue, shallowCopy]);
+    }, [searchValue, combatInstanceDataFiltered]);
 
     return (
         <div id="instance-list-wrapper" className="journal-content-wrapper">
@@ -51,8 +50,8 @@ const CombatInstanceListWrapper = (props) => {
                     <CombatInstanceListNotes
                         key={instance.name + index}
                         instance={instance}
-                        campaign={campaign}
-                        combatInstanceData={combatInstanceData}
+                        // campaign={campaign}
+                        // combatInstanceData={combatInstanceData}
                         map={map}
                         setLocationNotes={setLocationNotes}
                         serosLocations={serosLocations}

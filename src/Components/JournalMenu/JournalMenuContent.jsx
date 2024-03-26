@@ -133,7 +133,9 @@ const JournalMenuContent = (props) => {
                 serosLocations={serosLocations}
                 setLocationNotes={setLocationNotes}
                 combatInstanceData={combatInstanceData}
-                combatInstanceDataFiltered={Array.from(combatInstanceData)}
+                combatInstanceDataFiltered={Array.from(
+                    combatInstanceData
+                ).reverse()}
                 map={map}
                 campaign={campaign}
             />
