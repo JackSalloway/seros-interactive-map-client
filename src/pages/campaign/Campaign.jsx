@@ -59,10 +59,6 @@ const Campaign = () => {
     // Render data states
     //     // Fetch location data from database
     useEffect(() => {
-        if (serosLocations !== null) {
-            return;
-        }
-
         fetch(
             `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaignParams.campaignId}`,
             {
@@ -76,10 +72,6 @@ const Campaign = () => {
 
     // Fetch quest data from database
     useEffect(() => {
-        if (serosQuests !== null) {
-            return;
-        }
-
         fetch(
             `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaignParams.campaignId}`,
             {
@@ -93,10 +85,6 @@ const Campaign = () => {
 
     // Fetch NPC data from database
     useEffect(() => {
-        if (serosNPCs !== null) {
-            return;
-        }
-
         fetch(
             `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaignParams.campaignId}`,
             {
@@ -110,10 +98,6 @@ const Campaign = () => {
 
     // Fetch changelog data from database
     useEffect(() => {
-        if (changelogData !== null) {
-            return;
-        }
-
         fetch(
             `${process.env.REACT_APP_API_URL}/changelog_data/?campaign_id=${campaignParams.campaignId}`,
             {
@@ -133,10 +117,6 @@ const Campaign = () => {
 
     // Fetch combat instance data from database
     useEffect(() => {
-        if (combatInstanceData !== null) {
-            return;
-        }
-
         fetch(
             `${process.env.REACT_APP_API_URL}/combat_instance_data/?campaign_id=${campaignParams.campaignId}`,
             {
