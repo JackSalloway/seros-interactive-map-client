@@ -17,8 +17,6 @@ const CombatInstanceListWrapper = (props) => {
     const [instanceList, setInstanceList] = useState(shallowCopy);
     const [searchValue, setSearchValue] = useState("");
 
-    console.log(instanceList);
-
     useEffect(() => {
         if (searchValue === "") {
             setInstanceList(shallowCopy);
