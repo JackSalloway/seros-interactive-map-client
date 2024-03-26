@@ -27,9 +27,6 @@ const CampaignSettingsWrapper = (props) => {
     const [disableUpdateCampaignDetails, setDisableUpdateCampaignDetails] =
         useState(true);
 
-    // Campaign user list update values
-    const [updatedCampaignUsers, setUpdatedCampaignUsers] = useState([]);
-
     useEffect(() => {
         // Fetch campaign settings from backend
         fetch(
@@ -47,7 +44,6 @@ const CampaignSettingsWrapper = (props) => {
                 // Set the campaign update values
                 setUpdatedCampaignName(he.decode(data.campaign[0].name));
                 setUpdatedCampaignDesc(he.decode(data.campaign[0].desc));
-                setUpdatedCampaignUsers(data.campaignUsers);
             });
     }, [campaignID]);
 
