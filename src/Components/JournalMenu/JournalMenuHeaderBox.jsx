@@ -51,16 +51,6 @@ const JournalMenuHeaderBox = (props) => {
                         : { color: "green" }
                 }
             />
-            {/* Removed the tooltip icon for now due to it being buggy, plan to implement it in relevant wrappers at a later date */}
-            {/* {selectedTab === headerValue ? (
-                <span style={{ position: "absolute", right: 0 }}>
-                    <FontAwesomeIcon
-                        icon="info-circle"
-                        className="journal-fa-icon"
-                        id="menu-tab-tooltip-icon"
-                    />
-                </span>
-            ) : null} */}
         </div>
     );
 };
