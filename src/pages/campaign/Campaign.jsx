@@ -97,11 +97,6 @@ const Campaign = () => {
             return;
         }
 
-        // Don't think this one is needed anymore
-        // if (campaignParams.campaignId === null) {
-        //     return; // Checks if the user has selected a campaign or not
-        // }
-
         fetch(
             `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaignParams.campaignId}`,
             {
@@ -117,11 +112,6 @@ const Campaign = () => {
     useEffect(() => {
         if (changelogData !== null) {
             return;
-        }
-
-        // Don't think this one is needed anymore
-        if (campaignParams.campaignId === null) {
-            return; // Checks if the user has selected a campaign or not
         }
 
         fetch(
