@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./CombatInstanceListNotes.css";
 import he from "he";
 import dayjs from "dayjs";
@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const CombatInstanceListNotes = (props) => {
     const {
         instance,
-        campaign,
-        combatInstanceData,
+        // campaign,
+        // combatInstanceData,
         map,
         setLocationNotes,
         serosLocations,
@@ -25,8 +25,6 @@ const CombatInstanceListNotes = (props) => {
             }}
         />
     );
-
-    console.log(instance);
 
     const collapseUpChevron = (
         <FontAwesomeIcon
