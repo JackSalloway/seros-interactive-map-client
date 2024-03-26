@@ -7,8 +7,8 @@ import "./CreateCampaignBannerForm.css";
 const CreateCampaignBannerForm = (props) => {
     const {
         userAuthenticated,
-        dataNotifications,
-        setDataNotifications,
+        // dataNotifications,
+        // setDataNotifications,
         setRenderCreateCampaignBannerForm,
     } = props;
 
