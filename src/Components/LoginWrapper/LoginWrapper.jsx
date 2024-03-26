@@ -26,6 +26,11 @@ const LoginWrapper = (props) => {
         }
     }, [newUser]);
 
+    // Would like to remove the state props from the CreateUserForm component and make it like the LoginUserForm component to make this section more consistent.
+    // To do this I would need to remove all the relevant state from this file and add it into the CreateUserForm so it can be handled there.
+    // I would also need to change how the CreateUserForm component handles notifications -
+    // One way of doing that would be to add a state value to this file that updates depending what the user does.
+
     return (
         <div id="login-wrapper">
             <div id="video-background-wrapper">
@@ -52,14 +57,14 @@ const LoginWrapper = (props) => {
                 <div id="login-screen-content-display-wrapper">
                     {newUser === false ? (
                         <LoginUserForm
-                            username={username}
-                            setUsername={setUsername}
-                            password={password}
-                            setPassword={setPassword}
-                            dataNotifications={dataNotifications}
-                            setDataNotifications={setDataNotifications}
-                            loginResMsg={loginResMsg}
-                            setLoginResMes={setLoginResMes}
+                            // username={username}
+                            // setUsername={setUsername}
+                            // password={password}
+                            // setPassword={setPassword}
+                            // dataNotifications={dataNotifications}
+                            // setDataNotifications={setDataNotifications}
+                            // loginResMsg={loginResMsg}
+                            // setLoginResMes={setLoginResMes}
                             setNewUser={setNewUser}
                         />
                     ) : (
@@ -78,8 +83,6 @@ const LoginWrapper = (props) => {
                         />
                     )}
                 </div>
-
-                {/* Arrow wrappers */}
             </div>
         </div>
     );
