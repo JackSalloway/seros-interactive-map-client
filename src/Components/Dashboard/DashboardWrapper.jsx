@@ -166,10 +166,8 @@ const DashboardWrapper = (props) => {
                               description={campaign.campaign.desc}
                               campaignID={campaign.campaign._id}
                               adminRights={campaign.admin}
-                              //   setCampaign={setCampaign}
                               renderCampaignForm={renderCampaignForm} // Used to disable campaign settings/deletion buttons if campaign creation form is open
                               userAuthenticated={userAuthenticated}
-                              //   setUserAuthenticated={setUserAuthenticated}
                               campaignIndex={index}
                               dataNotifications={dataNotifications}
                               setDataNotifications={setDataNotifications}
@@ -180,7 +178,6 @@ const DashboardWrapper = (props) => {
             {renderCreateCampaignBannerForm ? (
                 <CreateCampaignBannerForm
                     userAuthenticated={userAuthenticated}
-                    // setUserAuthenticated={setUserAuthenticated}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     setRenderCreateCampaignBannerForm={
@@ -193,7 +190,6 @@ const DashboardWrapper = (props) => {
             {joinCampaignBanner()}
         </div>
     );
-    // createCampaignBanner();
 };
 
 export default DashboardWrapper;
