@@ -108,7 +108,7 @@ const LocationListWrapper = (props) => {
                 <LocationListNotes
                     location={location}
                     unfilteredSerosLocations={unfilteredSerosLocations}
-                    serosLocations={serosLocations}
+                    // serosLocations={serosLocations}
                     setLocationNotes={setLocationNotes}
                     map={map}
                     key={location._id}
