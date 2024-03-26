@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Journal.css";
 import LocationNotes from "../LocationNotes/LocationNotes";
-// import DashboardJournal from "../DashboardJournal/DashboardJournal";
 import JournalMenuHeaderBox from "../JournalMenu/JournalMenuHeaderBox";
 import JournalMenuContent from "../JournalMenu/JournalMenuContent";
 
@@ -71,12 +70,6 @@ const Journal = (props) => {
                 {campaign === null ? null : (
                     <div id="journal-front-page-menu">
                         <div id="journal-front-page-menu-header">
-                            {/* faChartBar,
-    faHourglass,
-    faUsers,
-    faCircleExclamation,
-    faMapLocationDot */}
-
                             <JournalMenuHeaderBox
                                 selectedTab={selectedTab}
                                 setSelectedTab={setSelectedTab}
