@@ -70,7 +70,8 @@ const Banner = (props) => {
                             icon="trash-can"
                             className="banner-fa-icon"
                             style={iconStyles}
-                            // onClick={() => setDeleteData(subLocation)}
+                            // The following line will be for deleting campaigns, which is something I am not entirely sure I want to add.
+                            // onClick={() => setDeleteData(CAMPAIGN)}
                         />
                     </div>
                 ) : null}
@@ -92,7 +93,6 @@ const Banner = (props) => {
                     <button
                         onClick={() => {
                             navigate(`../campaign/${campaignID}`);
-                            // setCampaign({ name, description, id: campaignID });
                         }}
                     >
                         Select campaign!
