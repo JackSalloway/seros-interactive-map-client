@@ -36,7 +36,7 @@ const JournalMenuContent = (props) => {
         changelogData,
         setChangelogData,
         combatInstanceData,
-        setCombatInstanceData,
+        // setCombatInstanceData, - This is not used due to the locationless functionality for Combat Instances not being implemented as they cannot be deleted.
     } = props;
 
     if (markerBeingEdited !== null) {
