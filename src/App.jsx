@@ -70,25 +70,21 @@ library.add(
 // Loader to check users cookies for authorized users values
 const startupLoader = async () => {
     // fetch startup route from api
-    return fetch(`${process.env.REACT_APP_API_URL}/startup`, {
-        method: "GET",
-        mode: "cors",
-        credentials: "include",
-    })
-        .then(async (res) => {
-            // Check if the user object returned has timed out or there are no cookies present
-            if (res.status === 401) {
-                const errorMessage = await res.text();
-                console.log("Error hit:", errorMessage);
-                return errorMessage;
-            }
-            // Response value is valid, return as loader value
-            return await res.json();
-        })
-        .catch((err) => {
-            console.log(err.message);
-            return err.message;
+    try {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/startup`, {
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
         });
+        if (res.status === 401) {
+            const errorMessage = await res.text();
+            console.log("Error hit:", errorMessage);
+            return errorMessage;
+        }
+        return await res.json();
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 // Action to refresh the loader state value when a login request is recieved
@@ -106,16 +102,15 @@ const loginAction = async ({ request }) => {
         credentials: "include",
     };
 
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, init)
-        .then((res) => {
-            return res;
-        })
-        .catch(function (error) {
-            console.log(error);
-            console.log("error logging in");
-            return null;
-        });
-    return res;
+    try {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, init);
+        const userData = await res.json();
+        return userData;
+    } catch (err) {
+        console.log(err);
+        console.log("error logging in");
+        return null;
+    }
 };
 
 const router = createBrowserRouter(
