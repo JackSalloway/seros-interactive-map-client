@@ -30,7 +30,7 @@ import { titleCase } from "../../imports/imports.js";
 function MapBox(props) {
     // Destructure props
     const {
-        serosLocations,
+        locations,
         serosNPCs,
         serosQuests,
         combatInstanceData,
@@ -61,18 +61,18 @@ function MapBox(props) {
     const [layerFilter, setLayerFilter] = useState([]);
 
     useEffect(() => {
-        if (serosLocations === null) {
+        if (locations === null) {
             return;
         }
 
-        const filteredLocations = serosLocations
+        const filteredLocations = locations
             .map((location) => location.type)
             .filter((location, index, arr) => {
                 return arr.indexOf(location) === index;
             });
 
         setLayerFilter(filteredLocations);
-    }, [setLayerFilter, serosLocations]);
+    }, [setLayerFilter, locations]);
 
     // Select relevant npcs when a location is selected
     useEffect(() => {
@@ -233,7 +233,7 @@ function MapBox(props) {
     // };
 
     // If data hasn't been fetched yet, don't render the map
-    if (serosLocations === null) {
+    if (locations === null) {
         return <LoadingScreen />;
     }
 
@@ -306,7 +306,7 @@ function MapBox(props) {
             <ZoomControl position="bottomright" />
             <MapEvents />
             <LayersControl>
-                {layerFilter.map((type) => layerType(type, serosLocations))}
+                {layerFilter.map((type) => layerType(type, locations))}
             </LayersControl>
             {renderCreationMarker ? renderDraggableMarker() : null}
         </MapContainer>
