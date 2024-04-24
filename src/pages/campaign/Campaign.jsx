@@ -20,7 +20,8 @@ const Campaign = () => {
 
     // Retrieve selected campaign data
     const campaign = user.campaigns.filter(
-        (campaign) => campaign.campaign._id === campaignParams.campaignId
+        (campaign) =>
+            campaign.campaign_id === parseInt(campaignParams.campaignId)
     )[0];
 
     // Data states
@@ -57,7 +58,7 @@ const Campaign = () => {
     const [dataNotifications, setDataNotifications] = useState([]);
 
     // Render data states
-    //     // Fetch location data from database
+    // Fetch location data from database
     useEffect(() => {
         if (serosLocations !== null) {
             return;
