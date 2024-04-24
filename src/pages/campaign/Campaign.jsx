@@ -27,7 +27,7 @@ const Campaign = () => {
     // Data states
     const [locations, setLocations] = useState(null);
     const [quests, setQuests] = useState(null);
-    const [serosNPCs, setSerosNPCs] = useState(null);
+    const [npcs, setNPCs] = useState(null);
     const [changelogData, setChangelogData] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
     const [combatInstanceData, setCombatInstanceData] = useState(null);
 
@@ -98,34 +98,29 @@ const Campaign = () => {
         };
 
         fetchData().catch((err) => console.log(err));
-
-        // fetch(
-        //     `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaignParams.campaignId}`,
-        //     {
-        //         method: "GET",
-        //         mode: "cors",
-        //     }
-        // )
-        //     .then((response) => response.json())
-        //     .then((quests) => setQuests(quests));
     }, [quests, setQuests, campaignId]);
 
     // Fetch NPC data from database
-    // useEffect(() => {
-    //     if (serosNPCs !== null) {
-    //         return;
-    //     }
+    useEffect(() => {
+        if (npcs !== null) {
+            return;
+        }
 
-    //     fetch(
-    //         `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaignParams.campaignId}`,
-    //         {
-    //             method: "GET",
-    //             mode: "cors",
-    //         }
-    //     )
-    //         .then((response) => response.json())
-    //         .then((NPCs) => setSerosNPCs(NPCs));
-    // }, [serosNPCs, setSerosNPCs, campaignParams]);
+        const fetchData = async () => {
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaignParams.campaignId}`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                }
+            );
+            const resNPCs = await res.json();
+            console.log(resNPCs);
+            setNPCs(resNPCs);
+        };
+
+        fetchData().catch((err) => console.log(err));
+    }, [npcs, setNPCs, campaignParams]);
 
     // Fetch changelog data from database
     // useEffect(() => {
@@ -178,7 +173,7 @@ const Campaign = () => {
         <div className="map-screen-wrapper">
             <MapBox
                 locations={locations}
-                serosNPCs={serosNPCs}
+                npcs={npcs}
                 quests={quests}
                 combatInstanceData={combatInstanceData}
                 setLocations={setLocations}
@@ -209,8 +204,8 @@ const Campaign = () => {
             <Journal
                 locationNotes={locations?.[selectedLocationNotes] || null}
                 setLocationNotes={setSelectedLocationNotes}
-                serosNPCs={serosNPCs}
-                setSerosNPCs={setSerosNPCs}
+                npcs={npcs}
+                setNPCs={setNPCs}
                 locationNPCs={selectedLocationNPCs}
                 setLocationNPCs={setSelectedLocationNPCs}
                 locationQuests={selectedLocationQuests}
@@ -253,8 +248,8 @@ const Campaign = () => {
                     }
                     locations={locations}
                     setLocations={setLocations}
-                    serosNPCs={serosNPCs}
-                    setSerosNPCs={setSerosNPCs}
+                    npcs={npcs}
+                    setNPCs={setNPCs}
                     quests={quests}
                     setQuests={setQuests}
                     dataNotifications={dataNotifications}
