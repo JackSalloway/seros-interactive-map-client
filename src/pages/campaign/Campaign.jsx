@@ -12,6 +12,7 @@ import DataNotification from "../../Components/Notifications/DataNotification";
 
 const Campaign = () => {
     let campaignParams = useParams();
+    const campaignId = parseInt(campaignParams.campaignId);
 
     let matches = useMatches();
     let user = matches
@@ -20,12 +21,11 @@ const Campaign = () => {
 
     // Retrieve selected campaign data
     const campaign = user.campaigns.filter(
-        (campaign) =>
-            campaign.campaign_id === parseInt(campaignParams.campaignId)
+        (campaign) => campaign.campaign_id === campaignId
     )[0];
 
     // Data states
-    const [serosLocations, setSerosLocations] = useState(null);
+    const [locations, setLocations] = useState(null);
     const [serosQuests, setSerosQuests] = useState(null);
     const [serosNPCs, setSerosNPCs] = useState(null);
     const [changelogData, setChangelogData] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
@@ -60,20 +60,20 @@ const Campaign = () => {
     // Render data states
     // Fetch location data from database
     useEffect(() => {
-        if (serosLocations !== null) {
+        if (locations !== null) {
             return;
         }
 
         fetch(
-            `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaignParams.campaignId}`,
+            `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaignId}`,
             {
                 method: "GET",
                 mode: "cors",
             }
         )
             .then((response) => response.json())
-            .then((locations) => setSerosLocations(locations));
-    }, [serosLocations, setSerosLocations, campaignParams]);
+            .then((locations) => setLocations(locations));
+    }, [locations, setLocations, campaignId]);
 
     // Fetch quest data from database
     useEffect(() => {
@@ -159,18 +159,18 @@ const Campaign = () => {
     return (
         <div className="map-screen-wrapper">
             <MapBox
-                serosLocations={serosLocations}
+                locations={locations}
                 serosNPCs={serosNPCs}
                 serosQuests={serosQuests}
                 combatInstanceData={combatInstanceData}
-                setSerosLocations={setSerosLocations}
+                setLocations={setLocations}
                 map={map}
                 renderCreationMarker={renderCreationMarker}
                 creationMarkerLatLng={creationMarkerLatLng}
                 creationMarkerType={creationMarkerType}
                 setCreationMarkerLatLng={setCreationMarkerLatLng}
                 selectedLocationNotes={
-                    serosLocations?.[selectedLocationNotes] || null
+                    locations?.[selectedLocationNotes] || null
                 }
                 setSelectedLocationNotes={setSelectedLocationNotes}
                 setSelectedLocationQuests={setSelectedLocationQuests}
@@ -189,7 +189,7 @@ const Campaign = () => {
                 setDeleteData={setDeleteData}
             />
             <Journal
-                locationNotes={serosLocations?.[selectedLocationNotes] || null}
+                locationNotes={locations?.[selectedLocationNotes] || null}
                 setLocationNotes={setSelectedLocationNotes}
                 serosNPCs={serosNPCs}
                 setSerosNPCs={setSerosNPCs}
@@ -199,8 +199,8 @@ const Campaign = () => {
                 setLocationQuests={setSelectedLocationQuests}
                 locationCombatInstances={selectedLocationCombatInstances}
                 setLocationCombatInstances={setSelectedLocationCombatInstances}
-                serosLocations={serosLocations}
-                setSerosLocations={setSerosLocations}
+                locations={locations}
+                setLocations={setLocations}
                 serosQuests={serosQuests}
                 setSerosQuests={setSerosQuests}
                 deleteData={deleteData}
@@ -231,10 +231,10 @@ const Campaign = () => {
                     data={deleteData}
                     setDeleteData={setDeleteData}
                     selectedLocationNotes={
-                        serosLocations?.[selectedLocationNotes] || null
+                        locations?.[selectedLocationNotes] || null
                     }
-                    serosLocations={serosLocations}
-                    setSerosLocations={setSerosLocations}
+                    locations={locations}
+                    setLocations={setLocations}
                     serosNPCs={serosNPCs}
                     setSerosNPCs={setSerosNPCs}
                     serosQuests={serosQuests}
