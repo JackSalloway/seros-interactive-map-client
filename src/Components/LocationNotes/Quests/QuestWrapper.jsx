@@ -13,8 +13,8 @@ const QuestWrapper = (props) => {
         locationQuests,
         setDeleteData,
         locationList,
-        serosQuests,
-        setSerosQuests,
+        quests,
+        setQuests,
         setSerosNPCs,
         setQuestUpdated,
         addNewQuest,
@@ -25,6 +25,7 @@ const QuestWrapper = (props) => {
         setChangelogData,
         username,
     } = props;
+
     return (
         <div
             className="location-notes-category-wrapper"
@@ -58,11 +59,11 @@ const QuestWrapper = (props) => {
                             <QuestNotes
                                 quest={quest.questData}
                                 originalIndex={quest.originalIndex}
-                                key={quest.questData._id}
+                                key={quest.questData.quest_id}
                                 setDeleteData={setDeleteData}
                                 locationList={locationList}
-                                serosQuests={serosQuests}
-                                setSerosQuests={setSerosQuests}
+                                quests={quests}
+                                setQuests={setQuests}
                                 setSerosNPCs={setSerosNPCs}
                                 setQuestUpdated={setQuestUpdated}
                                 dataNotifications={dataNotifications}
@@ -121,8 +122,8 @@ const QuestWrapper = (props) => {
                 <CreateQuest
                     locationNotes={locationNotes}
                     locationList={locationList}
-                    serosQuests={serosQuests}
-                    setSerosQuests={setSerosQuests}
+                    quests={quests}
+                    setQuests={setQuests}
                     setAddNewQuest={setAddNewQuest}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}

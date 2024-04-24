@@ -22,10 +22,10 @@ const LocationNotes = (props) => {
         setLocationQuests,
         locationCombatInstances,
         setLocationCombatInstances,
-        serosLocations,
-        setSerosLocations,
-        serosQuests,
-        setSerosQuests,
+        locations,
+        setLocations,
+        quests,
+        setQuests,
         setDeleteData,
         dataNotifications,
         setDataNotifications,
@@ -68,28 +68,28 @@ const LocationNotes = (props) => {
 
     // Populate locationList with locations
     useEffect(() => {
-        if (locationList.length !== serosLocations.length) {
+        if (locationList.length !== locations.length) {
             setLocationList([
                 ...locationList,
-                ...serosLocations.map((location) => ({
-                    value: he.decode(location._id),
+                ...locations.map((location) => ({
+                    value: location.id,
                     label: he.decode(location.name),
                 })),
             ]);
         }
-    }, [serosLocations, locationList]);
+    }, [locations, locationList]);
 
     // Populate questList with quests
     useEffect(() => {
-        if (questList.length !== serosQuests.length) {
+        if (questList.length !== quests.length) {
             setQuestList([
-                ...serosQuests.map((quest) => ({
-                    value: he.decode(quest._id),
+                ...quests.map((quest) => ({
+                    value: quest._id,
                     label: he.decode(quest.name),
                 })),
             ]);
         }
-    }, [serosQuests, questList, questUpdated]);
+    }, [quests, questList, questUpdated]);
 
     // Close all categories when a new location is picked
     useEffect(() => {
@@ -159,15 +159,17 @@ const LocationNotes = (props) => {
                 </div>
             </div>
             <div id="location-notes-data" className="description-section">
-                {locationNotes.desc
-                    ? splitParas(locationNotes.desc).map((para, index) => (
-                          <p
-                              className="location-notes-description-paragraph location-notes-location-description"
-                              key={index}
-                          >
-                              {he.decode(para)}
-                          </p>
-                      ))
+                {locationNotes.description
+                    ? splitParas(locationNotes.description).map(
+                          (para, index) => (
+                              <p
+                                  className="location-notes-description-paragraph location-notes-location-description"
+                                  key={index}
+                              >
+                                  {he.decode(para)}
+                              </p>
+                          )
+                      )
                     : null}
 
                 <SubLocationWrapper
@@ -175,8 +177,8 @@ const LocationNotes = (props) => {
                     setShowSubLocations={setShowSubLocations}
                     locationNotes={locationNotes}
                     setDeleteData={setDeleteData}
-                    serosLocations={serosLocations}
-                    setSerosLocations={setSerosLocations}
+                    locations={locations}
+                    setLocations={setLocations}
                     addNewSubLocation={addNewSubLocation}
                     setAddNewSubLocation={setAddNewSubLocation}
                     dataNotifications={dataNotifications}
@@ -212,8 +214,8 @@ const LocationNotes = (props) => {
                     locationQuests={locationQuests}
                     setDeleteData={setDeleteData}
                     locationList={locationList}
-                    serosQuests={serosQuests}
-                    setSerosQuests={setSerosQuests}
+                    quests={quests}
+                    setQuests={setQuests}
                     setSerosNPCs={setSerosNPCs}
                     setQuestUpdated={setQuestUpdated}
                     addNewQuest={addNewQuest}

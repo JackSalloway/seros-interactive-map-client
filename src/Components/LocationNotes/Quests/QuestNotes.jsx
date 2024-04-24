@@ -35,7 +35,7 @@ const QuestNotes = (props) => {
         he.decode(quest.name)
     );
     const [updatedQuestDescription, setUpdatedQuestDescription] = useState(
-        he.decode(quest.desc)
+        he.decode(quest.description)
     );
     const [updatedQuestStatus, setUpdatedQuestStatus] = useState(
         quest.completed
@@ -51,35 +51,15 @@ const QuestNotes = (props) => {
         // Reset update inputs on initial render and update form close
         if (editing === false) {
             setUpdatedQuestName(he.decode(quest.name));
-            setUpdatedQuestDescription(he.decode(quest.desc));
+            setUpdatedQuestDescription(he.decode(quest.description));
             setUpdatedQuestStatus(quest.completed);
-            setUpdatedQuestSelectedLocations(
-                quest.associated_locations.map((location) => {
-                    return {
-                        value: he.decode(location._id),
-                        label: he.decode(location.name),
-                    };
-                })
-            ); // Set the values for selected locations (selection box)
-            setUpdatedQuestSelectedLocationsData(
-                quest.associated_locations.map((location) => location._id)
-            );
+            setUpdatedQuestSelectedLocations({
+                value: quest.location_id,
+                label: he.decode(quest.location_name),
+            });
+            setUpdatedQuestSelectedLocationsData(quest.location_id);
         }
-    }, [
-        editing,
-        quest.name,
-        quest.desc,
-        quest.completed,
-        quest.associated_locations,
-    ]);
-
-    // useEffect(() => {
-    //     // Set the values for selected locations (selection box)
-    //     if ( updatedQuestSelectedLocations === {} ) {
-
-    //     }
-
-    // }, [ quest.associated_locations, updatedQuestSelectedLocations ]);
+    }, [editing, quest]);
 
     if (selected === false) {
         return (
@@ -361,24 +341,23 @@ const QuestNotes = (props) => {
                         <div className="location-notes-details-data-section description-section">
                             <h5>Quest Description:</h5>
                             {/* <p>{he.decode(quest.desc)}</p> */}
-                            {splitParas(quest.desc).map((para, index) => (
-                                <p
-                                    key={index}
-                                    className="location-notes-description-paragraph"
-                                >
-                                    {he.decode(para)}
-                                </p>
-                            ))}
+                            {splitParas(quest.description).map(
+                                (para, index) => (
+                                    <p
+                                        key={index}
+                                        className="location-notes-description-paragraph"
+                                    >
+                                        {he.decode(para)}
+                                    </p>
+                                )
+                            )}
                         </div>
                         <Separator />
                         <div className="location-notes-details-data-section associated-locations-section">
                             <h5>Relevant Locations:</h5>
                             <ul>
-                                {quest.associated_locations.map((location) => (
-                                    <li key={location._id}>
-                                        {he.decode(location.name)}
-                                    </li>
-                                ))}
+                                {/* Currently unsure how to implement this without adding a new value derived from some horrific sql join query */}
+                                <li>{he.decode(quest.location_name)}</li>
                             </ul>
                         </div>
                         <Separator />

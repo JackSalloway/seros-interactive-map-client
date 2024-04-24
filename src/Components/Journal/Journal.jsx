@@ -16,10 +16,10 @@ const Journal = (props) => {
         setLocationQuests,
         locationCombatInstances,
         setLocationCombatInstances,
-        serosLocations,
-        setSerosLocations,
-        serosQuests,
-        setSerosQuests,
+        locations,
+        setLocations,
+        quests,
+        setQuests,
         deleteData,
         setDeleteData,
         userAuthenticated,
@@ -112,13 +112,13 @@ const Journal = (props) => {
                             />
                         </div>
                         <JournalMenuContent
-                            serosLocations={serosLocations}
-                            setSerosLocations={setSerosLocations}
+                            locations={locations}
+                            setLocations={setLocations}
                             setLocationNotes={setLocationNotes}
                             userAuthenticated={userAuthenticated}
                             selectedTab={selectedTab}
-                            serosQuests={serosQuests}
-                            setSerosQuests={setSerosQuests}
+                            quests={quests}
+                            setQuests={setQuests}
                             serosNPCs={serosNPCs}
                             setSerosNPCs={setSerosNPCs}
                             renderCreationMarker={renderCreationMarker}
@@ -159,10 +159,10 @@ const Journal = (props) => {
                 setLocationQuests={setLocationQuests}
                 locationCombatInstances={locationCombatInstances}
                 setLocationCombatInstances={setLocationCombatInstances}
-                serosLocations={serosLocations}
-                setSerosLocations={setSerosLocations}
-                serosQuests={serosQuests}
-                setSerosQuests={setSerosQuests}
+                locations={locations}
+                setLocations={setLocations}
+                quests={quests}
+                setQuest={setQuests}
                 setDeleteData={setDeleteData}
                 userAuthenticated={userAuthenticated}
                 dataNotifications={dataNotifications}

@@ -26,7 +26,7 @@ const Campaign = () => {
 
     // Data states
     const [locations, setLocations] = useState(null);
-    const [serosQuests, setSerosQuests] = useState(null);
+    const [quests, setQuests] = useState(null);
     const [serosNPCs, setSerosNPCs] = useState(null);
     const [changelogData, setChangelogData] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
     const [combatInstanceData, setCombatInstanceData] = useState(null);
@@ -81,83 +81,97 @@ const Campaign = () => {
 
     // Fetch quest data from database
     useEffect(() => {
-        if (serosQuests !== null) {
+        if (quests !== null) {
             return;
         }
 
-        fetch(
-            `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaignParams.campaignId}`,
-            {
-                method: "GET",
-                mode: "cors",
-            }
-        )
-            .then((response) => response.json())
-            .then((quests) => setSerosQuests(quests));
-    }, [serosQuests, setSerosQuests, campaignParams]);
+        const fetchData = async () => {
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaignId}`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                }
+            );
+            const resQuests = await res.json();
+            setQuests(resQuests);
+        };
+
+        fetchData().catch((err) => console.log(err));
+
+        // fetch(
+        //     `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaignParams.campaignId}`,
+        //     {
+        //         method: "GET",
+        //         mode: "cors",
+        //     }
+        // )
+        //     .then((response) => response.json())
+        //     .then((quests) => setQuests(quests));
+    }, [quests, setQuests, campaignId]);
 
     // Fetch NPC data from database
-    useEffect(() => {
-        if (serosNPCs !== null) {
-            return;
-        }
+    // useEffect(() => {
+    //     if (serosNPCs !== null) {
+    //         return;
+    //     }
 
-        fetch(
-            `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaignParams.campaignId}`,
-            {
-                method: "GET",
-                mode: "cors",
-            }
-        )
-            .then((response) => response.json())
-            .then((NPCs) => setSerosNPCs(NPCs));
-    }, [serosNPCs, setSerosNPCs, campaignParams]);
+    //     fetch(
+    //         `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaignParams.campaignId}`,
+    //         {
+    //             method: "GET",
+    //             mode: "cors",
+    //         }
+    //     )
+    //         .then((response) => response.json())
+    //         .then((NPCs) => setSerosNPCs(NPCs));
+    // }, [serosNPCs, setSerosNPCs, campaignParams]);
 
     // Fetch changelog data from database
-    useEffect(() => {
-        if (changelogData !== null) {
-            return;
-        }
+    // useEffect(() => {
+    //     if (changelogData !== null) {
+    //         return;
+    //     }
 
-        fetch(
-            `${process.env.REACT_APP_API_URL}/changelog_data/?campaign_id=${campaignParams.campaignId}`,
-            {
-                method: "GET",
-                mode: "cors",
-            }
-        )
-            .then((response) => response.json())
-            .then((changelog) => {
-                if (changelog === null) {
-                    setChangelogData([]);
-                    return;
-                }
-                setChangelogData(changelog.changes);
-            });
-    }, [changelogData, campaignParams]);
+    //     fetch(
+    //         `${process.env.REACT_APP_API_URL}/changelog_data/?campaign_id=${campaignParams.campaignId}`,
+    //         {
+    //             method: "GET",
+    //             mode: "cors",
+    //         }
+    //     )
+    //         .then((response) => response.json())
+    //         .then((changelog) => {
+    //             if (changelog === null) {
+    //                 setChangelogData([]);
+    //                 return;
+    //             }
+    //             setChangelogData(changelog.changes);
+    //         });
+    // }, [changelogData, campaignParams]);
 
     // Fetch combat instance data from database
-    useEffect(() => {
-        if (combatInstanceData !== null) {
-            return;
-        }
+    // useEffect(() => {
+    //     if (combatInstanceData !== null) {
+    //         return;
+    //     }
 
-        fetch(
-            `${process.env.REACT_APP_API_URL}/combat_instance_data/?campaign_id=${campaignParams.campaignId}`,
-            {
-                method: "GET",
-                mode: "cors",
-            }
-        )
-            .then((response) => response.json())
-            .then((combatInstances) => {
-                if (combatInstances === null) {
-                    setCombatInstanceData([]);
-                    return;
-                }
-                setCombatInstanceData(combatInstances);
-            });
-    });
+    //     fetch(
+    //         `${process.env.REACT_APP_API_URL}/combat_instance_data/?campaign_id=${campaignParams.campaignId}`,
+    //         {
+    //             method: "GET",
+    //             mode: "cors",
+    //         }
+    //     )
+    //         .then((response) => response.json())
+    //         .then((combatInstances) => {
+    //             if (combatInstances === null) {
+    //                 setCombatInstanceData([]);
+    //                 return;
+    //             }
+    //             setCombatInstanceData(combatInstances);
+    //         });
+    // });
 
     // Campaign has been selected so render a map and a journal sidebar
     return (
@@ -165,7 +179,7 @@ const Campaign = () => {
             <MapBox
                 locations={locations}
                 serosNPCs={serosNPCs}
-                serosQuests={serosQuests}
+                quests={quests}
                 combatInstanceData={combatInstanceData}
                 setLocations={setLocations}
                 map={map}
@@ -205,8 +219,8 @@ const Campaign = () => {
                 setLocationCombatInstances={setSelectedLocationCombatInstances}
                 locations={locations}
                 setLocations={setLocations}
-                serosQuests={serosQuests}
-                setSerosQuests={setSerosQuests}
+                quests={quests}
+                setQuests={setQuests}
                 deleteData={deleteData}
                 setDeleteData={setDeleteData}
                 userAuthenticated={user}
@@ -241,8 +255,8 @@ const Campaign = () => {
                     setLocations={setLocations}
                     serosNPCs={serosNPCs}
                     setSerosNPCs={setSerosNPCs}
-                    serosQuests={serosQuests}
-                    setSerosQuests={setSerosQuests}
+                    quests={quests}
+                    setQuests={setQuests}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     username={user.username}

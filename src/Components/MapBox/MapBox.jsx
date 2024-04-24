@@ -32,7 +32,7 @@ function MapBox(props) {
     const {
         locations,
         serosNPCs,
-        serosQuests,
+        quests,
         combatInstanceData,
         map,
         renderCreationMarker,
@@ -75,24 +75,24 @@ function MapBox(props) {
     }, [setLayerFilter, locations]);
 
     // Select relevant npcs when a location is selected
-    useEffect(() => {
-        if (selectedLocationNotes === null) {
-            return;
-        }
-        // Filter through serosNPCs to find the NPCs relevant to the selected location.
-        const reduceNPCs = serosNPCs.reduce((prevNPCs, npcData, index) => {
-            if (
-                npcData.associated_locations.findIndex(
-                    (npcLocation) =>
-                        npcLocation._id === selectedLocationNotes._id
-                ) !== -1
-            ) {
-                return [...prevNPCs, { npcData, originalIndex: index }];
-            }
-            return prevNPCs;
-        }, []);
-        setSelectedLocationNPCs(reduceNPCs);
-    }, [serosNPCs, selectedLocationNotes, setSelectedLocationNPCs]);
+    // useEffect(() => {
+    //     if (selectedLocationNotes === null) {
+    //         return;
+    //     }
+    //     // Filter through serosNPCs to find the NPCs relevant to the selected location.
+    //     const reduceNPCs = serosNPCs.reduce((prevNPCs, npcData, index) => {
+    //         if (
+    //             npcData.associated_locations.findIndex(
+    //                 (npcLocation) =>
+    //                     npcLocation._id === selectedLocationNotes._id
+    //             ) !== -1
+    //         ) {
+    //             return [...prevNPCs, { npcData, originalIndex: index }];
+    //         }
+    //         return prevNPCs;
+    //     }, []);
+    //     setSelectedLocationNPCs(reduceNPCs);
+    // }, [serosNPCs, selectedLocationNotes, setSelectedLocationNPCs]);
 
     // Select relevant quests when a location is selected
     useEffect(() => {
@@ -100,51 +100,43 @@ function MapBox(props) {
             return;
         }
         // Filter through serosQuests to find the quests relevant to the selected location.
-        const reduceQuests = serosQuests.reduce(
-            (prevQuests, questData, index) => {
-                if (
-                    questData.associated_locations.findIndex(
-                        (questLocation) =>
-                            questLocation._id === selectedLocationNotes._id
-                    ) !== -1
-                ) {
-                    return [...prevQuests, { questData, originalIndex: index }];
-                }
-                return prevQuests;
-            },
-            []
-        );
+        const reduceQuests = quests.reduce((prevQuests, questData, index) => {
+            if (questData.location_id === selectedLocationNotes.id) {
+                return [...prevQuests, { questData, originalIndex: index }];
+            }
+            return prevQuests;
+        }, []);
         setSelectedLocationQuests(reduceQuests);
-    }, [serosQuests, selectedLocationNotes, setSelectedLocationQuests]);
+    }, [quests, selectedLocationNotes, setSelectedLocationQuests]);
 
     // Select relevant combat instances when a location is selected
-    useEffect(() => {
-        if (selectedLocationNotes === null) {
-            return;
-        }
-        // Filter through combatInstanceData to find the combat instances relevant to the selected location.
-        const reduceCombatInstances = combatInstanceData.reduce(
-            (prevInstances, instanceData, index) => {
-                if (
-                    (instanceData.associated_location._id ===
-                        selectedLocationNotes._id) ===
-                    true
-                ) {
-                    return [
-                        ...prevInstances,
-                        { instanceData, originalIndex: index },
-                    ];
-                }
-                return prevInstances;
-            },
-            []
-        );
-        setSelectedLocationCombatInstances(reduceCombatInstances);
-    }, [
-        combatInstanceData,
-        selectedLocationNotes,
-        setSelectedLocationCombatInstances,
-    ]);
+    // useEffect(() => {
+    //     if (selectedLocationNotes === null) {
+    //         return;
+    //     }
+    //     // Filter through combatInstanceData to find the combat instances relevant to the selected location.
+    //     const reduceCombatInstances = combatInstanceData.reduce(
+    //         (prevInstances, instanceData, index) => {
+    //             if (
+    //                 (instanceData.associated_location._id ===
+    //                     selectedLocationNotes._id) ===
+    //                 true
+    //             ) {
+    //                 return [
+    //                     ...prevInstances,
+    //                     { instanceData, originalIndex: index },
+    //                 ];
+    //             }
+    //             return prevInstances;
+    //         },
+    //         []
+    //     );
+    //     setSelectedLocationCombatInstances(reduceCombatInstances);
+    // }, [
+    //     combatInstanceData,
+    //     selectedLocationNotes,
+    //     setSelectedLocationCombatInstances,
+    // ]);
 
     // Renders layer check boxes tied to each type of location, then calls the renderMarker function to render each relevant marker.
     var layerType = (type, index, locations) => {
