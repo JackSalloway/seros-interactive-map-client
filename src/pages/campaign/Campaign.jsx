@@ -64,15 +64,20 @@ const Campaign = () => {
             return;
         }
 
-        fetch(
-            `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaignId}`,
-            {
-                method: "GET",
-                mode: "cors",
-            }
-        )
-            .then((response) => response.json())
-            .then((locations) => setLocations(locations));
+        const fetchData = async () => {
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaignId}`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                }
+            );
+            const resLocations = await res.json();
+            // console.log(resLocations);
+            setLocations(resLocations);
+        };
+
+        fetchData().catch((err) => console.log(err));
     }, [locations, setLocations, campaignId]);
 
     // Fetch quest data from database

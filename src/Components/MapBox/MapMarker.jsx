@@ -35,8 +35,8 @@ const MapMarker = (props) => {
     if (draggable === false) {
         return (
             <Marker
-                position={[location.latlng.lat, location.latlng.lng]}
-                key={location._id}
+                position={[location.latitude, location.longitude]}
+                key={location.id}
                 // icon={getIcon(location.type)}
                 riseOnHover={true}
                 draggable={draggable}
@@ -97,7 +97,7 @@ const MapMarker = (props) => {
     return (
         <Marker
             position={editMarkerLatLng}
-            key={location._id}
+            key={location.id}
             // icon={getIcon(editMarkerType)}
             riseOnHover={true}
             draggable={draggable}

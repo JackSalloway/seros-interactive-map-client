@@ -147,12 +147,15 @@ function MapBox(props) {
     ]);
 
     // Renders layer check boxes tied to each type of location, then calls the renderMarker function to render each relevant marker.
-    var layerType = (type, locations) => {
+    var layerType = (type, index, locations) => {
+        // console.log(type, locations);
+        // console.log(layerFilter);
+        // console.log(index);
         return (
             <LayersControl.Overlay
                 name={titleCase(type).replace("_", " ")} // The replace method is used to remove the _ in the natural_feature location type
                 checked
-                key={type}
+                key={index}
             >
                 <LayerGroup>
                     {locations.reduce((matching, location, index) => {
@@ -178,7 +181,7 @@ function MapBox(props) {
         return (
             <MapMarker
                 location={location}
-                key={location._id}
+                key={location.id}
                 index={index}
                 // getIcon={getIcon}
                 map={map}
@@ -306,7 +309,9 @@ function MapBox(props) {
             <ZoomControl position="bottomright" />
             <MapEvents />
             <LayersControl>
-                {layerFilter.map((type) => layerType(type, locations))}
+                {layerFilter.map((type, index) =>
+                    layerType(type, index, locations)
+                )}
             </LayersControl>
             {renderCreationMarker ? renderDraggableMarker() : null}
         </MapContainer>
