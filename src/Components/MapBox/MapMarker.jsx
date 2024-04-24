@@ -14,7 +14,7 @@ const MapMarker = (props) => {
         setEditLocationDetails,
         editMarkerLatLng,
         setEditMarkerLatLng,
-        editMarkerType,
+        // editMarkerType,
         setEditMarkerType,
         setDeleteData,
     } = props;
