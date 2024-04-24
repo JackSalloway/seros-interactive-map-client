@@ -10,8 +10,8 @@ import CombatInstancesListWrapper from "../CombatInstanceList/CombatInstanceList
 
 const JournalMenuContent = (props) => {
     const {
-        serosLocations,
-        setSerosLocations,
+        locations,
+        setLocations,
         setLocationNotes,
         userAuthenticated,
         selectedTab,
@@ -48,8 +48,8 @@ const JournalMenuContent = (props) => {
                 editMarkerLatLng={editMarkerLatLng}
                 setEditMarkerType={setEditMarkerType}
                 map={map}
-                serosLocations={serosLocations}
-                setSerosLocations={setSerosLocations}
+                locations={locations}
+                setLocations={setLocations}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
@@ -78,9 +78,9 @@ const JournalMenuContent = (props) => {
                 creationMarkerLatLng={creationMarkerLatLng}
                 setCreationMarkerLatLng={setCreationMarkerLatLng}
                 setCreationMarkerType={setCreationMarkerType}
-                unfilteredSerosLocations={serosLocations}
-                serosLocations={Array.from(serosLocations)}
-                setSerosLocations={setSerosLocations}
+                unfilteredSerosLocations={locations}
+                locations={Array.from(locations)}
+                setLocations={setLocations}
                 setLocationNotes={setLocationNotes}
                 map={map}
                 dataNotifications={dataNotifications}
@@ -94,7 +94,7 @@ const JournalMenuContent = (props) => {
     const questListContent = () => {
         return (
             <QuestListWrapper
-                serosLocations={serosLocations}
+                locations={locations}
                 setLocationNotes={setLocationNotes}
                 serosQuests={serosQuests}
                 setSerosQuests={setSerosQuests}
@@ -112,7 +112,7 @@ const JournalMenuContent = (props) => {
     const npcListContent = () => {
         return (
             <NPCListWrapper
-                serosLocations={serosLocations}
+                locations={locations}
                 setLocationNotes={setLocationNotes}
                 serosNPCs={serosNPCs}
                 setSerosNPCs={setSerosNPCs}
@@ -130,7 +130,7 @@ const JournalMenuContent = (props) => {
     const combatInstancesContent = () => {
         return (
             <CombatInstancesListWrapper
-                serosLocations={serosLocations}
+                locations={locations}
                 setLocationNotes={setLocationNotes}
                 combatInstanceData={combatInstanceData}
                 combatInstanceDataFiltered={Array.from(
