@@ -152,7 +152,7 @@ const QuestNotes = (props) => {
         setUpdatedQuestSelectedLocations(
             locations.map((location) => {
                 return {
-                    value: he.decode(location.value),
+                    value: location.value,
                     label: he.decode(location.label),
                 };
             })
