@@ -73,7 +73,6 @@ const Campaign = () => {
                 }
             );
             const resLocations = await res.json();
-            // console.log(resLocations);
             setLocations(resLocations);
         };
 
