@@ -5,7 +5,6 @@ import "./PlayerBar.css";
 const PlayerBar = (props) => {
     const {
         player,
-        position, // Might add a button to toggle this and class icons
         selectedStat,
         totalInstanceDamage,
         totalInstanceHealing,
@@ -90,22 +89,6 @@ const PlayerBar = (props) => {
                 />
             )}
         </div>
-
-        // <div key={player._id} className={lowerCaseClass}>
-        //
-        //     <div>
-        //         <p>Damage:</p>
-        //         {player.turns.damage.map((turnDamage, index) => (
-        //             <p key={player._id + index}>{turnDamage}</p>
-        //         ))}
-        //     </div>
-        //     <div>
-        //         <p>Healing:</p>
-        //         {player.turns.healing.map((turnHealing, index) => (
-        //             <p key={player._id + index}>{turnHealing}</p>
-        //         ))}
-        //     </div>
-        // </div>
     );
 };
 
