@@ -13,12 +13,12 @@ const PlayerBar = (props) => {
         highestHealing,
     } = props;
 
-    const lowerCaseClass = player.player_class.toLowerCase().replace(" ", "-");
+    const lowerCaseClass = player.class.toLowerCase().replace(" ", "-");
     const playerBarClassName = "player-meter-bar-class " + lowerCaseClass;
 
     // Damage stats
     const damagePerTurn = Number.parseFloat(
-        player.damage_total / player.turns.damage.length
+        player.damage_total / player.damage.length
     ).toFixed(1);
     let damagePercentage =
         Number.parseFloat(
@@ -29,7 +29,7 @@ const PlayerBar = (props) => {
 
     // Healing Stats
     const healingPerTurn = Number.parseFloat(
-        player.healing_total / player.turns.healing.length
+        player.healing_total / player.healing.length
     ).toFixed(1);
     let healingPercentage =
         Number.parseFloat(
@@ -64,7 +64,7 @@ const PlayerBar = (props) => {
             <div className="player-meter-bar-name">
                 <div
                     className="player-meter-bar-class-icon"
-                    title={player.player_class}
+                    title={player.class}
                 >
                     <div
                         // className={lowerCaseClass}
@@ -74,7 +74,7 @@ const PlayerBar = (props) => {
                     ></div>
                 </div>
 
-                <p>{player.player_name}</p>
+                <p>{player.name}</p>
             </div>
             {selectedStat === "damage" ? (
                 <DamageNumbers

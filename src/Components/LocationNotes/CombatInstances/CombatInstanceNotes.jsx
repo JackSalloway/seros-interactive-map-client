@@ -33,47 +33,66 @@ const CombatInstanceNotes = (props) => {
 
     const [selected, setSelected] = useState(false);
     const [hover, setHover] = useState(false);
+
     const [totalTurns, setTotalTurns] = useState(
-        instance.combat_details[0].turns.damage.length
+        instance.players[0].turns.length
     );
     const [viewTurns, setViewTurns] = useState(totalTurns);
     const [totalInstanceDamage, setTotalInstanceDamage] = useState(0);
     const [totalInstanceHealing, setTotalInstanceHealing] = useState(0);
+    const [playerValues, setPlayerValues] = useState([]);
     const [orderedInstanceDetails, setOrderedInstanceDetails] = useState([]);
     const [selectedStat, setSelectedStat] = useState("damage");
     const [editing, setEditing] = useState(false);
 
+    // Effect to isolate player values
+    useEffect(() => {
+        const test = instance.players.map((player) => {
+            return {
+                id: player.id,
+                name: player.name,
+                class: player.class,
+                damage: player.turns.map((turn) => turn.damage),
+                healing: player.turns.map((turn) => turn.healing),
+            };
+        });
+        setPlayerValues(test);
+    }, [instance]);
+
     // Effect to recalculate total values when the viewTurns state value is changed
     useEffect(() => {
-        // Function to get the overall value of damage/healing for the instance
         const getTotalValue = (statValue) => {
-            return instance.combat_details
+            const total = playerValues
                 .map((player) => {
-                    return player.turns[statValue].reduce(
+                    return player[statValue].reduce(
                         (prevNum, currentNum, currentIndex) => {
                             if (viewTurns < currentIndex + 1) return prevNum;
                             return prevNum + currentNum;
-                        }
+                        },
+                        0
                     );
                 })
-                .reduce((prevNum, currentNum) => prevNum + currentNum);
+                .reduce((a, b) => a + b, 0);
+            return total;
         };
 
         setTotalInstanceDamage(getTotalValue("damage", viewTurns));
         setTotalInstanceHealing(getTotalValue("healing", viewTurns));
-    }, [instance, viewTurns]);
+    }, [playerValues, viewTurns]);
 
     // Effect to reorder instance details depending on highest dps/hps
     useEffect(() => {
+        if (playerValues.length === 0) return;
+
         const sortInstanceDetails = (instanceArray) => {
-            return instanceArray.combat_details.map((player) => {
-                player.damage_total = player.turns.damage.reduce(
+            return instanceArray.map((player) => {
+                player.damage_total = player.damage.reduce(
                     (prev, current, currentIndex) => {
                         if (viewTurns < currentIndex + 1) return prev;
                         return prev + current;
                     }
                 );
-                player.healing_total = player.turns.healing.reduce(
+                player.healing_total = player.healing.reduce(
                     (prev, current, currentIndex) => {
                         if (viewTurns < currentIndex + 1) return prev;
                         return prev + current;
@@ -85,14 +104,14 @@ const CombatInstanceNotes = (props) => {
 
         if (selectedStat === "damage") {
             setOrderedInstanceDetails(
-                sortInstanceDetails(instance).sort(compareDamage)
+                sortInstanceDetails(playerValues).sort(compareDamage)
             );
         } else {
             setOrderedInstanceDetails(
-                sortInstanceDetails(instance).sort(compareHealing)
+                sortInstanceDetails(playerValues).sort(compareHealing)
             );
         }
-    }, [instance, selectedStat, viewTurns]);
+    }, [playerValues, selectedStat, viewTurns]);
 
     // Functions to increase/decrease viewTurns state value
     const incrementViewTurns = () => {
@@ -261,11 +280,7 @@ const CombatInstanceNotes = (props) => {
                             {orderedInstanceDetails.map((player, index) => {
                                 return (
                                     <PlayerBar
-                                        key={
-                                            player.player_name +
-                                            player.player_class +
-                                            index
-                                        }
+                                        key={player.id}
                                         player={player}
                                         position={index + 1}
                                         selectedStat={selectedStat}

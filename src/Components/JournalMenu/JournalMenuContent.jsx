@@ -35,7 +35,7 @@ const JournalMenuContent = (props) => {
         campaign,
         changelogData,
         setChangelogData,
-        combatInstanceData,
+        combatInstances,
         // setCombatInstanceData, - This is not used due to the locationless functionality for Combat Instances not being implemented as they cannot be deleted.
     } = props;
 
@@ -132,9 +132,9 @@ const JournalMenuContent = (props) => {
             <CombatInstancesListWrapper
                 locations={locations}
                 setLocationNotes={setLocationNotes}
-                combatInstanceData={combatInstanceData}
+                combatInstanceData={combatInstances}
                 combatInstanceDataFiltered={Array.from(
-                    combatInstanceData
+                    combatInstances
                 ).reverse()}
                 map={map}
                 campaign={campaign}

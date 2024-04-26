@@ -33,7 +33,7 @@ function MapBox(props) {
         locations,
         serosNPCs,
         quests,
-        combatInstanceData,
+        combatInstances,
         map,
         renderCreationMarker,
         creationMarkerLatLng,
@@ -110,39 +110,35 @@ function MapBox(props) {
     }, [quests, selectedLocationNotes, setSelectedLocationQuests]);
 
     // Select relevant combat instances when a location is selected
-    // useEffect(() => {
-    //     if (selectedLocationNotes === null) {
-    //         return;
-    //     }
-    //     // Filter through combatInstanceData to find the combat instances relevant to the selected location.
-    //     const reduceCombatInstances = combatInstanceData.reduce(
-    //         (prevInstances, instanceData, index) => {
-    //             if (
-    //                 (instanceData.associated_location._id ===
-    //                     selectedLocationNotes._id) ===
-    //                 true
-    //             ) {
-    //                 return [
-    //                     ...prevInstances,
-    //                     { instanceData, originalIndex: index },
-    //                 ];
-    //             }
-    //             return prevInstances;
-    //         },
-    //         []
-    //     );
-    //     setSelectedLocationCombatInstances(reduceCombatInstances);
-    // }, [
-    //     combatInstanceData,
-    //     selectedLocationNotes,
-    //     setSelectedLocationCombatInstances,
-    // ]);
+    useEffect(() => {
+        if (selectedLocationNotes === null) {
+            return;
+        }
+        // Filter through combatInstances to find the combat instances relevant to the selected location.
+        const reduceCombatInstances = combatInstances.reduce(
+            (prevInstances, instanceData, index) => {
+                if (
+                    (instanceData.location.id === selectedLocationNotes.id) ===
+                    true
+                ) {
+                    return [
+                        ...prevInstances,
+                        { instanceData, originalIndex: index },
+                    ];
+                }
+                return prevInstances;
+            },
+            []
+        );
+        setSelectedLocationCombatInstances(reduceCombatInstances);
+    }, [
+        combatInstances,
+        selectedLocationNotes,
+        setSelectedLocationCombatInstances,
+    ]);
 
     // Renders layer check boxes tied to each type of location, then calls the renderMarker function to render each relevant marker.
     var layerType = (type, index, locations) => {
-        // console.log(type, locations);
-        // console.log(layerFilter);
-        // console.log(index);
         return (
             <LayersControl.Overlay
                 name={titleCase(type).replace("_", " ")} // The replace method is used to remove the _ in the natural_feature location type

@@ -29,7 +29,7 @@ const Campaign = () => {
     const [quests, setQuests] = useState(null);
     const [npcs, setNPCs] = useState(null);
     const [changelogData, setChangelogData] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
-    const [combatInstanceData, setCombatInstanceData] = useState(null);
+    const [combatInstances, setCombatInstances] = useState(null);
 
     // Selected data states
     const [selectedLocationNotes, setSelectedLocationNotes] = useState(null);
@@ -115,7 +115,6 @@ const Campaign = () => {
                 }
             );
             const resNPCs = await res.json();
-            console.log(resNPCs);
             setNPCs(resNPCs);
         };
 
@@ -146,27 +145,26 @@ const Campaign = () => {
     // }, [changelogData, campaignParams]);
 
     // Fetch combat instance data from database
-    // useEffect(() => {
-    //     if (combatInstanceData !== null) {
-    //         return;
-    //     }
+    useEffect(() => {
+        if (combatInstances !== null) {
+            return;
+        }
 
-    //     fetch(
-    //         `${process.env.REACT_APP_API_URL}/combat_instance_data/?campaign_id=${campaignParams.campaignId}`,
-    //         {
-    //             method: "GET",
-    //             mode: "cors",
-    //         }
-    //     )
-    //         .then((response) => response.json())
-    //         .then((combatInstances) => {
-    //             if (combatInstances === null) {
-    //                 setCombatInstanceData([]);
-    //                 return;
-    //             }
-    //             setCombatInstanceData(combatInstances);
-    //         });
-    // });
+        const fetchData = async () => {
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/combat_instance_data/?campaign_id=${campaignParams.campaignId}`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                }
+            );
+
+            const resCombatInstances = await res.json();
+            setCombatInstances(resCombatInstances);
+        };
+
+        fetchData().catch((err) => console.log(err));
+    }, [campaignParams, combatInstances]);
 
     // Campaign has been selected so render a map and a journal sidebar
     return (
@@ -175,7 +173,7 @@ const Campaign = () => {
                 locations={locations}
                 npcs={npcs}
                 quests={quests}
-                combatInstanceData={combatInstanceData}
+                combatInstances={combatInstances}
                 setLocations={setLocations}
                 map={map}
                 renderCreationMarker={renderCreationMarker}
@@ -235,8 +233,8 @@ const Campaign = () => {
                 campaign={campaign}
                 changelogData={changelogData}
                 setChangelogData={setChangelogData}
-                combatInstanceData={combatInstanceData}
-                setCombatInstanceData={setCombatInstanceData}
+                combatInstances={combatInstances}
+                setCombatInstances={setCombatInstances}
             />
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (

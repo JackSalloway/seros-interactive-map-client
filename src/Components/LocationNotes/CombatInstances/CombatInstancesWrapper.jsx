@@ -8,8 +8,8 @@ const CombatInstancesWrapper = (props) => {
     const {
         showCombatInstances,
         setShowCombatInstances,
-        combatInstanceData,
-        setCombatInstanceData,
+        combatInstances,
+        setCombatInstances,
         addNewInstance,
         setAddNewInstance,
         locationNotes,
@@ -73,7 +73,7 @@ const CombatInstancesWrapper = (props) => {
                         {locationCombatInstances.map((instance) => {
                             return (
                                 <CombatInstanceNotes
-                                    key={instance.instanceData.created_at}
+                                    key={instance.instanceData.id}
                                     instance={instance.instanceData}
                                     setDeleteData={setDeleteData}
                                 />
@@ -111,8 +111,8 @@ const CombatInstancesWrapper = (props) => {
                     campaign={campaign}
                     setChangelogData={setChangelogData}
                     username={username}
-                    combatInstanceData={combatInstanceData}
-                    setCombatInstanceData={setCombatInstanceData}
+                    combatInstances={combatInstances}
+                    setCombatInstances={setCombatInstances}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     setAddNewInstance={setAddNewInstance}

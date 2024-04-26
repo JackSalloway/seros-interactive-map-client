@@ -39,8 +39,8 @@ const Journal = (props) => {
         campaign,
         changelogData,
         setChangelogData,
-        combatInstanceData,
-        setCombatInstanceData,
+        combatInstances,
+        setCombatInstances,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -137,8 +137,8 @@ const Journal = (props) => {
                             campaign={campaign}
                             changelogData={changelogData}
                             setChangelogData={setChangelogData}
-                            combatInstanceData={combatInstanceData}
-                            setCombatInstanceData={setCombatInstanceData}
+                            combatInstances={combatInstances}
+                            setCombatInstances={setCombatInstances}
                         />
                     </div>
                 )}
@@ -170,8 +170,8 @@ const Journal = (props) => {
                 campaign={campaign}
                 setChangelogData={setChangelogData}
                 username={userAuthenticated.username}
-                combatInstanceData={combatInstanceData}
-                setCombatInstanceData={setCombatInstanceData}
+                combatInstances={combatInstances}
+                setCombatInstances={setCombatInstances}
             />
         </div>
     );

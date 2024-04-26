@@ -11,10 +11,14 @@ const CombatInstanceListNotes = (props) => {
         // combatInstanceData,
         map,
         setLocationNotes,
-        serosLocations,
+        locations,
     } = props;
 
     const [selected, setSelected] = useState(false);
+    const locationLatLng = {
+        lat: instance.location.latitude,
+        lng: instance.location.longitude,
+    };
 
     const expandDownChevron = (
         <FontAwesomeIcon
@@ -57,28 +61,23 @@ const CombatInstanceListNotes = (props) => {
         return (
             <div
                 className="instance-list-notes-locations"
-                key={instance.associated_location._id}
+                key={instance.location.id}
             >
                 <div className="instance-list-notes-locations-name">
-                    {he.decode(instance.associated_location.name)}
+                    {he.decode(instance.location.name)}
                 </div>
                 <button
                     className="instance-list-notes-locations-lat-lng"
                     onClick={() => {
                         if (map.current.getZoom() === 5) {
-                            map.current.flyTo(
-                                instance.associated_location.latlng
-                            );
+                            map.current.flyTo(locationLatLng);
                         } else {
-                            map.current.setView(
-                                instance.associated_location.latlng,
-                                5
-                            );
+                            map.current.setView(locationLatLng, 5);
                         }
                         setLocationNotes(
-                            serosLocations
-                                .map((serosLocation) => serosLocation._id)
-                                .indexOf(instance.associated_location._id)
+                            locations
+                                .map((location) => location.id)
+                                .indexOf(instance.location.id)
                         );
                     }}
                 >

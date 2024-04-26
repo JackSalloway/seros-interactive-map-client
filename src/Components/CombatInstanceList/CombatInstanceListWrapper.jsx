@@ -3,7 +3,7 @@ import CombatInstanceListNotes from "./CombatInstanceListNotes";
 
 const CombatInstanceListWrapper = (props) => {
     const {
-        serosLocations,
+        locations,
         setLocationNotes,
         // combatInstanceData,
         combatInstanceDataFiltered,
@@ -38,7 +38,7 @@ const CombatInstanceListWrapper = (props) => {
                     id="instance-list-wrapper-header"
                     className="content-wrapper-header"
                 >
-                    <h2>{campaign.campaign.name}</h2>
+                    <h2>{campaign.campaign_name}</h2>
                     <h3>Combat Instance List</h3>
                     <input
                         type="text"
@@ -54,7 +54,7 @@ const CombatInstanceListWrapper = (props) => {
                         // combatInstanceData={combatInstanceData}
                         map={map}
                         setLocationNotes={setLocationNotes}
-                        serosLocations={serosLocations}
+                        locations={locations}
                     />
                 ))}
             </div>
