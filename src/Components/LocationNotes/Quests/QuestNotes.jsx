@@ -15,8 +15,8 @@ const QuestNotes = (props) => {
         originalIndex,
         setDeleteData,
         locationList,
-        serosQuests,
-        setSerosQuests,
+        quests,
+        setQuests,
         setQuestUpdated,
         setSerosNPCs,
         dataNotifications,
@@ -55,9 +55,17 @@ const QuestNotes = (props) => {
             setUpdatedQuestStatus(quest.completed);
             setUpdatedQuestSelectedLocations({
                 value: quest.location_id,
-                label: he.decode(quest.location_name),
+                label: he.decode(quest.name),
             });
-            setUpdatedQuestSelectedLocationsData(quest.location_id);
+            // setUpdatedQuestSelectedLocationsData(quest.location_id);
+            setUpdatedQuestSelectedLocations(
+                quest.associated_locations.map((location) => {
+                    return {
+                        value: location.id,
+                        label: he.decode(location.name),
+                    };
+                })
+            ); // Set the values for selected locations (selection box)
         }
     }, [editing, quest]);
 
@@ -120,7 +128,7 @@ const QuestNotes = (props) => {
             init
         );
         const returnedData = await result.json();
-        let serosQuestsCopy = [...serosQuests];
+        let questsCopy = [...quests];
         // The following assignment is needed due to how the latlng values were being returned as they were being returned like this:
         // {latlng: { lat: {$numberDecimal: LAT_VALUE}, lng: {$numberDecimal: LNG_VALUE} }}
         // I suspect this has something to do with the way the backend is returning the mongodb document - however this works for now.
@@ -130,8 +138,8 @@ const QuestNotes = (props) => {
             lng: returnedData.result.questResult.associated_locations[0].latlng
                 .lng.$numberDecimal,
         };
-        serosQuestsCopy[originalIndex] = returnedData.result.questResult;
-        setSerosQuests(serosQuestsCopy);
+        questsCopy[originalIndex] = returnedData.result.questResult;
+        setQuests(questsCopy);
         setSerosNPCs(returnedData.result.npcResult);
         setQuestUpdated(true);
         const notificationsCopy = dataNotifications;
@@ -356,8 +364,11 @@ const QuestNotes = (props) => {
                         <div className="location-notes-details-data-section associated-locations-section">
                             <h5>Relevant Locations:</h5>
                             <ul>
-                                {/* Currently unsure how to implement this without adding a new value derived from some horrific sql join query */}
-                                <li>{he.decode(quest.location_name)}</li>
+                                {quest.associated_locations.map((location) => (
+                                    <li key={location.id}>
+                                        {he.decode(location.name)}
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                         <Separator />

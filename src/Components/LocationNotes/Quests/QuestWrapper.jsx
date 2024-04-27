@@ -59,7 +59,7 @@ const QuestWrapper = (props) => {
                             <QuestNotes
                                 quest={quest.questData}
                                 originalIndex={quest.originalIndex}
-                                key={quest.questData.quest_id}
+                                key={quest.questData.id}
                                 setDeleteData={setDeleteData}
                                 locationList={locationList}
                                 quests={quests}

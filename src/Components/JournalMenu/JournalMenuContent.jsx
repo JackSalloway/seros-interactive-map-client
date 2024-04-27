@@ -15,8 +15,8 @@ const JournalMenuContent = (props) => {
         setLocationNotes,
         userAuthenticated,
         selectedTab,
-        serosQuests,
-        setSerosQuests,
+        quests,
+        setQuests,
         serosNPCs,
         setSerosNPCs,
         renderCreationMarker,
@@ -96,9 +96,9 @@ const JournalMenuContent = (props) => {
             <QuestListWrapper
                 locations={locations}
                 setLocationNotes={setLocationNotes}
-                serosQuests={serosQuests}
-                setSerosQuests={setSerosQuests}
-                serosQuestsFiltered={Array.from(serosQuests)}
+                quests={quests}
+                setQuests={setQuests}
+                questsFiltered={Array.from(quests)}
                 map={map}
                 campaign={campaign}
                 userAuthenticated={userAuthenticated}

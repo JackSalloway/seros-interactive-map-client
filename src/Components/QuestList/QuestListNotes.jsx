@@ -12,14 +12,14 @@ const QuestListNotes = (props) => {
     const {
         quest,
         map,
-        serosLocations,
+        locations,
         setLocationNotes,
         campaignID,
         username,
         dataNotifications,
         setDataNotifications,
-        serosQuests,
-        setSerosQuests,
+        quests,
+        setQuests,
         setChangelogData,
     } = props;
 
@@ -32,16 +32,16 @@ const QuestListNotes = (props) => {
 
     // Populate locationList with locations
     useEffect(() => {
-        if (locationList.length !== serosLocations.length) {
+        if (locationList.length !== locations.length) {
             setLocationList([
                 ...locationList,
-                ...serosLocations.map((location) => ({
-                    value: he.decode(location._id),
+                ...locations.map((location) => ({
+                    value: location.id,
                     label: he.decode(location.name),
                 })),
             ]);
         }
-    }, [serosLocations, locationList]);
+    }, [locations, locationList]);
 
     const expandDownChevron = (
         <FontAwesomeIcon
@@ -90,7 +90,7 @@ const QuestListNotes = (props) => {
 
     // Create components for each quest when they are clicked
     // Take first sentence from quest description
-    const questBriefDesc = he.decode(quest.desc.split(".")[0] + "...");
+    const questBriefDesc = he.decode(quest.description.split(".")[0] + "...");
 
     // POST request to update a locationless quest and assign locations to it.
     const assignLocationsToQuest = async () => {
@@ -116,12 +116,12 @@ const QuestListNotes = (props) => {
         );
         const returnedData = await result.json();
         // Update quests values
-        let serosQuestsCopy = [...serosQuests];
-        const questIndexToUpdate = serosQuestsCopy.findIndex(
+        let questsCopy = [...quests];
+        const questIndexToUpdate = questsCopy.findIndex(
             (originalQuest) => originalQuest._id === quest._id
         );
-        serosQuestsCopy[questIndexToUpdate] = returnedData.questResult;
-        setSerosQuests(serosQuestsCopy);
+        questsCopy[questIndexToUpdate] = returnedData.questResult;
+        setQuests(questsCopy);
         // Update notifications values
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
@@ -192,7 +192,7 @@ const QuestListNotes = (props) => {
             );
         } else {
             return quest.associated_locations.map((location) => (
-                <div className="quest-list-notes-locations" key={location._id}>
+                <div className="quest-list-notes-locations" key={location.id}>
                     <div className="quest-list-notes-locations-name">
                         {he.decode(location.name)}
                     </div>
@@ -205,7 +205,7 @@ const QuestListNotes = (props) => {
                                 map.current.setView(location.latlng, 5);
                             }
                             setLocationNotes(
-                                serosLocations
+                                locations
                                     .map((serosLocation) => serosLocation._id)
                                     .indexOf(location._id)
                             );

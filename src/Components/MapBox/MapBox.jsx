@@ -101,7 +101,12 @@ function MapBox(props) {
         }
         // Filter through serosQuests to find the quests relevant to the selected location.
         const reduceQuests = quests.reduce((prevQuests, questData, index) => {
-            if (questData.location_id === selectedLocationNotes.id) {
+            if (
+                questData.associated_locations.findIndex(
+                    (questLocation) =>
+                        questLocation.id === selectedLocationNotes.id
+                ) !== -1
+            ) {
                 return [...prevQuests, { questData, originalIndex: index }];
             }
             return prevQuests;

@@ -7,11 +7,11 @@ import QuestListNotes from "./QuestListNotes";
 
 const QuestListWrapper = (props) => {
     const {
-        serosLocations,
+        locations,
         setLocationNotes,
-        serosQuests, // Created from a new array instance using the serosQuests value
-        setSerosQuests,
-        serosQuestsFiltered,
+        quests,
+        setQuests,
+        questsFiltered, // Created from a new array instance using the quests value
         map,
         campaign,
         userAuthenticated,
@@ -21,7 +21,7 @@ const QuestListWrapper = (props) => {
     } = props;
 
     // Create shallow copy variable for reuse
-    const shallowCopy = serosQuestsFiltered.sort(function (a, b) {
+    const shallowCopy = questsFiltered.sort(function (a, b) {
         var questA = a.name.toUpperCase();
         var questB = b.name.toUpperCase();
         return questA < questB ? -1 : questA > questB ? 1 : 0;
@@ -44,11 +44,11 @@ const QuestListWrapper = (props) => {
         }
     }, [searchValue, shallowCopy]);
 
-    // const completedQuests = serosQuests.filter(
+    // const completedQuests = quests.filter(
     //     (quest) => quest.completed === true
     // );
 
-    // const incompletedQuests = serosQuests.filter(
+    // const incompletedQuests = quests.filter(
     //     (quest) => quest.completed === false
     // );
 
@@ -71,7 +71,7 @@ const QuestListWrapper = (props) => {
                 id="quest-list-wrapper-header"
                 className="content-wrapper-header"
             >
-                <h2>{campaign.campaign.name}</h2>
+                <h2>{campaign.name}</h2>
                 <h3>Quest List</h3>
                 <input
                     type="text"
@@ -83,16 +83,16 @@ const QuestListWrapper = (props) => {
             {questList.map((quest) => (
                 <QuestListNotes
                     quest={quest}
-                    key={quest._id}
+                    key={quest.id}
                     map={map}
-                    serosLocations={serosLocations}
+                    locations={locations}
                     setLocationNotes={setLocationNotes}
-                    campaignID={campaign.campaign._id}
+                    campaignID={campaign.id}
                     username={userAuthenticated.username}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
-                    serosQuests={serosQuests}
-                    setSerosQuests={setSerosQuests}
+                    quests={quests}
+                    setQuests={setQuests}
                     setChangelogData={setChangelogData}
                 />
             ))}
