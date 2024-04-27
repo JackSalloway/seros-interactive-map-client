@@ -14,8 +14,6 @@ const CombatInstanceListNotes = (props) => {
         locations,
     } = props;
 
-    console.log(instance.location.latlng);
-
     const [selected, setSelected] = useState(false);
 
     const expandDownChevron = (
