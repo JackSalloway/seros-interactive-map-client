@@ -14,11 +14,9 @@ const CombatInstanceListNotes = (props) => {
         locations,
     } = props;
 
+    console.log(instance.location.latlng);
+
     const [selected, setSelected] = useState(false);
-    const locationLatLng = {
-        lat: instance.location.latitude,
-        lng: instance.location.longitude,
-    };
 
     const expandDownChevron = (
         <FontAwesomeIcon
@@ -70,9 +68,9 @@ const CombatInstanceListNotes = (props) => {
                     className="instance-list-notes-locations-lat-lng"
                     onClick={() => {
                         if (map.current.getZoom() === 5) {
-                            map.current.flyTo(locationLatLng);
+                            map.current.flyTo(instance.location.latlng);
                         } else {
-                            map.current.setView(locationLatLng, 5);
+                            map.current.setView(instance.location.latlng, 5);
                         }
                         setLocationNotes(
                             locations
