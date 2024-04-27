@@ -31,10 +31,10 @@ function compareHealing(a, b) {
 const CombatInstanceNotes = (props) => {
     const { instance, setDeleteData } = props;
 
+    const totalTurns = instance.players[0].turns.length;
+
     const [selected, setSelected] = useState(false);
     const [hover, setHover] = useState(false);
-
-    const [totalTurns] = instance.players[0].turns.length;
     const [viewTurns, setViewTurns] = useState(totalTurns);
     const [totalInstanceDamage, setTotalInstanceDamage] = useState(0);
     const [totalInstanceHealing, setTotalInstanceHealing] = useState(0);
