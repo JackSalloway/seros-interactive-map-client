@@ -12,7 +12,7 @@ const NPCListNotes = (props) => {
     const {
         npc,
         map,
-        serosLocations,
+        locations,
         setLocationNotes,
         campaignID,
         username,
@@ -32,16 +32,16 @@ const NPCListNotes = (props) => {
 
     // Populate locationList with locations
     useEffect(() => {
-        if (locationList.length !== serosLocations.length) {
+        if (locationList.length !== locations.length) {
             setLocationList([
                 ...locationList,
-                ...serosLocations.map((location) => ({
-                    value: he.decode(location._id),
+                ...locations.map((location) => ({
+                    value: location.id,
                     label: he.decode(location.name),
                 })),
             ]);
         }
-    }, [serosLocations, locationList]);
+    }, [locations, locationList]);
 
     const expandDownChevron = (
         <FontAwesomeIcon
@@ -78,7 +78,7 @@ const NPCListNotes = (props) => {
 
     // Create components for each npc when they are clicked
     // Take first sentence from npc description
-    const npcBriefDesc = he.decode(npc.desc.split(".")[0] + "...");
+    const npcBriefDesc = he.decode(npc.description.split(".")[0] + "...");
 
     // POST request to update a locationless npc and assign locations to it.
     const assignLocationsToNPC = async () => {
@@ -179,7 +179,7 @@ const NPCListNotes = (props) => {
             );
         } else {
             return npc.associated_locations.map((location) => (
-                <div className="npc-list-notes-locations" key={location._id}>
+                <div className="npc-list-notes-locations" key={location.id}>
                     <div className="npc-list-notes-locations-name">
                         {he.decode(location.name)}
                     </div>
@@ -192,7 +192,7 @@ const NPCListNotes = (props) => {
                                 map.current.setView(location.latlng, 5);
                             }
                             setLocationNotes(
-                                serosLocations
+                                locations
                                     .map((serosLocation) => serosLocation._id)
                                     .indexOf(location._id)
                             );

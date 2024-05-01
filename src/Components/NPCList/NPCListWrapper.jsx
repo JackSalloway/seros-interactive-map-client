@@ -4,7 +4,7 @@ import NPCListNotes from "./NPCListNotes";
 
 const NPCListWrapper = (props) => {
     const {
-        serosLocations,
+        locations,
         setLocationNotes,
         npcs,
         setNPCs,
@@ -39,9 +39,6 @@ const NPCListWrapper = (props) => {
         }
     }, [searchValue, shallowCopy]);
 
-    console.log(npcs);
-    console.log(campaign);
-
     return (
         <div id="npc-list-wrapper" className="journal-content-wrapper">
             <div className="npc-list-wrapper-category" id="npc-list-friendly">
@@ -60,9 +57,9 @@ const NPCListWrapper = (props) => {
                 {npcList.map((npc) => (
                     <NPCListNotes
                         npc={npc}
-                        key={npc._id}
+                        key={npc.id}
                         map={map}
-                        serosLocations={serosLocations}
+                        locations={locations}
                         setLocationNotes={setLocationNotes}
                         campaignID={campaign.campaign_id}
                         username={userAuthenticated.username}
