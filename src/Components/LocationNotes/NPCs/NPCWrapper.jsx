@@ -14,8 +14,8 @@ const NPCWrapper = (props) => {
         setDeleteData,
         questList,
         locationList,
-        serosNPCs,
-        setSerosNPCs,
+        npcs,
+        setNPCs,
         addNewNPC,
         setAddNewNPC,
         dataNotifications,
@@ -59,12 +59,12 @@ const NPCWrapper = (props) => {
                             <NPCNotes
                                 npc={npc.npcData}
                                 originalIndex={npc.originalIndex}
-                                key={npc.npcData._id}
+                                key={npc.npcData.id}
                                 setDeleteData={setDeleteData}
                                 questList={questList}
                                 locationList={locationList}
-                                serosNPCs={serosNPCs}
-                                setSerosNPCs={setSerosNPCs}
+                                npcs={npcs}
+                                setNPCs={setNPCs}
                                 dataNotifications={dataNotifications}
                                 setDataNotifications={setDataNotifications}
                                 campaign={campaign}
@@ -122,8 +122,8 @@ const NPCWrapper = (props) => {
                     locationNotes={locationNotes}
                     locationList={locationList}
                     questList={questList}
-                    serosNPCs={serosNPCs}
-                    setSerosNPCs={setSerosNPCs}
+                    npcs={npcs}
+                    setNPCs={setNPCs}
                     setAddNewNPC={setAddNewNPC}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}

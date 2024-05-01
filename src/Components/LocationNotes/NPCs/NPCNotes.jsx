@@ -51,13 +51,13 @@ const NPCNotes = (props) => {
         if (editing === false) {
             setUpdatedNPCName(he.decode(npc.name));
             setUpdatedNPCRace({ value: npc.race, label: npc.race });
-            setUpdatedNPCDescription(he.decode(npc.desc));
+            setUpdatedNPCDescription(he.decode(npc.description));
             setUpdatedNPCDisposition(npc.disposition);
             setUpdatedNPCStatus(npc.status);
             setUpdatedNPCQuests(
-                npc.quests.map((quest) => {
+                npc.associated_quests.map((quest) => {
                     return {
-                        value: he.decode(quest._id),
+                        value: quest.id,
                         label: he.decode(quest.name),
                     };
                 })
@@ -65,7 +65,7 @@ const NPCNotes = (props) => {
             setUpdatedNPCSelectedLocations(
                 npc.associated_locations.map((location) => {
                     return {
-                        value: he.decode(location._id),
+                        value: location.id,
                         label: he.decode(location.name),
                     };
                 })
@@ -390,7 +390,7 @@ const NPCNotes = (props) => {
             />
             <div
                 className="location-notes-details location-notes-brighter-filter location-notes-open-internal"
-                key={npc.name}
+                key={npc.id}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 style={{ backgroundImage: `url(/images/papyr.jpg)` }}
@@ -442,7 +442,7 @@ const NPCNotes = (props) => {
                         <Separator />
                         <div className="location-notes-details-data-section description-section">
                             <h5>Description:</h5>
-                            {splitParas(npc.desc).map((para, index) => (
+                            {splitParas(npc.description).map((para, index) => (
                                 <p
                                     key={index}
                                     className="location-notes-description-paragraph"
@@ -456,19 +456,19 @@ const NPCNotes = (props) => {
                             <h5>Relevant Locations:</h5>
                             <ul>
                                 {npc.associated_locations.map((location) => (
-                                    <li key={location._id}>
+                                    <li key={location.id}>
                                         {he.decode(location.name)}
                                     </li>
                                 ))}
                             </ul>
                         </div>
                         <Separator />
-                        {npc.quests.length > 0 ? (
+                        {npc.associated_quests.length > 0 ? (
                             <div className="location-notes-details-data-section quests-section">
                                 <h5>Relevant Quests:</h5>
                                 <ul>
-                                    {npc.quests.map((quest) => (
-                                        <li key={quest._id}>
+                                    {npc.associated_quests.map((quest) => (
+                                        <li key={quest.id}>
                                             {he.decode(quest.name)}
                                         </li>
                                     ))}
@@ -476,7 +476,9 @@ const NPCNotes = (props) => {
                             </div>
                         ) : null}
 
-                        {npc.quests.length > 0 ? <Separator /> : null}
+                        {npc.associated_quests.length > 0 ? (
+                            <Separator />
+                        ) : null}
                     </div>
                 </div>
             </div>

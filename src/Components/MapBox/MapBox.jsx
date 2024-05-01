@@ -31,7 +31,7 @@ function MapBox(props) {
     // Destructure props
     const {
         locations,
-        serosNPCs,
+        npcs,
         quests,
         combatInstances,
         map,
@@ -75,24 +75,23 @@ function MapBox(props) {
     }, [setLayerFilter, locations]);
 
     // Select relevant npcs when a location is selected
-    // useEffect(() => {
-    //     if (selectedLocationNotes === null) {
-    //         return;
-    //     }
-    //     // Filter through serosNPCs to find the NPCs relevant to the selected location.
-    //     const reduceNPCs = serosNPCs.reduce((prevNPCs, npcData, index) => {
-    //         if (
-    //             npcData.associated_locations.findIndex(
-    //                 (npcLocation) =>
-    //                     npcLocation._id === selectedLocationNotes._id
-    //             ) !== -1
-    //         ) {
-    //             return [...prevNPCs, { npcData, originalIndex: index }];
-    //         }
-    //         return prevNPCs;
-    //     }, []);
-    //     setSelectedLocationNPCs(reduceNPCs);
-    // }, [serosNPCs, selectedLocationNotes, setSelectedLocationNPCs]);
+    useEffect(() => {
+        if (selectedLocationNotes === null) {
+            return;
+        }
+        // Filter through serosNPCs to find the NPCs relevant to the selected location.
+        const reduceNPCs = npcs.reduce((prevNPCs, npcData, index) => {
+            if (
+                npcData.associated_locations.findIndex(
+                    (npcLocation) => npcLocation.id === selectedLocationNotes.id
+                ) !== -1
+            ) {
+                return [...prevNPCs, { npcData, originalIndex: index }];
+            }
+            return prevNPCs;
+        }, []);
+        setSelectedLocationNPCs(reduceNPCs);
+    }, [npcs, selectedLocationNotes, setSelectedLocationNPCs]);
 
     // Select relevant quests when a location is selected
     useEffect(() => {

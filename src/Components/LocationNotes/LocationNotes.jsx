@@ -14,8 +14,8 @@ const LocationNotes = (props) => {
     const {
         locationNotes,
         setLocationNotes,
-        serosNPCs,
-        setSerosNPCs,
+        npcs,
+        setNPCs,
         locationNPCs,
         setLocationNPCs,
         locationQuests,
@@ -196,8 +196,8 @@ const LocationNotes = (props) => {
                     setDeleteData={setDeleteData}
                     questList={questList}
                     locationList={locationList}
-                    serosNPCs={serosNPCs}
-                    setSerosNPCs={setSerosNPCs}
+                    npcs={npcs}
+                    setNPCs={setNPCs}
                     addNewNPC={addNewNPC}
                     setAddNewNPC={setAddNewNPC}
                     dataNotifications={dataNotifications}
@@ -216,7 +216,7 @@ const LocationNotes = (props) => {
                     locationList={locationList}
                     quests={quests}
                     setQuests={setQuests}
-                    setSerosNPCs={setSerosNPCs}
+                    setNPCs={setNPCs}
                     setQuestUpdated={setQuestUpdated}
                     addNewQuest={addNewQuest}
                     setAddNewQuest={setAddNewQuest}
