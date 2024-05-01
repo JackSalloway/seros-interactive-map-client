@@ -18,8 +18,8 @@ const NPCListNotes = (props) => {
         username,
         dataNotifications,
         setDataNotifications,
-        serosNPCs,
-        setSerosNPCs,
+        npcs,
+        setNPCs,
         setChangelogData,
     } = props;
 
@@ -103,12 +103,12 @@ const NPCListNotes = (props) => {
             init
         );
         const returnedData = await result.json();
-        let serosNPCsCopy = [...serosNPCs];
+        let serosNPCsCopy = [...npcs];
         const npcIndexToUpdate = serosNPCsCopy.findIndex(
             (originalNPC) => originalNPC._id === npc._id
         );
         serosNPCsCopy[npcIndexToUpdate] = returnedData.npcResult;
-        setSerosNPCs(serosNPCsCopy);
+        setNPCs(serosNPCsCopy);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
             message: `NPC: ${npc.name} successfully updated!`,

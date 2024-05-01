@@ -17,8 +17,8 @@ const JournalMenuContent = (props) => {
         selectedTab,
         quests,
         setQuests,
-        serosNPCs,
-        setSerosNPCs,
+        npcs,
+        setNPCs,
         renderCreationMarker,
         setRenderCreationMarker,
         creationMarkerLatLng,
@@ -114,9 +114,9 @@ const JournalMenuContent = (props) => {
             <NPCListWrapper
                 locations={locations}
                 setLocationNotes={setLocationNotes}
-                serosNPCs={serosNPCs}
-                setSerosNPCs={setSerosNPCs}
-                serosNPCsFiltered={Array.from(serosNPCs)}
+                npcs={npcs}
+                setNPCs={setNPCs}
+                npcsFiltered={Array.from(npcs)}
                 map={map}
                 campaign={campaign}
                 userAuthenticated={userAuthenticated}

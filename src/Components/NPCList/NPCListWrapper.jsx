@@ -6,9 +6,9 @@ const NPCListWrapper = (props) => {
     const {
         serosLocations,
         setLocationNotes,
-        serosNPCs,
-        setSerosNPCs,
-        serosNPCsFiltered,
+        npcs,
+        setNPCs,
+        npcsFiltered,
         map,
         campaign,
         userAuthenticated,
@@ -17,7 +17,7 @@ const NPCListWrapper = (props) => {
         setChangelogData,
     } = props;
 
-    const shallowCopy = serosNPCsFiltered.sort(function (a, b) {
+    const shallowCopy = npcsFiltered.sort(function (a, b) {
         var npcA = a.name.toUpperCase();
         var npcB = b.name.toUpperCase();
         return npcA < npcB ? -1 : npcA > npcB ? 1 : 0;
@@ -39,6 +39,9 @@ const NPCListWrapper = (props) => {
         }
     }, [searchValue, shallowCopy]);
 
+    console.log(npcs);
+    console.log(campaign);
+
     return (
         <div id="npc-list-wrapper" className="journal-content-wrapper">
             <div className="npc-list-wrapper-category" id="npc-list-friendly">
@@ -46,7 +49,7 @@ const NPCListWrapper = (props) => {
                     id="npc-list-wrapper-header"
                     className="content-wrapper-header"
                 >
-                    <h2>{campaign.campaign.name}</h2>
+                    <h2>{campaign.campaign_name}</h2>
                     <h3>NPC List</h3>
                     <input
                         type="text"
@@ -61,12 +64,12 @@ const NPCListWrapper = (props) => {
                         map={map}
                         serosLocations={serosLocations}
                         setLocationNotes={setLocationNotes}
-                        campaignID={campaign.campaign._id}
+                        campaignID={campaign.campaign_id}
                         username={userAuthenticated.username}
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}
-                        serosNPCs={serosNPCs}
-                        setSerosNPCs={setSerosNPCs}
+                        npcs={npcs}
+                        setNPCs={setNPCs}
                         setChangelogData={setChangelogData}
                     />
                 ))}

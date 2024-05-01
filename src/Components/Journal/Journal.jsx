@@ -8,8 +8,8 @@ const Journal = (props) => {
     const {
         locationNotes,
         setLocationNotes,
-        serosNPCs,
-        setSerosNPCs,
+        npcs,
+        setNPCs,
         locationNPCs,
         setLocationNPCs,
         locationQuests,
@@ -119,8 +119,8 @@ const Journal = (props) => {
                             selectedTab={selectedTab}
                             quests={quests}
                             setQuests={setQuests}
-                            serosNPCs={serosNPCs}
-                            setSerosNPCs={setSerosNPCs}
+                            npcs={npcs}
+                            setNPCs={setNPCs}
                             renderCreationMarker={renderCreationMarker}
                             setRenderCreationMarker={setRenderCreationMarker}
                             creationMarkerLatLng={creationMarkerLatLng}
@@ -151,8 +151,8 @@ const Journal = (props) => {
             <LocationNotes
                 locationNotes={locationNotes}
                 setLocationNotes={setLocationNotes}
-                serosNPCs={serosNPCs}
-                setSerosNPCs={setSerosNPCs}
+                npcs={npcs}
+                setNPCs={setNPCs}
                 locationNPCs={locationNPCs}
                 setLocationNPCs={setLocationNPCs}
                 locationQuests={locationQuests}
