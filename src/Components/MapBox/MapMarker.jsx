@@ -28,14 +28,14 @@ const MapMarker = (props) => {
     }, [markerBeingEdited]);
 
     // Take first sentence from location description
-    const locationBriefDesc = location.desc
-        ? he.decode(location.desc.split(".")[0] + "...")
+    const locationBriefDesc = location.description
+        ? he.decode(location.description.split(".")[0] + "...")
         : "This location has no description...";
 
     if (draggable === false) {
         return (
             <Marker
-                position={[location.latitude, location.longitude]}
+                position={[location.latlng.lat, location.latlng.lng]}
                 key={location.id}
                 // icon={getIcon(location.type)}
                 riseOnHover={true}

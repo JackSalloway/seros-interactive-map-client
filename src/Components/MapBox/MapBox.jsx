@@ -261,8 +261,8 @@ function MapBox(props) {
                 eventHandlers={{
                     dragend: (e) => {
                         setCreationMarkerLatLng([
-                            e.target._latlng.lat,
-                            e.target._latlng.lng,
+                            e.target.latlng.lat,
+                            e.target.latlng.lng,
                         ]);
                     },
                 }}

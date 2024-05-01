@@ -13,7 +13,6 @@ const LocationListNotes = (props) => {
     } = props;
 
     const [selected, setSelected] = useState(false);
-    const locationLatLng = { lat: location.latitude, lng: location.longitude };
 
     const expandDownChevron = (
         <FontAwesomeIcon
@@ -55,9 +54,9 @@ const LocationListNotes = (props) => {
             className="location-list-notes-location-lat-lng"
             onClick={() => {
                 if (map.current.getZoom() === 5) {
-                    map.current.flyTo(locationLatLng);
+                    map.current.flyTo(location.latlng);
                 } else {
-                    map.current.setView(locationLatLng, 5);
+                    map.current.setView(location.latlng, 5);
                 }
                 setLocationNotes(
                     unfilteredSerosLocations

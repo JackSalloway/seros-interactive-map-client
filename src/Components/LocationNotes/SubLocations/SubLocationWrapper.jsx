@@ -2,17 +2,17 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Component imports
-import SubLocationNotes from "./SubLocationNotes";
-import CreateSubLocation from "./CreateSubLocation";
+import SublocationNotes from "./SublocationNotes";
+import CreateSublocation from "./CreateSublocation";
 
-const SubLocationWrapper = (props) => {
+const SublocationWrapper = (props) => {
     const {
-        showSubLocations,
-        setShowSubLocations,
+        showSublocations,
+        setShowSublocations,
         locationNotes,
         setDeleteData,
-        serosLocations,
-        setSerosLocations,
+        locations,
+        setLocations,
         addNewSubLocation,
         setAddNewSubLocation,
         dataNotifications,
@@ -32,10 +32,10 @@ const SubLocationWrapper = (props) => {
                 <span
                     data-testid="expand/collapse sub-locations icon"
                     onClick={() => {
-                        setShowSubLocations(!showSubLocations);
+                        setShowSublocations(!showSublocations);
                     }}
                 >
-                    {showSubLocations === false ? (
+                    {showSublocations === false ? (
                         <FontAwesomeIcon
                             icon="chevron-down"
                             className="location-notes-fa-icon h3"
@@ -49,20 +49,20 @@ const SubLocationWrapper = (props) => {
                 </span>
             </div>
             {/* Has sub-locations drop down been clicked? */}
-            {showSubLocations === true ? (
+            {showSublocations === true ? (
                 // Are there more than 0 sub-locations?
-                locationNotes.sub_locations.length > 0 ? (
+                locationNotes.sublocations.length > 0 ? (
                     <>
-                        {locationNotes.sub_locations.map(
-                            (subLocation, index) => (
-                                <SubLocationNotes
-                                    subLocation={subLocation}
+                        {locationNotes.sublocations.map(
+                            (sublocation, index) => (
+                                <SublocationNotes
+                                    sublocation={sublocation}
                                     index={index}
-                                    key={subLocation.name}
+                                    key={sublocation.id}
                                     locationNotes={locationNotes}
                                     setDeleteData={setDeleteData}
-                                    serosLocations={serosLocations}
-                                    setSerosLocations={setSerosLocations}
+                                    locations={locations}
+                                    setLocations={setLocations}
                                     dataNotifications={dataNotifications}
                                     setDataNotifications={setDataNotifications}
                                     campaign={campaign}
@@ -119,10 +119,10 @@ const SubLocationWrapper = (props) => {
             ) : null}
             {/* Has add new sub-location been clicked? */}
             {addNewSubLocation === true ? (
-                <CreateSubLocation
+                <CreateSublocation
                     locationNotes={locationNotes}
-                    serosLocations={serosLocations}
-                    setSerosLocations={setSerosLocations}
+                    locations={locations}
+                    setLocations={setLocations}
                     setAddNewSubLocation={setAddNewSubLocation}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
@@ -135,4 +135,4 @@ const SubLocationWrapper = (props) => {
     );
 };
 
-export default SubLocationWrapper;
+export default SublocationWrapper;

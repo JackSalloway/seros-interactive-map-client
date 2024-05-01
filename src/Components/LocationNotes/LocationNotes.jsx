@@ -5,7 +5,7 @@ import he from "he";
 import { splitParas } from "../../imports/imports";
 
 // Component imports
-import SubLocationWrapper from "./SubLocations/SubLocationWrapper";
+import SublocationWrapper from "./Sublocations/SublocationWrapper";
 import NPCWrapper from "./NPCs/NPCWrapper";
 import QuestWrapper from "./Quests/QuestWrapper";
 import CombatInstancesWrapper from "./CombatInstances/CombatInstancesWrapper";
@@ -38,7 +38,7 @@ const LocationNotes = (props) => {
 
     // Set states
     const [dataFetched, setDataFetched] = useState(false);
-    const [showSubLocations, setShowSubLocations] = useState(false);
+    const [showSublocations, setShowSublocations] = useState(false);
     const [showNPCs, setShowNPCs] = useState(false);
     const [showQuests, setShowQuests] = useState(false);
     const [showCombatInstances, setShowCombatInstances] = useState(false);
@@ -46,7 +46,7 @@ const LocationNotes = (props) => {
     const [questList, setQuestList] = useState([]); // Used for adding quests to new npcs/locations
 
     // Sub Location states
-    const [addNewSubLocation, setAddNewSubLocation] = useState(false);
+    const [addNewSublocation, setAddNewSublocation] = useState(false);
 
     // NPC states
     const [addNewNPC, setAddNewNPC] = useState(false);
@@ -93,7 +93,7 @@ const LocationNotes = (props) => {
 
     // Close all categories when a new location is picked
     useEffect(() => {
-        setShowSubLocations(false);
+        setShowSublocations(false);
         setShowNPCs(false);
         setShowQuests(false);
         setShowCombatInstances(false);
@@ -101,10 +101,10 @@ const LocationNotes = (props) => {
 
     // Close Sub Location form if the parent category is closed
     useEffect(() => {
-        if (showSubLocations === false) {
-            setAddNewSubLocation(false);
+        if (showSublocations === false) {
+            setAddNewSublocation(false);
         }
-    }, [showSubLocations]);
+    }, [showSublocations]);
 
     // Close NPC form if the parent category is closed
     useEffect(() => {
@@ -172,15 +172,15 @@ const LocationNotes = (props) => {
                       )
                     : null}
 
-                <SubLocationWrapper
-                    showSubLocations={showSubLocations}
-                    setShowSubLocations={setShowSubLocations}
+                <SublocationWrapper
+                    showSublocations={showSublocations}
+                    setShowSublocations={setShowSublocations}
                     locationNotes={locationNotes}
                     setDeleteData={setDeleteData}
                     locations={locations}
                     setLocations={setLocations}
-                    addNewSubLocation={addNewSubLocation}
-                    setAddNewSubLocation={setAddNewSubLocation}
+                    addNewSubLocation={addNewSublocation}
+                    setAddNewSubLocation={setAddNewSublocation}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}

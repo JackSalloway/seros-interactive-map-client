@@ -10,12 +10,12 @@ import Separator from "../Separator/Separator";
 
 const SubLocationNotes = (props) => {
     const {
-        subLocation,
+        sublocation,
         index,
         locationNotes,
         setDeleteData,
-        serosLocations,
-        setSerosLocations,
+        locations,
+        setLocations,
         dataNotifications,
         setDataNotifications,
         campaign,
@@ -29,18 +29,20 @@ const SubLocationNotes = (props) => {
     // Update value states
     const [editing, setEditing] = useState(false);
     const [updatedSubLocationName, setUpdatedSubLocationName] = useState(
-        subLocation.name
+        sublocation.name
     );
     const [updatedSubLocationDescription, setUpdatedSubLocationDescription] =
-        useState(subLocation.desc);
+        useState(sublocation.description);
 
     useEffect(() => {
         // Reset update inputs on update form close
         if (editing === false) {
-            setUpdatedSubLocationName(he.decode(subLocation.name));
-            setUpdatedSubLocationDescription(he.decode(subLocation.desc));
+            setUpdatedSubLocationName(he.decode(sublocation.name));
+            setUpdatedSubLocationDescription(
+                he.decode(sublocation.description)
+            );
         }
-    }, [editing, subLocation.name, subLocation.desc]);
+    }, [editing, sublocation]);
 
     // Expand chevron has not been clicked so render sub-location banner
     if (selected === false) {
@@ -56,7 +58,7 @@ const SubLocationNotes = (props) => {
                     className="location-notes-details-header details-closed location-notes-brighter-filter"
                     style={{ backgroundImage: `url(/images/papyr.jpg)` }}
                 >
-                    <h4>{he.decode(subLocation.name)}</h4>
+                    <h4>{he.decode(sublocation.name)}</h4>
                     <span
                         data-testid="expand sub-location icon"
                         onClick={() => {
@@ -86,8 +88,8 @@ const SubLocationNotes = (props) => {
             location_id: locationNotes._id,
             location_name: locationNotes.name,
             sub_location_index: index,
-            sub_location_name: subLocation.name,
-            sub_location_desc: subLocation.desc,
+            sub_location_name: sublocation.name,
+            sub_location_desc: sublocation.description,
             updated_sub_location_name: updatedSubLocationName,
             updated_sub_location_desc: updatedSubLocationDescription,
             location_campaign_id: campaign.campaign._id,
@@ -107,7 +109,7 @@ const SubLocationNotes = (props) => {
             init
         );
         const returnedData = await result.json();
-        let serosLocationsCopy = [...serosLocations];
+        let serosLocationsCopy = [...locations];
         const indexToUpdate = serosLocationsCopy
             .map((location) => location._id)
             .indexOf(returnedData.subLocationResult._id);
@@ -116,7 +118,7 @@ const SubLocationNotes = (props) => {
             ...returnedData.subLocationResult.sub_locations,
         ];
         serosLocationsCopy[indexToUpdate] = location;
-        setSerosLocations(serosLocationsCopy);
+        setLocations(serosLocationsCopy);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
             message: `Sub-location: ${updatedSubLocationName}, successfully updated!`,
@@ -145,7 +147,7 @@ const SubLocationNotes = (props) => {
                     style={{ backgroundImage: `url(/images/papyr.jpg)` }}
                 >
                     <div className="location-notes-details-data-section name-section editing">
-                        <h4>Update: {he.decode(subLocation.name)}</h4>
+                        <h4>Update: {he.decode(sublocation.name)}</h4>
                         <span
                             data-testid="cancel edit sub-location icon"
                             className="journal-fa-icon cancel-edit"
@@ -218,14 +220,14 @@ const SubLocationNotes = (props) => {
             />
             <div
                 className="location-notes-details location-notes-brighter-filter location-notes-open-internal"
-                key={subLocation.name}
+                key={sublocation.name}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 style={{ backgroundImage: `url(/images/papyr.jpg)` }}
             >
                 <div className="details-open">
                     <div className="location-notes-open-header-wrapper">
-                        <h4>{he.decode(subLocation.name)}</h4>
+                        <h4>{he.decode(sublocation.name)}</h4>
                     </div>
                     <div className="location-notes-open-icons-wrapper">
                         <span
@@ -252,7 +254,7 @@ const SubLocationNotes = (props) => {
                                 </span>
                                 <span
                                     data-testid="delete sub-location icon"
-                                    onClick={() => setDeleteData(subLocation)}
+                                    onClick={() => setDeleteData(sublocation)}
                                 >
                                     <FontAwesomeIcon
                                         icon="trash-can"
@@ -273,7 +275,7 @@ const SubLocationNotes = (props) => {
                                 </span>
                                 <span
                                     data-testid="delete sub-location icon"
-                                    onClick={() => setDeleteData(subLocation)}
+                                    onClick={() => setDeleteData(sublocation)}
                                 >
                                     <FontAwesomeIcon
                                         icon="trash-can"
@@ -287,14 +289,16 @@ const SubLocationNotes = (props) => {
                     <div className="location-notes-open-details-wrapper ">
                         <Separator />
                         <div className="location-notes-details-data-section">
-                            {splitParas(subLocation.desc).map((para, index) => (
-                                <p
-                                    key={index}
-                                    className="location-notes-description-paragraph"
-                                >
-                                    {he.decode(para)}
-                                </p>
-                            ))}
+                            {splitParas(sublocation.description).map(
+                                (para, index) => (
+                                    <p
+                                        key={index}
+                                        className="location-notes-description-paragraph"
+                                    >
+                                        {he.decode(para)}
+                                    </p>
+                                )
+                            )}
                         </div>
 
                         <Separator />
