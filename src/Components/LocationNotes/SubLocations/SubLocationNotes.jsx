@@ -8,7 +8,7 @@ import {
 } from "../../../imports/imports";
 import Separator from "../Separator/Separator";
 
-const SubLocationNotes = (props) => {
+const SublocationNotes = (props) => {
     const {
         sublocation,
         index,
@@ -313,4 +313,4 @@ const SubLocationNotes = (props) => {
     );
 };
 
-export default SubLocationNotes;
+export default SublocationNotes;
