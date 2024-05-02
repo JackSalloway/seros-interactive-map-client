@@ -33,8 +33,8 @@ const JournalMenuContent = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        changelogData,
-        setChangelogData,
+        changelog,
+        setChangelog,
         combatInstances,
         // setCombatInstanceData, - This is not used due to the locationless functionality for Combat Instances not being implemented as they cannot be deleted.
     } = props;
@@ -54,7 +54,7 @@ const JournalMenuContent = (props) => {
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
                 userAuthenticated={userAuthenticated}
-                setChangelogData={setChangelogData}
+                setChangelog={setChangelog}
             />
         );
     }
@@ -63,8 +63,8 @@ const JournalMenuContent = (props) => {
         return (
             <ChangelogWrapper
                 campaign={campaign}
-                changelogData={changelogData}
-                setChangelogData={setChangelogData}
+                changelog={changelog}
+                setChangelog={setChangelog}
             />
         );
     };
@@ -86,7 +86,8 @@ const JournalMenuContent = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
-                setChangelogData={setChangelogData}
+                changelog={changelog}
+                setChangelog={setChangelog}
             />
         );
     };
@@ -104,7 +105,7 @@ const JournalMenuContent = (props) => {
                 userAuthenticated={userAuthenticated}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
-                setChangelogData={setChangelogData}
+                setChangelog={setChangelog}
             />
         );
     };
@@ -122,7 +123,7 @@ const JournalMenuContent = (props) => {
                 userAuthenticated={userAuthenticated}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
-                setChangelogData={setChangelogData}
+                setChangelog={setChangelog}
             />
         );
     };

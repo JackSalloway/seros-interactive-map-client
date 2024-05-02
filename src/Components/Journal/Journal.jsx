@@ -37,8 +37,8 @@ const Journal = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        changelogData,
-        setChangelogData,
+        changelog,
+        setChangelog,
         combatInstances,
         setCombatInstances,
     } = props;
@@ -135,8 +135,8 @@ const Journal = (props) => {
                             dataNotifications={dataNotifications}
                             setDataNotifications={setDataNotifications}
                             campaign={campaign}
-                            changelogData={changelogData}
-                            setChangelogData={setChangelogData}
+                            changelog={changelog}
+                            setChangelog={setChangelog}
                             combatInstances={combatInstances}
                             setCombatInstances={setCombatInstances}
                         />
@@ -168,7 +168,7 @@ const Journal = (props) => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
-                setChangelogData={setChangelogData}
+                setChangelog={setChangelog}
                 username={userAuthenticated.username}
                 combatInstances={combatInstances}
                 setCombatInstances={setCombatInstances}

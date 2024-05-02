@@ -15,13 +15,14 @@ const LocationListCreateNewLocation = (props) => {
         creationMarkerLatLng,
         setCreationMarkerLatLng,
         setCreationMarkerType,
-        serosLocations,
-        setSerosLocations,
+        locations,
+        setLocations,
         dataNotifications,
         setDataNotifications,
         campaign,
         userAuthenticated,
-        setChangelogData,
+        changelog,
+        setChangelog,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -47,7 +48,7 @@ const LocationListCreateNewLocation = (props) => {
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
-            location_campaign_id: campaign.campaign._id,
+            location_campaign_id: campaign.campaign_id,
             username: userAuthenticated.username,
         };
 
@@ -64,9 +65,9 @@ const LocationListCreateNewLocation = (props) => {
             init
         );
         const returnedData = await result.json();
-        let serosLocationsCopy = [...serosLocations];
-        serosLocationsCopy.push(returnedData.locationResult);
-        setSerosLocations(serosLocationsCopy);
+        let locationsCopy = [...locations];
+        locationsCopy.push(returnedData.locationResult);
+        setLocations(locationsCopy);
         const notificationsCopy = dataNotifications;
         notificationsCopy.push({
             message: `Location: ${locationName}, successfully created!`,
@@ -77,7 +78,7 @@ const LocationListCreateNewLocation = (props) => {
         setRenderCreationMarker(false);
         setCreationMarkerLatLng([0, 0]);
         setCreationMarkerType("miscellaneous");
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
     };
 
     // Type selection box variables

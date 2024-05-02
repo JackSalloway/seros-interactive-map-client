@@ -27,27 +27,27 @@ const changelogDiv = (
 };
 
 const ChangelogWrapper = (props) => {
-    const { campaign, changelogData } = props;
+    const { campaign, changelog } = props;
 
-    if (changelogData === null) {
+    if (changelog === null) {
         return <p>Loading changelog data...</p>;
     }
 
     return (
         <div id="changelog-wrapper">
             <div className="content-wrapper-header">
-                <h2>{campaign.campaign.name}</h2>
+                <h2>{campaign.campagin_name}</h2>
                 <h3>Changelog</h3>
             </div>
-            {changelogData.length === 0 ? (
+            {changelog.length === 0 ? (
                 <div id="changelog-empty">
                     <h3>No changes yet, make some to see them logged here.</h3>
                 </div>
             ) : (
-                changelogData.map((change) => {
+                changelog.map((change) => {
                     return changelogDiv(
-                        change.username,
-                        change.operation_type,
+                        change.user,
+                        change.action,
                         change.data_affected,
                         change.data_name,
                         change.created_at

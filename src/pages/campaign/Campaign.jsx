@@ -28,7 +28,7 @@ const Campaign = () => {
     const [locations, setLocations] = useState(null);
     const [quests, setQuests] = useState(null);
     const [npcs, setNPCs] = useState(null);
-    const [changelogData, setChangelogData] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
+    const [changelog, setChangelog] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
     const [combatInstances, setCombatInstances] = useState(null);
 
     // Selected data states
@@ -122,27 +122,24 @@ const Campaign = () => {
     }, [npcs, setNPCs, campaignParams]);
 
     // Fetch changelog data from database
-    // useEffect(() => {
-    //     if (changelogData !== null) {
-    //         return;
-    //     }
+    useEffect(() => {
+        if (changelog !== null) {
+            return;
+        }
 
-    //     fetch(
-    //         `${process.env.REACT_APP_API_URL}/changelog_data/?campaign_id=${campaignParams.campaignId}`,
-    //         {
-    //             method: "GET",
-    //             mode: "cors",
-    //         }
-    //     )
-    //         .then((response) => response.json())
-    //         .then((changelog) => {
-    //             if (changelog === null) {
-    //                 setChangelogData([]);
-    //                 return;
-    //             }
-    //             setChangelogData(changelog.changes);
-    //         });
-    // }, [changelogData, campaignParams]);
+        const fetchData = async () => {
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/changelog_data/?campaign_id=${campaignParams.campaignId}`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                }
+            );
+            const resChangelogs = await res.json();
+            setChangelog(resChangelogs);
+        };
+        fetchData().catch((err) => console.log(err));
+    }, [changelog, campaignParams]);
 
     // Fetch combat instance data from database
     useEffect(() => {
@@ -231,8 +228,8 @@ const Campaign = () => {
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
-                changelogData={changelogData}
-                setChangelogData={setChangelogData}
+                changelog={changelog}
+                setChangelog={setChangelog}
                 combatInstances={combatInstances}
                 setCombatInstances={setCombatInstances}
             />
@@ -253,7 +250,7 @@ const Campaign = () => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     username={user.username}
-                    setChangelogData={setChangelogData}
+                    setChangelog={setChangelog}
                 />
             ) : null}
             {/* If there is an object within the dataNotifications state, render dataNotification component () */}

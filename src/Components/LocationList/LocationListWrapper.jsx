@@ -19,7 +19,8 @@ const LocationListWrapper = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
     } = props;
 
     // Create shallow copy variable for reuse
@@ -62,7 +63,8 @@ const LocationListWrapper = (props) => {
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
                 userAuthenticated={userAuthenticated}
-                setChangelogData={setChangelogData}
+                changelog={changelog}
+                setChangelog={setChangelog}
             />
         );
     }
