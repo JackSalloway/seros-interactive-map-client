@@ -6,7 +6,7 @@ import "./LocationListNotes.css";
 const LocationListNotes = (props) => {
     const {
         location,
-        unfilteredSerosLocations,
+        unfilteredLocations,
         // serosLocations,
         setLocationNotes,
         map,
@@ -53,15 +53,16 @@ const LocationListNotes = (props) => {
         <button
             className="location-list-notes-location-lat-lng"
             onClick={() => {
+                console.log(unfilteredLocations, location);
                 if (map.current.getZoom() === 5) {
                     map.current.flyTo(location.latlng);
                 } else {
                     map.current.setView(location.latlng, 5);
                 }
                 setLocationNotes(
-                    unfilteredSerosLocations
-                        .map((serosLocation) => serosLocation._id)
-                        .indexOf(location._id)
+                    unfilteredLocations
+                        .map((unfilteredLocation) => unfilteredLocation.id)
+                        .indexOf(location.id)
                 );
             }}
         >

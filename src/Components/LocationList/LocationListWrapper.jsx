@@ -11,7 +11,7 @@ const LocationListWrapper = (props) => {
         creationMarkerLatLng,
         setCreationMarkerLatLng,
         setCreationMarkerType,
-        unfilteredSerosLocations, // This is the original version, used to set the actual journal notes to the relevant location
+        unfilteredLocations, // This is the original version, used to set the actual journal notes to the relevant location
         locations, // This is a new version of locations - passed in via the props of the component to keep the sorted list persistent
         setLocations,
         setLocationNotes,
@@ -109,7 +109,7 @@ const LocationListWrapper = (props) => {
             {locationList.map((location) => (
                 <LocationListNotes
                     location={location}
-                    unfilteredSerosLocations={unfilteredSerosLocations}
+                    unfilteredLocations={unfilteredLocations}
                     // locations={locations}
                     setLocationNotes={setLocationNotes}
                     map={map}
