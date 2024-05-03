@@ -30,7 +30,8 @@ const LocationNotes = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
         combatInstances,
         setCombatInstances,
@@ -184,7 +185,8 @@ const LocationNotes = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
-                    setChangelogData={setChangelogData}
+                    changelog={changelog}
+                    setChangelog={setChangelog}
                     username={username}
                 />
 
@@ -203,7 +205,7 @@ const LocationNotes = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
-                    setChangelogData={setChangelogData}
+                    setChangelog={setChangelog}
                     username={username}
                 />
 
@@ -223,7 +225,7 @@ const LocationNotes = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
-                    setChangelogData={setChangelogData}
+                    setChangelog={setChangelog}
                     username={username}
                 />
 
@@ -238,7 +240,7 @@ const LocationNotes = (props) => {
                     locationCombatInstances={locationCombatInstances}
                     setDeleteData={setDeleteData}
                     campaign={campaign}
-                    setChangelogData={setChangelogData}
+                    setChangelog={setChangelog}
                     username={username}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}

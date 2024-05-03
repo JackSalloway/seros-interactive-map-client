@@ -18,7 +18,8 @@ const SublocationWrapper = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -66,7 +67,8 @@ const SublocationWrapper = (props) => {
                                     dataNotifications={dataNotifications}
                                     setDataNotifications={setDataNotifications}
                                     campaign={campaign}
-                                    setChangelogData={setChangelogData}
+                                    changelog={changelog}
+                                    setChangelog={setChangelog}
                                     username={username}
                                 />
                             )
@@ -127,7 +129,8 @@ const SublocationWrapper = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
-                    setChangelogData={setChangelogData}
+                    changelog={changelog}
+                    setChangelog={setChangelog}
                     username={username}
                 />
             ) : null}

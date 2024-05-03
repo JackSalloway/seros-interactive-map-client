@@ -4,15 +4,18 @@ import { CONTENT_TYPE_APPLICATION_JSON } from "../../../imports/imports";
 const CreateSubLocation = (props) => {
     const {
         locationNotes,
-        serosLocations,
-        setSerosLocations,
+        locations,
+        setLocations,
         setAddNewSubLocation,
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
+
+    // console.log(locations);
 
     // Set states
     const [newSubLocationName, setNewSubLocationName] = useState("");
@@ -23,10 +26,10 @@ const CreateSubLocation = (props) => {
         e.preventDefault();
 
         const subLocationData = {
-            sub_location_name: newSubLocationName,
-            sub_location_desc: newSubLocationDesc,
-            parent_location_id: locationNotes._id,
-            location_campaign_id: campaign.campaign._id,
+            sublocation_name: newSubLocationName,
+            sublocation_description: newSubLocationDesc,
+            parent_location_id: locationNotes.id,
+            campaign_id: campaign.campaign_id,
             username: username,
         };
 
@@ -39,28 +42,35 @@ const CreateSubLocation = (props) => {
         };
 
         const result = await fetch(
-            `${process.env.REACT_APP_API_URL}/create_sub_location`,
+            `${process.env.REACT_APP_API_URL}/create_sublocation`,
             init
         );
         const data = await result.json();
-        let serosLocationsCopy = [...serosLocations];
-        const indexToUpdate = serosLocationsCopy
-            .map((location) => location._id)
-            .indexOf(data.subLocationResult._id);
-        const location = { ...serosLocationsCopy[indexToUpdate] };
-        location.sub_locations = [...data.subLocationResult.sub_locations];
-        serosLocationsCopy[indexToUpdate] = location;
-        setSerosLocations(serosLocationsCopy);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+
+        // Update locations array by adding the new sublocation to the relevant location
+        let locationsCopy = [...locations];
+        const indexToUpdate = locationsCopy
+            .map((location) => location.id)
+            .indexOf(data.sublocationResult.location_id);
+        const location = { ...locationsCopy[indexToUpdate] };
+        console.log(data.sublocationResult);
+        location.sublocations = [
+            ...location.sublocations,
+            data.sublocationResult,
+        ];
+        locationsCopy[indexToUpdate] = location;
+        setLocations(locationsCopy);
+
+        // Add a notification to the notifications array
+        const newNotification = {
             message: `Sub-location: ${newSubLocationName}, successfully created!`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
         setAddNewSubLocation(false);
 
-        // Update changelog
-        setChangelogData(data.changelogResult.changes);
+        // Update changelog showing the newly created sublocation
+        setChangelog([...changelog, data.changelogResult]);
     };
 
     // Render sub location form
@@ -111,7 +121,7 @@ const CreateSubLocation = (props) => {
                     </div>
 
                     <div className="location-notes-submit">
-                        <button>Submit Sub Location!</button>
+                        <button>Submit Sublocation!</button>
                     </div>
                 </form>
             </div>
