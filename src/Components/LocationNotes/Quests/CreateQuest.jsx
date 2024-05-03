@@ -10,13 +10,14 @@ const CreateQuest = (props) => {
     const {
         locationNotes,
         locationList,
-        serosQuests,
-        setSerosQuests,
+        quests,
+        setQuests,
         setAddNewQuest,
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -26,7 +27,7 @@ const CreateQuest = (props) => {
     const [newQuestStatus, setNewQuestStatus] = useState(null);
     const [newQuestSelectedLocations, setNewQuestSelectedLocations] = useState([
         {
-            value: he.decode(locationNotes._id),
+            value: locationNotes.id,
             label: he.decode(locationNotes.name),
         },
     ]);
@@ -42,7 +43,7 @@ const CreateQuest = (props) => {
             quest_associated_locations: newQuestSelectedLocations.map(
                 (location) => location.value
             ),
-            quest_campaign: campaign.campaign._id,
+            quest_campaign: campaign.campaign_id,
             username: username,
         };
 
@@ -59,17 +60,22 @@ const CreateQuest = (props) => {
             init
         );
         const returnedData = await result.json();
-        setSerosQuests([...serosQuests, ...returnedData.questResult]);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+
+        // Add new quest to the list of quests
+        setQuests([...quests, returnedData.questResult]);
+
+        // Add a new notification showing a new quest has been created
+        const newNotification = {
             message: `Quest: ${newQuestName}, successfully created!`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
+
+        // Set state value for rendering quest creation form to false to cause the form to de-render
         setAddNewQuest(false);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
     };
 
     // Function to handle changes in the selection box
@@ -78,7 +84,7 @@ const CreateQuest = (props) => {
         setNewQuestSelectedLocations(
             locations.map((location) => {
                 return {
-                    value: he.decode(location.value),
+                    value: location.value,
                     label: he.decode(location.label),
                 };
             })

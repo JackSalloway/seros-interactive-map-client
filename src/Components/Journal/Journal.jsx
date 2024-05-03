@@ -162,7 +162,7 @@ const Journal = (props) => {
                 locations={locations}
                 setLocations={setLocations}
                 quests={quests}
-                setQuest={setQuests}
+                setQuests={setQuests}
                 setDeleteData={setDeleteData}
                 userAuthenticated={userAuthenticated}
                 dataNotifications={dataNotifications}

@@ -15,14 +15,15 @@ const QuestWrapper = (props) => {
         locationList,
         quests,
         setQuests,
-        setSerosNPCs,
+        setNPCs,
         setQuestUpdated,
         addNewQuest,
         setAddNewQuest,
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -64,12 +65,13 @@ const QuestWrapper = (props) => {
                                 locationList={locationList}
                                 quests={quests}
                                 setQuests={setQuests}
-                                setSerosNPCs={setSerosNPCs}
+                                setNPCs={setNPCs}
                                 setQuestUpdated={setQuestUpdated}
                                 dataNotifications={dataNotifications}
                                 setDataNotifications={setDataNotifications}
                                 campaign={campaign}
-                                setChangelogData={setChangelogData}
+                                changelog={changelog}
+                                setChangelog={setChangelog}
                                 username={username}
                             />
                         ))}
@@ -128,7 +130,8 @@ const QuestWrapper = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
-                    setChangelogData={setChangelogData}
+                    changelog={changelog}
+                    setChangelog={setChangelog}
                     username={username}
                 />
             ) : null}
