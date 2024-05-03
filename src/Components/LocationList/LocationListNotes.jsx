@@ -53,7 +53,6 @@ const LocationListNotes = (props) => {
         <button
             className="location-list-notes-location-lat-lng"
             onClick={() => {
-                console.log(unfilteredLocations, location);
                 if (map.current.getZoom() === 5) {
                     map.current.flyTo(location.latlng);
                 } else {
