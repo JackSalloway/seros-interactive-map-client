@@ -85,7 +85,7 @@ const LocationNotes = (props) => {
         if (questList.length !== quests.length) {
             setQuestList([
                 ...quests.map((quest) => ({
-                    value: quest._id,
+                    value: quest.id,
                     label: he.decode(quest.name),
                 })),
             ]);
@@ -205,6 +205,7 @@ const LocationNotes = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
+                    changelog={changelog}
                     setChangelog={setChangelog}
                     username={username}
                 />

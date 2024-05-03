@@ -21,7 +21,8 @@ const NPCWrapper = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -68,7 +69,7 @@ const NPCWrapper = (props) => {
                                 dataNotifications={dataNotifications}
                                 setDataNotifications={setDataNotifications}
                                 campaign={campaign}
-                                setChangelogData={setChangelogData}
+                                setChangelog={setChangelog}
                                 username={username}
                             />
                         ))}
@@ -128,7 +129,8 @@ const NPCWrapper = (props) => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     campaign={campaign}
-                    setChangelogData={setChangelogData}
+                    changelog={changelog}
+                    setChangelog={setChangelog}
                     username={username}
                 />
             ) : null}

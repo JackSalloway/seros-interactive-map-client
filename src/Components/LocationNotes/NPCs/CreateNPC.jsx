@@ -11,15 +11,19 @@ const CreateNPC = (props) => {
         locationNotes,
         locationList,
         questList,
-        serosNPCs,
-        setSerosNPCs,
+        npcs,
+        setNPCs,
         setAddNewNPC,
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
+
+    // console.log(locationList);
+    // console.log(questList);
 
     // Set states
     const [newNPCName, setNewNPCName] = useState("");
@@ -29,7 +33,7 @@ const CreateNPC = (props) => {
     const [newNPCStatus, setNewNPCStatus] = useState(null);
     const [newNPCSelectedLocations, setNewNPCSelectedLocations] = useState([
         {
-            value: he.decode(locationNotes._id),
+            value: locationNotes.id,
             label: he.decode(locationNotes.name),
         },
     ]);
@@ -49,7 +53,7 @@ const CreateNPC = (props) => {
                 (location) => location.value
             ),
             npc_quests: newNPCQuests,
-            npc_campaign: campaign.campaign._id,
+            npc_campaign: campaign.campaign_id,
             username: username,
         };
 
@@ -66,17 +70,21 @@ const CreateNPC = (props) => {
             init
         );
         const returnedData = await result.json();
-        setSerosNPCs([...serosNPCs, ...returnedData.npcResult]);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+        // Update npc values
+        setNPCs([...npcs, returnedData.npcResult]);
+
+        // Add a new notification showing a new npc has been created
+        const newNotification = {
             message: `NPC: ${newNPCName}, successfully created!`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
+
+        // Set state value for rendering npc creation form to false to cause the form to de-render
         setAddNewNPC(false);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
     };
 
     // Function to handle changes inside the npc race selection box
@@ -123,8 +131,7 @@ const CreateNPC = (props) => {
 
     // Function to handle changes inside the npc associated quests selection box
     const handleNPCQuestChange = (value) => {
-        // Having issues keeping the location that is already selected in the selection box (not allowing it to be removed)
-        setNewNPCQuests(value.map((location) => location.value));
+        setNewNPCQuests(value.map((quest) => quest.value));
     };
 
     // Create a react select component for npc associated quests
@@ -148,7 +155,7 @@ const CreateNPC = (props) => {
         setNewNPCSelectedLocations(
             value.map((location) => {
                 return {
-                    value: he.decode(location.value),
+                    value: location.value,
                     label: he.decode(location.label),
                 };
             })
