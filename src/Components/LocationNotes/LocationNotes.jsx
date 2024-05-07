@@ -35,6 +35,8 @@ const LocationNotes = (props) => {
         username,
         combatInstances,
         setCombatInstances,
+        players,
+        setPlayers,
     } = props;
 
     // Set states
@@ -246,6 +248,8 @@ const LocationNotes = (props) => {
                     username={username}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
+                    players={players}
+                    setPlayers={setPlayers}
                 />
             </div>
         </div>

@@ -25,6 +25,7 @@ const Campaign = () => {
     )[0];
 
     // Data states
+    const [players, setPlayers] = useState(null);
     const [locations, setLocations] = useState(null);
     const [quests, setQuests] = useState(null);
     const [npcs, setNPCs] = useState(null);
@@ -58,6 +59,27 @@ const Campaign = () => {
     const [dataNotifications, setDataNotifications] = useState([]);
 
     // Render data states
+    useEffect(() => {
+        if (players !== null) {
+            return;
+        }
+
+        const fetchData = async () => {
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/campaign_player_data/?campaign_id=${campaignId}`,
+                {
+                    method: "GET",
+                    mode: "cors",
+                }
+            );
+            const resPlayers = await res.json();
+            console.log(resPlayers);
+            setPlayers(resPlayers);
+        };
+
+        fetchData().catch((err) => console.log(err));
+    }, [campaignId, players]);
+
     // Fetch location data from database
     useEffect(() => {
         if (locations !== null) {
@@ -232,6 +254,8 @@ const Campaign = () => {
                 setChangelog={setChangelog}
                 combatInstances={combatInstances}
                 setCombatInstances={setCombatInstances}
+                players={players}
+                setPlayers={setPlayers}
             />
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (

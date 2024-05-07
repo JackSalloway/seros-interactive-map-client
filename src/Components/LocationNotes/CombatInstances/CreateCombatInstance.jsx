@@ -16,16 +16,19 @@ const CreateCombatInstance = (props) => {
         dataNotifications,
         setDataNotifications,
         setAddNewInstance,
+        players,
+        setPlayers,
     } = props;
 
     // Instance data states
     const [turns, setTurns] = useState([1]);
     const [playerList, setPlayerList] = useState(
-        campaign.campaign.players.map((player) => {
+        players.map((player) => {
             return {
                 value: {
-                    player_name: player.name,
-                    player_class: player.class,
+                    id: player.id,
+                    name: player.name,
+                    class: player.class,
                     turns: {
                         damage: [0],
                         healing: [0],

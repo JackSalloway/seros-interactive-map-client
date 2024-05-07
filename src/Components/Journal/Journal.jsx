@@ -41,6 +41,8 @@ const Journal = (props) => {
         setChangelog,
         combatInstances,
         setCombatInstances,
+        players,
+        setPlayers,
     } = props;
 
     const [selectedTab, setSelectedTab] = useState("Front Page");
@@ -173,6 +175,8 @@ const Journal = (props) => {
                 username={userAuthenticated.username}
                 combatInstances={combatInstances}
                 setCombatInstances={setCombatInstances}
+                players={players}
+                setPlayers={setPlayers}
             />
         </div>
     );

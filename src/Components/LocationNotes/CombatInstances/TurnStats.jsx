@@ -109,10 +109,10 @@ const TurnStats = (props) => {
             {instancePlayerDetails.map((player, playerIndex) => {
                 return (
                     <div
-                        key={player.player_name + playerIndex}
+                        key={player.name + playerIndex}
                         className="player-turn-inputs-wrapper"
                     >
-                        <p>{player.player_name}</p>
+                        <p>{player.name}</p>
                         <div className="player-turn-input-wrapper">
                             {/* Render damage inputs */}
                             {player.turns.damage.map((turnValue, turnIndex) => {
@@ -120,7 +120,7 @@ const TurnStats = (props) => {
                                     return (
                                         <PlayerTurnInputs
                                             key={
-                                                player.player_name +
+                                                player.name +
                                                 "damage" +
                                                 turnIndex
                                             }
@@ -142,7 +142,7 @@ const TurnStats = (props) => {
                                         return (
                                             <PlayerTurnInputs
                                                 key={
-                                                    player.player_name +
+                                                    player.name +
                                                     "healing" +
                                                     turnIndex
                                                 }
