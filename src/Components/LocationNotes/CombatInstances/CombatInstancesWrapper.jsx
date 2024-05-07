@@ -16,7 +16,8 @@ const CombatInstancesWrapper = (props) => {
         locationCombatInstances,
         setDeleteData,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
         dataNotifications,
         setDataNotifications,
@@ -111,7 +112,8 @@ const CombatInstancesWrapper = (props) => {
                 <CreateCombatInstance
                     locationNotes={locationNotes}
                     campaign={campaign}
-                    setChangelogData={setChangelogData}
+                    changelog={changelog}
+                    setChangelog={setChangelog}
                     username={username}
                     combatInstances={combatInstances}
                     setCombatInstances={setCombatInstances}

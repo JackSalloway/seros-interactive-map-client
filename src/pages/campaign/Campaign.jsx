@@ -73,7 +73,6 @@ const Campaign = () => {
                 }
             );
             const resPlayers = await res.json();
-            console.log(resPlayers);
             setPlayers(resPlayers);
         };
 

@@ -57,9 +57,9 @@ const InstanceDetails = (props) => {
             ...playerList,
             {
                 value: {
-                    player_name: newCharacterName,
-                    player_class: newCharacterClass,
-                    player_character: newCharacterIsPlayerCharacter,
+                    name: newCharacterName,
+                    class: newCharacterClass,
+                    isReal: newCharacterIsPlayerCharacter,
                     turns: { damage: damageArray, healing: healingArray },
                 },
                 label: newCharacterName,

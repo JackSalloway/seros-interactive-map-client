@@ -9,10 +9,11 @@ const CreateCombatInstance = (props) => {
     const {
         locationNotes,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
-        combatInstanceData,
-        setCombatInstanceData,
+        combatInstances,
+        setCombatInstances,
         dataNotifications,
         setDataNotifications,
         setAddNewInstance,
@@ -67,8 +68,10 @@ const CreateCombatInstance = (props) => {
             instance_name: instanceName,
             instance_desc: instanceDescription,
             instance_details: instancePlayerDetails,
-            instance_location_id: locationNotes._id,
-            instance_campaign_id: campaign.campaign._id,
+            instance_location_id: locationNotes.id,
+            instance_location_name: locationNotes.name,
+            instance_location_latlng: locationNotes.latlng,
+            instance_campaign_id: campaign.campaign_id,
             username: username,
         };
 
@@ -87,23 +90,21 @@ const CreateCombatInstance = (props) => {
         );
         const returnedData = await result.json();
 
-        console.log(combatInstanceData);
-        console.log(returnedData);
-        setCombatInstanceData([
-            ...combatInstanceData,
-            returnedData.instanceResult,
+        setCombatInstances([
+            ...combatInstances,
+            returnedData.newCombatInstance,
         ]);
 
         // Add notification on successful combat instance creation
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+        const newNotification = {
             message: `Combat log: ${instanceName} successfully created!`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog values
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
+
         // De-render the new instance form
         setAddNewInstance(false);
     };

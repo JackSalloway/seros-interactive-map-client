@@ -244,6 +244,7 @@ const LocationNotes = (props) => {
                     locationCombatInstances={locationCombatInstances}
                     setDeleteData={setDeleteData}
                     campaign={campaign}
+                    changelog={changelog}
                     setChangelog={setChangelog}
                     username={username}
                     dataNotifications={dataNotifications}
