@@ -34,7 +34,9 @@ const EditLocation = (props) => {
         he.decode(editLocationDetails.name)
     );
     const [locationDescription, setLocationDescription] = useState(
-        editLocationDetails.desc ? he.decode(editLocationDetails.desc) : ""
+        editLocationDetails.description
+            ? he.decode(editLocationDetails.description)
+            : ""
     );
 
     const [locationType, setLocationType] = useState({
@@ -60,13 +62,13 @@ const EditLocation = (props) => {
                 ? editMarkerLatLng[1]
                 : editLocationDetails.latlng.lng,
             location_name: locationName,
-            location_desc: locationDescription,
+            location_description: locationDescription,
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
-            location_sub_locations: editLocationDetails.sub_locations,
-            location_campaign_id: campaign.campaign._id,
-            location_id: editLocationDetails._id,
+            location_sublocations: editLocationDetails.sublocations,
+            campaign_id: campaign.campaign_id,
+            location_id: editLocationDetails.id,
             username: userAuthenticated.username,
         };
 
@@ -83,6 +85,8 @@ const EditLocation = (props) => {
             init
         );
         const returnedData = await result.json();
+
+        // Update location
         let locationsCopy = [...locations];
         locationsCopy[markerBeingEdited] = returnedData.locationResult;
         setLocations(locationsCopy);
@@ -95,7 +99,7 @@ const EditLocation = (props) => {
         setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelog([...changelog, returnedData.changelogResult.changes]);
+        setChangelog([...changelog, returnedData.changelogResult]);
 
         // Cleanup state values that cause edit location form to render
         setMarkerBeingEdited(null);
