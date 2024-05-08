@@ -36,10 +36,7 @@ const EditLocation = (props) => {
     const [locationDescription, setLocationDescription] = useState(
         editLocationDetails.desc ? he.decode(editLocationDetails.desc) : ""
     );
-    const [locationRegion, setLocationRegion] = useState({
-        value: editLocationDetails.region,
-        label: editLocationDetails.region,
-    });
+
     const [locationType, setLocationType] = useState({
         value: editLocationDetails.type,
         label: titleCase(editLocationDetails.type).replace("_", " "),
@@ -64,7 +61,6 @@ const EditLocation = (props) => {
                 : editLocationDetails.latlng.lng,
             location_name: locationName,
             location_desc: locationDescription,
-            location_region: locationRegion.value,
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
@@ -124,25 +120,6 @@ const EditLocation = (props) => {
             label: he.decode(location.label),
         });
         setEditMarkerType(location.value);
-    };
-
-    // Region selection box variables
-    // Create location region values
-    const locationRegionValues = [
-        { value: "Eastern Kae Empire", label: "Eastern Kae Empire" },
-        { value: "The Elven Kingdoms", label: "The Elven Kingdoms" },
-        { value: "The North", label: "The North" },
-        { value: "Western Kae Empire", label: "Western Kae Empire" },
-        { value: "Draconic Territories", label: "Draconic Territories" },
-        { value: "The Plains of Maddening", label: "The Plains of Maddening" },
-    ];
-
-    // Function to handle changes in the selection box
-    const handleLocationRegionChange = (location) => {
-        setLocationRegion({
-            value: he.decode(location.value),
-            label: he.decode(location.label),
-        });
     };
 
     const createSelectBox = (
@@ -285,17 +262,6 @@ const EditLocation = (props) => {
                             locationType,
                             locationTypeValues,
                             handleLocationTypeChange
-                        )}
-                    </label>
-                </div>
-                <div className="journal-create-new-location-input-div create-new-location-select-box">
-                    <label htmlFor="location-region">
-                        Region:
-                        {createSelectBox(
-                            "location-region",
-                            locationRegion,
-                            locationRegionValues,
-                            handleLocationRegionChange
                         )}
                     </label>
                 </div>
