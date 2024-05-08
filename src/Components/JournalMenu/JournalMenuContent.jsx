@@ -54,6 +54,7 @@ const JournalMenuContent = (props) => {
                 setDataNotifications={setDataNotifications}
                 campaign={campaign}
                 userAuthenticated={userAuthenticated}
+                changelog={changelog}
                 setChangelog={setChangelog}
             />
         );

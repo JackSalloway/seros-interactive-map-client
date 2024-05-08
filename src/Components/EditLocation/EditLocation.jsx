@@ -17,13 +17,14 @@ const EditLocation = (props) => {
         editMarkerLatLng,
         setEditMarkerType,
         map,
-        serosLocations,
-        setSerosLocations,
+        locations,
+        setLocations,
         dataNotifications,
         setDataNotifications,
         campaign,
         userAuthenticated,
-        setChangelogData,
+        changelog,
+        setChangelog,
     } = props;
 
     const [showGuide, setShowGuide] = useState(false);
@@ -86,19 +87,22 @@ const EditLocation = (props) => {
             init
         );
         const returnedData = await result.json();
-        let serosLocationsCopy = [...serosLocations];
-        serosLocationsCopy[markerBeingEdited] = returnedData.locationResult;
-        setSerosLocations(serosLocationsCopy);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+        let locationsCopy = [...locations];
+        locationsCopy[markerBeingEdited] = returnedData.locationResult;
+        setLocations(locationsCopy);
+
+        // Add notification showing that a location had been updated
+        const newNotification = {
             message: `Location: ${locationName}, successfully updated!`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
-        setMarkerBeingEdited(null);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult.changes]);
+
+        // Cleanup state values that cause edit location form to render
+        setMarkerBeingEdited(null);
     };
 
     // Type selection box variables
