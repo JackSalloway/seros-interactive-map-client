@@ -19,7 +19,8 @@ const SublocationNotes = (props) => {
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -28,17 +29,17 @@ const SublocationNotes = (props) => {
 
     // Update value states
     const [editing, setEditing] = useState(false);
-    const [updatedSubLocationName, setUpdatedSubLocationName] = useState(
+    const [updatedSublocationName, setUpdatedSublocationName] = useState(
         sublocation.name
     );
-    const [updatedSubLocationDescription, setUpdatedSubLocationDescription] =
+    const [updatedSublocationDescription, setUpdatedSublocationDescription] =
         useState(sublocation.description);
 
     useEffect(() => {
         // Reset update inputs on update form close
         if (editing === false) {
-            setUpdatedSubLocationName(he.decode(sublocation.name));
-            setUpdatedSubLocationDescription(
+            setUpdatedSublocationName(he.decode(sublocation.name));
+            setUpdatedSublocationDescription(
                 he.decode(sublocation.description)
             );
         }
@@ -84,22 +85,18 @@ const SublocationNotes = (props) => {
     const updateSubLocationData = async (e) => {
         e.preventDefault();
 
-        const subLocationData = {
-            location_id: locationNotes._id,
-            location_name: locationNotes.name,
-            sub_location_index: index,
-            sub_location_name: sublocation.name,
-            sub_location_desc: sublocation.description,
-            updated_sub_location_name: updatedSubLocationName,
-            updated_sub_location_desc: updatedSubLocationDescription,
-            location_campaign_id: campaign.campaign._id,
+        const data = {
+            sublocation_id: sublocation.id,
+            sublocation_name: updatedSublocationName,
+            sublocation_description: updatedSublocationDescription,
             username: username,
+            campaign_id: campaign.campaign_id,
         };
 
         const init = {
             method: "POST",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify(subLocationData),
+            body: JSON.stringify(data),
             mode: "cors",
             credentials: "include",
         };
@@ -109,26 +106,33 @@ const SublocationNotes = (props) => {
             init
         );
         const returnedData = await result.json();
-        let serosLocationsCopy = [...locations];
-        const indexToUpdate = serosLocationsCopy
-            .map((location) => location._id)
-            .indexOf(returnedData.subLocationResult._id);
-        const location = { ...serosLocationsCopy[indexToUpdate] };
-        location.sub_locations = [
-            ...returnedData.subLocationResult.sub_locations,
-        ];
-        serosLocationsCopy[indexToUpdate] = location;
-        setLocations(serosLocationsCopy);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
-            message: `Sub-location: ${updatedSubLocationName}, successfully updated!`,
+
+        // Update the relevant location with the new sublocation and set the locations array
+        // Find and update the correct sublocation
+        let locationCopy = locationNotes;
+        locationCopy.sublocations[index] = returnedData.sublocationResult;
+
+        // Find and update the correct location
+        let locationsCopy = [...locations];
+        const locationIndexToUpdate = locationsCopy
+            .map((location) => location.id)
+            .indexOf(locationNotes.id);
+        locationsCopy[locationIndexToUpdate].sublocations =
+            locationCopy.sublocations;
+        setLocations(locationsCopy);
+
+        // Add a new notification showing that a sublocation has been updated
+        const newNotification = {
+            message: `Sub-location: ${updatedSublocationName}, successfully updated!`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
-        setEditing(false);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
+
+        // Clean up state values that caused the edit form to render
+        setEditing(false);
     };
 
     // Edit icon has been clicked so render sub-location edit form
@@ -167,12 +171,12 @@ const SublocationNotes = (props) => {
                                 Sub Location Name:
                                 <input
                                     id="sub-location-name"
-                                    value={updatedSubLocationName}
+                                    value={updatedSublocationName}
                                     type="string"
                                     required
                                     placeholder="Sub-location name"
                                     onChange={({ target }) => {
-                                        setUpdatedSubLocationName(target.value);
+                                        setUpdatedSublocationName(target.value);
                                     }}
                                 />
                             </label>
@@ -183,12 +187,12 @@ const SublocationNotes = (props) => {
                                 Sub Location Description:
                                 <textarea
                                     id="sub-location-desc"
-                                    value={updatedSubLocationDescription}
+                                    value={updatedSublocationDescription}
                                     type="text"
                                     required
                                     placeholder="Sub-location description"
                                     onChange={({ target }) => {
-                                        setUpdatedSubLocationDescription(
+                                        setUpdatedSublocationDescription(
                                             target.value
                                         );
                                     }}
