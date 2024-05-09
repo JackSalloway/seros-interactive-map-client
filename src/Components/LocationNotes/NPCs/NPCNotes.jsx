@@ -15,13 +15,14 @@ const NPCNotes = (props) => {
         setDeleteData,
         questList,
         locationList,
-        serosNPCs,
-        setSerosNPCs,
+        npcs,
+        setNPCs,
         originalIndex,
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -38,7 +39,7 @@ const NPCNotes = (props) => {
     const [updatedNPCDescription, setUpdatedNPCDescription] = useState(
         npc.desc
     );
-    const [updatedNPCDispostion, setUpdatedNPCDisposition] = useState(
+    const [updatedNPCDisposition, setUpdatedNPCDisposition] = useState(
         npc.disposition
     );
     const [updatedNPCStatus, setUpdatedNPCStatus] = useState(npc.status);
@@ -152,7 +153,7 @@ const NPCNotes = (props) => {
         setUpdatedNPCQuests(
             quests.map((quest) => {
                 return {
-                    value: he.decode(quest.value),
+                    value: quest.value,
                     label: he.decode(quest.label),
                 };
             })
@@ -179,7 +180,7 @@ const NPCNotes = (props) => {
         setUpdatedNPCSelectedLocations(
             locations.map((location) => {
                 return {
-                    value: he.decode(location.value),
+                    value: location.value,
                     label: he.decode(location.label),
                 };
             })
@@ -205,25 +206,25 @@ const NPCNotes = (props) => {
     const updateNPCData = async (e) => {
         e.preventDefault();
 
-        const NPCData = {
+        const data = {
+            npc_id: npc.id,
             npc_name: updatedNPCName,
+            npc_description: updatedNPCDescription,
             npc_race: updatedNPCRace.value,
-            npc_desc: updatedNPCDescription,
-            npc_disposition: updatedNPCDispostion,
+            npc_disposition: updatedNPCDisposition,
             npc_status: updatedNPCStatus,
             npc_associated_locations: updatedNPCSelectedLocations.map(
                 (location) => location.value
             ),
             npc_quests: updatedNPCQuests.map((quest) => quest.value),
-            npc_campaign: campaign.campaign._id,
-            npc_id: npc._id,
+            campaign_id: campaign.campaign_id,
             username: username,
         };
 
         const init = {
             method: "POST",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify(NPCData),
+            body: JSON.stringify(data),
             mode: "cors",
             credentials: "include",
         };
@@ -233,19 +234,24 @@ const NPCNotes = (props) => {
             init
         );
         const returnedData = await result.json();
-        let serosNPCsCopy = [...serosNPCs];
-        serosNPCsCopy[originalIndex] = returnedData.npcResult;
-        setSerosNPCs(serosNPCsCopy);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+
+        // Update relevant npc in list of npcs
+        let npcsCopy = [...npcs];
+        npcsCopy[originalIndex] = returnedData.npcResult;
+        setNPCs(npcsCopy);
+
+        // Add a notification showing the npc has been updated
+        const newNotification = {
             message: `NPC: ${updatedNPCName}, successfully updated!`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
-        setEditing(false);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
+
+        // Clean up state values to cause npc edit form to de-render
+        setEditing(false);
     };
 
     if (editing === true) {
@@ -317,7 +323,7 @@ const NPCNotes = (props) => {
                                 NPC Disposition:
                                 <select
                                     name="disposition-status"
-                                    defaultValue={updatedNPCDispostion}
+                                    defaultValue={updatedNPCDisposition}
                                     id="npc-disposition"
                                     onChange={({ target }) => {
                                         setUpdatedNPCDisposition(target.value);
