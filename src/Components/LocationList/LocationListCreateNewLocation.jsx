@@ -43,7 +43,7 @@ const LocationListCreateNewLocation = (props) => {
             location_lat: creationMarkerLatLng[0],
             location_lng: creationMarkerLatLng[1],
             location_name: locationName,
-            location_desc: locationDescription,
+            location_description: locationDescription,
             location_region: locationRegion.value,
             location_type: locationType.value,
             location_marked: locationMarked,
