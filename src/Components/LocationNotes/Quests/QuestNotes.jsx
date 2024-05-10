@@ -18,11 +18,12 @@ const QuestNotes = (props) => {
         quests,
         setQuests,
         setQuestUpdated,
-        setSerosNPCs,
+        setNPCs,
         dataNotifications,
         setDataNotifications,
         campaign,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -41,11 +42,14 @@ const QuestNotes = (props) => {
         quest.completed
     );
     const [updatedQuestSelectedLocations, setUpdatedQuestSelectedLocations] =
-        useState({});
-    const [
-        updatedQuestSelectedLocationsData,
-        setUpdatedQuestSelectedLocationsData,
-    ] = useState([]);
+        useState(
+            quest.associated_locations.map((location) => {
+                return {
+                    value: location.id,
+                    name: he.decode(location.name),
+                };
+            })
+        );
 
     useEffect(() => {
         // Reset update inputs on initial render and update form close
@@ -53,11 +57,6 @@ const QuestNotes = (props) => {
             setUpdatedQuestName(he.decode(quest.name));
             setUpdatedQuestDescription(he.decode(quest.description));
             setUpdatedQuestStatus(quest.completed);
-            setUpdatedQuestSelectedLocations({
-                value: quest.location_id,
-                label: he.decode(quest.name),
-            });
-            // setUpdatedQuestSelectedLocationsData(quest.location_id);
             setUpdatedQuestSelectedLocations(
                 quest.associated_locations.map((location) => {
                     return {
@@ -107,11 +106,13 @@ const QuestNotes = (props) => {
 
         const questData = {
             quest_name: updatedQuestName,
-            quest_desc: updatedQuestDescription,
+            quest_description: updatedQuestDescription,
             quest_completed: updatedQuestStatus,
-            quest_associated_locations: updatedQuestSelectedLocationsData,
-            quest_campaign: campaign.campaign._id,
-            quest_id: quest._id,
+            quest_associated_locations: updatedQuestSelectedLocations.map(
+                (location) => location.value
+            ),
+            campaign_id: campaign.campaign_id,
+            quest_id: quest.id,
             username: username,
         };
 
@@ -128,30 +129,36 @@ const QuestNotes = (props) => {
             init
         );
         const returnedData = await result.json();
-        let questsCopy = [...quests];
+
         // The following assignment is needed due to how the latlng values were being returned as they were being returned like this:
         // {latlng: { lat: {$numberDecimal: LAT_VALUE}, lng: {$numberDecimal: LNG_VALUE} }}
         // I suspect this has something to do with the way the backend is returning the mongodb document - however this works for now.
-        returnedData.result.questResult.associated_locations[0].latlng = {
-            lat: returnedData.result.questResult.associated_locations[0].latlng
-                .lat.$numberDecimal,
-            lng: returnedData.result.questResult.associated_locations[0].latlng
-                .lng.$numberDecimal,
-        };
-        questsCopy[originalIndex] = returnedData.result.questResult;
+        // returnedData.result.questResult.associated_locations[0].latlng = {
+        //     lat: returnedData.result.questResult.associated_locations[0].latlng
+        //         .lat.$numberDecimal,
+        //     lng: returnedData.result.questResult.associated_locations[0].latlng
+        //         .lng.$numberDecimal,
+        // };
+
+        // Update the relevant quest and quest list state
+        let questsCopy = [...quests];
+        questsCopy[originalIndex] = returnedData.questResult;
         setQuests(questsCopy);
-        setSerosNPCs(returnedData.result.npcResult);
+        setNPCs(returnedData.npcResult);
         setQuestUpdated(true);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+
+        // Add a new notification showing a quest has been updated
+        const newNotification = {
             message: `Quest: ${updatedQuestName}, successfully updated!`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
-        setEditing(false);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
+
+        // Update state value and cause the edit form to de-render
+        setEditing(false);
     };
 
     // Function to handle changes in the selection box
@@ -164,9 +171,6 @@ const QuestNotes = (props) => {
                     label: he.decode(location.label),
                 };
             })
-        );
-        setUpdatedQuestSelectedLocationsData(
-            locations.map((location) => location.value)
         );
     };
 
