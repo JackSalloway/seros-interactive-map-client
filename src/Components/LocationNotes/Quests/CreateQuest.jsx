@@ -38,7 +38,7 @@ const CreateQuest = (props) => {
 
         const questData = {
             quest_name: newQuestName,
-            quest_desc: newQuestDesc,
+            quest_description: newQuestDesc,
             quest_completed: newQuestStatus,
             quest_associated_locations: newQuestSelectedLocations.map(
                 (location) => location.value
