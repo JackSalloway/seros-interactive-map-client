@@ -206,8 +206,8 @@ const QuestListNotes = (props) => {
                             }
                             setLocationNotes(
                                 locations
-                                    .map((serosLocation) => serosLocation._id)
-                                    .indexOf(location._id)
+                                    .map((location) => location.id)
+                                    .indexOf(location.id)
                             );
                         }}
                     >
