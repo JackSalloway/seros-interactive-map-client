@@ -262,17 +262,6 @@ const LocationListCreateNewLocation = (props) => {
                         )}
                     </label>
                 </div>
-                <div className="journal-create-new-location-input-div create-new-location-select-box">
-                    <label htmlFor="location-region">
-                        Region:
-                        {createSelectBox(
-                            "location-region",
-                            locationRegion,
-                            locationRegionValues,
-                            handleLocationRegionChange
-                        )}
-                    </label>
-                </div>
                 <div className="journal-create-new-location-visited-marked-wrapper">
                     <div>
                         <label htmlFor="visited">
