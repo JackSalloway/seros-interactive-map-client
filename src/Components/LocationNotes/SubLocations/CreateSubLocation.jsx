@@ -15,8 +15,6 @@ const CreateSubLocation = (props) => {
         username,
     } = props;
 
-    // console.log(locations);
-
     // Set states
     const [newSubLocationName, setNewSubLocationName] = useState("");
     const [newSubLocationDesc, setNewSubLocationDesc] = useState("");
@@ -53,7 +51,6 @@ const CreateSubLocation = (props) => {
             .map((location) => location.id)
             .indexOf(data.sublocationResult.location_id);
         const location = { ...locationsCopy[indexToUpdate] };
-        console.log(data.sublocationResult);
         location.sublocations = [
             ...location.sublocations,
             data.sublocationResult,
