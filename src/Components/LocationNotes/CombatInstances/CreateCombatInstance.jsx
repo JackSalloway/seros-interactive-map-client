@@ -66,7 +66,7 @@ const CreateCombatInstance = (props) => {
 
         const instanceData = {
             instance_name: instanceName,
-            instance_desc: instanceDescription,
+            instance_description: instanceDescription,
             instance_details: instancePlayerDetails,
             instance_location_id: locationNotes.id,
             instance_location_name: locationNotes.name,
