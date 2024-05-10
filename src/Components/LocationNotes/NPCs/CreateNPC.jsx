@@ -46,7 +46,7 @@ const CreateNPC = (props) => {
         const NPCData = {
             npc_name: newNPCName,
             npc_race: newNPCRace,
-            npc_desc: newNPCDesc,
+            npc_description: newNPCDesc,
             npc_disposition: newNPCDisposition,
             npc_status: newNPCStatus,
             npc_associated_locations: newNPCSelectedLocations.map(
