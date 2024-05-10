@@ -5,35 +5,36 @@ import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const DeleteSubLocation = (props) => {
     const {
-        data,
+        deleteData,
         setDeleteData,
         selectedLocationNotes,
-        serosLocations,
-        setSerosLocations,
+        locations,
+        setLocations,
         dataNotifications,
         setDataNotifications,
         username,
-        setChangelogData,
+        changelog,
+        setChangelog,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
     const [deleteDisabled, setDeleteDisabled] = useState(false);
 
     useEffect(() => {
-        if (deletionString === he.decode(data.name)) {
+        if (deletionString === he.decode(deleteData.name)) {
             setDeleteDisabled(true);
         } else {
             setDeleteDisabled(false);
         }
-    }, [data.name, deletionString]);
+    }, [deleteData, deletionString]);
 
-    const deleteData = async (e) => {
+    const deleteSublocation = async (e) => {
         e.preventDefault();
 
         const dataToDelete = {
-            location_id: selectedLocationNotes._id,
-            sub_location_name: data.name,
-            location_campaign_id: selectedLocationNotes.campaign,
+            sublocation_id: deleteData.id,
+            sublocation_name: deleteData.name,
+            campaign_id: selectedLocationNotes.campaign.id,
             username: username,
         };
 
@@ -45,30 +46,43 @@ const DeleteSubLocation = (props) => {
             credentials: "include",
         };
         const result = await fetch(
-            `${process.env.REACT_APP_API_URL}/delete_sub_location`,
+            `${process.env.REACT_APP_API_URL}/delete_sublocation`,
             init
         );
         const returnedData = await result.json();
-        let serosLocationsCopy = [...serosLocations];
-        const indexToUpdate = serosLocationsCopy
-            .map((location) => location._id)
-            .indexOf(returnedData.subLocationResult._id);
-        const location = { ...serosLocationsCopy[indexToUpdate] };
-        location.sub_locations = [
-            ...returnedData.subLocationResult.sub_locations,
-        ];
-        serosLocationsCopy[indexToUpdate] = location;
-        setSerosLocations(serosLocationsCopy);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
-            message: `Sub-location: ${data.name}, successfully deleted.`,
+
+        // Find the index of the location that is being modified
+        let locationsCopy = [...locations];
+        const locationIndexToUpdate = locationsCopy
+            .map((location) => location.id)
+            .indexOf(selectedLocationNotes.id);
+
+        const location = { ...locationsCopy[locationIndexToUpdate] };
+
+        // Find the index of the sublocation that is being removed
+        const sublocationIndexToRemove = locationsCopy
+            .map((location) => location.sublocations)
+            [locationIndexToUpdate].map((sublocation) => sublocation.id)
+            .indexOf(returnedData.sublocation_id);
+
+        // Remove the sublocation from the relevant location
+        location.sublocations.splice(sublocationIndexToRemove, 1);
+        locationsCopy[locationIndexToUpdate] = location;
+        console.log(locationsCopy);
+        setLocations(locationsCopy);
+
+        // Add a new notification showing a sublocation has been deleted
+        const newNotification = {
+            message: `Sub-location: ${deleteData.name}, successfully deleted.`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
-        setDeleteData(null);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
+
+        // De-render DeletionModal component
+        setDeleteData(null);
     };
 
     return (
@@ -87,7 +101,7 @@ const DeleteSubLocation = (props) => {
                     <p>
                         Are you sure you want to delete the{" "}
                         <span className="data-to-delete">
-                            {he.decode(data.name)}
+                            {he.decode(deleteData.name)}
                         </span>{" "}
                         sub location?
                     </p>
@@ -101,12 +115,12 @@ const DeleteSubLocation = (props) => {
                     <p>
                         Please type{" "}
                         <span className="data-to-delete">
-                            {he.decode(data.name)}
+                            {he.decode(deleteData.name)}
                         </span>{" "}
                         to confirm.
                     </p>
                 </div>
-                <form onSubmit={deleteData} id="deletion-modal-form">
+                <form onSubmit={deleteSublocation} id="deletion-modal-form">
                     <input
                         type="text"
                         onChange={({ target }) => {
