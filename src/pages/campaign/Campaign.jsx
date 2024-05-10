@@ -259,7 +259,7 @@ const Campaign = () => {
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (
                 <DeletionModal
-                    data={deleteData}
+                    deleteData={deleteData}
                     setDeleteData={setDeleteData}
                     selectedLocationNotes={
                         locations?.[selectedLocationNotes] || null
@@ -273,6 +273,7 @@ const Campaign = () => {
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     username={user.username}
+                    changelog={changelog}
                     setChangelog={setChangelog}
                 />
             ) : null}

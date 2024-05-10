@@ -9,89 +9,94 @@ import DeleteQuest from "./DeleteQuest";
 
 const DeletionModal = (props) => {
     const {
-        data,
+        deleteData,
         setDeleteData,
         selectedLocationNotes,
-        serosLocations,
-        setSerosLocations,
-        serosNPCs,
-        setSerosNPCs,
-        serosQuests,
-        setSerosQuests,
+        locations,
+        setLocations,
+        npcs,
+        setNPCs,
+        quests,
+        setQuests,
         dataNotifications,
         setDataNotifications,
         username,
-        setChangelogData,
+        changelog,
+        setChangelog,
     } = props;
 
     const [dataType, setDataType] = useState(null);
 
     useEffect(() => {
-        if (Object.hasOwn(data, "marked") === true) {
+        if (Object.hasOwn(deleteData, "marked") === true) {
             setDataType("Location");
-        } else if (Object.hasOwn(data, "disposition") === true) {
+        } else if (Object.hasOwn(deleteData, "disposition") === true) {
             setDataType("NPC");
-        } else if (Object.hasOwn(data, "completed") === true) {
+        } else if (Object.hasOwn(deleteData, "completed") === true) {
             setDataType("Quest");
         } else {
             setDataType("Sub Location");
         }
-    }, [data]);
+    }, [deleteData]);
 
     if (dataType === "Location") {
         return (
             <DeleteLocation
-                data={data}
+                deleteData={deleteData}
                 setDeleteData={setDeleteData}
-                serosLocations={serosLocations}
-                setSerosLocations={setSerosLocations}
-                setSerosNPCs={setSerosNPCs}
-                setSerosQuests={setSerosQuests}
+                locations={locations}
+                setLocations={setLocations}
+                setNPCs={setNPCs}
+                setQuests={setQuests}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
-                setChangelogData={setChangelogData}
+                changelog={changelog}
+                setChangelog={setChangelog}
             />
         );
     } else if (dataType === "NPC") {
         return (
             <DeleteNPC
-                data={data}
+                deleteData={deleteData}
                 setDeleteData={setDeleteData}
-                serosNPCs={serosNPCs}
-                setSerosNPCs={setSerosNPCs}
+                npcs={npcs}
+                setNPCs={setNPCs}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
-                setChangelogData={setChangelogData}
+                changelog={changelog}
+                setChangelog={setChangelog}
             />
         );
     } else if (dataType === "Quest") {
         return (
             <DeleteQuest
-                data={data}
+                deleteData={deleteData}
                 setDeleteData={setDeleteData}
-                serosQuests={serosQuests}
-                setSerosQuests={setSerosQuests}
-                setSerosNPCs={setSerosNPCs}
+                quests={quests}
+                setQuests={setQuests}
+                setNPCs={setNPCs}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
-                setChangelogData={setChangelogData}
+                changelog={changelog}
+                setChangelog={setChangelog}
             />
         );
     } else if (dataType === "Sub Location") {
         return (
             <DeleteSubLocation
-                data={data}
+                deleteData={deleteData}
                 setDeleteData={setDeleteData}
                 selectedLocationNotes={selectedLocationNotes}
-                serosLocations={serosLocations}
-                setSerosLocations={setSerosLocations}
+                locations={locations}
+                setLocations={setLocations}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
-                setChangelogData={setChangelogData}
+                changelog={changelog}
+                setChangelog={setChangelog}
             />
         );
     }
