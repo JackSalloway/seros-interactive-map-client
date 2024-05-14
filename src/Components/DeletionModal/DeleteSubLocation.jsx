@@ -68,7 +68,6 @@ const DeleteSubLocation = (props) => {
         // Remove the sublocation from the relevant location
         location.sublocations.splice(sublocationIndexToRemove, 1);
         locationsCopy[locationIndexToUpdate] = location;
-        console.log(locationsCopy);
         setLocations(locationsCopy);
 
         // Add a new notification showing a sublocation has been deleted
