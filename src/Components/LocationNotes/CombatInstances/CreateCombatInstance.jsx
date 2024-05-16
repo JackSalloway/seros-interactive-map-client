@@ -71,9 +71,11 @@ const CreateCombatInstance = (props) => {
             instance_location_id: locationNotes.id,
             instance_location_name: locationNotes.name,
             instance_location_latlng: locationNotes.latlng,
-            instance_campaign_id: campaign.campaign_id,
+            instance_campaign_id: campaign.id,
             username: username,
         };
+
+        console.log(instanceData);
 
         const init = {
             method: "POST",
@@ -89,6 +91,8 @@ const CreateCombatInstance = (props) => {
             init
         );
         const returnedData = await result.json();
+
+        console.log(returnedData);
 
         setCombatInstances([
             ...combatInstances,

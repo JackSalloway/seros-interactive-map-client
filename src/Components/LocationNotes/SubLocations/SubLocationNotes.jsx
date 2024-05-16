@@ -90,7 +90,7 @@ const SublocationNotes = (props) => {
             sublocation_name: updatedSublocationName,
             sublocation_description: updatedSublocationDescription,
             username: username,
-            campaign_id: campaign.campaign_id,
+            campaign_id: campaign.id,
         };
 
         const init = {

@@ -111,7 +111,7 @@ const QuestNotes = (props) => {
             quest_associated_locations: updatedQuestSelectedLocations.map(
                 (location) => location.value
             ),
-            campaign_id: campaign.campaign_id,
+            campaign_id: campaign.id,
             quest_id: quest.id,
             username: username,
         };

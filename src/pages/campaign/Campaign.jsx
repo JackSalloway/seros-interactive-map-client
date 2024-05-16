@@ -21,7 +21,7 @@ const Campaign = () => {
 
     // Retrieve selected campaign data
     const campaign = user.campaigns.filter(
-        (campaign) => campaign.campaign_id === campaignId
+        (campaign) => campaign.id === campaignId
     )[0];
 
     // Data states

@@ -161,10 +161,10 @@ const DashboardWrapper = (props) => {
                 ? campaigns.map((campaign, index) => {
                       return (
                           <Banner
-                              key={campaign.campaign_id}
-                              name={campaign.campaign_name}
-                              description={campaign.campaign_description}
-                              campaignID={campaign.campaign_id}
+                              key={campaign.id}
+                              name={campaign.name}
+                              description={campaign.description}
+                              campaignID={campaign.id}
                               adminRights={campaign.admin}
                               renderCampaignForm={renderCampaignForm} // Used to disable campaign settings/deletion buttons if campaign creation form is open
                               userAuthenticated={userAuthenticated}
