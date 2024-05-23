@@ -48,7 +48,7 @@ const LocationListCreateNewLocation = (props) => {
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
-            location_campaign_id: campaign.campaign_id,
+            campaign_id: campaign.id,
             username: userAuthenticated.username,
         };
 
