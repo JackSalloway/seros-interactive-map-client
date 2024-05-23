@@ -78,7 +78,7 @@ const DeleteSubLocation = (props) => {
         setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
 
         // De-render DeletionModal component
         setDeleteData(null);
