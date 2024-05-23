@@ -92,8 +92,6 @@ const CreateCombatInstance = (props) => {
         );
         const returnedData = await result.json();
 
-        console.log(returnedData);
-
         setCombatInstances([
             ...combatInstances,
             returnedData.newCombatInstance,
