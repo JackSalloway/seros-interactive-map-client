@@ -5,14 +5,15 @@ import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const DeleteQuest = (props) => {
     const {
-        data,
+        deleteData,
         setDeleteData,
-        serosQuests,
-        setSerosQuests,
-        setSerosNPCs,
+        quests,
+        setQuests,
+        setNPCs,
         dataNotifications,
         setDataNotifications,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -20,21 +21,21 @@ const DeleteQuest = (props) => {
     const [deleteDisabled, setDeleteDisabled] = useState(false);
 
     useEffect(() => {
-        if (deletionString === he.decode(data.name)) {
+        if (deletionString === he.decode(deleteData.name)) {
             setDeleteDisabled(true);
         } else {
             setDeleteDisabled(false);
         }
-    }, [data.name, deletionString]);
+    }, [deleteData.name, deletionString]);
 
-    const deleteData = async (e) => {
+    const deleteQuest = async (e) => {
         e.preventDefault();
 
         const dataToDelete = {
-            quest_name: data.name,
-            quest_id: data._id,
+            quest_name: deleteData.name,
+            quest_id: deleteData.id,
             username: username,
-            quest_campaign: data.campaign,
+            campaign_id: deleteData.campaign.id,
         };
 
         const init = {
@@ -49,23 +50,30 @@ const DeleteQuest = (props) => {
             init
         );
         const returnedData = await result.json(); // returnedData is the list of NPCs, need to do this as deleting quests could affect npcs.
-        const serosQuestsCopy = [...serosQuests];
-        const questToRemove = serosQuests
-            .map((quest) => quest._id)
-            .indexOf(data._id);
-        serosQuestsCopy.splice(questToRemove, 1);
-        setSerosQuests(serosQuestsCopy);
-        setSerosNPCs(returnedData.npcResult);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
-            message: `Quest: ${data.name}, successfully deleted.`,
+
+        // Remove quest from quest list
+        const questsCopy = [...quests];
+        const questToRemove = quests
+            .map((quest) => quest.id)
+            .indexOf(deleteData.id);
+        questsCopy.splice(questToRemove, 1);
+        setQuests(questsCopy);
+
+        // Update npcs
+        setNPCs(returnedData.npcResult);
+
+        // Add a new notification showing a quest has been deleted
+        const newNotification = {
+            message: `Quest: ${deleteData.name}, successfully deleted.`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
-        setDeleteData(null);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
+
+        // De-render DeletionModal component
+        setDeleteData(null);
     };
 
     return (
@@ -84,26 +92,26 @@ const DeleteQuest = (props) => {
                     <p>
                         Are you sure you want to delete the{" "}
                         <span className="data-to-delete">
-                            {he.decode(data.name)}
+                            {he.decode(deleteData.name)}
                         </span>{" "}
                         quest?
                     </p>
                     <p>
                         This action cannot be undone. This will permanently
                         delete the quest data and any relations it has to other
-                        data.
+                        deleteData.
                     </p>
                 </div>
                 <div id="deletion-modal-p">
                     <p>
                         Please type{" "}
                         <span className="data-to-delete">
-                            {he.decode(data.name)}
+                            {he.decode(deleteData.name)}
                         </span>{" "}
                         to confirm.
                     </p>
                 </div>
-                <form onSubmit={deleteData} id="deletion-modal-form">
+                <form onSubmit={deleteQuest} id="deletion-modal-form">
                     <input
                         type="text"
                         onChange={({ target }) => {
