@@ -22,9 +22,6 @@ const CreateNPC = (props) => {
         username,
     } = props;
 
-    // console.log(locationList);
-    // console.log(questList);
-
     // Set states
     const [newNPCName, setNewNPCName] = useState("");
     const [newNPCRace, setNewNPCRace] = useState("");
