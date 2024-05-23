@@ -6,6 +6,7 @@ import DeleteLocation from "./DeleteLocation";
 import DeleteSubLocation from "./DeleteSubLocation";
 import DeleteNPC from "./DeleteNPC";
 import DeleteQuest from "./DeleteQuest";
+import DeleteCombatInstance from "./DeleteCombatInstance";
 
 const DeletionModal = (props) => {
     const {
@@ -18,6 +19,8 @@ const DeletionModal = (props) => {
         setNPCs,
         quests,
         setQuests,
+        combatInstances,
+        setCombatInstances,
         dataNotifications,
         setDataNotifications,
         username,
@@ -34,6 +37,8 @@ const DeletionModal = (props) => {
             setDataType("NPC");
         } else if (Object.hasOwn(deleteData, "completed") === true) {
             setDataType("Quest");
+        } else if (Object.hasOwn(deleteData, "players") === true) {
+            setDataType("Combat Instance");
         } else {
             setDataType("Sub Location");
         }
@@ -82,6 +87,20 @@ const DeletionModal = (props) => {
                 username={username}
                 changelog={changelog}
                 setChangelog={setChangelog}
+            />
+        );
+    } else if (dataType === "Combat Instance") {
+        return (
+            <DeleteCombatInstance
+                deleteData={deleteData}
+                setDeleteData={setDeleteData}
+                combatInstances={combatInstances}
+                setCombatInstances={setCombatInstances}
+                dataNotifications={dataNotifications}
+                setDataNotifications={setDataNotifications}
+                changelog={changelog}
+                setChangelog={setChangelog}
+                username={username}
             />
         );
     } else if (dataType === "Sub Location") {

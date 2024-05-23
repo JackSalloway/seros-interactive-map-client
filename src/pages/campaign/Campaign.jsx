@@ -270,6 +270,8 @@ const Campaign = () => {
                     setNPCs={setNPCs}
                     quests={quests}
                     setQuests={setQuests}
+                    combatInstances={combatInstances}
+                    setCombatInstances={setCombatInstances}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     username={user.username}
