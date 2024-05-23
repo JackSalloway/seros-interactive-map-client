@@ -105,7 +105,7 @@ const CreateCombatInstance = (props) => {
         setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog values
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
 
         // De-render the new instance form
         setAddNewInstance(false);

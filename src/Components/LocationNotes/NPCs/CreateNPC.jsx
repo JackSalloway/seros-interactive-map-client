@@ -81,7 +81,7 @@ const CreateNPC = (props) => {
         setAddNewNPC(false);
 
         // Update changelog
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
     };
 
     // Function to handle changes inside the npc race selection box

@@ -67,7 +67,7 @@ const CreateSubLocation = (props) => {
         setAddNewSubLocation(false);
 
         // Update changelog showing the newly created sublocation
-        setChangelog([...changelog, data.changelogResult]);
+        setChangelog([...changelog, ...data.changelogResult]);
     };
 
     // Render sub location form

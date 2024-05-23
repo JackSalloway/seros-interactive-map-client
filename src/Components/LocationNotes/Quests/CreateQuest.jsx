@@ -75,7 +75,7 @@ const CreateQuest = (props) => {
         setAddNewQuest(false);
 
         // Update changelog
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
     };
 
     // Function to handle changes in the selection box

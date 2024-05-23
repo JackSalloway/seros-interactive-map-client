@@ -78,7 +78,7 @@ const LocationListCreateNewLocation = (props) => {
         setRenderCreationMarker(false);
         setCreationMarkerLatLng([0, 0]);
         setCreationMarkerType("miscellaneous");
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
     };
 
     // Type selection box variables
