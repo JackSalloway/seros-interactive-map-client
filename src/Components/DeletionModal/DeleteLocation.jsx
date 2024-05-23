@@ -5,16 +5,18 @@ import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const DeleteLocation = (props) => {
     const {
-        data,
+        deleteData,
         setDeleteData,
-        serosLocations,
-        setSerosLocations,
-        setSerosNPCs, // This would be for removing associated locations from NPCs after deleting a location
-        setSerosQuests, // This would be for removing assocaited locations from Quests after deleting a location
+        locations,
+        setLocations,
+        setNPCs, // This would be for removing associated locations from NPCs after deleting a location
+        setQuests, // This would be for removing assocaited locations from Quests after deleting a location
+        setCombatInstances,
         dataNotifications,
         setDataNotifications,
         username,
-        setChangelogData,
+        changelog,
+        setChangelog,
     } = props;
 
     const [deletionString, setDeletionString] = useState("");
@@ -23,20 +25,23 @@ const DeleteLocation = (props) => {
     const deleteLocationString = "DELETE-LOCATION: "; // Wanted to do this as deleting a location is quite a serious thing.
 
     useEffect(() => {
-        if (deletionString === deleteLocationString + he.decode(data.name)) {
+        if (
+            deletionString ===
+            deleteLocationString + he.decode(deleteData.name)
+        ) {
             setDeleteDisabled(true);
         } else {
             setDeleteDisabled(false);
         }
-    }, [data.name, deletionString]);
+    }, [deleteData, deletionString]);
 
-    const deleteData = async (e) => {
+    const deleteLocation = async (e) => {
         e.preventDefault();
 
         const dataToDelete = {
-            location_id: data._id,
-            location_campaign_id: data.campaign,
-            location_name: data.name,
+            location_id: deleteData.id,
+            campaign_id: deleteData.campaign.id,
+            location_name: deleteData.name,
             username: username,
         };
 
@@ -52,27 +57,36 @@ const DeleteLocation = (props) => {
             init
         );
         const returnedData = await result.json();
-        let serosLocationsCopy = [...serosLocations];
-        const indexToRemove = serosLocationsCopy
-            .map((location) => location._id)
-            .indexOf(data._id);
-        // const location = { ...serosLocationsCopy[indexToUpdate] };
-        // location.sub_locations = [...returnedData.sub_locations];
-        // serosLocationsCopy[indexToUpdate] = location;
-        serosLocationsCopy.splice(indexToRemove, 1);
-        setSerosLocations(serosLocationsCopy);
-        setSerosNPCs([...returnedData.updatedNPCList]);
-        setSerosQuests([...returnedData.updatedQuestList]);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
-            message: `Location: ${data.name}, successfully deleted.`,
+
+        // Remove relevant location from location list
+        let locationsCopy = [...locations];
+        const indexToRemove = locationsCopy
+            .map((location) => location.id)
+            .indexOf(deleteData.id);
+        locationsCopy.splice(indexToRemove, 1);
+        setLocations(locationsCopy);
+
+        // Update npc list
+        setNPCs(returnedData.npcResult);
+
+        // Update quest list
+        setQuests(returnedData.questResult);
+
+        // Update combat instance list
+        setCombatInstances(returnedData.combatInstanceResult);
+
+        // Add a new notification showing that a location has been successfully deleted
+        const newNotification = {
+            message: `Location: ${deleteData.name}, successfully deleted.`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
-        setDeleteData(null);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelogData
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
+
+        // Update state to cause deletion modal to de-render
+        setDeleteData(null);
     };
 
     return (
@@ -91,7 +105,7 @@ const DeleteLocation = (props) => {
                     <p>
                         Are you sure you want to delete the{" "}
                         <span className="data-to-delete">
-                            {he.decode(data.name)}
+                            {he.decode(deleteData.name)}
                         </span>{" "}
                         location?
                     </p>
@@ -141,12 +155,12 @@ const DeleteLocation = (props) => {
                     <p>
                         Please type{" "}
                         <span className="data-to-delete">
-                            {deleteLocationString + he.decode(data.name)}
+                            {deleteLocationString + he.decode(deleteData.name)}
                         </span>{" "}
                         to confirm.
                     </p>
                 </div>
-                <form onSubmit={deleteData} id="deletion-modal-form">
+                <form onSubmit={deleteLocation} id="deletion-modal-form">
                     <input
                         type="text"
                         onChange={({ target }) => {

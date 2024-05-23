@@ -53,6 +53,7 @@ const DeletionModal = (props) => {
                 setLocations={setLocations}
                 setNPCs={setNPCs}
                 setQuests={setQuests}
+                setCombatInstances={setCombatInstances}
                 dataNotifications={dataNotifications}
                 setDataNotifications={setDataNotifications}
                 username={username}
