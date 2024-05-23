@@ -5,13 +5,14 @@ import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 
 const DeleteNPC = (props) => {
     const {
-        data,
+        deleteData,
         setDeleteData,
-        serosNPCs,
-        setSerosNPCs,
+        npcs,
+        setNPCs,
         dataNotifications,
         setDataNotifications,
-        setChangelogData,
+        changelog,
+        setChangelog,
         username,
     } = props;
 
@@ -19,21 +20,21 @@ const DeleteNPC = (props) => {
     const [deleteDisabled, setDeleteDisabled] = useState(false);
 
     useEffect(() => {
-        if (deletionString === he.decode(data.name)) {
+        if (deletionString === he.decode(deleteData.name)) {
             setDeleteDisabled(true);
         } else {
             setDeleteDisabled(false);
         }
-    }, [data.name, deletionString]);
+    }, [deleteData.name, deletionString]);
 
-    const deleteData = async (e) => {
+    const deleteNPC = async (e) => {
         e.preventDefault();
 
         const dataToDelete = {
-            npc_name: data.name,
-            npc_id: data._id,
+            npc_name: deleteData.name,
+            npc_id: deleteData.id,
             username: username,
-            npc_campaign: data.campaign,
+            campaign_id: deleteData.campaign.id,
         };
 
         const init = {
@@ -48,21 +49,25 @@ const DeleteNPC = (props) => {
             init
         );
         const returnedData = await result.json();
-        // setSerosNPCs(returnedData);
-        let serosNPCsCopy = [...serosNPCs];
-        const npcToRemove = serosNPCs.map((npc) => npc._id).indexOf(data._id);
-        serosNPCsCopy.splice(npcToRemove, 1);
-        setSerosNPCs(serosNPCsCopy);
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
-            message: `NPC: ${data.name}, successfully deleted.`,
+
+        // setNPCs(returnedData);
+        let npcsCopy = [...npcs];
+        const npcToRemove = npcs.map((npc) => npc.id).indexOf(deleteData.id);
+        npcsCopy.splice(npcToRemove, 1);
+        setNPCs(npcsCopy);
+
+        // Add a new notification showing an npc has been deleted
+        const newNotification = {
+            message: `NPC: ${deleteData.name}, successfully deleted.`,
             important: false,
-        });
-        setDataNotifications(notificationsCopy);
-        setDeleteData(null);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelogData(returnedData.changelogResult.changes);
+        setChangelog([...changelog, returnedData.changelogResult]);
+
+        // De-render DeletionModal component
+        setDeleteData(null);
     };
 
     return (
@@ -81,26 +86,26 @@ const DeleteNPC = (props) => {
                     <p>
                         Are you sure you want to delete{" "}
                         <span className="data-to-delete">
-                            {he.decode(data.name)}
+                            {he.decode(deleteData.name)}
                         </span>
                         ?
                     </p>
                     <p>
                         This action cannot be undone. This will permanently
                         delete the NPC data and any relations it has to other
-                        data.
+                        deleteData.
                     </p>
                 </div>
                 <div id="deletion-modal-p">
                     <p>
                         Please type{" "}
                         <span className="data-to-delete">
-                            {he.decode(data.name)}
+                            {he.decode(deleteData.name)}
                         </span>{" "}
                         to confirm.
                     </p>
                 </div>
-                <form onSubmit={deleteData} id="deletion-modal-form">
+                <form onSubmit={deleteNPC} id="deletion-modal-form">
                     <input
                         type="text"
                         onChange={({ target }) => {
