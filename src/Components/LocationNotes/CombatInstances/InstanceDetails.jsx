@@ -65,13 +65,14 @@ const InstanceDetails = (props) => {
                 label: newCharacterName,
             },
         ]);
+
         // Add notification to let user know new character has been added
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+        const newNotification = {
             message: `${newCharacterName} has been added to the select players list!`,
             important: false,
-        });
-        setDataNotifications([...notificationsCopy]);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
+
         // De-render AddNewCharacter component and reset all relevant state values
         setRenderNewCharacterForm(false);
         setNewCharacterName("");
