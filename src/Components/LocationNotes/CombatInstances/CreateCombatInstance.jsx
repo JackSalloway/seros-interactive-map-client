@@ -75,8 +75,6 @@ const CreateCombatInstance = (props) => {
             username: username,
         };
 
-        console.log(instanceData);
-
         const init = {
             method: "POST",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
