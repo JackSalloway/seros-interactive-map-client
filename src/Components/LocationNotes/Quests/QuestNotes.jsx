@@ -145,7 +145,7 @@ const QuestNotes = (props) => {
         setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
 
         // Update state value and cause the edit form to de-render
         setEditing(false);

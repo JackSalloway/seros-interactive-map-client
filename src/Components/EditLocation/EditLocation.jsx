@@ -99,7 +99,7 @@ const EditLocation = (props) => {
         setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
 
         // Cleanup state values that cause edit location form to render
         setMarkerBeingEdited(null);

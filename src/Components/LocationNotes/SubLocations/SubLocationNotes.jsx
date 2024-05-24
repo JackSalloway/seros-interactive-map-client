@@ -129,7 +129,7 @@ const SublocationNotes = (props) => {
         setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
 
         // Clean up state values that caused the edit form to render
         setEditing(false);

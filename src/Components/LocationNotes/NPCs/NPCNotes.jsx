@@ -248,7 +248,7 @@ const NPCNotes = (props) => {
         setDataNotifications([...dataNotifications, newNotification]);
 
         // Update changelog
-        setChangelog([...changelog, returnedData.changelogResult]);
+        setChangelog([...changelog, ...returnedData.changelogResult]);
 
         // Clean up state values to cause npc edit form to de-render
         setEditing(false);
