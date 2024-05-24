@@ -79,6 +79,14 @@ const CombatInstancesWrapper = (props) => {
                                     key={instance.instanceData.id}
                                     instance={instance.instanceData}
                                     setDeleteData={setDeleteData}
+                                    changelog={changelog}
+                                    setChangelog={setChangelog}
+                                    combatInstances={combatInstances}
+                                    setCombatInstances={setCombatInstances}
+                                    dataNotifications={dataNotifications}
+                                    setDataNotifications={setDataNotifications}
+                                    players={players}
+                                    setPlayers={setPlayers}
                                 />
                             );
                         })}

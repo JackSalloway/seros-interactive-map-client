@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import Separator from "../Separator/Separator";
 import PlayerBar from "./PlayerBar";
 import { splitParas } from "../../../imports/imports";
+import EditCombatInstance from "./EditCombatInstance/EditCombatInstance";
 
 import "./CombatInstanceNotes.css";
 
@@ -29,7 +30,18 @@ function compareHealing(a, b) {
 }
 
 const CombatInstanceNotes = (props) => {
-    const { instance, setDeleteData } = props;
+    const {
+        instance,
+        setDeleteData,
+        changelog,
+        setChangelog,
+        combatInstances,
+        setCombatInstances,
+        dataNotifications,
+        setDataNotifications,
+        players,
+        setPlayers,
+    } = props;
 
     const totalTurns = instance.players[0].turns.length;
 
@@ -155,8 +167,7 @@ const CombatInstanceNotes = (props) => {
         );
     }
 
-    // Combat instance has been selected
-    return (
+    const openCombatInstance = (
         <div className="location-notes-details">
             <div
                 className="location-notes-details-border top"
@@ -309,6 +320,33 @@ const CombatInstanceNotes = (props) => {
             />
         </div>
     );
+
+    // Combat instance has been selected
+    return !editing ? (
+        openCombatInstance
+    ) : (
+        <EditCombatInstance
+            instance={instance}
+            changelog={changelog}
+            setChangelog={setChangelog}
+            combatInstances={combatInstances}
+            setCombatInstances={setCombatInstances}
+            dataNotifications={dataNotifications}
+            setDataNotifications={setDataNotifications}
+            players={players}
+            setPlayers={setPlayers}
+            setEditing={setEditing}
+        />
+    );
 };
+
+// changelog,
+//         setChangelog,
+//         combatInstances,
+//         setCombatInstances,
+//         dataNotifications,
+//         setDataNotifications,
+//         players,
+//         setPlayers,
 
 export default CombatInstanceNotes;
