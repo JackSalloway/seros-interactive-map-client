@@ -39,6 +39,7 @@ const EditCombatInstance = (props) => {
                         name: player.name,
                         class: player.class,
                         turns: player.turns,
+                        removedTurns: [],
                     },
                     label: player.name,
                 };
@@ -75,6 +76,7 @@ const EditCombatInstance = (props) => {
                                         healing: 0,
                                     };
                                 }),
+                            removedTurns: [],
                         },
                         label: player.name,
                     };
@@ -91,19 +93,7 @@ const EditCombatInstance = (props) => {
 
     // Function to handle changes inside the player selection box
     const handleSelectedPlayersChange = (selectedPlayerList) => {
-        setInstancePlayerDetailsSelect(
-            selectedPlayerList.map((player) => {
-                // Add right amount of turns for damage and healing arrays.
-                // if (player.value.turns.damage.length !== turns.length) {
-                //     player.value.turns.length = turns.length;
-                //     player.value.turns.damage.fill(0);
-                //     player.value.turns.length = turns.length;
-                //     player.value.turns.healing.fill(0);
-                // }
-
-                return player;
-            })
-        );
+        setInstancePlayerDetailsSelect(selectedPlayerList);
     };
 
     const updateInstanceData = () => {

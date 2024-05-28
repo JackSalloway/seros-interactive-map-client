@@ -18,11 +18,17 @@ const UpdatedTurnStats = (props) => {
         // Add another value to both damage and healing arrays for all characters
         const instancePlayerDetailsCopy = instancePlayerDetails;
         instancePlayerDetailsCopy.map((player) => {
-            player.turns.push({
-                turn_number: turns.length,
-                damage: 0,
-                healing: 0,
-            });
+            // Check if any turns have been removed whilst editing - Done this to keep any values from turns that have previously been removed
+            if (player.removedTurns.length > 0) {
+                player.turns.push(player.removedTurns.pop());
+            } else {
+                player.turns.push({
+                    turn_number: turns.length,
+                    damage: 0,
+                    healing: 0,
+                });
+            }
+
             return player;
         });
         setInstancePlayerDetails(instancePlayerDetailsCopy);
@@ -30,16 +36,19 @@ const UpdatedTurnStats = (props) => {
     const removeTurn = () => {
         // Prevent user removing turns if only one turn exists
         if (turns.length === 1) return;
+
         // Update the current turn state value if the user is on the last turn
         if (currentTurn === turns.length - 1) setCurrentTurn(currentTurn - 1);
+
         // Remove the last index from the turns array
         const turnsCopy = turns;
         turnsCopy.pop();
         setTurns([...turnsCopy]);
-        // Remove last index from player damage / healing arrays
+
+        // Remove last index from player turns array and add it to the removedTurns array on the player object
         const instancePlayerDetailsCopy = instancePlayerDetails;
         instancePlayerDetailsCopy.map((player) => {
-            player.turns.pop();
+            player.removedTurns.push(player.turns.pop());
             return player;
         });
         setInstancePlayerDetails(instancePlayerDetailsCopy);
