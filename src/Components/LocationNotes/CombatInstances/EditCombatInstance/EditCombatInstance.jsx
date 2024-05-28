@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { CONTENT_TYPE_APPLICATION_JSON } from "../../../../imports/imports";
 import UpdateInstanceDetails from "./UpdateInstanceDetails";
 import UpdatedTurnStats from "./UpdateTurnStats";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -113,7 +114,7 @@ const EditCombatInstance = (props) => {
         setInstancePlayerDetailsSelect(selectedPlayerList);
     };
 
-    const updateInstanceData = () => {
+    const updateInstanceData = async () => {
         const data = {
             instance_id: instance.id,
             instance_name: instanceName,
@@ -123,7 +124,19 @@ const EditCombatInstance = (props) => {
             campaign_id: instance.campaign.id,
         };
 
-        console.log(data);
+        const init = {
+            method: "PUT",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify(data),
+            mode: "cors",
+            credentials: "include",
+        };
+
+        const result = await fetch(
+            `${process.env.REACT_APP_API_URL}/update_combat_instance`,
+            init
+        );
+        const returnedData = await result.json();
     };
 
     return (
