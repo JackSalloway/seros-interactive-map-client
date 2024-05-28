@@ -326,7 +326,7 @@ const CombatInstanceNotes = (props) => {
         openCombatInstance
     ) : (
         <EditCombatInstance
-            instance={instance}
+            instance={structuredClone(instance)}
             changelog={changelog}
             setChangelog={setChangelog}
             combatInstances={combatInstances}
