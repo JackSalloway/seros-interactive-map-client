@@ -340,13 +340,4 @@ const CombatInstanceNotes = (props) => {
     );
 };
 
-// changelog,
-//         setChangelog,
-//         combatInstances,
-//         setCombatInstances,
-//         dataNotifications,
-//         setDataNotifications,
-//         players,
-//         setPlayers,
-
 export default CombatInstanceNotes;
