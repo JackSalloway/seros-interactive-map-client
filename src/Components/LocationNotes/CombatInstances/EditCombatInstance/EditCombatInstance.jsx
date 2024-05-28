@@ -17,15 +17,9 @@ const EditCombatInstance = (props) => {
         setEditing,
     } = props;
 
-    const [turns, setTurns] = useState(
-        Array(instance.players[0].turns.length)
-            .fill()
-            .map((_, index) => index + 1)
-    );
-    const [instanceName, setInstanceName] = useState(instance.name);
-    const [instanceDescription, setInstanceDescription] = useState(
-        instance.description
-    );
+    const [turns, setTurns] = useState([]);
+    const [instanceName, setInstanceName] = useState("");
+    const [instanceDescription, setInstanceDescription] = useState("");
 
     // Render new character inputs state value
     const [renderNewCharacterForm, setRenderNewCharacterForm] = useState(false);
@@ -48,6 +42,29 @@ const EditCombatInstance = (props) => {
     const [instancePlayerDetails, setInstancePlayerDetails] = useState([]);
     const [selectedPlayerIds, setSelectedPlayerIds] = useState([]);
     const [unselectedPlayers, setUnselectedPlayers] = useState([]);
+
+    // Set initial form values and cleanup on component unmount
+    useEffect(() => {
+        setTurns(
+            Array(instance.players[0].turns.length)
+                .fill()
+                .map((_, index) => index + 1)
+        );
+        setInstanceName(instance.name);
+        setInstanceDescription(instance.description);
+
+        // Cleanup state values when component unmounts
+        return () => {
+            setTurns([]);
+            setInstanceName("");
+            setInstanceDescription("");
+            setRenderNewCharacterForm(false);
+            setInstancePlayerDetailsSelect([]);
+            setInstancePlayerDetails([]);
+            setSelectedPlayerIds([]);
+            setUnselectedPlayers([]);
+        };
+    }, [instance]);
 
     // Update selected player id array when a player is unselected
     useEffect(() => {
@@ -97,10 +114,17 @@ const EditCombatInstance = (props) => {
     };
 
     const updateInstanceData = () => {
-        console.log(instancePlayerDetails);
-    };
+        const data = {
+            instance_id: instance.id,
+            instance_name: instanceName,
+            instance_description: instanceDescription,
+            instance_details: instancePlayerDetails,
+            location_id: instance.location.id,
+            campaign_id: instance.campaign.id,
+        };
 
-    // Note that instance details is a re-used component due to the data that it handles being much less complex than the data handled in the UpdateTurnStats component
+        console.log(data);
+    };
 
     return (
         <div className="location-notes-details">
