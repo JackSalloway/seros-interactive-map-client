@@ -41,6 +41,7 @@ const CombatInstanceNotes = (props) => {
         setDataNotifications,
         players,
         setPlayers,
+        username,
     } = props;
 
     const totalTurns = instance.players[0].turns.length;
@@ -336,6 +337,7 @@ const CombatInstanceNotes = (props) => {
             players={players}
             setPlayers={setPlayers}
             setEditing={setEditing}
+            username={username}
         />
     );
 };

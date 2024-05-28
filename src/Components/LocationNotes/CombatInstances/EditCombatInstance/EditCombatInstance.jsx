@@ -16,6 +16,7 @@ const EditCombatInstance = (props) => {
         players,
         // setPlayers,
         setEditing,
+        username,
     } = props;
 
     const [turns, setTurns] = useState([]);
@@ -122,6 +123,7 @@ const EditCombatInstance = (props) => {
             instance_details: instancePlayerDetails,
             location_id: instance.location.id,
             campaign_id: instance.campaign.id,
+            username: username,
         };
 
         const init = {

@@ -87,6 +87,7 @@ const CombatInstancesWrapper = (props) => {
                                     setDataNotifications={setDataNotifications}
                                     players={players}
                                     setPlayers={setPlayers}
+                                    username={username}
                                 />
                             );
                         })}
