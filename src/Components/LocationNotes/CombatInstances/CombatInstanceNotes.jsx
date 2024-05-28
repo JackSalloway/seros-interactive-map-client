@@ -57,7 +57,7 @@ const CombatInstanceNotes = (props) => {
 
     // Effect to isolate player values
     useEffect(() => {
-        const test = instance.players.map((player) => {
+        const isolatedPlayerValues = instance.players.map((player) => {
             return {
                 id: player.id,
                 name: player.name,
@@ -66,7 +66,7 @@ const CombatInstanceNotes = (props) => {
                 healing: player.turns.map((turn) => turn.healing),
             };
         });
-        setPlayerValues(test);
+        setPlayerValues(isolatedPlayerValues);
     }, [instance]);
 
     // Effect to recalculate total values when the viewTurns state value is changed
