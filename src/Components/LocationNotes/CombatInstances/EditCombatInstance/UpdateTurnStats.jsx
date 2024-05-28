@@ -23,7 +23,7 @@ const UpdatedTurnStats = (props) => {
                 player.turns.push(player.removedTurns.pop());
             } else {
                 player.turns.push({
-                    turn_number: turns.length,
+                    turn_number: turns.length + 1,
                     damage: 0,
                     healing: 0,
                 });
