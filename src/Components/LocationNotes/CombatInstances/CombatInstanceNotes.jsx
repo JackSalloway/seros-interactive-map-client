@@ -32,6 +32,7 @@ function compareHealing(a, b) {
 const CombatInstanceNotes = (props) => {
     const {
         instance,
+        originalIndex,
         setDeleteData,
         changelog,
         setChangelog,
@@ -328,6 +329,7 @@ const CombatInstanceNotes = (props) => {
     ) : (
         <EditCombatInstance
             instance={structuredClone(instance)}
+            originalIndex={originalIndex}
             changelog={changelog}
             setChangelog={setChangelog}
             combatInstances={combatInstances}

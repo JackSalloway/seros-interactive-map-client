@@ -78,6 +78,7 @@ const CombatInstancesWrapper = (props) => {
                                 <CombatInstanceNotes
                                     key={instance.instanceData.id}
                                     instance={instance.instanceData}
+                                    originalIndex={instance.originalIndex}
                                     setDeleteData={setDeleteData}
                                     changelog={changelog}
                                     setChangelog={setChangelog}

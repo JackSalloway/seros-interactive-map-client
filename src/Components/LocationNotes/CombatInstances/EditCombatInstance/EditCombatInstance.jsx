@@ -7,10 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const EditCombatInstance = (props) => {
     const {
         instance,
-        // changelog,
-        // setChangelog,
-        // combatInstances,
-        // setCombatInstances,
+        originalIndex,
+        changelog,
+        setChangelog,
+        combatInstances,
+        setCombatInstances,
         dataNotifications,
         setDataNotifications,
         players,
@@ -139,8 +140,23 @@ const EditCombatInstance = (props) => {
         );
         const returnedData = await result.json();
 
-        console.log(instance);
-        console.log(returnedData);
+        // Update the relevant combat instance
+        let combatInstancesCopy = [...combatInstances];
+        combatInstancesCopy[originalIndex] = returnedData.combatInstanceResult;
+        setCombatInstances(combatInstancesCopy);
+
+        // Add a data notification showing that the combat instance has been updated
+        const newNotification = {
+            message: `NPC: ${instanceName}, successfully updated!`,
+            important: false,
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
+
+        // Update changelog
+        setChangelog([...changelog, ...returnedData.changelogResult]);
+
+        // Invert state value and cause the form to unmount
+        setEditing(false);
     };
 
     return (
