@@ -121,7 +121,7 @@ const EditCombatInstance = (props) => {
             instance_name: instanceName,
             instance_description: instanceDescription,
             instance_details: instancePlayerDetails,
-            location_id: instance.location.id,
+
             campaign_id: instance.campaign.id,
             username: username,
         };
@@ -139,6 +139,9 @@ const EditCombatInstance = (props) => {
             init
         );
         const returnedData = await result.json();
+
+        console.log(instance);
+        console.log(returnedData);
     };
 
     return (
