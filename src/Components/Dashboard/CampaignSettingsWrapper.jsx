@@ -29,22 +29,28 @@ const CampaignSettingsWrapper = (props) => {
 
     useEffect(() => {
         // Fetch campaign settings from backend
-        fetch(
-            `${process.env.REACT_APP_API_URL}/campaign_settings/?campaign_id=${campaignID}`,
-            {
-                method: "GET",
-                mode: "cors",
+        const fetchData = async () => {
+            try {
+                // Send request to fetch campaign settings data
+                const res = await fetch(
+                    `${process.env.REACT_APP_API_URL}/campaign_settings/?campaign_id=${campaignID}`,
+                    {
+                        method: "GET",
+                        mode: "cors",
+                    }
+                );
+                const result = await res.json();
+                setCampaignSettings(result.campaign);
+                setInvite(result.invite);
+                setCampaignUsers(result.campaignUsers);
+                setUpdatedCampaignName(he.decode(result.campaign.name));
+                setUpdatedCampaignDesc(he.decode(result.campaign.description));
+            } catch (err) {
+                console.error("Error fetching campaign data:", err);
             }
-        )
-            .then((res) => res.json())
-            .then((data) => {
-                setCampaignSettings(data.campaign[0]);
-                setInvite(data.invite[0]); // If there is no invite code found, data.invite[0] === undefined
-                setCampaignUsers(data.campaignUsers);
-                // Set the campaign update values
-                setUpdatedCampaignName(he.decode(data.campaign[0].name));
-                setUpdatedCampaignDesc(he.decode(data.campaign[0].desc));
-            });
+        };
+
+        fetchData();
     }, [campaignID]);
 
     // Check if either campaign name or description valu has been edited
@@ -161,18 +167,12 @@ const CampaignSettingsWrapper = (props) => {
                 {campaignUsers.map((user) => {
                     return (
                         <div
-                            key={user._id}
+                            key={user.id}
                             className="dashboard-banner-campaign-settings-users-single-user-wrapper"
                         >
                             <p>
                                 {user.username}
-                                {user.campaigns[0].creator === true
-                                    ? " - Creator"
-                                    : null}
-                                {user.campaigns[0].admin === true &&
-                                user.campaigns[0].creator === false
-                                    ? " - Admin"
-                                    : null}
+                                {user.is_admin === 1 ? " - Admin" : null}
                             </p>
                         </div>
                     );
