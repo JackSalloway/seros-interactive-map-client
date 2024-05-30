@@ -35,7 +35,7 @@ const Navbar = () => {
 
     // Redirect user to dashboard if the cookies have their user data stored
     useEffect(() => {
-        if (user.userId && location.pathname === "/") {
+        if (user.id && location.pathname === "/") {
             navigate("/dashboard");
         }
     }, [user, location, navigate]);
