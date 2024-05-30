@@ -50,7 +50,7 @@ const Banner = (props) => {
                     <h2>{he.decode(name)}</h2>
                     <p>{he.decode(description)}</p>
                 </div>
-                {adminRights === true ? (
+                {adminRights === 1 ? (
                     <div className="dashboard-banner-admin-icons">
                         <FontAwesomeIcon
                             icon="cog"
