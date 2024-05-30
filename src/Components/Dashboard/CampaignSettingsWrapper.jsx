@@ -9,8 +9,8 @@ import "./CampaignSettingsWrapper.css";
 const CampaignSettingsWrapper = (props) => {
     const {
         campaignID,
-        userAuthenticated,
-        setUserAuthenticated,
+        userData,
+        setUserData,
         campaignIndex,
         dataNotifications,
         setDataNotifications,
@@ -23,7 +23,8 @@ const CampaignSettingsWrapper = (props) => {
 
     // Campaign name/description update values states
     const [updatedCampaignName, setUpdatedCampaignName] = useState("");
-    const [updatedCampaignDesc, setUpdatedCampaignDesc] = useState("");
+    const [updatedCampaignDescription, setUpdatedCampaignDescription] =
+        useState("");
     const [disableUpdateCampaignDetails, setDisableUpdateCampaignDetails] =
         useState(true);
 
@@ -44,7 +45,9 @@ const CampaignSettingsWrapper = (props) => {
                 setInvite(result.invite);
                 setCampaignUsers(result.campaignUsers);
                 setUpdatedCampaignName(he.decode(result.campaign.name));
-                setUpdatedCampaignDesc(he.decode(result.campaign.description));
+                setUpdatedCampaignDescription(
+                    he.decode(result.campaign.description)
+                );
             } catch (err) {
                 console.error("Error fetching campaign data:", err);
             }
@@ -58,45 +61,49 @@ const CampaignSettingsWrapper = (props) => {
         if (campaignSettings === null) return; // This prevents the app from crashing before the data has been retrieved on initial render
         if (
             updatedCampaignName !== campaignSettings.name ||
-            updatedCampaignDesc !== campaignSettings.desc
+            updatedCampaignDescription !== campaignSettings.desc
         ) {
             setDisableUpdateCampaignDetails(false);
         } else {
             setDisableUpdateCampaignDetails(true);
         }
-    }, [campaignSettings, updatedCampaignName, updatedCampaignDesc]);
+    }, [campaignSettings, updatedCampaignName, updatedCampaignDescription]);
 
     // Update campaign name/description
     const updateCampaignData = async (e) => {
         e.preventDefault();
         const updatedCampaignData = {
             campaign_name: updatedCampaignName,
-            campaign_desc: updatedCampaignDesc,
+            campaign_description: updatedCampaignDescription,
             campaign_id: campaignID,
-            username: userAuthenticated.username,
+            username: userData.username,
         };
         const init = {
-            method: "POST",
+            method: "PUT",
             headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
             body: JSON.stringify(updatedCampaignData),
             mode: "cors",
             credentials: "include",
         };
-        const result = await fetch(
+        const res = await fetch(
             `${process.env.REACT_APP_API_URL}/update_campaign`,
             init
         );
-        const returnedData = await result.json();
-        const userCopy = userAuthenticated;
-        userCopy.campaigns[campaignIndex] =
-            returnedData.campaigns[campaignIndex];
-        setUserAuthenticated({ ...userCopy });
-        const notificationsCopy = dataNotifications;
-        notificationsCopy.push({
+        const result = await res.json();
+
+        console.log(result);
+
+        // Update the campaign array in the userData state
+        const userDataCopy = userData;
+        userData.campaigns[campaignIndex] = result.campaigns[campaignIndex];
+        setUserData({ ...userDataCopy });
+
+        // Add a data notification showing that the campaign has been updated
+        const newNotification = {
             message: `Campaign: ${updatedCampaignName} successfully updated!`,
             important: false,
-        });
-        setDataNotifications([...notificationsCopy]);
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
     };
 
     // Create invite code
@@ -149,9 +156,9 @@ const CampaignSettingsWrapper = (props) => {
                         <textarea
                             id={`update-campaign-${campaignID}-description-input`}
                             type="text"
-                            value={updatedCampaignDesc}
+                            value={updatedCampaignDescription}
                             onChange={({ target }) => {
-                                setUpdatedCampaignDesc(target.value);
+                                setUpdatedCampaignDescription(target.value);
                             }}
                         />
                     </div>

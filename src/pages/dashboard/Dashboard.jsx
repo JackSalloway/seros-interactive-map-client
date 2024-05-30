@@ -9,9 +9,7 @@ const Dashboard = () => {
         .filter((match) => Boolean(match.handle?.user))
         .map((match) => match.data)[0];
 
-    return (
-        <DashboardWrapper userAuthenticated={user} campaigns={user.campaigns} />
-    );
+    return <DashboardWrapper user={user} />;
 };
 
 export default Dashboard;

@@ -15,8 +15,9 @@ const Banner = (props) => {
         description,
         campaignID,
         adminRights,
-        renderCampaignForm,
-        userAuthenticated,
+        renderCampaignBannerForm,
+        userData,
+        setUserData,
         campaignIndex,
         dataNotifications,
         setDataNotifications,
@@ -57,7 +58,7 @@ const Banner = (props) => {
                             className="banner-fa-icon"
                             style={iconStyles}
                             onClick={() => {
-                                if (renderCampaignForm === true) {
+                                if (renderCampaignBannerForm === true) {
                                     alert(
                                         "Finish Creating your campaign first!"
                                     );
@@ -101,7 +102,8 @@ const Banner = (props) => {
                 {renderCampaignSettings === true ? (
                     <CampaignSettingsWrapper
                         campaignID={campaignID}
-                        userAuthenticated={userAuthenticated}
+                        userData={userData}
+                        setUserData={setUserData}
                         campaignIndex={campaignIndex}
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}

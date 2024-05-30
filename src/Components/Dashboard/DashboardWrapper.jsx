@@ -2,22 +2,24 @@ import React, { useState, useEffect } from "react";
 import "./Dashboard.css";
 import Banner from "./Banner";
 import CreateCampaignBannerForm from "./CreateCampaignBannerForm";
+import DataNotification from "../Notifications/DataNotification";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 import { useNavigate } from "react-router-dom";
 
 const DashboardWrapper = (props) => {
     // Plan is to render out multiple banners that display the name, description and a portion of the image (styled somehow).
     // The user can then click a button on these banners to select that campaign.
-    // Campaigns will be stored in the user data (currenty userAuthenticated state value) as an array of strings that will link to relevant campaign documents
+    // Campaigns will be stored in the user data (currenty user state value) as an array of strings that will link to relevant campaign documents
     // Users can make new campaigns, or join one that is already created via referal from a friend (or of a similar sort.)
 
-    const {
-        userAuthenticated,
-        campaigns,
-        renderCampaignForm,
-        dataNotifications,
-        setDataNotifications,
-    } = props;
+    const { user } = props;
+
+    // Create userData state value for storing and updating user values on the dashboard
+    const [userData, setUserData] = useState({
+        id: user.id,
+        username: user.username,
+        campaigns: user.campaigns,
+    });
 
     // State for rendering CreateCampaignBannerForm in place of CreateCampaignBanner
     const [renderCreateCampaignBannerForm, setRenderCreateCampaignBannerForm] =
@@ -30,6 +32,9 @@ const DashboardWrapper = (props) => {
     // States related to invite codes Invite codes
     const [inviteCode, setInviteCode] = useState(""); // Used to update invite code input value
     const [validCode, setValidCode] = useState(false); // Used to enable join campaign button when code is valid
+
+    // State related to dataNotifications
+    const [dataNotifications, setDataNotifications] = useState([]);
 
     const navigate = useNavigate();
 
@@ -70,7 +75,7 @@ const DashboardWrapper = (props) => {
     // Function to fire request for user to join a new campaign
     const joinCampaign = async () => {
         const joinCampaignData = {
-            username: userAuthenticated.username,
+            username: user.username,
             invite_code: inviteCode,
         };
 
@@ -97,7 +102,7 @@ const DashboardWrapper = (props) => {
                 // I would like to use this, but am unsure how to update the loader value that it uses
                 // The loader value comes from the Navbar component
 
-                // const userCopy = userAuthenticated;
+                // const userCopy = user;
                 // userCopy.campaigns = returnedData.campaigns;
                 // setUserAuthenticated({ ...userCopy });
                 // setInviteCode(""); // Reset the invite code to an empty string
@@ -157,8 +162,8 @@ const DashboardWrapper = (props) => {
 
     return (
         <div id="dashboard-banner-wrapper">
-            {campaigns.length > 0
-                ? campaigns.map((campaign, index) => {
+            {userData.campaigns.length > 0
+                ? userData.campaigns.map((campaign, index) => {
                       return (
                           <Banner
                               key={campaign.id}
@@ -166,8 +171,11 @@ const DashboardWrapper = (props) => {
                               description={campaign.description}
                               campaignID={campaign.id}
                               adminRights={campaign.is_admin}
-                              renderCampaignForm={renderCampaignForm} // Used to disable campaign settings/deletion buttons if campaign creation form is open
-                              userAuthenticated={userAuthenticated}
+                              renderCreateCampaignBannerForm={
+                                  renderCreateCampaignBannerForm
+                              } // Used to disable campaign settings/deletion buttons if campaign creation form is open
+                              userData={userData}
+                              setUserData={setUserData}
                               campaignIndex={index}
                               dataNotifications={dataNotifications}
                               setDataNotifications={setDataNotifications}
@@ -177,7 +185,7 @@ const DashboardWrapper = (props) => {
                 : null}
             {renderCreateCampaignBannerForm ? (
                 <CreateCampaignBannerForm
-                    userAuthenticated={userAuthenticated}
+                    user={user}
                     // dataNotifications={dataNotifications}
                     // setDataNotifications={setDataNotifications}
                     setRenderCreateCampaignBannerForm={
@@ -188,6 +196,20 @@ const DashboardWrapper = (props) => {
                 createCampaignBanner()
             )}
             {joinCampaignBanner()}
+            {/* If there is an object within the dataNotifications state, render dataNotification component () */}
+            {dataNotifications.length !== 0
+                ? dataNotifications.map((notification, index) => {
+                      return (
+                          <DataNotification
+                              dataNotifications={dataNotifications}
+                              setDataNotifications={setDataNotifications}
+                              notification={notification}
+                              index={index}
+                              key={`${notification.message} ${index}`}
+                          />
+                      );
+                  })
+                : null}
         </div>
     );
 };
