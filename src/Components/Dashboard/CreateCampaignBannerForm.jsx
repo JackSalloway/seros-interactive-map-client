@@ -6,10 +6,11 @@ import "./CreateCampaignBannerForm.css";
 
 const CreateCampaignBannerForm = (props) => {
     const {
-        userAuthenticated,
-        // dataNotifications,
-        // setDataNotifications,
+        dataNotifications,
+        setDataNotifications,
         setRenderCreateCampaignBannerForm,
+        userData,
+        setUserData,
     } = props;
 
     // State to increase siz scale for banner
@@ -20,8 +21,6 @@ const CreateCampaignBannerForm = (props) => {
     const [newCampaignDescription, setNewCampaignDescription] = useState("");
     const [disableCreateCampaignButton, setDisableCreateCampaignButton] =
         useState(true);
-
-    const navigate = useNavigate();
 
     // Effect to enable create campaign button when inputs are valid
     useEffect(() => {
@@ -36,8 +35,9 @@ const CreateCampaignBannerForm = (props) => {
     const postCampaignData = async (e) => {
         const campaignData = {
             campaign_name: newCampaignName,
-            campaign_desc: newCampaignDescription,
-            username: userAuthenticated.username,
+            campaign_description: newCampaignDescription,
+            username: userData.username,
+            user_id: userData.id,
         };
 
         const init = {
@@ -48,24 +48,27 @@ const CreateCampaignBannerForm = (props) => {
             credentials: "include",
         };
 
-        await fetch(`${process.env.REACT_APP_API_URL}/create_campaign`, init);
-        navigate(0); // Used to refresh the page so the user values are updated
+        // Send request to create a new campaign
+        const req = await fetch(
+            `${process.env.REACT_APP_API_URL}/create_campaign`,
+            init
+        );
+        const result = await req.json();
 
-        // Old code used to update the campaign value of the user object without refreshing the page
-        // I would like to use this, but am unsure how to update the loader value that it uses
-        // The loader value comes from the Navbar component
+        // Update the campaign array in the userData state
+        const userDataCopy = userData;
+        userData.campaigns = result.campaigns;
+        setUserData({ ...userDataCopy });
 
-        // const returnedData = await result.json();
-        // const userCopy = userAuthenticated;
-        // userCopy.campaigns = returnedData.campaigns;
-        // setUserAuthenticated({ ...userCopy });
-        // const notificationsCopy = dataNotifications;
-        // notificationsCopy.push({
-        //     message: `Campaign: ${newCampaignName} successfully created!`,
-        //     important: false,
-        // });
-        // setDataNotifications([...notificationsCopy]);
-        // setRenderCreateCampaignBannerForm(false);
+        // Add a data notificaiton showing that the new campaign has been successfully created
+        const newNotification = {
+            message: `Campaign: ${newCampaignName} successfully created!`,
+            important: false,
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
+
+        // Unmount form component
+        setRenderCreateCampaignBannerForm(false);
     };
 
     return (

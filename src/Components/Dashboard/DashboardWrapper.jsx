@@ -187,11 +187,13 @@ const DashboardWrapper = (props) => {
             {renderCreateCampaignBannerForm ? (
                 <CreateCampaignBannerForm
                     user={user}
-                    // dataNotifications={dataNotifications}
-                    // setDataNotifications={setDataNotifications}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
                     setRenderCreateCampaignBannerForm={
                         setRenderCreateCampaignBannerForm
                     }
+                    userData={userData}
+                    setUserData={setUserData}
                 />
             ) : (
                 createCampaignBanner()
