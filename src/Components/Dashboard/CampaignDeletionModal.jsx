@@ -20,8 +20,6 @@ const CampaignDeletionModal = (props) => {
         setDataNotifications,
     } = props;
 
-    console.log(deleteData);
-
     const [deletionString, setDeletionString] = useState("");
     const [deleteDisabled, setDeleteDisabled] = useState(false);
 
@@ -49,8 +47,6 @@ const CampaignDeletionModal = (props) => {
             setNPCCount(res.npcCount);
             setQuestCount(res.questCount);
             setInstanceCount(res.instanceCount);
-
-            console.log(res);
         };
         fetchData().catch((err) => console.log(err));
     }, [deleteData]);
