@@ -5,13 +5,6 @@ import he from "he";
 //Style imports
 import "./CampaignDeletionModal.css";
 
-// Component imports
-// import DeleteLocation from "./DeleteLocation";
-// import DeleteSubLocation from "./DeleteSubLocation";
-// import DeleteNPC from "./DeleteNPC";
-// import DeleteQuest from "./DeleteQuest";
-// import DeleteCombatInstance from "./DeleteCombatInstance";
-
 const CampaignDeletionModal = (props) => {
     const {
         deleteData,
