@@ -51,26 +51,6 @@ const CampaignDeletionModal = (props) => {
         fetchData().catch((err) => console.log(err));
     }, [deleteData]);
 
-    // useEffect(() => {
-    //     if (players !== null) {
-    //         return;
-    //     }
-
-    //     const fetchData = async () => {
-    //         const res = await fetch(
-    //             `${process.env.REACT_APP_API_URL}/campaign_player_data/?campaign_id=${campaign.id}`,
-    //             {
-    //                 method: "GET",
-    //                 mode: "cors",
-    //             }
-    //         );
-    //         const resPlayers = await res.json();
-    //         setPlayers(resPlayers);
-    //     };
-
-    //     fetchData().catch((err) => console.log(err));
-    // }, [campaign, players]);
-
     // Effect to check the user input matches the required deleteCampaignString
     useEffect(() => {
         if (
