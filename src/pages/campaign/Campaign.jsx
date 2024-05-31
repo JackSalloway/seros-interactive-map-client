@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 
 // react-router-dom imports
-import { useParams, useMatches } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 // Component imports
 import MapBox from "../../Components/MapBox/MapBox";
@@ -11,18 +11,9 @@ import DeletionModal from "../../Components/DeletionModal/DeletionModal";
 import DataNotification from "../../Components/Notifications/DataNotification";
 
 const Campaign = () => {
-    let campaignParams = useParams();
-    const campaignId = parseInt(campaignParams.campaignId);
-
-    let matches = useMatches();
-    let user = matches
-        .filter((match) => Boolean(match.handle?.user))
-        .map((match) => match.data)[0];
-
-    // Retrieve selected campaign data
-    const campaign = user.campaigns.filter(
-        (campaign) => campaign.id === campaignId
-    )[0];
+    // Retrieve campaign and user values from previous page through useLocation hook
+    const location = useLocation();
+    const { campaign, user } = location.state;
 
     // Data states
     const [players, setPlayers] = useState(null);
@@ -66,7 +57,7 @@ const Campaign = () => {
 
         const fetchData = async () => {
             const res = await fetch(
-                `${process.env.REACT_APP_API_URL}/campaign_player_data/?campaign_id=${campaignId}`,
+                `${process.env.REACT_APP_API_URL}/campaign_player_data/?campaign_id=${campaign.id}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -77,7 +68,7 @@ const Campaign = () => {
         };
 
         fetchData().catch((err) => console.log(err));
-    }, [campaignId, players]);
+    }, [campaign, players]);
 
     // Fetch location data from database
     useEffect(() => {
@@ -87,7 +78,7 @@ const Campaign = () => {
 
         const fetchData = async () => {
             const res = await fetch(
-                `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaignId}`,
+                `${process.env.REACT_APP_API_URL}/location_data/?campaign_id=${campaign.id}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -98,7 +89,7 @@ const Campaign = () => {
         };
 
         fetchData().catch((err) => console.log(err));
-    }, [locations, setLocations, campaignId]);
+    }, [locations, setLocations, campaign]);
 
     // Fetch quest data from database
     useEffect(() => {
@@ -108,7 +99,7 @@ const Campaign = () => {
 
         const fetchData = async () => {
             const res = await fetch(
-                `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaignId}`,
+                `${process.env.REACT_APP_API_URL}/quest_data/?campaign_id=${campaign.id}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -119,7 +110,7 @@ const Campaign = () => {
         };
 
         fetchData().catch((err) => console.log(err));
-    }, [quests, setQuests, campaignId]);
+    }, [quests, setQuests, campaign]);
 
     // Fetch NPC data from database
     useEffect(() => {
@@ -129,7 +120,7 @@ const Campaign = () => {
 
         const fetchData = async () => {
             const res = await fetch(
-                `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaignParams.campaignId}`,
+                `${process.env.REACT_APP_API_URL}/npc_data/?campaign_id=${campaign.id}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -140,7 +131,7 @@ const Campaign = () => {
         };
 
         fetchData().catch((err) => console.log(err));
-    }, [npcs, setNPCs, campaignParams]);
+    }, [npcs, setNPCs, campaign]);
 
     // Fetch changelog data from database
     useEffect(() => {
@@ -150,7 +141,7 @@ const Campaign = () => {
 
         const fetchData = async () => {
             const res = await fetch(
-                `${process.env.REACT_APP_API_URL}/changelog_data/?campaign_id=${campaignParams.campaignId}`,
+                `${process.env.REACT_APP_API_URL}/changelog_data/?campaign_id=${campaign.id}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -160,7 +151,7 @@ const Campaign = () => {
             setChangelog(resChangelogs);
         };
         fetchData().catch((err) => console.log(err));
-    }, [changelog, campaignParams]);
+    }, [changelog, campaign]);
 
     // Fetch combat instance data from database
     useEffect(() => {
@@ -170,7 +161,7 @@ const Campaign = () => {
 
         const fetchData = async () => {
             const res = await fetch(
-                `${process.env.REACT_APP_API_URL}/combat_instance_data/?campaign_id=${campaignParams.campaignId}`,
+                `${process.env.REACT_APP_API_URL}/combat_instance_data/?campaign_id=${campaign.id}`,
                 {
                     method: "GET",
                     mode: "cors",
@@ -182,7 +173,7 @@ const Campaign = () => {
         };
 
         fetchData().catch((err) => console.log(err));
-    }, [campaignParams, combatInstances]);
+    }, [campaign, combatInstances]);
 
     // Campaign has been selected so render a map and a journal sidebar
     return (

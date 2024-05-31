@@ -15,6 +15,7 @@ const Banner = (props) => {
         description,
         campaignID,
         adminRights,
+        campaign,
         renderCampaignBannerForm,
         userData,
         setUserData,
@@ -28,6 +29,13 @@ const Banner = (props) => {
 
     // Campaign settings state values
     const [renderCampaignSettings, setRenderCampaignSettings] = useState(false);
+
+    // User values - sent in the state value when a user clicks on a campaign
+    const user = {
+        id: userData.id,
+        username: userData.username,
+        is_admin: campaign.is_admin,
+    };
 
     const navigate = useNavigate();
 
@@ -93,7 +101,9 @@ const Banner = (props) => {
                 >
                     <button
                         onClick={() => {
-                            navigate(`../campaign/${campaignID}`);
+                            navigate(`../campaign/${campaignID}`, {
+                                state: { campaign, user },
+                            });
                         }}
                     >
                         Select campaign!

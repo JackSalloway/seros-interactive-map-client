@@ -171,6 +171,7 @@ const DashboardWrapper = (props) => {
                               description={campaign.description}
                               campaignID={campaign.id}
                               adminRights={campaign.is_admin}
+                              campaign={campaign}
                               renderCreateCampaignBannerForm={
                                   renderCreateCampaignBannerForm
                               } // Used to disable campaign settings/deletion buttons if campaign creation form is open
