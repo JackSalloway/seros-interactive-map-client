@@ -22,6 +22,7 @@ const Banner = (props) => {
         campaignIndex,
         dataNotifications,
         setDataNotifications,
+        setDeleteData,
     } = props;
 
     // Scale sizing state values
@@ -80,7 +81,7 @@ const Banner = (props) => {
                             className="banner-fa-icon"
                             style={iconStyles}
                             // The following line will be for deleting campaigns, which is something I am not entirely sure I want to add.
-                            // onClick={() => setDeleteData(CAMPAIGN)}
+                            onClick={() => setDeleteData(campaign)}
                         />
                     </div>
                 ) : null}

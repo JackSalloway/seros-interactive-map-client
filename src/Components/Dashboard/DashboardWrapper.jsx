@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import Banner from "./Banner";
 import CreateCampaignBannerForm from "./CreateCampaignBannerForm";
 import DataNotification from "../Notifications/DataNotification";
+import CampaignDeletionModal from "./CampaignDeletionModal";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 import { useNavigate } from "react-router-dom";
 
@@ -35,6 +36,9 @@ const DashboardWrapper = (props) => {
 
     // State related to dataNotifications
     const [dataNotifications, setDataNotifications] = useState([]);
+
+    // State related to deleting campaigns
+    const [deleteData, setDeleteData] = useState(null);
 
     const navigate = useNavigate();
 
@@ -180,6 +184,7 @@ const DashboardWrapper = (props) => {
                               campaignIndex={index}
                               dataNotifications={dataNotifications}
                               setDataNotifications={setDataNotifications}
+                              setDeleteData={setDeleteData}
                           />
                       );
                   })
@@ -199,6 +204,15 @@ const DashboardWrapper = (props) => {
                 createCampaignBanner()
             )}
             {joinCampaignBanner()}
+            {/* If deleteData state has is not null render the DeletionModal */}
+            {deleteData !== null ? (
+                <CampaignDeletionModal
+                    deleteData={deleteData}
+                    setDeleteData={setDeleteData}
+                    dataNotifications={dataNotifications}
+                    setDataNotifications={setDataNotifications}
+                />
+            ) : null}
             {/* If there is an object within the dataNotifications state, render dataNotification component () */}
             {dataNotifications.length !== 0
                 ? dataNotifications.map((notification, index) => {

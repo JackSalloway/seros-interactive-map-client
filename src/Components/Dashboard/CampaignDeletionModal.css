@@ -1,0 +1,86 @@
+#deletion-modal-blur {
+    width: 100vw;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 2;
+}
+
+#deletion-modal {
+    width: 20rem;
+    height: fit-content;
+    background-color: rgb(14, 22, 31);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: left;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    padding: 3rem 1rem;
+    z-index: 2;
+    border-radius: 1rem;
+}
+
+.deletion-modal-fa-icon {
+    position: relative;
+    top: 1rem;
+    margin-top: -2rem;
+    margin-right: 1rem;
+    margin-left: auto;
+}
+
+#deletion-modal > h1 {
+    align-self: center;
+}
+
+#deletion-modal-p {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+#deletion-modal-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#deletion-modal-form > button {
+    width: 100%;
+}
+
+.deletion-modal-red {
+    color: red;
+}
+
+.data-to-delete {
+    text-decoration: underline;
+}
+
+.deletion-modal-warning {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.deletion-modal-warning > ul {
+    list-style-type: circle;
+    margin-left: 2rem;
+}
+
+.deletion-modal-warning > ul > li {
+    padding: 0.2rem 0;
+    list-style-type: circle;
+}
+
+.deletion-modal-warning-bold {
+    font-weight: 700;
+}
