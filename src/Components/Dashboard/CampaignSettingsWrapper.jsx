@@ -57,7 +57,7 @@ const CampaignSettingsWrapper = (props) => {
         fetchData();
     }, [campaignID]);
 
-    // Check if either campaign name or description valu has been edited
+    // Check if either campaign name or description value has been edited
     useEffect(() => {
         if (campaignSettings === null) return; // This prevents the app from crashing before the data has been retrieved on initial render
         if (
