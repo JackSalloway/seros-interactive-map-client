@@ -106,18 +106,19 @@ const CampaignSettingsWrapper = (props) => {
     };
 
     // Create invite code
-    const createInviteCode = () => {
-        fetch(`${process.env.REACT_APP_API_URL}/campaign_generate_code/`, {
-            method: "PUT",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify({ campaign_id: campaignSettings._id }),
-            mode: "cors",
-            credentials: "include",
-        })
-            .then((res) => res.json())
-            .then((inviteCode) => {
-                setInvite(inviteCode[0]);
-            });
+    const createInviteCode = async () => {
+        const res = await fetch(
+            `${process.env.REACT_APP_API_URL}/campaign_generate_code/`,
+            {
+                method: "PUT",
+                headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+                body: JSON.stringify({ campaign_id: campaignID }),
+                mode: "cors",
+                credentials: "include",
+            }
+        );
+        const result = await res.json();
+        setInvite(result);
     };
 
     if (campaignSettings === null) {
@@ -202,10 +203,17 @@ const CampaignSettingsWrapper = (props) => {
                     </button>
                 ) : (
                     <>
+                        <h2>Share this code with your friends!</h2>
                         <h2>Invite Code: {invite.code}</h2>
                         <h2>
-                            Time Created:{" "}
+                            Create at:{" "}
                             {dayjs(invite.created_at).format(
+                                "DD/MM/YYYY HH:mm:ss"
+                            )}
+                        </h2>
+                        <h2>
+                            expires at:{" "}
+                            {dayjs(invite.expires_at).format(
                                 "DD/MM/YYYY HH:mm:ss"
                             )}
                         </h2>
