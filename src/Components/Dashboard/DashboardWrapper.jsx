@@ -13,14 +13,7 @@ const DashboardWrapper = (props) => {
     // Campaigns will be stored in the user data (currenty user state value) as an array of strings that will link to relevant campaign documents
     // Users can make new campaigns, or join one that is already created via referal from a friend (or of a similar sort.)
 
-    const { user } = props;
-
-    // Create userData state value for storing and updating user values on the dashboard
-    const [userData, setUserData] = useState({
-        id: user.id,
-        username: user.username,
-        campaigns: user.campaigns,
-    });
+    const { userData, setUpdateUser } = props;
 
     // State for rendering CreateCampaignBannerForm in place of CreateCampaignBanner
     const [renderCreateCampaignBannerForm, setRenderCreateCampaignBannerForm] =
@@ -79,7 +72,7 @@ const DashboardWrapper = (props) => {
     // Function to fire request for user to join a new campaign
     const joinCampaign = async () => {
         const joinCampaignData = {
-            username: user.username,
+            username: userData.username,
             invite_code: inviteCode,
         };
 
@@ -180,7 +173,7 @@ const DashboardWrapper = (props) => {
                                   renderCreateCampaignBannerForm
                               } // Used to disable campaign settings/deletion buttons if campaign creation form is open
                               userData={userData}
-                              setUserData={setUserData}
+                              setUpdateUser={setUpdateUser}
                               campaignIndex={index}
                               dataNotifications={dataNotifications}
                               setDataNotifications={setDataNotifications}
@@ -191,14 +184,13 @@ const DashboardWrapper = (props) => {
                 : null}
             {renderCreateCampaignBannerForm ? (
                 <CreateCampaignBannerForm
-                    user={user}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                     setRenderCreateCampaignBannerForm={
                         setRenderCreateCampaignBannerForm
                     }
                     userData={userData}
-                    setUserData={setUserData}
+                    setUpdateUser={setUpdateUser}
                 />
             ) : (
                 createCampaignBanner()
@@ -209,6 +201,8 @@ const DashboardWrapper = (props) => {
                 <CampaignDeletionModal
                     deleteData={deleteData}
                     setDeleteData={setDeleteData}
+                    userData={userData}
+                    setUpdateUser={setUpdateUser}
                     dataNotifications={dataNotifications}
                     setDataNotifications={setDataNotifications}
                 />

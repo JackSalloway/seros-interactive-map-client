@@ -9,7 +9,7 @@ const CreateCampaignBannerForm = (props) => {
         setDataNotifications,
         setRenderCreateCampaignBannerForm,
         userData,
-        setUserData,
+        setUpdateUser,
     } = props;
 
     // State to increase siz scale for banner
@@ -48,16 +48,14 @@ const CreateCampaignBannerForm = (props) => {
         };
 
         // Send request to create a new campaign
-        const req = await fetch(
+        const res = await fetch(
             `${process.env.REACT_APP_API_URL}/create_campaign`,
             init
         );
-        const result = await req.json();
+        // const result = await res.json();
 
-        // Update the campaign array in the userData state
-        const userDataCopy = userData;
-        userData.campaigns = result.campaigns;
-        setUserData({ ...userDataCopy });
+        // Set updateUser state value to true
+        setUpdateUser(true);
 
         // Add a data notificaiton showing that the new campaign has been successfully created
         const newNotification = {

@@ -10,8 +10,7 @@ const CampaignSettingsWrapper = (props) => {
     const {
         campaignID,
         userData,
-        setUserData,
-        campaignIndex,
+        setUpdateUser,
         dataNotifications,
         setDataNotifications,
     } = props;
@@ -89,14 +88,12 @@ const CampaignSettingsWrapper = (props) => {
             `${process.env.REACT_APP_API_URL}/update_campaign`,
             init
         );
-        const result = await res.json();
+        // const result = await res.json();
 
-        console.log(result);
+        // console.log(result);
 
-        // Update the campaign array in the userData state
-        const userDataCopy = userData;
-        userData.campaigns[campaignIndex] = result.campaigns[campaignIndex];
-        setUserData({ ...userDataCopy });
+        // Update the updateUser state value
+        setUpdateUser(true);
 
         // Add a data notification showing that the campaign has been updated
         const newNotification = {

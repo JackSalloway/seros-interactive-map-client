@@ -18,7 +18,7 @@ const Banner = (props) => {
         campaign,
         renderCampaignBannerForm,
         userData,
-        setUserData,
+        setUpdateUser,
         campaignIndex,
         dataNotifications,
         setDataNotifications,
@@ -114,7 +114,7 @@ const Banner = (props) => {
                     <CampaignSettingsWrapper
                         campaignID={campaignID}
                         userData={userData}
-                        setUserData={setUserData}
+                        setUpdateUser={setUpdateUser}
                         campaignIndex={campaignIndex}
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}

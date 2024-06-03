@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
 import he from "he";
 
 //Style imports
@@ -9,6 +10,8 @@ const CampaignDeletionModal = (props) => {
     const {
         deleteData,
         setDeleteData,
+        userData,
+        setUpdateUser,
         dataNotifications,
         setDataNotifications,
     } = props;
@@ -42,6 +45,12 @@ const CampaignDeletionModal = (props) => {
             setInstanceCount(res.instanceCount);
         };
         fetchData().catch((err) => console.log(err));
+        return () => {
+            setLocationCount("");
+            setNPCCount("");
+            setQuestCount("");
+            setInstanceCount("");
+        };
     }, [deleteData]);
 
     // Effect to check the user input matches the required deleteCampaignString
@@ -55,6 +64,45 @@ const CampaignDeletionModal = (props) => {
             setDeleteDisabled(false);
         }
     }, [deleteData, deletionString]);
+
+    // Function to delete campaign by id
+    const deleteCampaign = async (e) => {
+        e.preventDefault();
+
+        const dataToDelete = {
+            campaign_id: deleteData.id,
+            user: {
+                id: userData.id,
+                username: userData.username,
+            },
+        };
+
+        const init = {
+            method: "DELETE",
+            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+            body: JSON.stringify(dataToDelete),
+            mode: "cors",
+            credentials: "include",
+        };
+        const res = await fetch(
+            `${process.env.REACT_APP_API_URL}/delete_campaign`,
+            init
+        );
+        // const result = await res.status();
+
+        // Set updateUser state value to true
+        setUpdateUser(true);
+
+        // Add a new notification showing that a campaign has been successfully deleted
+        const newNotification = {
+            message: `Campaign: ${deleteData.name}, successfully deleted.`,
+            important: false,
+        };
+        setDataNotifications([...dataNotifications, newNotification]);
+
+        // Unmount deletion modal component
+        setDeleteData(null);
+    };
 
     return (
         <div>
@@ -113,13 +161,7 @@ const CampaignDeletionModal = (props) => {
                         to confirm.
                     </p>
                 </div>
-                <form
-                    onSubmit={
-                        null
-                        // deleteLocation
-                    }
-                    id="deletion-modal-form"
-                >
+                <form onSubmit={deleteCampaign} id="deletion-modal-form">
                     <input
                         type="text"
                         onChange={({ target }) => {
