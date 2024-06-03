@@ -5,7 +5,6 @@ import CreateCampaignBannerForm from "./CreateCampaignBannerForm";
 import DataNotification from "../Notifications/DataNotification";
 import CampaignDeletionModal from "./CampaignDeletionModal";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
-import { useNavigate } from "react-router-dom";
 
 const DashboardWrapper = (props) => {
     // Plan is to render out multiple banners that display the name, description and a portion of the image (styled somehow).
