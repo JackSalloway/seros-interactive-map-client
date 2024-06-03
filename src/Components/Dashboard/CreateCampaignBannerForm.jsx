@@ -52,20 +52,17 @@ const CreateCampaignBannerForm = (props) => {
             `${process.env.REACT_APP_API_URL}/create_campaign`,
             init
         );
-        // const result = await res.json();
+        const message = await res.text();
 
-        // Set updateUser state value to true
-        setUpdateUser(true);
-
-        // Add a data notificaiton showing that the new campaign has been successfully created
-        const newNotification = {
-            message: `Campaign: ${newCampaignName} successfully created!`,
-            important: false,
-        };
-        setDataNotifications([...dataNotifications, newNotification]);
-
-        // Unmount form component
-        setRenderCreateCampaignBannerForm(false);
+        if (res.status === 201) {
+            const successMessage = {
+                message: message,
+                important: false,
+            };
+            setDataNotifications([...dataNotifications, successMessage]);
+            setUpdateUser(true);
+            setRenderCreateCampaignBannerForm(false);
+        }
     };
 
     return (
