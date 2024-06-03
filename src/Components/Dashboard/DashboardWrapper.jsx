@@ -33,8 +33,6 @@ const DashboardWrapper = (props) => {
     // State related to deleting campaigns
     const [deleteData, setDeleteData] = useState(null);
 
-    const navigate = useNavigate();
-
     useEffect(() => {
         const regex = /^[a-z,0-9,-]{36,36}$/; // Not the best regex expression, but will prevent user from spamming join
         setValidCode(regex.test(inviteCode));
@@ -71,53 +69,47 @@ const DashboardWrapper = (props) => {
 
     // Function to fire request for user to join a new campaign
     const joinCampaign = async () => {
-        const joinCampaignData = {
-            username: userData.username,
-            invite_code: inviteCode,
-        };
+        try {
+            const joinCampaignData = {
+                user: {
+                    id: userData.id,
+                    username: userData.username,
+                },
+                invite_code: inviteCode,
+            };
 
-        const init = {
-            method: "POST",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify(joinCampaignData),
-            mode: "cors",
-            credentials: "include",
-        };
+            const init = {
+                method: "POST",
+                headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+                body: JSON.stringify(joinCampaignData),
+                mode: "cors",
+                credentials: "include",
+            };
 
-        fetch(`${process.env.REACT_APP_API_URL}/join_campaign`, init)
-            .then(async (res) => {
-                if (res.status === 400) {
-                    const message = await res.text();
-                    throw Error(message);
-                }
-                return res.json();
-            })
-            .then((returnedData) => {
-                navigate(0);
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/join_campaign`,
+                init
+            );
+            const message = await res.text();
 
-                // Old code used to update the campaign value of the user object without refreshing the page
-                // I would like to use this, but am unsure how to update the loader value that it uses
-                // The loader value comes from the Navbar component
-
-                // const userCopy = user;
-                // userCopy.campaigns = returnedData.campaigns;
-                // setUserAuthenticated({ ...userCopy });
-                // setInviteCode(""); // Reset the invite code to an empty string
-                // const notificationsCopy = dataNotifications;
-                // notificationsCopy.push({
-                //     message: "New campaign successfully joined!",
-                //     important: false,
-                // });
-                // setDataNotifications([...notificationsCopy]);
-            })
-            .catch((err) => {
-                // const notificationsCopy = dataNotifications;
-                // notificationsCopy.push({
-                //     message: err.message,
-                //     important: true,
-                // });
-                // setDataNotifications([...notificationsCopy]);
-            });
+            if (res.status === 400) {
+                throw Error(message);
+            }
+            if (res.status === 201) {
+                const successMessage = {
+                    message: message,
+                    important: false,
+                };
+                setDataNotifications([...dataNotifications, successMessage]);
+                setUpdateUser(true);
+            }
+        } catch (err) {
+            const errorMessage = {
+                message: err.message,
+                important: true,
+            };
+            setDataNotifications([...dataNotifications, errorMessage]);
+        }
     };
 
     const joinCampaignBanner = () => {
