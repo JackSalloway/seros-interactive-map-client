@@ -85,7 +85,7 @@ const Banner = (props) => {
                         />
                     </div>
                 ) : null}
-                {adminRights === false ? (
+                {adminRights === 0 ? (
                     <div className="dashboard-banner-not-admin-icons">
                         <FontAwesomeIcon
                             icon="right-from-bracket"
@@ -118,6 +118,7 @@ const Banner = (props) => {
                         campaignIndex={campaignIndex}
                         dataNotifications={dataNotifications}
                         setDataNotifications={setDataNotifications}
+                        setRenderCampaignSettings={setRenderCampaignSettings}
                     />
                 ) : null}
             </div>
