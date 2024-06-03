@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../imports/imports";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import dayjs from "dayjs";
 import he from "he";
 
@@ -13,6 +14,7 @@ const CampaignSettingsWrapper = (props) => {
         setUpdateUser,
         dataNotifications,
         setDataNotifications,
+        setRenderCampaignSettings,
     } = props;
 
     // Campaign data states
@@ -125,6 +127,13 @@ const CampaignSettingsWrapper = (props) => {
     return (
         <div className="dashboard-banner-campaign-settings-wrapper">
             <div className="dashboard-banner-campaign-settings-title-wrapper">
+                <FontAwesomeIcon
+                    icon="fa-times"
+                    className="dashboard-settings-admin-icons location-notes-fa-cross"
+                    onClick={() => {
+                        setRenderCampaignSettings(false);
+                    }}
+                />
                 <h2>Campaign Settings</h2>
             </div>
             <div className="dashboard-banner-campaign-settings-details-wrapper">
