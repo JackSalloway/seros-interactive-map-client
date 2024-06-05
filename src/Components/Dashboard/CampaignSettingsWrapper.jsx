@@ -72,37 +72,52 @@ const CampaignSettingsWrapper = (props) => {
 
     // Update campaign name/description
     const updateCampaignData = async (e) => {
-        e.preventDefault();
-        const updatedCampaignData = {
-            campaign_name: updatedCampaignName,
-            campaign_description: updatedCampaignDescription,
-            campaign_id: campaignID,
-            username: userData.username,
-        };
-        const init = {
-            method: "PUT",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify(updatedCampaignData),
-            mode: "cors",
-            credentials: "include",
-        };
-        const res = await fetch(
-            `${process.env.REACT_APP_API_URL}/update_campaign`,
-            init
-        );
-        // const result = await res.json();
+        try {
+            e.preventDefault();
+            const updatedCampaignData = {
+                campaign_name: updatedCampaignName,
+                campaign_description: updatedCampaignDescription,
+                campaign_id: campaignID,
+                username: userData.username,
+            };
+            const init = {
+                method: "PUT",
+                headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+                body: JSON.stringify(updatedCampaignData),
+                mode: "cors",
+                credentials: "include",
+            };
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/update_campaign`,
+                init
+            );
 
-        // console.log(result);
+            // Campaign name/description value failed backend validation
+            if (res.status === 400) {
+                const result = await res.json();
+                const errorArray = result.errors.map((error) => {
+                    const errorMessage = {
+                        message: error.msg,
+                        important: true,
+                    };
+                    return errorMessage;
+                });
+                setDataNotifications([...dataNotifications, ...errorArray]);
+            }
 
-        // Update the updateUser state value
-        setUpdateUser(true);
-
-        // Add a data notification showing that the campaign has been updated
-        const newNotification = {
-            message: `Campaign: ${updatedCampaignName} successfully updated!`,
-            important: false,
-        };
-        setDataNotifications([...dataNotifications, newNotification]);
+            // Request successful
+            if (res.status === 201) {
+                const message = await res.text();
+                const successMessage = {
+                    message: message,
+                    important: false,
+                };
+                setDataNotifications([...dataNotifications, successMessage]);
+                setUpdateUser(true);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     // Create invite code
