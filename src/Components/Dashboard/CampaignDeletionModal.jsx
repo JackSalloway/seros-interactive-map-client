@@ -67,41 +67,43 @@ const CampaignDeletionModal = (props) => {
 
     // Function to delete campaign by id
     const deleteCampaign = async (e) => {
-        e.preventDefault();
+        try {
+            e.preventDefault();
 
-        const dataToDelete = {
-            campaign_id: deleteData.id,
-            user: {
-                id: userData.id,
-                username: userData.username,
-            },
-        };
+            const dataToDelete = {
+                campaign_id: deleteData.id,
+                user: {
+                    id: userData.id,
+                    username: userData.username,
+                },
+            };
 
-        const init = {
-            method: "DELETE",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify(dataToDelete),
-            mode: "cors",
-            credentials: "include",
-        };
-        const res = await fetch(
-            `${process.env.REACT_APP_API_URL}/delete_campaign`,
-            init
-        );
-        // const result = await res.status();
+            const init = {
+                method: "DELETE",
+                headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+                body: JSON.stringify(dataToDelete),
+                mode: "cors",
+                credentials: "include",
+            };
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/delete_campaign`,
+                init
+            );
 
-        // Set updateUser state value to true
-        setUpdateUser(true);
-
-        // Add a new notification showing that a campaign has been successfully deleted
-        const newNotification = {
-            message: `Campaign: ${deleteData.name}, successfully deleted.`,
-            important: false,
-        };
-        setDataNotifications([...dataNotifications, newNotification]);
-
-        // Unmount deletion modal component
-        setDeleteData(null);
+            // Request successful
+            if (res.status === 200) {
+                const message = await res.text();
+                const successMessage = {
+                    message: message,
+                    important: false,
+                };
+                setDataNotifications([...dataNotifications, successMessage]);
+                setUpdateUser(true);
+                setDeleteData(null);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
