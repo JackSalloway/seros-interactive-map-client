@@ -32,36 +32,54 @@ const CreateCampaignBannerForm = (props) => {
 
     // Send POST request to create a new Campaign with this user assigned as admin for it
     const postCampaignData = async (e) => {
-        const campaignData = {
-            campaign_name: newCampaignName,
-            campaign_description: newCampaignDescription,
-            username: userData.username,
-            user_id: userData.id,
-        };
-
-        const init = {
-            method: "POST",
-            headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
-            body: JSON.stringify(campaignData),
-            mode: "cors",
-            credentials: "include",
-        };
-
-        // Send request to create a new campaign
-        const res = await fetch(
-            `${process.env.REACT_APP_API_URL}/create_campaign`,
-            init
-        );
-        const message = await res.text();
-
-        if (res.status === 201) {
-            const successMessage = {
-                message: message,
-                important: false,
+        try {
+            const campaignData = {
+                campaign_name: newCampaignName,
+                campaign_description: newCampaignDescription,
+                username: userData.username,
+                user_id: userData.id,
             };
-            setDataNotifications([...dataNotifications, successMessage]);
-            setUpdateUser(true);
-            setRenderCreateCampaignBannerForm(false);
+
+            const init = {
+                method: "POST",
+                headers: { "Content-Type": CONTENT_TYPE_APPLICATION_JSON },
+                body: JSON.stringify(campaignData),
+                mode: "cors",
+                credentials: "include",
+            };
+
+            // Send request to create a new campaign
+            const res = await fetch(
+                `${process.env.REACT_APP_API_URL}/create_campaign`,
+                init
+            );
+
+            // Campaign name/description value failed backend validation
+            if (res.status === 400) {
+                const result = await res.json();
+                const errorArray = result.errors.map((error) => {
+                    const errorMessage = {
+                        message: error.msg,
+                        important: true,
+                    };
+                    return errorMessage;
+                });
+                setDataNotifications([...dataNotifications, ...errorArray]);
+            }
+
+            // Request successful
+            if (res.status === 201) {
+                const message = await res.text();
+                const successMessage = {
+                    message: message,
+                    important: false,
+                };
+                setDataNotifications([...dataNotifications, successMessage]);
+                setUpdateUser(true);
+                setRenderCreateCampaignBannerForm(false);
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
