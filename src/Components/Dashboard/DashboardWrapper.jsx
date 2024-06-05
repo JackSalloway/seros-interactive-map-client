@@ -91,9 +91,17 @@ const DashboardWrapper = (props) => {
             );
             const message = await res.text();
 
+            // Error joining campaign
             if (res.status === 400) {
-                throw Error(message);
+                // Only one error is returned at a time when joining campaigns so no need to create an array of the errors returned
+                const errorMessage = {
+                    message: message,
+                    important: true,
+                };
+                setDataNotifications([...dataNotifications, errorMessage]);
             }
+
+            // Campaign join request was successful
             if (res.status === 201) {
                 const successMessage = {
                     message: message,
@@ -103,11 +111,7 @@ const DashboardWrapper = (props) => {
                 setUpdateUser(true);
             }
         } catch (err) {
-            const errorMessage = {
-                message: err.message,
-                important: true,
-            };
-            setDataNotifications([...dataNotifications, errorMessage]);
+            console.log(err);
         }
     };
 
