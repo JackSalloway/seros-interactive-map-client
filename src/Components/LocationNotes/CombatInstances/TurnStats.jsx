@@ -5,8 +5,7 @@ import PlayerTurnInputs from "./PlayerTurnInputs";
 import "./TurnStats.css";
 
 const TurnStats = (props) => {
-    const { turns, setTurns, instancePlayerDetails, setInstancePlayerDetails } =
-        props;
+    const { turns, setTurns, instanceStats, setInstanceStats } = props;
 
     // Need to loop over each instance of turns and render two sets of inputs for each player (damage & healing)
     // All inputs should have a default value of 0
@@ -23,13 +22,13 @@ const TurnStats = (props) => {
         // Set current turn to latest turn (this change may be reverted later)
         setCurrentTurn(turns.length);
         // Add another value to both damage and healing arrays for all characters
-        const instancePlayerDetailsCopy = instancePlayerDetails;
-        instancePlayerDetailsCopy.map((player) => {
+        const instanceStatsCopy = instanceStats;
+        instanceStatsCopy.map((player) => {
             player.turns.damage.push(0);
             player.turns.healing.push(0);
             return player;
         });
-        setInstancePlayerDetails(instancePlayerDetailsCopy);
+        setInstanceStats(instanceStatsCopy);
     };
     const removeTurn = () => {
         // Prevent user removing turns if only one turn exists
@@ -41,13 +40,13 @@ const TurnStats = (props) => {
         turnsCopy.pop();
         setTurns([...turnsCopy]);
         // Remove last index from player damage / healing arrays
-        const instancePlayerDetailsCopy = instancePlayerDetails;
-        instancePlayerDetailsCopy.map((player) => {
+        const instanceStatsCopy = instanceStats;
+        instanceStatsCopy.map((player) => {
             player.turns.damage.pop();
             player.turns.healing.pop();
             return player;
         });
-        setInstancePlayerDetails(instancePlayerDetailsCopy);
+        setInstanceStats(instanceStatsCopy);
     };
     const nextTurn = () => {
         if (turns.length === currentTurn - 1) return; // Prevent user from going to next turn if they are on the last turn
@@ -59,14 +58,13 @@ const TurnStats = (props) => {
     };
 
     const updatePlayerTurnDetail = (inputValue, playerIndex, stat) => {
-        const instancePlayerDetailsCopy = instancePlayerDetails;
-        instancePlayerDetailsCopy[playerIndex].turns[stat][currentTurn] =
+        const instanceStatsCopy = instanceStats;
+        instanceStatsCopy[playerIndex].turns[stat][currentTurn] =
             Number(inputValue);
-        setInstancePlayerDetails([...instancePlayerDetailsCopy]);
+        setInstanceStats([...instanceStatsCopy]);
     };
 
-    if (instancePlayerDetails === null)
-        return <div>Add a player to log data!</div>;
+    if (instanceStats.length === 0) return <div>Add a player to log data!</div>;
 
     // Having an issue updating the input values as the turns progress/regress.
     // Obviously they should update to reflect whatever the current turns input value is within each instancePlayerDetails player object
@@ -106,7 +104,7 @@ const TurnStats = (props) => {
 
                 <button onClick={() => addTurn()}>Add turn</button>
             </div>
-            {instancePlayerDetails.map((player, playerIndex) => {
+            {instanceStats.map((player, playerIndex) => {
                 return (
                     <div
                         key={player.name + playerIndex}

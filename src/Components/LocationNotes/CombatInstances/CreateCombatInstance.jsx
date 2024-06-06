@@ -22,26 +22,16 @@ const CreateCombatInstance = (props) => {
     } = props;
 
     // Instance data states
+
+    const [pcList, setPCList] = useState(null);
+    const [selectedPCs, setSelectedPCs] = useState([]);
+    const [npcList, setNPCList] = useState(null);
+    const [selectedNPCs, setSelectedNPCs] = useState([]);
+
     const [turns, setTurns] = useState([1]);
-    const [playerList, setPlayerList] = useState(
-        players.map((player) => {
-            return {
-                value: {
-                    id: player.id,
-                    name: player.name,
-                    class: player.class,
-                    turns: {
-                        damage: [0],
-                        healing: [0],
-                    },
-                },
-                label: player.name,
-            };
-        })
-    );
     const [instanceName, setInstanceName] = useState("");
     const [instanceDescription, setInstanceDescription] = useState("");
-    const [instancePlayerDetails, setInstancePlayerDetails] = useState(null);
+    const [instanceStats, setInstanceStats] = useState([]);
 
     // Render new character inputs state value
     const [renderNewCharacterForm, setRenderNewCharacterForm] = useState(false);
@@ -49,29 +39,81 @@ const CreateCombatInstance = (props) => {
     // Valid form values state
     const [validFormData, setValidFormData] = useState(false);
 
+    // Set pcList and npcList state values
+    useEffect(() => {
+        setPCList(
+            players.pcs.map((pc) => {
+                return {
+                    value: {
+                        id: pc.id,
+                        name: pc.name,
+                        class: pc.class,
+                        isReal: pc.is_real,
+                        turns: {
+                            damage: [0],
+                            healing: [0],
+                        },
+                    },
+                    label: pc.name,
+                };
+            })
+        );
+
+        setNPCList(
+            players.npcs.map((npc) => {
+                return {
+                    value: {
+                        id: npc.id,
+                        name: npc.name,
+                        class: npc.class,
+                        isReal: npc.is_real,
+                        turns: {
+                            damage: [0],
+                            healing: [0],
+                        },
+                    },
+                    label: npc.name,
+                };
+            })
+        );
+
+        // Cleanup state values when component unmounts
+        return () => {
+            setPCList(null);
+            setNPCList(null);
+        };
+    }, [players]);
+
+    // Set instanceStats state value when selectedPCs/selectedNPCs gets updated
+    useEffect(() => {
+        setInstanceStats([...selectedPCs, ...selectedNPCs]);
+    }, [selectedNPCs, selectedPCs]);
+
     // Check if form values are valid to disable/enable form submit button
     useEffect(() => {
-        if (instanceName.length > 0 && instancePlayerDetails !== null) {
+        if (
+            instanceName.length > 0 &&
+            instanceDescription.length > 0 &&
+            instanceStats.length > 0
+        ) {
             // Might need to validate the damage/healing values as at least one number above 0 may be necessary to render the stat bars.
             // Just leaving it at this for now however.
             setValidFormData(true);
         } else {
             setValidFormData(false);
         }
-    }, [instanceName, instancePlayerDetails]);
+    }, [instanceName, instanceDescription, instanceStats]);
 
     // Send POST request to create a new Combat Instance at this location
     const postInstanceData = async () => {
-        // e.preventDefault();
-
         const instanceData = {
             instance_name: instanceName,
             instance_description: instanceDescription,
-            instance_details: instancePlayerDetails,
-            instance_location_id: locationNotes.id,
-            instance_location_name: locationNotes.name,
-            instance_location_latlng: locationNotes.latlng,
-            instance_campaign_id: campaign.id,
+            instance_details: instanceStats,
+            location_id: locationNotes.id,
+            location_name: locationNotes.name,
+            location_latlng: locationNotes.latlng,
+            campaign_id: campaign.id,
             username: username,
         };
 
@@ -90,10 +132,17 @@ const CreateCombatInstance = (props) => {
         );
         const returnedData = await result.json();
 
+        // Update combatInstances state value
         setCombatInstances([
             ...combatInstances,
             returnedData.newCombatInstance,
         ]);
+
+        // Update players state value
+        setPlayers({
+            pcs: [...returnedData.players.pcs],
+            npcs: [...returnedData.players.npcs],
+        });
 
         // Add notification on successful combat instance creation
         const newNotification = {
@@ -109,19 +158,46 @@ const CreateCombatInstance = (props) => {
         setAddNewInstance(false);
     };
 
-    // Function to handle changes inside the player selection box
-    const handleSelectedPlayersChange = (selectedPlayerList) => {
-        setInstancePlayerDetails(
-            selectedPlayerList.map((player) => {
-                // Add right amount of turns for damage and healing arrays.
-                if (player.value.turns.damage.length !== turns.length) {
-                    player.value.turns.damage.length = turns.length;
-                    player.value.turns.damage.fill(0);
-                    player.value.turns.healing.length = turns.length;
-                    player.value.turns.healing.fill(0);
+    // Function to handle changes inside the pc (player character) selection box
+    const handleSelectedPCsChange = (selectedPCList) => {
+        setSelectedPCs(
+            selectedPCList.map((pc) => {
+                // Remove or add turns to match the length of the instance
+                // Remove turns
+                while (pc.value.turns.damage.length > turns.length) {
+                    pc.value.turns.damage.pop();
+                    pc.value.turns.healing.pop();
                 }
 
-                return player.value;
+                // Add turns
+                while (pc.value.turns.healing.length < turns.length) {
+                    pc.value.turns.damage.push(0);
+                    pc.value.turns.healing.push(0);
+                }
+
+                return pc.value;
+            })
+        );
+    };
+
+    // Function to handle changes inside the npc (non-player character) selection box
+    const handleSelectedNPCsChange = (selectedNPClist) => {
+        setSelectedNPCs(
+            selectedNPClist.map((npc) => {
+                // Remove or add turns to match the length of the instance
+                // Remove turns
+                while (npc.value.turns.damage.length > turns.length) {
+                    npc.value.turns.damage.pop();
+                    npc.value.turns.healing.pop();
+                }
+
+                // Add turns
+                while (npc.value.turns.healing.length < turns.length) {
+                    npc.value.turns.damage.push(0);
+                    npc.value.turns.healing.push(0);
+                }
+
+                return npc.value;
             })
         );
     };
@@ -140,12 +216,13 @@ const CreateCombatInstance = (props) => {
                         instanceDescription={instanceDescription}
                         setInstanceDescription={setInstanceDescription}
                         turns={turns}
-                        playerList={playerList}
-                        setPlayerList={setPlayerList}
-                        handleSelectedPlayersChange={
-                            handleSelectedPlayersChange
-                        }
-                        instancePlayerDetails={instancePlayerDetails}
+                        pcList={pcList}
+                        setPCList={setPCList}
+                        handleSelectedPCsChange={handleSelectedPCsChange}
+                        npcList={npcList}
+                        setNPCList={setNPCList}
+                        handleSelectedNPCsChange={handleSelectedNPCsChange}
+                        instanceStats={instanceStats}
                         renderNewCharacterForm={renderNewCharacterForm}
                         setRenderNewCharacterForm={setRenderNewCharacterForm}
                         dataNotifications={dataNotifications}
@@ -154,8 +231,8 @@ const CreateCombatInstance = (props) => {
                     <TurnStats
                         turns={turns}
                         setTurns={setTurns}
-                        instancePlayerDetails={instancePlayerDetails}
-                        setInstancePlayerDetails={setInstancePlayerDetails}
+                        instanceStats={instanceStats}
+                        setInstanceStats={setInstanceStats}
                     />
                     <button
                         disabled={!validFormData}

@@ -16,12 +16,12 @@ const Campaign = () => {
     const { campaign, user } = location.state;
 
     // Data states
-    const [players, setPlayers] = useState(null);
     const [locations, setLocations] = useState(null);
     const [quests, setQuests] = useState(null);
     const [npcs, setNPCs] = useState(null);
     const [changelog, setChangelog] = useState(null); // Changed the naming scheme of this state value as I would like to remove the Seros part from all other values
     const [combatInstances, setCombatInstances] = useState(null);
+    const [players, setPlayers] = useState(null); // This value will now contain a list of player objects and non-player objects
 
     // Selected data states
     const [selectedLocationNotes, setSelectedLocationNotes] = useState(null);

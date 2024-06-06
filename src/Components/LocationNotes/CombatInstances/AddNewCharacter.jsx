@@ -89,17 +89,17 @@ const AddNewCharacter = (props) => {
                 options={[
                     {
                         value: true,
-                        label: "Player Character (remember for next time)",
+                        label: "Player character",
                     },
                     {
                         value: false,
-                        label: "Non-player Character (do not remember for next time)",
+                        label: "Non-player character",
                     },
                 ]}
                 isMulti={false}
                 onChange={handleNewCharacterTypeChange}
                 styles={customStyles}
-                placeholder="Should this character be remembered for next time?"
+                placeholder="Player character or Non-player character"
             />
         );
     };
