@@ -88,11 +88,11 @@ const AddNewCharacter = (props) => {
                 menuPortalTarget={document.body} // This is used to give the menu a z-index to prevent it being hidden by other elements
                 options={[
                     {
-                        value: true,
+                        value: 1,
                         label: "Player character",
                     },
                     {
-                        value: false,
+                        value: 0,
                         label: "Non-player character",
                     },
                 ]}

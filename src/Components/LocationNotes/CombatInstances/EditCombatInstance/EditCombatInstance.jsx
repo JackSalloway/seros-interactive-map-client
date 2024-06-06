@@ -15,156 +15,207 @@ const EditCombatInstance = (props) => {
         dataNotifications,
         setDataNotifications,
         players,
-        // setPlayers,
+        setPlayers,
         setEditing,
         username,
     } = props;
 
-    const [turns, setTurns] = useState([]);
+    const [listsLoaded, setListsLoaded] = useState(false);
+    const [defaultSelectionLoaded, setDefaultSelectionLoaded] = useState(false);
+
+    const [turns, setTurns] = useState(
+        Array(instance.players[0].turns.length)
+            .fill()
+            .map((_, index) => index + 1)
+    );
     const [instanceName, setInstanceName] = useState("");
     const [instanceDescription, setInstanceDescription] = useState("");
 
     // Render new character inputs state value
     const [renderNewCharacterForm, setRenderNewCharacterForm] = useState(false);
 
-    const [instancePlayerDetailsSelect, setInstancePlayerDetailsSelect] =
-        useState(
-            instance.players.map((player) => {
-                return {
-                    value: {
-                        id: player.id,
-                        name: player.name,
-                        class: player.class,
-                        turns: player.turns,
-                        removedTurns: [],
-                    },
-                    label: player.name,
-                };
-            })
-        );
-    const [instancePlayerDetails, setInstancePlayerDetails] = useState([]);
-    const [selectedPlayerIds, setSelectedPlayerIds] = useState([]);
-    const [unselectedPlayers, setUnselectedPlayers] = useState([]);
-    const [removedPlayers, setRemovedPlayers] = useState([]);
+    // PC and NPC list state values
+    const [pcList, setPCList] = useState(null);
+    const [selectedPCs, setSelectedPCs] = useState(null);
+    const [npcList, setNPCList] = useState(null);
+    const [selectedNPCs, setSelectedNPCs] = useState(null);
+    const [selectedCharacterIds, setSelectedCharacterIds] = useState([]);
+    const [instanceStats, setInstanceStats] = useState([]);
+    const [removedCharacters, setRemovedCharacters] = useState([]);
 
     // Set initial form values and cleanup on component unmount
     useEffect(() => {
-        setTurns(
-            Array(instance.players[0].turns.length)
-                .fill()
-                .map((_, index) => index + 1)
-        );
         setInstanceName(instance.name);
         setInstanceDescription(instance.description);
 
         // Cleanup state values when component unmounts
         return () => {
-            setTurns([]);
+            // setTurns([]); - This setState value causes the turns to be reset after adding a pc/npc not entirely sure why, so have removed it for now, functionality still works the same anyway
             setInstanceName("");
             setInstanceDescription("");
             setRenderNewCharacterForm(false);
-            setInstancePlayerDetailsSelect([]);
-            setInstancePlayerDetails([]);
-            setSelectedPlayerIds([]);
-            setUnselectedPlayers([]);
-            setRemovedPlayers([]);
+            setRemovedCharacters([]);
         };
     }, [instance]);
 
-    // Update selected player id array when a player is unselected
+    // Set pcList and npcList state values on initial render
     useEffect(() => {
-        setSelectedPlayerIds(
-            instancePlayerDetailsSelect.map((player) => player.value.id)
-        );
-    }, [instancePlayerDetailsSelect]);
-
-    // Update removed players array when a player is unselected
-    useEffect(() => {
-        setRemovedPlayers(
-            combatInstances[originalIndex].players
-                .map((player) => {
-                    return {
-                        id: player.id,
-                        turnIds: player.turns.map((turn) => {
-                            return turn.id;
-                        }),
-                    };
-                })
-                .filter((player) => {
-                    return !selectedPlayerIds.includes(player.id);
-                })
-        );
-    }, [combatInstances, originalIndex, selectedPlayerIds]);
-
-    // Update unselected player values when a player is unselected
-    useEffect(() => {
-        setUnselectedPlayers(
-            players
-                .filter((player) => !selectedPlayerIds.includes(player.id))
-                .map((player) => {
-                    // Check if the player was already on the instance before opening the edit form
-                    const playerExists = combatInstances[
-                        originalIndex
-                    ].players.filter((originalPlayer) => {
-                        return originalPlayer.id === player.id;
-                    });
-
-                    let newTurns;
-                    let newRemovedTurns = [];
-
-                    if (playerExists.length !== 0) {
-                        // Set value of newTurns variable to equal the existing value from the instance being edited
-                        newTurns = Array.from(playerExists[0].turns);
-
-                        // Add empty turn values if the original turn length is less than the current turn value in this component
-                        while (newTurns.length < turns.length) {
-                            newTurns.push({
-                                turn_number: newTurns.length + 1,
+        if (listsLoaded === false && turns.length !== 0) {
+            setPCList(
+                players.pcs.map((pc) => {
+                    // Set default values for turnValue and foundational variables
+                    let turnValue = Array(turns.length)
+                        .fill()
+                        .map((_, index) => {
+                            return {
+                                turn_number: index + 1,
                                 damage: 0,
                                 healing: 0,
-                            });
-                        }
+                            };
+                        });
+                    let originalCharacter = false; // Used to discern if the character was already in the instance before the edit form was opened
 
-                        // Remove turns if the original turn length is more than the current turn value in this component
-                        while (newTurns.length > turns.length) {
-                            newRemovedTurns.push(newTurns.pop());
-                        }
-                    } else {
-                        newTurns = Array(turns.length)
-                            .fill()
-                            .map((_, index) => {
-                                return {
-                                    turn_number: index + 1,
-                                    damage: 0,
-                                    healing: 0,
-                                };
-                            });
+                    // Check if player character was in the instance before the edit form was opened
+                    const originalPC = instance.players.filter(
+                        (player) => player.id === pc.id
+                    );
+
+                    // If player character was in the instance to begin with, set the turns value to its original value
+                    if (originalPC.length === 1) {
+                        turnValue = originalPC[0].turns;
+                        originalCharacter = true;
                     }
 
                     return {
                         value: {
-                            id: player.id,
-                            name: player.name,
-                            class: player.class,
-                            turns: newTurns,
-                            removedTurns: newRemovedTurns,
+                            id: pc.id,
+                            name: pc.name,
+                            class: pc.class,
+                            isReal: pc.is_real,
+                            removedTurns: [],
+                            foundational: originalCharacter,
+                            turns: turnValue,
                         },
-                        label: player.name,
+                        label: pc.name,
                     };
                 })
-        );
-    }, [players, selectedPlayerIds, turns, combatInstances, originalIndex]);
+            );
 
-    // Isolate values from label
+            setNPCList(
+                players.npcs.map((npc) => {
+                    // Set default values for turnValue and foundational variables
+                    let turnValue = Array(turns.length)
+                        .fill()
+                        .map((_, index) => {
+                            return {
+                                turn_number: index + 1,
+                                damage: 0,
+                                healing: 0,
+                            };
+                        });
+                    let originalCharacter = false; // Used to discern if the character was already in the instance before the edit form was opened
+
+                    // Check if non-player-character was in the instance before the edit form was opened
+                    const originalNPC = instance.players.filter(
+                        (player) => player.id === npc.id
+                    );
+
+                    // If non-player character was in the instance to begin with, set the turns value to its original value
+                    if (originalNPC.length === 1) {
+                        turnValue = originalNPC[0].turns;
+                        originalCharacter = true;
+                    }
+
+                    return {
+                        value: {
+                            id: npc.id,
+                            name: npc.name,
+                            class: npc.class,
+                            isReal: npc.is_real,
+                            removedTurns: [],
+                            foundational: originalCharacter,
+                            turns: turnValue,
+                        },
+                        label: npc.name,
+                    };
+                })
+            );
+
+            setListsLoaded(true);
+        }
+    }, [listsLoaded, players, instance, turns]);
+
+    //Set default values for selectedPCs and selectedNPCs, and remove the default values from the pcList and npcList respectively
     useEffect(() => {
-        setInstancePlayerDetails(
-            instancePlayerDetailsSelect.map((player) => player.value)
-        );
-    }, [instancePlayerDetailsSelect]);
+        if (
+            defaultSelectionLoaded === false &&
+            pcList !== null &&
+            npcList !== null
+        ) {
+            setSelectedPCs(
+                pcList.filter((pc) => pc.value.foundational === true)
+            );
+            const pcListCopy = pcList;
+            pcListCopy.filter((pc) => pc.value.foundational === false);
+            setPCList(pcListCopy);
 
-    // Function to handle changes inside the player selection box
-    const handleSelectedPlayersChange = (selectedPlayerList) => {
-        setInstancePlayerDetailsSelect(selectedPlayerList);
+            setSelectedNPCs(
+                npcList.filter((npc) => npc.value.foundational === true)
+            );
+            const npcListCopy = npcList;
+            npcListCopy.filter((npc) => npc.value.foundational === false);
+            setNPCList(npcListCopy);
+
+            setDefaultSelectionLoaded(true);
+        }
+    }, [defaultSelectionLoaded, pcList, npcList]);
+
+    // Set instanceStats state value when selectedPCs/selectedNPCs gets updated
+    useEffect(() => {
+        if (selectedPCs !== null && selectedNPCs !== null) {
+            setInstanceStats([
+                ...selectedPCs.map((pc) => pc.value),
+                ...selectedNPCs.map((npc) => npc.value),
+            ]);
+        }
+    }, [selectedNPCs, selectedPCs]);
+
+    // Update selected player id array when a player is unselected
+    useEffect(() => {
+        if (selectedPCs !== null && selectedNPCs !== null) {
+            const selectedPCIds = selectedPCs.map((pc) => pc.value.id);
+            const selectedNPCIds = selectedNPCs.map((npc) => npc.value.id);
+
+            setSelectedCharacterIds([...selectedPCIds, ...selectedNPCIds]);
+        }
+    }, [selectedPCs, selectedNPCs]);
+
+    // Update removed characters array when a character is unselected
+    useEffect(() => {
+        setRemovedCharacters(
+            combatInstances[originalIndex].players
+                .map((character) => {
+                    return {
+                        id: character.id,
+                        turnIds: character.turns.map((turn) => {
+                            return turn.id;
+                        }),
+                    };
+                })
+                .filter((character) => {
+                    return !selectedCharacterIds.includes(character.id);
+                })
+        );
+    }, [combatInstances, originalIndex, selectedCharacterIds]);
+
+    // Function to handle changes inside the pc (player character) selection box
+    const handleSelectedPCsChange = (selectedPCList) => {
+        setSelectedPCs(selectedPCList);
+    };
+
+    // Function to handle changes inside the npc (non-player character) selection box
+    const handleSelectedNPCsChange = (selectedNPCList) => {
+        setSelectedNPCs(selectedNPCList);
     };
 
     const updateInstanceData = async () => {
@@ -172,8 +223,8 @@ const EditCombatInstance = (props) => {
             instance_id: instance.id,
             instance_name: instanceName,
             instance_description: instanceDescription,
-            instance_details: instancePlayerDetails,
-            removed_player_turn_ids: removedPlayers
+            instance_details: instanceStats,
+            removed_player_turn_ids: removedCharacters
                 .map((player) => {
                     return player.turnIds;
                 })
@@ -236,12 +287,15 @@ const EditCombatInstance = (props) => {
                         instanceDescription={instanceDescription}
                         setInstanceDescription={setInstanceDescription}
                         turns={turns}
-                        playerList={unselectedPlayers}
-                        setPlayerList={setUnselectedPlayers}
-                        handleSelectedPlayersChange={
-                            handleSelectedPlayersChange
-                        }
-                        instancePlayerDetails={instancePlayerDetailsSelect}
+                        pcList={pcList}
+                        setPCList={setPCList}
+                        selectedPCs={selectedPCs}
+                        handleSelectedPCsChange={handleSelectedPCsChange}
+                        npcList={npcList}
+                        setNPCList={setNPCList}
+                        selectedNPCs={selectedNPCs}
+                        handleSelectedNPCsChange={handleSelectedNPCsChange}
+                        instanceStats={instanceStats}
                         renderNewCharacterForm={renderNewCharacterForm}
                         setRenderNewCharacterForm={setRenderNewCharacterForm}
                         dataNotifications={dataNotifications}
@@ -250,8 +304,12 @@ const EditCombatInstance = (props) => {
                     <UpdatedTurnStats
                         turns={turns}
                         setTurns={setTurns}
-                        instancePlayerDetails={instancePlayerDetails}
-                        setInstancePlayerDetails={setInstancePlayerDetails}
+                        instanceStats={instanceStats}
+                        setInstanceStats={setInstanceStats}
+                        pcList={pcList}
+                        setPCList={setPCList}
+                        npcList={npcList}
+                        setNPCList={setNPCList}
                     />
                     <button
                         // disabled={!validFormData}
@@ -260,6 +318,7 @@ const EditCombatInstance = (props) => {
                     >
                         Update instance!
                     </button>
+                    {/* <button onClick={() => logValues()}>log values</button> */}
                 </div>
             </div>
             <div

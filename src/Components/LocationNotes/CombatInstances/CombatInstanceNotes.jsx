@@ -336,7 +336,7 @@ const CombatInstanceNotes = (props) => {
             setCombatInstances={setCombatInstances}
             dataNotifications={dataNotifications}
             setDataNotifications={setDataNotifications}
-            players={players}
+            players={structuredClone(players)}
             setPlayers={setPlayers}
             setEditing={setEditing}
             username={username}
