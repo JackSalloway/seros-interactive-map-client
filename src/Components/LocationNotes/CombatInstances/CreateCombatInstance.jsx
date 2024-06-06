@@ -22,12 +22,10 @@ const CreateCombatInstance = (props) => {
     } = props;
 
     // Instance data states
-
     const [pcList, setPCList] = useState(null);
     const [selectedPCs, setSelectedPCs] = useState([]);
     const [npcList, setNPCList] = useState(null);
     const [selectedNPCs, setSelectedNPCs] = useState([]);
-
     const [turns, setTurns] = useState([1]);
     const [instanceName, setInstanceName] = useState("");
     const [instanceDescription, setInstanceDescription] = useState("");
