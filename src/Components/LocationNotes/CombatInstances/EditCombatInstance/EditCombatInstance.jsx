@@ -252,9 +252,15 @@ const EditCombatInstance = (props) => {
         combatInstancesCopy[originalIndex] = returnedData.combatInstanceResult;
         setCombatInstances(combatInstancesCopy);
 
+        // Update players state value
+        setPlayers({
+            pcs: [...returnedData.players.pcs],
+            npcs: [...returnedData.players.npcs],
+        });
+
         // Add a data notification showing that the combat instance has been updated
         const newNotification = {
-            message: `NPC: ${instanceName}, successfully updated!`,
+            message: `Instance: ${instanceName}, successfully updated!`,
             important: false,
         };
         setDataNotifications([...dataNotifications, newNotification]);
