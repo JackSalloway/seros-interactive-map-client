@@ -82,7 +82,7 @@ const SublocationNotes = (props) => {
         );
     }
 
-    const updateSubLocationData = async (e) => {
+    const updateSublocationData = async (e) => {
         e.preventDefault();
 
         const data = {
@@ -163,7 +163,7 @@ const SublocationNotes = (props) => {
                         </span>
                     </div>
                     <form
-                        onSubmit={updateSubLocationData}
+                        onSubmit={updateSublocationData}
                         className="location-notes-form sub-location-form"
                     >
                         <div className="create-location-sub-location-name location-notes-create">

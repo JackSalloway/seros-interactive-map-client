@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CONTENT_TYPE_APPLICATION_JSON } from "../../../imports/imports";
 
-const CreateSubLocation = (props) => {
+const CreateSublocation = (props) => {
     const {
         locationNotes,
         locations,
@@ -132,4 +132,4 @@ const CreateSubLocation = (props) => {
     );
 };
 
-export default CreateSubLocation;
+export default CreateSublocation;
