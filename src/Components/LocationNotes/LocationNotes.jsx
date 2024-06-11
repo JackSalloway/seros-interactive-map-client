@@ -5,7 +5,7 @@ import he from "he";
 import { splitParas } from "../../imports/imports";
 
 // Component imports
-import SublocationWrapper from "./Sublocations/SublocationWrapper";
+import SublocationWrapper from "./SubLocations/SublocationWrapper";
 import NPCWrapper from "./NPCs/NPCWrapper";
 import QuestWrapper from "./Quests/QuestWrapper";
 import CombatInstancesWrapper from "./CombatInstances/CombatInstancesWrapper";
