@@ -44,6 +44,7 @@ const Campaign = () => {
     const [editMarkerLatLng, setEditMarkerLatLng] = useState([]);
     const [editMarkerType, setEditMarkerType] = useState(null);
 
+    const [journalOpen, setJournalOpen] = useState(false);
     const [deleteData, setDeleteData] = useState(null);
 
     // Data notification states
@@ -207,6 +208,7 @@ const Campaign = () => {
                 editMarkerType={editMarkerType}
                 setEditMarkerType={setEditMarkerType}
                 setDeleteData={setDeleteData}
+                journalOpen={journalOpen}
             />
             <Journal
                 locationNotes={locations?.[selectedLocationNotes] || null}
@@ -246,6 +248,8 @@ const Campaign = () => {
                 setCombatInstances={setCombatInstances}
                 players={players}
                 setPlayers={setPlayers}
+                journalOpen={journalOpen}
+                setJournalOpen={setJournalOpen}
             />
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (

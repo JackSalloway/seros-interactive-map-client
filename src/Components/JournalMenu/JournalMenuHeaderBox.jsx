@@ -5,6 +5,7 @@ const JournalMenuHeaderBox = (props) => {
     const {
         selectedTab,
         setSelectedTab,
+        selectedTabValue,
         headerValue,
         iconValue,
         boxPosition,
@@ -23,10 +24,10 @@ const JournalMenuHeaderBox = (props) => {
                     );
                     return;
                 }
-                if (selectedTab === headerValue) {
+                if (selectedTab === selectedTabValue) {
                     setSelectedTab("Front Page");
                 } else {
-                    setSelectedTab(headerValue);
+                    setSelectedTab(selectedTabValue);
                 }
             }}
             style={

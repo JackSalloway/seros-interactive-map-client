@@ -53,12 +53,15 @@ function MapBox(props) {
         editMarkerType,
         setEditMarkerType,
         setDeleteData,
+        journalOpen,
     } = props;
 
-    // useState hooks
-    // const [creationMarkerLatLng, setcreationMarkerLatLng] = useState([51.505, -0.09]);
-
     const [layerFilter, setLayerFilter] = useState([]);
+
+    // useEffect to trigger map resize when journal component is opened/closed
+    useEffect(() => {
+        window.dispatchEvent(new Event("resize"));
+    }, [journalOpen]);
 
     useEffect(() => {
         if (locations === null) {
@@ -233,8 +236,8 @@ function MapBox(props) {
     }
 
     // Create map boundries
-    const swBoundry = new LatLng(-85, -200);
-    const neBoundry = new LatLng(85, 200);
+    const swBoundry = new LatLng(-400, -400);
+    const neBoundry = new LatLng(400, 400);
     const bounds = new LatLngBounds(swBoundry, neBoundry);
 
     // Events for animated panning when clicking a marker
@@ -246,6 +249,9 @@ function MapBox(props) {
                 } else {
                     map.setView(e.popup._latlng, 5);
                 }
+            },
+            resize(_e) {
+                map.invalidateSize();
             },
         });
         return false;
@@ -290,7 +296,6 @@ function MapBox(props) {
             scrollWheelZoom={true}
             zoomControl={false}
             maxBounds={bounds}
-            // maxBoundsViscosity={0.3}
             ref={map}
         >
             <TileLayer

@@ -1,12 +1,12 @@
 /* leaflet styles - things to do with MapBox.jsx */
 .leaflet-container {
-    /* margin: 0 auto; */
-    width: auto;
-    height: 90vh;
+    height: inherit;
+    width: inherit;
+    flex: 1;
+    height: 100%;
+    width: 100%;
     background: url("../../../public/maps/seros/png-example/5/7/12.png");
     z-index: 1;
-    /* margin-bottom: 5vh; */
-    grid-area: mapbox;
 }
 
 .popup-container {

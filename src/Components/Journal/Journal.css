@@ -1,7 +1,73 @@
+/* Dropdown styles */
+#dropdown-wrapper {
+    z-index: 1;
+    display: grid;
+    grid-template-rows: 70% 30%;
+    grid-template-areas:
+        "main"
+        "tab";
+    height: 3rem;
+    width: 40%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -71%);
+    transition: transform 0.1s ease-in-out;
+
+    justify-items: center;
+}
+
+#dropdown-wrapper.dropdown-main-open {
+    transform: translate(-50%, 0%);
+}
+
+.dropdown-component {
+    background-color: rgba(14, 22, 31, 1);
+    border-radius: 0 0 1rem 1rem;
+}
+
+.dropdown-pointer {
+    cursor: pointer;
+}
+
+#dropdown-main {
+    grid-area: main;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown-text-wrapper {
+    text-align: center;
+    margin: 0 1rem;
+}
+
+.dropdown-text:hover {
+    text-decoration: underline;
+}
+
+#dropdown-tab {
+    grid-area: tab;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+}
+
+#dropdown-fa-icon {
+    transition: transform 0.15s ease-in-out;
+}
+
+.dropdown-tab-open {
+    transform: rotate(0.5turn);
+}
+
 /* Journal styles - things to do with Journal.jsx */
 .journal {
-    width: 100%;
-    height: 100vh;
+    width: 40%;
+    height: 100%;
     background-color: rgba(14, 22, 31, 0.5);
     color: white;
     grid-area: journal;
@@ -11,7 +77,6 @@
 }
 
 #journal-front-page-container {
-    width: 30vw;
     /* display: grid;
     grid-template-rows: 1fr 2fr;
     grid-template-areas: "menu"; */
@@ -47,8 +112,8 @@
     display: flex;
     position: relative;
     flex-direction: column;
-    height: 90vh; /* Had issues with the previous value of 100% causing the last few entries to not appear on the screen when the user scrolled to the bottom */
-    width: 30vw;
+    height: 100%; /* Had issues with the previous value of 100% causing the last few entries to not appear on the screen when the user scrolled to the bottom */
+    width: 100%;
     overflow-y: auto;
 }
 

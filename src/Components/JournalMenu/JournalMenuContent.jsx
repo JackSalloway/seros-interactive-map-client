@@ -37,6 +37,9 @@ const JournalMenuContent = (props) => {
         setChangelog,
         combatInstances,
         // setCombatInstanceData, - This is not used due to the locationless functionality for Combat Instances not being implemented as they cannot be deleted.
+        journalOpen,
+        setJournalOpen,
+        setSelectedTab,
     } = props;
 
     if (markerBeingEdited !== null) {
@@ -145,28 +148,35 @@ const JournalMenuContent = (props) => {
     };
 
     const conditionalRender = () => {
-        if (selectedTab === "Changelog") {
+        if (selectedTab === "changelog") {
             return ChangelogContent();
         }
 
-        if (selectedTab === "Location list") {
+        if (selectedTab === "locations") {
             return locationListContent();
         }
 
-        if (selectedTab === "Quest list") {
+        if (selectedTab === "quests") {
             return questListContent();
         }
 
-        if (selectedTab === "NPC list") {
+        if (selectedTab === "npcs") {
             return npcListContent();
         }
 
-        if (selectedTab === "Combat Instances") {
+        if (selectedTab === "instances") {
             return combatInstancesContent();
         }
 
         // No tab has been selected so return frontpage
-        return <FrontPageWrapper campaign={campaign} />;
+        return (
+            <FrontPageWrapper
+                campaign={campaign}
+                journalOpen={journalOpen}
+                setJournalOpen={setJournalOpen}
+                setSelectedTab={setSelectedTab}
+            />
+        );
     };
 
     return (
