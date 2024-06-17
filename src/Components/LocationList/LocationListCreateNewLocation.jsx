@@ -30,7 +30,6 @@ const LocationListCreateNewLocation = (props) => {
     // Create location state values
     const [locationName, setLocationName] = useState("");
     const [locationDescription, setLocationDescription] = useState("");
-    const [locationRegion, setLocationRegion] = useState({});
     const [locationType, setLocationType] = useState({});
     const [locationMarked, setLocationMarked] = useState(false);
     const [locationVisited, setLocationVisited] = useState(false);
@@ -44,7 +43,6 @@ const LocationListCreateNewLocation = (props) => {
             location_lng: creationMarkerLatLng[1],
             location_name: locationName,
             location_description: locationDescription,
-            location_region: locationRegion.value,
             location_type: locationType.value,
             location_marked: locationMarked,
             location_visited: locationVisited,
@@ -100,25 +98,6 @@ const LocationListCreateNewLocation = (props) => {
             label: he.decode(location.label),
         });
         setCreationMarkerType(location.value);
-    };
-
-    // Region selection box variables
-    // Create location region values
-    const locationRegionValues = [
-        { value: "Eastern Kae Empire", label: "Eastern Kae Empire" },
-        { value: "The Elven Kingdoms", label: "The Elven Kingdoms" },
-        { value: "The North", label: "The North" },
-        { value: "Western Kae Empire", label: "Western Kae Empire" },
-        { value: "Draconic Territories", label: "Draconic Territories" },
-        { value: "The Plains of Maddening", label: "The Plains of Maddening" },
-    ];
-
-    // Function to handle changes in the selection box
-    const handleLocationRegionChange = (location) => {
-        setLocationRegion({
-            value: he.decode(location.value),
-            label: he.decode(location.label),
-        });
     };
 
     const createSelectBox = (
