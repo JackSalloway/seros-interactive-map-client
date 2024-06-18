@@ -213,7 +213,13 @@ const Campaign = () => {
                 setSidebarOpen={setSidebarOpen}
             />
 
-            <Sidebar sidebarOpen={sidebarOpen} campaign={campaign} />
+            <Sidebar
+                sidebarOpen={sidebarOpen}
+                mapRef={map}
+                campaign={campaign}
+                locations={locations}
+                setLocations={setLocations}
+            />
 
             {/* <Journal
                 locationNotes={locations?.[selectedLocationNotes] || null}

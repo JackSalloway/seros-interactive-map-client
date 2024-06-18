@@ -1,32 +1,48 @@
-import React, { useState, useEffect, useRef, SetStateAction } from "react";
-import ReactDOM from "react-dom";
+import React, { SetStateAction } from "react";
+import { Map } from "leaflet";
+
+// Component imports
+import ListWrapper from "../ListWrapper/ListWrapper";
+
+// Type imports
+import type { Campaign, Location } from "../../types";
 
 // Style imports
 import "./Sidebar.css";
 
-interface CampaignTypes {
-    id: number;
-    name: string;
-    description: string;
-    is_admin: number;
-}
-
 interface SidebarProps {
-    campaign: CampaignTypes;
+    campaign: Campaign;
+    mapRef: React.RefObject<Map>;
     sidebarOpen: boolean;
+    locations: Location[];
+    setLocations: React.Dispatch<SetStateAction<Location[]>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
-    const { sidebarOpen, campaign } = props;
-    const sidebarRef = useRef<HTMLDivElement | null>(null);
+    const { campaign, mapRef, sidebarOpen, locations, setLocations } = props;
 
     return (
         <div
-            ref={sidebarRef}
             className={`sidebar-wrapper ${
                 sidebarOpen === true ? "sidebar-open" : "sidebar-closed"
             }`}
-        ></div>
+        >
+            <div id="sidebar-header-wrapper">
+                <h2>{campaign.name}</h2>
+            </div>
+            <ListWrapper
+                title={"Locations"}
+                list={locations?.map((location) => {
+                    return {
+                        id: location.id,
+                        name: location.name,
+                        description: location.description,
+                        latlng: location.latlng,
+                        mapRef: mapRef,
+                    };
+                })}
+            />
+        </div>
     );
 };
 
