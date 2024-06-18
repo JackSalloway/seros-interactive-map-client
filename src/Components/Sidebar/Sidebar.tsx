@@ -14,7 +14,6 @@ interface CampaignTypes {
 interface SidebarProps {
     campaign: CampaignTypes;
     sidebarOpen: boolean;
-    setSidebarOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
