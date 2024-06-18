@@ -1,11 +1,10 @@
-import { Map, LatLng } from "leaflet";
+import { LatLng } from "leaflet";
 
 export interface ListItemType {
     id: number;
     name: string;
     description: string;
     latlng: LatLng;
-    mapRef: React.RefObject<Map>;
 }
 
 export interface Campaign {
