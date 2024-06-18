@@ -21,27 +21,36 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = (props) => {
     const { campaign, mapRef, sidebarOpen, locations, setLocations } = props;
 
+    const sidebarContent = () => {
+        if (!sidebarOpen) return null;
+        return (
+            <>
+                <div id="sidebar-header-wrapper">
+                    <h2>{campaign.name}</h2>
+                </div>
+                <ListWrapper
+                    title={"Locations"}
+                    mapRef={mapRef}
+                    list={locations?.map((location) => {
+                        return {
+                            id: location.id,
+                            name: location.name,
+                            description: location.description,
+                            latlng: location.latlng,
+                        };
+                    })}
+                />
+            </>
+        );
+    };
+
     return (
         <div
             className={`sidebar-wrapper ${
                 sidebarOpen === true ? "sidebar-open" : "sidebar-closed"
             }`}
         >
-            <div id="sidebar-header-wrapper">
-                <h2>{campaign.name}</h2>
-            </div>
-            <ListWrapper
-                title={"Locations"}
-                list={locations?.map((location) => {
-                    return {
-                        id: location.id,
-                        name: location.name,
-                        description: location.description,
-                        latlng: location.latlng,
-                        mapRef: mapRef,
-                    };
-                })}
-            />
+            {sidebarContent()}
         </div>
     );
 };

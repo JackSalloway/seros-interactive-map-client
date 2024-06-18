@@ -3,17 +3,21 @@ import ListItem from "../ListItem/ListItem";
 
 // Type imports
 import type { ListItemType } from "../../types";
+import { Map } from "leaflet";
 
 interface ListWrapperProps {
     title: string;
     list: ListItemType[];
+    mapRef: React.RefObject<Map>;
 }
 
 const ListWrapper: React.FC<ListWrapperProps> = (props) => {
+    const { title, list, mapRef } = props;
+
     return (
         <div>
-            <h3>{props.title}</h3>
-            {props.list?.map((item) => {
+            <h3>{title}</h3>
+            {list?.map((item) => {
                 return (
                     <ListItem
                         key={item.name + item.id}
@@ -21,7 +25,7 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                         name={item.name}
                         description={item.description}
                         latlng={item.latlng}
-                        mapRef={item.mapRef}
+                        mapRef={mapRef}
                     />
                 );
             })}
