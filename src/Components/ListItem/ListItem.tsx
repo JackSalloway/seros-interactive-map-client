@@ -1,4 +1,12 @@
-import React from "react";
+import { useState } from "react";
+
+// Component imports
+import FaChevronIcon from "../FaChevronIcon/FaChevronIcon";
+
+// Style import
+import "./ListItem.css";
+
+// Type imports
 import { Map, LatLng } from "leaflet";
 
 interface ListComponentProps {
@@ -12,9 +20,10 @@ interface ListComponentProps {
 const ListItem: React.FC<ListComponentProps> = (props) => {
     const { id, name, description, latlng, mapRef } = props;
 
+    const [selected, setSelected] = useState<boolean>(false);
+
     const jumpToLocationButton = (
         <button
-            className="location-list-notes-location-lat-lng"
             onClick={() => {
                 if (mapRef.current?.getZoom() === 5) {
                     mapRef.current.flyTo(latlng);
@@ -28,10 +37,17 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
     );
 
     return (
-        <div className="list-item-wrapper">
-            <h3>{name}</h3>
-            <p>{description}</p>
-            {jumpToLocationButton}
+        <div className="item-wrapper">
+            <div className="item-header">
+                <h3>{name}</h3>
+                <FaChevronIcon open={selected} toggleOpen={setSelected} />
+            </div>
+            {selected === true ? (
+                <div className="item-content">
+                    <p>{description}</p>
+                    {jumpToLocationButton}
+                </div>
+            ) : null}
         </div>
     );
 };

@@ -1,0 +1,13 @@
+.item-wrapper {
+    width: 100%;
+}
+
+.item-header {
+    display: flex;
+    gap: 1%;
+}
+
+.item-content {
+    display: flex;
+    gap: 20%;
+}

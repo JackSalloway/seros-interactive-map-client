@@ -25,7 +25,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         if (!sidebarOpen) return null;
         return (
             <>
-                <div id="sidebar-header-wrapper">
+                <div id="sidebar-header">
                     <h2>{campaign.name}</h2>
                 </div>
                 <ListWrapper
