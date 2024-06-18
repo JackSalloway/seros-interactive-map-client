@@ -1,0 +1,21 @@
+.sidebar-wrapper {
+    position: relative;
+    right: 0%;
+    height: 100%;
+    background-color: rgba(14, 22, 31);
+    color: white;
+    grid-area: journal;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    z-index: 2;
+    transition: width 0.4s ease-in-out;
+}
+
+.sidebar-open {
+    width: 40%;
+}
+
+.sidebar-closed.sidebar-wrapper {
+    width: 0;
+}

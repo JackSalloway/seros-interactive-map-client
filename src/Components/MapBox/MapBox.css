@@ -31,3 +31,13 @@
 .popup-button-wrapper > button {
     width: 25%;
 }
+
+.toggle-sidebar-icon {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    right: 1rem;
+    top: 10%;
+    cursor: pointer;
+    z-index: 1000; /* Set this very high as React Leaflet uses z-index to render tiles as the user zooms in */
+}

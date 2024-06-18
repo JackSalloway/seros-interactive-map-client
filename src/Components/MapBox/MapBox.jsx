@@ -23,7 +23,9 @@ import {
 } from "react-leaflet";
 
 // React imports
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { titleCase } from "../../imports/imports.js";
 
@@ -53,15 +55,18 @@ function MapBox(props) {
         editMarkerType,
         setEditMarkerType,
         setDeleteData,
-        journalOpen,
+        sidebarOpen,
+        setSidebarOpen,
     } = props;
 
     const [layerFilter, setLayerFilter] = useState([]);
 
-    // useEffect to trigger map resize when journal component is opened/closed
+    // useEffect to trigger map resize when journal component is opened/closed. Added a setTimeout as I put a transition on the sidebar
     useEffect(() => {
-        window.dispatchEvent(new Event("resize"));
-    }, [journalOpen]);
+        setTimeout(() => {
+            window.dispatchEvent(new Event("resize"));
+        }, 401);
+    }, [sidebarOpen]);
 
     useEffect(() => {
         if (locations === null) {
@@ -257,6 +262,27 @@ function MapBox(props) {
         return false;
     };
 
+    // Create FontAwesome close/open sidebar icon
+    const toggleSidebarIcon = () => {
+        return (
+            <>
+                <FontAwesomeIcon
+                    className={`toggle-sidebar-icon`}
+                    icon={sidebarOpen === true ? "book" : "book-open"}
+                    title={
+                        sidebarOpen === true
+                            ? "Close sidebar."
+                            : "Open sidebar."
+                    }
+                    onClick={() => {
+                        setSidebarOpen(!sidebarOpen);
+                    }}
+                />
+                {/* <Tooltip place="left" type="dark" effect="float" /> */}
+            </>
+        );
+    };
+
     // Function to render marker when button is clicked
     const renderDraggableMarker = () => {
         return (
@@ -303,6 +329,7 @@ function MapBox(props) {
                 noWrap={true}
                 bounds={bounds}
             />
+            {toggleSidebarIcon()}
             <ZoomControl position="bottomright" />
             <MapEvents />
             <LayersControl>

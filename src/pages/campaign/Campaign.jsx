@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 // Component imports
 import MapBox from "../../Components/MapBox/MapBox";
 import Journal from "../../Components/Journal/Journal";
+import Sidebar from "../../Components/Sidebar/Sidebar";
 import DeletionModal from "../../Components/DeletionModal/DeletionModal";
 import DataNotification from "../../Components/Notifications/DataNotification";
 
@@ -44,7 +45,7 @@ const Campaign = () => {
     const [editMarkerLatLng, setEditMarkerLatLng] = useState([]);
     const [editMarkerType, setEditMarkerType] = useState(null);
 
-    const [journalOpen, setJournalOpen] = useState(false);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
     const [deleteData, setDeleteData] = useState(null);
 
     // Data notification states
@@ -208,9 +209,13 @@ const Campaign = () => {
                 editMarkerType={editMarkerType}
                 setEditMarkerType={setEditMarkerType}
                 setDeleteData={setDeleteData}
-                journalOpen={journalOpen}
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
             />
-            <Journal
+
+            <Sidebar sidebarOpen={sidebarOpen} campaign={campaign} />
+
+            {/* <Journal
                 locationNotes={locations?.[selectedLocationNotes] || null}
                 setLocationNotes={setSelectedLocationNotes}
                 npcs={npcs}
@@ -250,7 +255,7 @@ const Campaign = () => {
                 setPlayers={setPlayers}
                 journalOpen={journalOpen}
                 setJournalOpen={setJournalOpen}
-            />
+            /> */}
             {/* If deleteData state has is not null render the DeletionModal */}
             {deleteData !== null ? (
                 <DeletionModal
