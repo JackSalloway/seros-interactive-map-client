@@ -1,5 +1,9 @@
 .item-wrapper {
-    width: 100%;
+    width: 99%;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 0.5rem;
+    box-sizing: border-box;
 }
 
 .item-header {
