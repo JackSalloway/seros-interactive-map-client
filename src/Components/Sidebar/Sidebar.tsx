@@ -35,8 +35,6 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         setNPCs,
     } = props;
 
-    console.log(npcs);
-
     const sidebarContent = () => {
         if (!sidebarOpen) return null;
         return (
