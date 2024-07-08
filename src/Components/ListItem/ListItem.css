@@ -4,6 +4,9 @@
     border-radius: 5px;
     padding: 0.5rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .item-header {
@@ -13,5 +16,12 @@
 
 .item-content {
     display: flex;
-    gap: 20%;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.associated-location-content {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
 }

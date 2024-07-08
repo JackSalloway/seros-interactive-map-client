@@ -4,7 +4,7 @@ export interface ListItemType {
     id: number;
     name: string;
     description: string;
-    latlng: LatLng;
+    coords: LatLng | AssociatedLocation[];
 }
 
 export interface Campaign {
@@ -22,7 +22,7 @@ export interface Location {
     name: string;
     description: string;
     latlng: LatLng;
-    sublocations: [Sublocation];
+    sublocations: Sublocation[];
     marked: boolean;
     visited: boolean;
     type: string;
@@ -33,4 +33,22 @@ export interface Sublocation {
     id: number;
     name: string;
     description: string;
+}
+
+export interface AssociatedLocation {
+    id: number;
+    name: string;
+    latlng: LatLng;
+}
+
+export interface Quest {
+    campaign: {
+        id: number;
+    };
+    id: number;
+    name: string;
+    description: string;
+    completed: boolean;
+    updated_at: string;
+    associated_locations: AssociatedLocation[];
 }

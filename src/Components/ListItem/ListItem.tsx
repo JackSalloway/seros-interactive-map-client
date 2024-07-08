@@ -7,28 +7,31 @@ import FaChevronIcon from "../FaChevronIcon/FaChevronIcon";
 import "./ListItem.css";
 
 // Type imports
+import type { AssociatedLocation } from "../../types";
 import { Map, LatLng } from "leaflet";
 
 interface ListComponentProps {
     id: number;
     name: string;
     description: string;
-    latlng: LatLng;
+    coords: LatLng | AssociatedLocation[];
     mapRef: React.RefObject<Map>;
 }
 
 const ListItem: React.FC<ListComponentProps> = (props) => {
-    const { id, name, description, latlng, mapRef } = props;
+    const { id, name, description, coords, mapRef } = props;
+
+    console.log(coords, Array.isArray(coords));
 
     const [selected, setSelected] = useState<boolean>(false);
 
-    const jumpToLocationButton = (
+    const jumpToLocationButton = (coordinates: LatLng) => (
         <button
             onClick={() => {
                 if (mapRef.current?.getZoom() === 5) {
-                    mapRef.current.flyTo(latlng);
+                    mapRef.current.flyTo(coordinates);
                 } else {
-                    mapRef.current?.setView(latlng, 5);
+                    mapRef.current?.setView(coordinates, 5);
                 }
             }}
         >
@@ -36,18 +39,46 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         </button>
     );
 
+    const renderContent = () => {
+        // Check if the list item has been selected - early return if not
+        if (!selected) return null;
+
+        // Check if the item has an array of associated locations - the only time an item won't have a list of associated locations is if the item is a location itself
+        if (Array.isArray(coords)) {
+            return (
+                <div className="item-content">
+                    <p>{description}</p>
+                    {coords.map((location) => {
+                        return (
+                            <div
+                                className="associated-location-content"
+                                key={location.id}
+                            >
+                                <p>{location.name}</p>
+                                {jumpToLocationButton(location.latlng)}
+                            </div>
+                        );
+                    })}
+                </div>
+            );
+        }
+
+        // Item is a location
+        return (
+            <div className="item-content">
+                <p>{description}</p>
+                {jumpToLocationButton(coords)}
+            </div>
+        );
+    };
+
     return (
         <div className="item-wrapper">
             <div className="item-header">
                 <h3>{name}</h3>
                 <FaChevronIcon open={selected} toggleOpen={setSelected} />
             </div>
-            {selected === true ? (
-                <div className="item-content">
-                    <p>{description}</p>
-                    {jumpToLocationButton}
-                </div>
-            ) : null}
+            {renderContent()}
         </div>
     );
 };

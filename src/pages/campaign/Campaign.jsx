@@ -219,6 +219,8 @@ const Campaign = () => {
                 campaign={campaign}
                 locations={locations}
                 setLocations={setLocations}
+                quests={quests}
+                setQuests={setQuests}
             />
 
             {/* <Journal

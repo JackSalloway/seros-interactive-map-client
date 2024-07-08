@@ -5,7 +5,7 @@ import { Map } from "leaflet";
 import ListWrapper from "../ListWrapper/ListWrapper";
 
 // Type imports
-import type { Campaign, Location } from "../../types";
+import type { Campaign, Location, Quest } from "../../types";
 
 // Style imports
 import "./Sidebar.css";
@@ -16,10 +16,20 @@ interface SidebarProps {
     sidebarOpen: boolean;
     locations: Location[];
     setLocations: React.Dispatch<SetStateAction<Location[]>>;
+    quests: Quest[];
+    setQuests: React.Dispatch<SetStateAction<Quest[]>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
-    const { campaign, mapRef, sidebarOpen, locations, setLocations } = props;
+    const {
+        campaign,
+        mapRef,
+        sidebarOpen,
+        locations,
+        setLocations,
+        quests,
+        setQuests,
+    } = props;
 
     const sidebarContent = () => {
         if (!sidebarOpen) return null;
@@ -28,18 +38,34 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                 <div id="sidebar-header">
                     <h2>{campaign.name}</h2>
                 </div>
-                <ListWrapper
-                    title={"Locations"}
-                    mapRef={mapRef}
-                    list={locations?.map((location) => {
-                        return {
-                            id: location.id,
-                            name: location.name,
-                            description: location.description,
-                            latlng: location.latlng,
-                        };
-                    })}
-                />
+                {/* Location List */}
+                <div id="sidebar-list-wrapper">
+                    <ListWrapper
+                        title={"Locations"}
+                        mapRef={mapRef}
+                        list={locations?.map((location) => {
+                            return {
+                                id: location.id,
+                                name: location.name,
+                                description: location.description,
+                                coords: location.latlng,
+                            };
+                        })}
+                    />
+                    {/* Quest List */}
+                    <ListWrapper
+                        title={"Quests"}
+                        mapRef={mapRef}
+                        list={quests?.map((quest) => {
+                            return {
+                                id: quest.id,
+                                name: quest.name,
+                                description: quest.description,
+                                coords: quest.associated_locations,
+                            };
+                        })}
+                    />
+                </div>
             </>
         );
     };

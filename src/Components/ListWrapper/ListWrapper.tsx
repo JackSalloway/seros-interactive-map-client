@@ -41,7 +41,7 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                                 id={item.id}
                                 name={item.name}
                                 description={item.description}
-                                latlng={item.latlng}
+                                coords={item.coords}
                                 mapRef={mapRef}
                             />
                         );
