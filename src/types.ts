@@ -56,7 +56,6 @@ export interface Quest {
     completed: boolean;
     updated_at: string;
     associated_locations: AssociatedLocation[];
-    associated_quests: AssociatedQuest[];
 }
 
 export interface NPC {
