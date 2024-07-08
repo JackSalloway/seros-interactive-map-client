@@ -5,7 +5,7 @@ import { Map } from "leaflet";
 import ListWrapper from "../ListWrapper/ListWrapper";
 
 // Type imports
-import type { Campaign, Location, Quest } from "../../types";
+import type { Campaign, Location, Quest, NPC } from "../../types";
 
 // Style imports
 import "./Sidebar.css";
@@ -18,6 +18,8 @@ interface SidebarProps {
     setLocations: React.Dispatch<SetStateAction<Location[]>>;
     quests: Quest[];
     setQuests: React.Dispatch<SetStateAction<Quest[]>>;
+    npcs: NPC[];
+    setNPCs: React.Dispatch<SetStateAction<NPC[]>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
@@ -29,7 +31,11 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         setLocations,
         quests,
         setQuests,
+        npcs,
+        setNPCs,
     } = props;
+
+    console.log(npcs);
 
     const sidebarContent = () => {
         if (!sidebarOpen) return null;
@@ -62,6 +68,19 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                 name: quest.name,
                                 description: quest.description,
                                 coords: quest.associated_locations,
+                            };
+                        })}
+                    />
+                    {/* NPC List */}
+                    <ListWrapper
+                        title={"NPCs"}
+                        mapRef={mapRef}
+                        list={npcs?.map((npc) => {
+                            return {
+                                id: npc.id,
+                                name: npc.name,
+                                description: npc.description,
+                                coords: npc.associated_locations,
                             };
                         })}
                     />

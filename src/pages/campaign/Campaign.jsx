@@ -221,6 +221,8 @@ const Campaign = () => {
                 setLocations={setLocations}
                 quests={quests}
                 setQuests={setQuests}
+                npcs={npcs}
+                setNPCs={setNPCs}
             />
 
             {/* <Journal

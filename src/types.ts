@@ -41,6 +41,11 @@ export interface AssociatedLocation {
     latlng: LatLng;
 }
 
+export interface AssociatedQuest {
+    id: number;
+    name: string;
+}
+
 export interface Quest {
     campaign: {
         id: number;
@@ -51,4 +56,20 @@ export interface Quest {
     completed: boolean;
     updated_at: string;
     associated_locations: AssociatedLocation[];
+    associated_quests: AssociatedQuest[];
+}
+
+export interface NPC {
+    campaign: {
+        id: number;
+    };
+    id: number;
+    name: string;
+    description: string;
+    race: string;
+    disposition: string;
+    status: string;
+    updated_at: string;
+    associated_locations: AssociatedLocation[];
+    associated_quests: AssociatedQuest[];
 }
