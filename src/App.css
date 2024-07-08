@@ -167,3 +167,8 @@ select:focus,
 textarea:focus {
     outline: none;
 }
+
+/* Hide scrollbar where applicable - I understand the purpose of a scroll bar, but I would like to style my own so it doesn't look so out of place */
+::-webkit-scrollbar {
+    display: none;
+}
