@@ -223,6 +223,8 @@ const Campaign = () => {
                 setQuests={setQuests}
                 npcs={npcs}
                 setNPCs={setNPCs}
+                combatInstances={combatInstances}
+                setCombatInstance={setCombatInstances}
             />
 
             {/* <Journal

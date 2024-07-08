@@ -5,7 +5,13 @@ import { Map } from "leaflet";
 import ListWrapper from "../ListWrapper/ListWrapper";
 
 // Type imports
-import type { Campaign, Location, Quest, NPC } from "../../types";
+import type {
+    Campaign,
+    Location,
+    Quest,
+    NPC,
+    CombatInstance,
+} from "../../types";
 
 // Style imports
 import "./Sidebar.css";
@@ -20,6 +26,8 @@ interface SidebarProps {
     setQuests: React.Dispatch<SetStateAction<Quest[]>>;
     npcs: NPC[];
     setNPCs: React.Dispatch<SetStateAction<NPC[]>>;
+    combatInstances: CombatInstance[];
+    setCombatInstances: React.Dispatch<SetStateAction<CombatInstance[]>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
@@ -33,6 +41,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         setQuests,
         npcs,
         setNPCs,
+        combatInstances,
+        setCombatInstances,
     } = props;
 
     const sidebarContent = () => {
@@ -79,6 +89,19 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                 name: npc.name,
                                 description: npc.description,
                                 coords: npc.associated_locations,
+                            };
+                        })}
+                    />
+                    {/* Combat Instance List */}
+                    <ListWrapper
+                        title={"Combat Instances"}
+                        mapRef={mapRef}
+                        list={combatInstances?.map((instance) => {
+                            return {
+                                id: instance.id,
+                                name: instance.name,
+                                description: instance.description,
+                                coords: instance.location.latlng,
                             };
                         })}
                     />

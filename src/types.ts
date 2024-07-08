@@ -72,3 +72,31 @@ export interface NPC {
     associated_locations: AssociatedLocation[];
     associated_quests: AssociatedQuest[];
 }
+
+export interface CombatInstance {
+    campaign: {
+        id: number;
+    };
+    id: number;
+    name: string;
+    description: string;
+    location: AssociatedLocation;
+    players: Player[];
+    updated_at: string;
+}
+
+export interface Player {
+    id: number;
+    name: string;
+    class: string;
+    is_real: number;
+    turns: Turn[];
+}
+
+export interface Turn {
+    id: number;
+    turn_number: number;
+    damage: number;
+    healing: number;
+    updated_at: string;
+}
