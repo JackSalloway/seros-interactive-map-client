@@ -32,22 +32,22 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                 <h3>{title}</h3>
                 <FaChevronIcon open={selected} toggleOpen={setSelected} />
             </div>
-            <div className="list-content">
-                {selected === true
-                    ? list?.map((item) => {
-                          return (
-                              <ListItem
-                                  key={item.name + item.id}
-                                  id={item.id}
-                                  name={item.name}
-                                  description={item.description}
-                                  latlng={item.latlng}
-                                  mapRef={mapRef}
-                              />
-                          );
-                      })
-                    : null}
-            </div>
+            {selected === true ? (
+                <div className="list-content">
+                    {list?.map((item) => {
+                        return (
+                            <ListItem
+                                key={item.name + item.id}
+                                id={item.id}
+                                name={item.name}
+                                description={item.description}
+                                latlng={item.latlng}
+                                mapRef={mapRef}
+                            />
+                        );
+                    })}
+                </div>
+            ) : null}
         </div>
     );
 };
