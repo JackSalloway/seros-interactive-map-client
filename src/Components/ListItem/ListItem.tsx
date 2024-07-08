@@ -21,8 +21,6 @@ interface ListComponentProps {
 const ListItem: React.FC<ListComponentProps> = (props) => {
     const { id, name, description, coords, mapRef } = props;
 
-    console.log(coords, Array.isArray(coords));
-
     const [selected, setSelected] = useState<boolean>(false);
 
     const jumpToLocationButton = (coordinates: LatLng) => (
