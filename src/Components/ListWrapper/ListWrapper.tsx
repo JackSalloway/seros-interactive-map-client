@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // Component imports
 import ListItem from "../ListItem/ListItem";
 import FaChevronIcon from "../FaChevronIcon/FaChevronIcon";
+import ListFilter from "../ListFilter/ListFilter";
 
 // Style imports
 import "./ListWrapper.css";
@@ -20,7 +21,21 @@ interface ListWrapperProps {
 const ListWrapper: React.FC<ListWrapperProps> = (props) => {
     const { title, list, mapRef } = props;
 
-    const [selected, setSelected] = useState<boolean>(false);
+    const [selected, setSelected] = useState<boolean>(false); // State for opening/closing list
+    const [filterString, setFilterString] = useState<string>(""); // State for filter by search query
+    const [filteredList, setFilteredList] = useState<ListItemType[]>([]); // State for filtering list
+
+    // Filter list whenever user updates the search input field
+    useEffect(() => {
+        // Set filteredList to default value if search query is empty
+        if (filterString === "") setFilteredList(list);
+
+        setFilteredList(
+            list.filter((item) =>
+                item.name.toLowerCase().includes(filterString.toLowerCase())
+            )
+        );
+    }, [list, filterString]);
 
     return (
         <div
@@ -34,7 +49,8 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
             </div>
             {selected === true ? (
                 <div className="list-content">
-                    {list?.map((item) => {
+                    <ListFilter setFilterString={setFilterString} />
+                    {filteredList?.map((item) => {
                         return (
                             <ListItem
                                 key={item.name + item.id}

@@ -217,13 +217,13 @@ const Campaign = () => {
                 sidebarOpen={sidebarOpen}
                 mapRef={map}
                 campaign={campaign}
-                locations={locations}
+                locations={locations ?? []}
                 setLocations={setLocations}
-                quests={quests}
+                quests={quests ?? []}
                 setQuests={setQuests}
-                npcs={npcs}
+                npcs={npcs ?? []}
                 setNPCs={setNPCs}
-                combatInstances={combatInstances}
+                combatInstances={combatInstances ?? []}
                 setCombatInstance={setCombatInstances}
             />
 

@@ -57,53 +57,61 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                     <ListWrapper
                         title={"Locations"}
                         mapRef={mapRef}
-                        list={locations?.map((location) => {
-                            return {
-                                id: location.id,
-                                name: location.name,
-                                description: location.description,
-                                coords: location.latlng,
-                            };
-                        })}
+                        list={Array.from(
+                            locations?.map((location) => {
+                                return {
+                                    id: location.id,
+                                    name: location.name,
+                                    description: location.description,
+                                    coords: location.latlng,
+                                };
+                            })
+                        )}
                     />
                     {/* Quest List */}
                     <ListWrapper
                         title={"Quests"}
                         mapRef={mapRef}
-                        list={quests?.map((quest) => {
-                            return {
-                                id: quest.id,
-                                name: quest.name,
-                                description: quest.description,
-                                coords: quest.associated_locations,
-                            };
-                        })}
+                        list={Array.from(
+                            quests?.map((quest) => {
+                                return {
+                                    id: quest.id,
+                                    name: quest.name,
+                                    description: quest.description,
+                                    coords: quest.associated_locations,
+                                };
+                            })
+                        )}
                     />
                     {/* NPC List */}
                     <ListWrapper
                         title={"NPCs"}
                         mapRef={mapRef}
-                        list={npcs?.map((npc) => {
-                            return {
-                                id: npc.id,
-                                name: npc.name,
-                                description: npc.description,
-                                coords: npc.associated_locations,
-                            };
-                        })}
+                        list={Array.from(
+                            npcs?.map((npc) => {
+                                return {
+                                    id: npc.id,
+                                    name: npc.name,
+                                    description: npc.description,
+                                    coords: npc.associated_locations,
+                                };
+                            })
+                        )}
                     />
                     {/* Combat Instance List */}
                     <ListWrapper
                         title={"Combat Instances"}
                         mapRef={mapRef}
-                        list={combatInstances?.map((instance) => {
-                            return {
-                                id: instance.id,
-                                name: instance.name,
-                                description: instance.description,
-                                coords: instance.location.latlng,
-                            };
-                        })}
+                        list={Array.from(
+                            combatInstances?.map((instance) => {
+                                return {
+                                    id: instance.id,
+                                    name: instance.name,
+                                    description: instance.description,
+                                    coords: instance.location.latlng,
+                                };
+                            })
+                        )}
                     />
                 </div>
             </>
