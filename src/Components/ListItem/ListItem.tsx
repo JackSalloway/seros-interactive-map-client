@@ -39,7 +39,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         </button>
     );
 
-    //
+    // Return the first sentence from the description
     const briefDescription = he.decode(description.split(".")[0] + "...");
 
     const renderContent = () => {
