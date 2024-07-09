@@ -49,7 +49,8 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         // Check if the item has an array of associated locations - the only time an item won't have a list of associated locations is if the item is a location/combat instance
         if (Array.isArray(coords)) {
             return (
-                <div className="item-content">
+                <>
+                    {" "}
                     <p>{briefDescription}</p>
                     {coords.map((location) => {
                         return (
@@ -62,16 +63,16 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
                             </div>
                         );
                     })}
-                </div>
+                </>
             );
         }
 
         // Item is a location/combat instance
         return (
-            <div className="item-content">
+            <>
                 <p>{briefDescription}</p>
                 {jumpToLocationButton(coords)}
-            </div>
+            </>
         );
     };
 
@@ -81,7 +82,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
                 <h3>{he.decode(name)}</h3>
                 <FaChevronIcon open={selected} toggleOpen={setSelected} />
             </div>
-            {renderContent()}
+            <div className="item-content">{renderContent()}</div>
         </div>
     );
 };
