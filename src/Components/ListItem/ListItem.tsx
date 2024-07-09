@@ -24,6 +24,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
 
     const [selected, setSelected] = useState<boolean>(false);
 
+    // Render a button to jump to a specific latitude and longitude
     const jumpToLocationButton = (coordinates: LatLng) => (
         <button
             onClick={() => {
@@ -38,13 +39,14 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         </button>
     );
 
+    //
     const briefDescription = he.decode(description.split(".")[0] + "...");
 
     const renderContent = () => {
         // Check if the list item has been selected - early return if not
         if (!selected) return null;
 
-        // Check if the item has an array of associated locations - the only time an item won't have a list of associated locations is if the item is a location itself
+        // Check if the item has an array of associated locations - the only time an item won't have a list of associated locations is if the item is a location/combat instance
         if (Array.isArray(coords)) {
             return (
                 <div className="item-content">
@@ -64,7 +66,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
             );
         }
 
-        // Item is a location
+        // Item is a location/combat instance
         return (
             <div className="item-content">
                 <p>{briefDescription}</p>
