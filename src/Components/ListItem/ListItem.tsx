@@ -1,4 +1,5 @@
 import { useState } from "react";
+import he from "he";
 
 // Component imports
 import FaChevronIcon from "../FaChevronIcon/FaChevronIcon";
@@ -52,7 +53,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
                                 className="associated-location-content"
                                 key={location.id}
                             >
-                                <p>{location.name}</p>
+                                <p>{he.decode(location.name)}</p>
                                 {jumpToLocationButton(location.latlng)}
                             </div>
                         );
@@ -64,7 +65,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         // Item is a location
         return (
             <div className="item-content">
-                <p>{description}</p>
+                <p>{he.decode(description)}</p>
                 {jumpToLocationButton(coords)}
             </div>
         );
@@ -73,7 +74,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
     return (
         <div className="item-wrapper">
             <div className="item-header">
-                <h3>{name}</h3>
+                <h3>{he.decode(name)}</h3>
                 <FaChevronIcon open={selected} toggleOpen={setSelected} />
             </div>
             {renderContent()}
