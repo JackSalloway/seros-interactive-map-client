@@ -38,6 +38,8 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         </button>
     );
 
+    const briefDescription = he.decode(description.split(".")[0] + "...");
+
     const renderContent = () => {
         // Check if the list item has been selected - early return if not
         if (!selected) return null;
@@ -46,7 +48,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         if (Array.isArray(coords)) {
             return (
                 <div className="item-content">
-                    <p>{description}</p>
+                    <p>{briefDescription}</p>
                     {coords.map((location) => {
                         return (
                             <div
@@ -65,7 +67,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         // Item is a location
         return (
             <div className="item-content">
-                <p>{he.decode(description)}</p>
+                <p>{briefDescription}</p>
                 {jumpToLocationButton(coords)}
             </div>
         );
