@@ -52,8 +52,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                 <div id="sidebar-header">
                     <h2>{campaign.name}</h2>
                 </div>
-                {/* Location List */}
                 <div id="sidebar-list-wrapper">
+                    {/* Location List */}
                     <ListWrapper
                         title={"Locations"}
                         mapRef={mapRef}
