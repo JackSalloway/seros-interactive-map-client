@@ -31,6 +31,10 @@ interface SidebarProps {
     combatInstances: CombatInstance[];
     setCombatInstances: React.Dispatch<SetStateAction<CombatInstance[]>>;
     changelog: Changelog[];
+    selectedLocation: Location;
+    selectedQuests: Quest[];
+    selectedNPCs: NPC[];
+    selectedCombatInstances: CombatInstance[];
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
@@ -47,6 +51,10 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         combatInstances,
         setCombatInstances,
         changelog,
+        selectedLocation,
+        selectedQuests,
+        selectedNPCs,
+        selectedCombatInstances,
     } = props;
 
     const sidebarContent = () => {

@@ -41,8 +41,8 @@ function MapBox(props) {
         creationMarkerLatLng,
         setCreationMarkerLatLng,
         // creationMarkerType,
-        selectedLocationNotes,
-        setSelectedLocationNotes,
+        selectedLocationId,
+        setSelectedLocationId,
         setSelectedLocationNPCs,
         setSelectedLocationQuests,
         setSelectedLocationCombatInstances,
@@ -84,59 +84,55 @@ function MapBox(props) {
 
     // Select relevant npcs when a location is selected
     useEffect(() => {
-        if (selectedLocationNotes === null) {
+        if (selectedLocationId === null) {
             return;
         }
         // Filter through serosNPCs to find the NPCs relevant to the selected location.
-        const reduceNPCs = npcs.reduce((prevNPCs, npcData, index) => {
+        const reduceNPCs = npcs.reduce((prevNPCs, npcData) => {
             if (
-                npcData.associated_locations.findIndex(
-                    (npcLocation) => npcLocation.id === selectedLocationNotes.id
-                ) !== -1
+                npcData.associated_locations.findIndex((npcLocation) => {
+                    return npcLocation.id === selectedLocationId;
+                }) !== -1
             ) {
-                return [...prevNPCs, { npcData, originalIndex: index }];
+                return [...prevNPCs, { npcData }];
             }
             return prevNPCs;
         }, []);
         setSelectedLocationNPCs(reduceNPCs);
-    }, [npcs, selectedLocationNotes, setSelectedLocationNPCs]);
+    }, [npcs, selectedLocationId, setSelectedLocationNPCs]);
 
     // Select relevant quests when a location is selected
     useEffect(() => {
-        if (selectedLocationNotes === null) {
+        if (selectedLocationId === null) {
             return;
         }
         // Filter through serosQuests to find the quests relevant to the selected location.
-        const reduceQuests = quests.reduce((prevQuests, questData, index) => {
+        const reduceQuests = quests.reduce((prevQuests, questData) => {
             if (
                 questData.associated_locations.findIndex(
-                    (questLocation) =>
-                        questLocation.id === selectedLocationNotes.id
+                    (questLocation) => questLocation.id === selectedLocationId
                 ) !== -1
             ) {
-                return [...prevQuests, { questData, originalIndex: index }];
+                return [...prevQuests, { questData }];
             }
             return prevQuests;
         }, []);
         setSelectedLocationQuests(reduceQuests);
-    }, [quests, selectedLocationNotes, setSelectedLocationQuests]);
+    }, [quests, selectedLocationId, setSelectedLocationQuests]);
 
     // Select relevant combat instances when a location is selected
     useEffect(() => {
-        if (selectedLocationNotes === null) {
+        if (selectedLocationId === null) {
             return;
         }
         // Filter through combatInstances to find the combat instances relevant to the selected location.
         const reduceCombatInstances = combatInstances.reduce(
-            (prevInstances, instanceData, index) => {
+            (prevInstances, instanceData) => {
                 if (
-                    (instanceData.location.id === selectedLocationNotes.id) ===
+                    (instanceData.location.id === selectedLocationId) ===
                     true
                 ) {
-                    return [
-                        ...prevInstances,
-                        { instanceData, originalIndex: index },
-                    ];
+                    return [...prevInstances, { instanceData }];
                 }
                 return prevInstances;
             },
@@ -145,7 +141,7 @@ function MapBox(props) {
         setSelectedLocationCombatInstances(reduceCombatInstances);
     }, [
         combatInstances,
-        selectedLocationNotes,
+        selectedLocationId,
         setSelectedLocationCombatInstances,
     ]);
 
@@ -185,7 +181,7 @@ function MapBox(props) {
                 index={index}
                 // getIcon={getIcon}
                 map={map}
-                setSelectedLocationNotes={setSelectedLocationNotes}
+                setSelectedLocationId={setSelectedLocationId}
                 userAuthenticated={userAuthenticated}
                 markerBeingEdited={markerBeingEdited}
                 setMarkerBeingEdited={setMarkerBeingEdited}

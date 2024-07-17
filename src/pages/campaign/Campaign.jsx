@@ -25,7 +25,7 @@ const Campaign = () => {
     const [players, setPlayers] = useState(null); // This value will now contain a list of player objects and non-player objects
 
     // Selected data states
-    const [selectedLocationNotes, setSelectedLocationNotes] = useState(null);
+    const [selectedLocationId, setSelectedLocationId] = useState(null);
     const [selectedLocationQuests, setSelectedLocationQuests] = useState(null);
     const [selectedLocationNPCs, setSelectedLocationNPCs] = useState(null);
     const [
@@ -191,10 +191,8 @@ const Campaign = () => {
                 creationMarkerLatLng={creationMarkerLatLng}
                 creationMarkerType={creationMarkerType}
                 setCreationMarkerLatLng={setCreationMarkerLatLng}
-                selectedLocationNotes={
-                    locations?.[selectedLocationNotes] || null
-                }
-                setSelectedLocationNotes={setSelectedLocationNotes}
+                selectedLocationId={selectedLocationId}
+                setSelectedLocationId={setSelectedLocationId}
                 setSelectedLocationQuests={setSelectedLocationQuests}
                 setSelectedLocationNPCs={setSelectedLocationNPCs}
                 setSelectedLocationCombatInstances={
@@ -226,6 +224,14 @@ const Campaign = () => {
                 combatInstances={combatInstances ?? []}
                 setCombatInstance={setCombatInstances}
                 changelog={changelog}
+                selectedLocation={
+                    locations?.filter(
+                        (location) => location.id === selectedLocationId
+                    )[0] || null
+                }
+                selectedQuests={selectedLocationQuests}
+                selectedNPCs={selectedLocationNPCs}
+                selectedCombatInstances={selectedLocationCombatInstances}
             />
 
             {/* <Journal

@@ -8,7 +8,7 @@ const MapMarker = (props) => {
         index,
         // getIcon,
         map,
-        setSelectedLocationNotes,
+        setSelectedLocationId,
         markerBeingEdited,
         setMarkerBeingEdited,
         setEditLocationDetails,
@@ -52,7 +52,7 @@ const MapMarker = (props) => {
                         <div className="popup-button-wrapper">
                             <button
                                 onClick={() => {
-                                    setSelectedLocationNotes(index);
+                                    setSelectedLocationId(location.id);
                                     if (location.marked === true) {
                                         map.current.closePopup();
                                     }
@@ -69,7 +69,7 @@ const MapMarker = (props) => {
                                     setEditLocationDetails(location);
                                     setEditMarkerLatLng(location.latlng);
                                     setEditMarkerType(location.type);
-                                    setSelectedLocationNotes(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
+                                    setSelectedLocationId(null); // Used to kick users out of currently rendered location notes, so EditLocation can render in its place
                                 }}
                                 disabled={
                                     markerBeingEdited === null ? false : true
