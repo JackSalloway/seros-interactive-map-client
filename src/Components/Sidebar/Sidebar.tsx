@@ -3,6 +3,7 @@ import { Map } from "leaflet";
 
 // Component imports
 import ListWrapper from "../ListWrapper/ListWrapper";
+import ChangelogWrapper from "../ChangelogWrapper/ChangelogWrapper";
 
 // Type imports
 import type {
@@ -11,6 +12,7 @@ import type {
     Quest,
     NPC,
     CombatInstance,
+    Changelog,
 } from "../../types";
 
 // Style imports
@@ -28,6 +30,7 @@ interface SidebarProps {
     setNPCs: React.Dispatch<SetStateAction<NPC[]>>;
     combatInstances: CombatInstance[];
     setCombatInstances: React.Dispatch<SetStateAction<CombatInstance[]>>;
+    changelog: Changelog[];
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
@@ -43,6 +46,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         setNPCs,
         combatInstances,
         setCombatInstances,
+        changelog,
     } = props;
 
     const sidebarContent = () => {
@@ -53,6 +57,12 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                     <h2>{campaign.name}</h2>
                 </div>
                 <div id="sidebar-list-wrapper">
+                    {/* Changelog List */}
+                    <ChangelogWrapper
+                        title={"Changelog"}
+                        changelog={changelog}
+                    />
+
                     {/* Location List */}
                     <ListWrapper
                         title={"Locations"}

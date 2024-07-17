@@ -225,6 +225,7 @@ const Campaign = () => {
                 setNPCs={setNPCs}
                 combatInstances={combatInstances ?? []}
                 setCombatInstance={setCombatInstances}
+                changelog={changelog}
             />
 
             {/* <Journal

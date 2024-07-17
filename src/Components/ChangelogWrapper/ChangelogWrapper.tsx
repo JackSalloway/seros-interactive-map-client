@@ -1,0 +1,44 @@
+import React, { useState } from "react";
+
+// Component imports
+import ChangelogItem from "../ChangelogItem/ChangelogItem";
+import FaChevronIcon from "../FaChevronIcon/FaChevronIcon";
+
+// Style imports
+import "./ChangelogWrapper.css";
+
+// Type imports
+import type { Changelog } from "../../types";
+
+interface ChangelogWrapperProps {
+    title: string;
+    changelog: Changelog[];
+}
+
+const ChangelogWrapper: React.FC<ChangelogWrapperProps> = (props) => {
+    const { title, changelog } = props;
+
+    const [selected, setSelected] = useState<boolean>(false); // State for opening/closing list
+
+    return (
+        <div
+            className={`changelog-wrapper ${
+                selected ? "changelog-wrapper-open" : "changelog-wrapper-closed"
+            }`}
+        >
+            <div className="list-header">
+                <h3>{title}</h3>
+                <FaChevronIcon open={selected} toggleOpen={setSelected} />
+            </div>
+            {selected === true ? (
+                <div className="list-content">
+                    {changelog?.reverse().map((item) => {
+                        return <ChangelogItem key={item.id} item={item} />;
+                    })}
+                </div>
+            ) : null}
+        </div>
+    );
+};
+
+export default ChangelogWrapper;

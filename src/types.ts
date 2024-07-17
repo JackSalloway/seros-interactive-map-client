@@ -1,5 +1,14 @@
 import { LatLng } from "leaflet";
 
+export interface Changelog {
+    id: number;
+    created_at: string;
+    action: string;
+    data_affected: string;
+    data_name: string;
+    user: string;
+}
+
 export interface ListItemType {
     id: number;
     name: string;
