@@ -30,6 +30,11 @@
     font-size: 1.4rem;
 }
 
+.list-sort-icons-wrapper {
+    display: flex;
+    gap: 1.5rem;
+}
+
 .list-content {
     padding: 1%;
     display: flex;

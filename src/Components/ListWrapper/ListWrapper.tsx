@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import ListItem from "../ListItem/ListItem";
 import FaChevronIcon from "../FaChevronIcon/FaChevronIcon";
 import ListFilter from "../ListFilter/ListFilter";
+import ListSortIcon from "../ListSortIcon/ListSortIcon";
 
 // Style imports
 import "./ListWrapper.css";
@@ -83,6 +84,36 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
             {selected === true ? (
                 <div className="list-content">
                     <ListFilter setFilterString={setFilterString} />
+                    <div className="list-sort-icons-wrapper">
+                        {/* Sort alphabetically icon */}
+                        <ListSortIcon
+                            iconName={"arrow-down-a-z"}
+                            sortValue={"alphabetical"}
+                            sortBy={sortBy}
+                            setSortBy={setSortBy}
+                        />
+                        {/* Sort reversed alphabetically icon */}
+                        <ListSortIcon
+                            iconName={"arrow-down-z-a"}
+                            sortValue={"revAlphabetical"}
+                            sortBy={sortBy}
+                            setSortBy={setSortBy}
+                        />
+                        {/* Sort chronologically icon */}
+                        <ListSortIcon
+                            iconName={"hourglass-start"}
+                            sortValue={"chronological"}
+                            sortBy={sortBy}
+                            setSortBy={setSortBy}
+                        />
+                        {/* Sort reverse chronologically icon */}
+                        <ListSortIcon
+                            iconName={"hourglass-end"}
+                            sortValue={"revChronological"}
+                            sortBy={sortBy}
+                            setSortBy={setSortBy}
+                        />
+                    </div>
                     {filteredList?.map((item) => {
                         return (
                             <ListItem
