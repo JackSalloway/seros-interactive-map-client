@@ -64,6 +64,9 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                 break;
             case "revChronological":
                 setFilteredList(orderChronologically(filtered).reverse());
+                break;
+            default:
+                setSortBy("alphabetical"); // Set sortBy state value to default value
         }
     }, [list, filterString, sortBy]);
 
