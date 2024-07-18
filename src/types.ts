@@ -14,6 +14,7 @@ export interface ListItemType {
     name: string;
     description: string;
     coords: LatLng | AssociatedLocation[];
+    updated_at: string;
 }
 
 export interface Campaign {

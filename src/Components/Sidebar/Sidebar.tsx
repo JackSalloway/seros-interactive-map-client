@@ -82,6 +82,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                     name: location.name,
                                     description: location.description,
                                     coords: location.latlng,
+                                    updated_at: location.updated_at,
                                 };
                             })
                         )}
@@ -97,6 +98,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                     name: quest.name,
                                     description: quest.description,
                                     coords: quest.associated_locations,
+                                    updated_at: quest.updated_at,
                                 };
                             })
                         )}
@@ -112,6 +114,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                     name: npc.name,
                                     description: npc.description,
                                     coords: npc.associated_locations,
+                                    updated_at: npc.updated_at,
                                 };
                             })
                         )}
@@ -127,6 +130,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                     name: instance.name,
                                     description: instance.description,
                                     coords: instance.location.latlng,
+                                    updated_at: instance.updated_at,
                                 };
                             })
                         )}

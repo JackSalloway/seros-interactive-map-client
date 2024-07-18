@@ -1,5 +1,6 @@
 import { useState } from "react";
 import he from "he";
+import dayjs from "dayjs";
 
 // Component imports
 import FaChevronIcon from "../FaChevronIcon/FaChevronIcon";
@@ -17,10 +18,11 @@ interface ListComponentProps {
     description: string;
     coords: LatLng | AssociatedLocation[];
     mapRef: React.RefObject<Map>;
+    updated_at: string;
 }
 
 const ListItem: React.FC<ListComponentProps> = (props) => {
-    const { id, name, description, coords, mapRef } = props;
+    const { id, name, description, coords, mapRef, updated_at } = props;
 
     const [selected, setSelected] = useState<boolean>(false);
 
@@ -42,6 +44,11 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
     // Return the first sentence from the description
     const briefDescription = he.decode(description.split(".")[0] + "...");
 
+    // Generate human readable date and time using the updated_at value
+    const updatedAt = `Last updated: ${dayjs(updated_at).format(
+        "DD/MM/YYYY"
+    )} at ${dayjs(updated_at).format("HH:mm:ss")}`;
+
     const renderContent = () => {
         // Check if the list item has been selected - early return if not
         if (!selected) return null;
@@ -52,6 +59,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
                 <>
                     {" "}
                     <p>{briefDescription}</p>
+                    <p>{updatedAt}</p>
                     {coords.map((location) => {
                         return (
                             <div
@@ -71,6 +79,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         return (
             <>
                 <p>{briefDescription}</p>
+                <p>{updatedAt}</p>
                 {jumpToLocationButton(coords)}
             </>
         );
