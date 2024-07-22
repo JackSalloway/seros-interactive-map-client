@@ -58,8 +58,8 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
             return (
                 <>
                     {" "}
-                    <p>{briefDescription}</p>
-                    <p>{updatedAt}</p>
+                    <p role="item-content-description">{briefDescription}</p>
+                    <p role="item-content-updated_at">{updatedAt}</p>
                     {coords.map((location) => {
                         return (
                             <div
@@ -78,8 +78,8 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
         // Item is a location/combat instance
         return (
             <>
-                <p>{briefDescription}</p>
-                <p>{updatedAt}</p>
+                <p role="item-content-description">{briefDescription}</p>
+                <p role="item-content-updated_at">{updatedAt}</p>
                 {jumpToLocationButton(coords)}
             </>
         );
@@ -88,7 +88,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
     return (
         <div className="item-wrapper">
             <div className="item-header">
-                <h3>{he.decode(name)}</h3>
+                <h3 role="item-header-name">{he.decode(name)}</h3>
                 <FaChevronIcon open={selected} toggleOpen={setSelected} />
             </div>
             <div className="item-content">{renderContent()}</div>

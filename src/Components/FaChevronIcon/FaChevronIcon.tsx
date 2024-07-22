@@ -17,6 +17,7 @@ const FaChevronIcon: React.FC<FaChevronIconProps> = (props) => {
                     props.open === true ? "rotate-180" : ""
                 }`}
                 icon="chevron-down"
+                data-testid="item-header-toggle"
                 onClick={() => {
                     props.toggleOpen(!props.open);
                 }}
