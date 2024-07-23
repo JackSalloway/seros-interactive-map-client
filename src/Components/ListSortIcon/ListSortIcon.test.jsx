@@ -7,7 +7,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faArrowDownZA } from "@fortawesome/free-solid-svg-icons";
 library.add(faArrowDownZA);
 
-test("setSortBy function gets called and appropriate state value is changed on click", async () => {
+test("setSortBy function gets called with appropriate parameter when icon is clicked", async () => {
     // ARRANGE
     const mockSetState = jest.fn();
     render(
