@@ -12,8 +12,6 @@ library.add(faChevronDown);
 
 test("list item name is displayed on render", async () => {
     //ARRANGE
-    // const mockRef = { current: null };
-    // const ref = useRef(mockRef);
     render(
         <ListItem
             id={0}
