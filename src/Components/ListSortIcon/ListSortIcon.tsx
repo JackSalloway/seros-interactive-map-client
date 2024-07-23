@@ -21,6 +21,7 @@ const ListSortIcon: React.FC<ListSortIconProps> = (props) => {
                     sortValue === sortBy ? "list-sort-icon-selected" : null
                 }`}
                 icon={iconName}
+                data-testid="list-sort-icon"
                 onClick={() => {
                     setSortBy(sortValue);
                 }}
