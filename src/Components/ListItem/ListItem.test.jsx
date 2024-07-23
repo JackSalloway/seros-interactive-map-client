@@ -73,7 +73,6 @@ test("jump to location button renders and calls flyTo function in ref.current ob
         },
     };
 
-    // ASSERT
     render(
         <ListItem
             id={0}
@@ -85,11 +84,12 @@ test("jump to location button renders and calls flyTo function in ref.current ob
         />
     );
 
+    // ACT
     // Fire click event to expand list item dropdown and click jump to location button
     fireEvent.click(screen.getByTestId("item-header-toggle"));
     fireEvent.click(await screen.findByText("Jump to location!"));
 
-    // ACT
+    // ASSERT
     expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
     expect(mockRef.current.flyTo).toHaveBeenCalledTimes(1);
 });
@@ -105,7 +105,6 @@ test("jump to location button renders and calls setView function in ref.current 
         },
     };
 
-    // ASSERT
     render(
         <ListItem
             id={0}
@@ -117,11 +116,12 @@ test("jump to location button renders and calls setView function in ref.current 
         />
     );
 
+    // ACT
     // Fire click event to expand list item dropdown and click jump to location button
     fireEvent.click(screen.getByTestId("item-header-toggle"));
     fireEvent.click(await screen.findByText("Jump to location!"));
 
-    // ACT
+    // ASSERT
     expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
     expect(mockRef.current.setView).toHaveBeenCalledTimes(1);
 });
