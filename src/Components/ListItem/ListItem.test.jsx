@@ -129,8 +129,8 @@ test("jump to location button renders and calls setView function in ref.current 
 test("component renders out multiple locations when coords parameter is an array of coords", () => {
     // ARRANGE
     const mockCoordsArray = [
-        { latlng: { lat: 0, lng: 0 }, name: "Fake Location 1" },
-        { latlng: { lat: 1, lng: 1 }, name: "Fake Location 2" },
+        { id: 0, latlng: { lat: 0, lng: 0 }, name: "Fake Location 1" },
+        { id: 1, latlng: { lat: 1, lng: 1 }, name: "Fake Location 2" },
     ];
     render(
         <ListItem
