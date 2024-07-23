@@ -6,13 +6,14 @@ import "./ListSortIcon.css";
 
 interface ListSortIconProps {
     iconName: IconProp;
+    iconTitle: string;
     sortValue: string;
     sortBy: string;
     setSortBy: React.Dispatch<SetStateAction<string>>;
 }
 
 const ListSortIcon: React.FC<ListSortIconProps> = (props) => {
-    const { iconName, sortValue, sortBy, setSortBy } = props;
+    const { iconName, iconTitle, sortValue, sortBy, setSortBy } = props;
 
     return (
         <div>
@@ -21,6 +22,7 @@ const ListSortIcon: React.FC<ListSortIconProps> = (props) => {
                     sortValue === sortBy ? "list-sort-icon-selected" : null
                 }`}
                 icon={iconName}
+                title={iconTitle}
                 data-testid="list-sort-icon"
                 onClick={() => {
                     setSortBy(sortValue);

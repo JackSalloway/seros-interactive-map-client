@@ -88,6 +88,7 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                         {/* Sort alphabetically icon */}
                         <ListSortIcon
                             iconName={"arrow-down-a-z"}
+                            iconTitle={"arrow-down-a-z"}
                             sortValue={"alphabetical"}
                             sortBy={sortBy}
                             setSortBy={setSortBy}
@@ -95,6 +96,7 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                         {/* Sort reversed alphabetically icon */}
                         <ListSortIcon
                             iconName={"arrow-down-z-a"}
+                            iconTitle={"arrow-down-z-a"}
                             sortValue={"revAlphabetical"}
                             sortBy={sortBy}
                             setSortBy={setSortBy}
@@ -102,6 +104,7 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                         {/* Sort chronologically icon */}
                         <ListSortIcon
                             iconName={"hourglass-start"}
+                            iconTitle={"hourglass-start"}
                             sortValue={"chronological"}
                             sortBy={sortBy}
                             setSortBy={setSortBy}
@@ -109,6 +112,7 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                         {/* Sort reverse chronologically icon */}
                         <ListSortIcon
                             iconName={"hourglass-end"}
+                            iconTitle={"hourglass-end"}
                             sortValue={"revChronological"}
                             sortBy={sortBy}
                             setSortBy={setSortBy}
