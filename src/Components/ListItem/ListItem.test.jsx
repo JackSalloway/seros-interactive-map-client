@@ -1,6 +1,4 @@
-import React, { useRef } from "react";
 import "@testing-library/jest-dom";
-import userEvent from "@testing-library/user-event";
 import { screen, render, fireEvent } from "@testing-library/react";
 import ListItem from "./ListItem";
 import dayjs from "dayjs";
