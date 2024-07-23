@@ -61,6 +61,25 @@ test("list is filtered on render by orderAlphabetically function ", () => {
     expect(renderedItems[2]).toHaveTextContent("C item");
 });
 
+test("sort alphabetically functionality works with multiple items that share the exact same sort value  ", () => {
+    // ARRANGE
+    const listItems = [
+        { id: 1, name: "B item", description: "B description" },
+        { id: 2, name: "A item", description: "A description" },
+        { id: 3, name: "A item", description: "A description" },
+    ];
+    render(<ListWrapper title={"locations"} list={listItems} />);
+
+    // ACT
+    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for the ListWrapper component
+    const renderedItems = screen.getAllByRole("item-header-name");
+
+    // ASSERT
+    expect(renderedItems[0]).toHaveTextContent("A item");
+    expect(renderedItems[1]).toHaveTextContent("A item");
+    expect(renderedItems[2]).toHaveTextContent("B item");
+});
+
 test("list is filtered reverse alphabetical after z-a icon is clicked", () => {
     // ARRANGE
     const listItems = [
