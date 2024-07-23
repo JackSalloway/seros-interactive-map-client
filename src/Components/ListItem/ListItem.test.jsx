@@ -125,3 +125,27 @@ test("jump to location button renders and calls setView function in ref.current 
     expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
     expect(mockRef.current.setView).toHaveBeenCalledTimes(1);
 });
+
+test("component renders out multiple locations when coords parameter is an array of coords", () => {
+    // ARRANGE
+    const mockCoordsArray = [
+        { latlng: { lat: 0, lng: 0 }, name: "Fake Location 1" },
+        { latlng: { lat: 1, lng: 1 }, name: "Fake Location 2" },
+    ];
+    render(
+        <ListItem
+            id={0}
+            name={"Nook of the North"}
+            description={"Fake Description"}
+            coords={mockCoordsArray}
+            updated_at={"Fake Time"}
+        />
+    );
+
+    //ACT
+    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for both objects in the coords array
+    const items = screen.getAllByRole("button", { name: "Jump to location!" }); // Retrieve array of buttons rendered for jumping to locations on the map
+
+    //ASSERT
+    expect(items.length).toBe(mockCoordsArray.length);
+});
