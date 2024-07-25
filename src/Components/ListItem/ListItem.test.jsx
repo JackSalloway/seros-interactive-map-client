@@ -9,52 +9,62 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 library.add(faChevronDown);
 
 describe("ListItem renders data correctly", () => {
-    test("list item name is displayed on render", async () => {
-        //ARRANGE
-        render(
+    // Render ListItem component
+    const renderListItem = (
+        time = "Fake time",
+        coords = { lat: 0, lng: 0 }
+    ) => {
+        return render(
             <ListItem
                 id={0}
                 name={"Nook of the North"}
-                description={"Fake Description"}
+                description={"Fake description"}
+                coords={coords}
+                updated_at={time}
             />
         );
+    };
+
+    // Fire click event to expand list item dropdown
+    const expandList = () => {
+        fireEvent.click(screen.getByTestId("item-header-toggle"));
+    };
+
+    test("list item displays name value correctly", async () => {
+        //ARRANGE
+        renderListItem();
 
         // ACT
         await screen.findByRole("item-header-name");
 
         // ASSERT
-        // Check header name value is rendering correctly
         expect(screen.getByRole("item-header-name")).toHaveTextContent(
             "Nook of the North"
         );
     });
 
-    test("list item displays more content when toggle chevron is clicked", async () => {
+    test("list item displays description value correctly", async () => {
         // ARRANGE
-        const currentTime = new Date().toISOString();
-        render(
-            <ListItem
-                id={0}
-                name={"Nook of the North"}
-                description={"Fake Description"}
-                coords={{ lat: 0, lng: 0 }}
-                updated_at={currentTime}
-            />
-        );
+        renderListItem();
 
         // ACT
-        // Fire click event to expand list item dropdown
-        fireEvent.click(screen.getByTestId("item-header-toggle"));
-        await screen.findByRole("item-content-description");
-        await screen.findByRole("item-content-updated_at");
+        expandList();
 
-        // ASSERT
-        // Check description is rendering correctly
+        //ASSERT
         expect(
             await screen.findByRole("item-content-description")
-        ).toHaveTextContent("Fake Description");
+        ).toHaveTextContent("Fake description");
+    });
 
-        // Check updated at value is rendering correctly
+    test("list item displays updated at value correctly", async () => {
+        // ARRANGE
+        const currentTime = new Date().toISOString();
+        renderListItem(currentTime);
+
+        // ACT
+        expandList();
+
+        // ASSERT
         const expectedDateString = `Last updated: ${dayjs(currentTime).format(
             "DD/MM/YYYY"
         )} at ${dayjs(currentTime).format("HH:mm:ss")}`;
@@ -69,21 +79,15 @@ describe("ListItem renders data correctly", () => {
             { id: 0, latlng: { lat: 0, lng: 0 }, name: "Fake Location 1" },
             { id: 1, latlng: { lat: 1, lng: 1 }, name: "Fake Location 2" },
         ];
-        render(
-            <ListItem
-                id={0}
-                name={"Nook of the North"}
-                description={"Fake Description"}
-                coords={mockCoordsArray}
-                updated_at={"Fake Time"}
-            />
-        );
+        renderListItem("Fake time", mockCoordsArray);
 
         //ACT
-        fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for both objects in the coords array
+
+        expandList();
+        // Retrieve array of buttons rendered for jumping to locations on the map
         const items = screen.getAllByRole("button", {
             name: "Jump to location!",
-        }); // Retrieve array of buttons rendered for jumping to locations on the map
+        });
 
         //ASSERT
         expect(items.length).toBe(mockCoordsArray.length);
