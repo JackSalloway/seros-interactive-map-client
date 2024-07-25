@@ -7,61 +7,85 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faArrowDownZA } from "@fortawesome/free-solid-svg-icons";
 library.add(faArrowDownZA);
 
-test("setSortBy function gets called with appropriate parameter when icon is clicked", async () => {
-    // ARRANGE
-    const mockSetState = jest.fn();
-    render(
+const mockSetState = jest.fn();
+
+const renderListSortIcon = (
+    name = "arrow-down-z-a",
+    value = "revAlphabetical",
+    sort = "alphabetical"
+) => {
+    return render(
         <ListSortIcon
-            iconName={"arrow-down-z-a"}
-            sortValue={"revAlphabetical"}
-            sortBy={"fakeValue"}
+            iconName={name}
+            sortValue={value}
+            sortBy={sort}
             setSortBy={mockSetState}
         />
     );
+};
+
+test("list sort icon renders correctly", async () => {
+    // ARRANGE
+    renderListSortIcon();
 
     // ACT
     const sortIcon = screen.getByTestId("list-sort-icon");
-    fireEvent.click(sortIcon);
 
     // ASSERT
-    expect(mockSetState).toHaveBeenCalledTimes(1); // Check the function has been called 1 time
-    expect(mockSetState).toHaveBeenCalledWith("revAlphabetical"); // Check the parameter the function was called with
+    expect(sortIcon).toBeInTheDocument();
 });
 
-test("check class attribute is being assigned the right value when icon is not selected", () => {
-    // ARRANGE
-    render(
-        <ListSortIcon
-            iconName={"arrow-down-z-a"}
-            sortValue={"revAlphabetical"}
-            sortBy={"alphabetical"}
-            setSortBy={jest.fn()}
-        />
-    );
+describe("list sort icon on click functionality", () => {
+    test("setSortBy function gets called when icon is clicked", async () => {
+        // ARRANGE
+        renderListSortIcon();
 
-    // ACT
-    const sortIcon = screen.getByTestId("list-sort-icon");
-    const className = sortIcon.getAttribute("class");
+        // ACT
+        fireEvent.click(screen.getByTestId("list-sort-icon"));
 
-    // ASSERT
-    expect(className).not.toContain("list-sort-icon-selected");
+        // ASSERT
+        expect(mockSetState).toHaveBeenCalledTimes(1); // Check the function has been called 1 time
+        expect(mockSetState).toHaveBeenCalledWith("revAlphabetical"); // Check the parameter the function was called with
+    });
+
+    test("setSortBy function gets called with correct parameter", async () => {
+        // ARRANGE
+        renderListSortIcon();
+
+        // ACT
+        fireEvent.click(screen.getByTestId("list-sort-icon"));
+
+        // ASSERT
+        expect(mockSetState).toHaveBeenCalledWith("revAlphabetical"); // Check the function is called with the value of the sortValue prop
+    });
 });
 
-test("check class attribute is being assigned the right value when icon is selected", () => {
-    // ARRANGE
-    render(
-        <ListSortIcon
-            iconName={"arrow-down-z-a"}
-            sortValue={"revAlphabetical"}
-            sortBy={"revAlphabetical"}
-            setSortBy={jest.fn()}
-        />
-    );
+describe("list sort icon className attribute assignment", () => {
+    test("check class attribute is being assigned the right value when icon is not selected", () => {
+        // ARRANGE
+        renderListSortIcon();
 
-    // ACT
-    const sortIcon = screen.getByTestId("list-sort-icon");
-    const className = sortIcon.getAttribute("class");
+        // ACT
+        const sortIcon = screen.getByTestId("list-sort-icon");
+        const className = sortIcon.getAttribute("class");
 
-    // ASSERT
-    expect(className).toContain("list-sort-icon-selected");
+        // ASSERT
+        expect(className).not.toContain("list-sort-icon-selected");
+    });
+
+    test("check class attribute is being assigned the right value when icon is selected", () => {
+        // ARRANGE
+        renderListSortIcon(
+            "arrow-down-z-a",
+            "revAlphabetical",
+            "revAlphabetical"
+        );
+
+        // ACT
+        const sortIcon = screen.getByTestId("list-sort-icon");
+        const className = sortIcon.getAttribute("class");
+
+        // ASSERT
+        expect(className).toContain("list-sort-icon-selected");
+    });
 });
