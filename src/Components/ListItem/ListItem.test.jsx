@@ -91,6 +91,12 @@ describe("ListItem renders data correctly", () => {
 });
 
 describe("ListItem jump to location button functionality", () => {
+    // Fire click event to expand list item dropdown and click jump to location button
+    const mockJumpToLocation = async () => {
+        fireEvent.click(screen.getByTestId("item-header-toggle"));
+        fireEvent.click(await screen.findByText("Jump to location!"));
+    };
+
     test("jump to location button renders and calls flyTo function in ref.current object when ref.current._zoom value is 5 ", async () => {
         // ARRANGE
         const mockRef = {
@@ -114,9 +120,7 @@ describe("ListItem jump to location button functionality", () => {
         );
 
         // ACT
-        // Fire click event to expand list item dropdown and click jump to location button
-        fireEvent.click(screen.getByTestId("item-header-toggle"));
-        fireEvent.click(await screen.findByText("Jump to location!"));
+        await mockJumpToLocation();
 
         // ASSERT
         expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
@@ -146,9 +150,7 @@ describe("ListItem jump to location button functionality", () => {
         );
 
         // ACT
-        // Fire click event to expand list item dropdown and click jump to location button
-        fireEvent.click(screen.getByTestId("item-header-toggle"));
-        fireEvent.click(await screen.findByText("Jump to location!"));
+        await mockJumpToLocation();
 
         // ASSERT
         expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
