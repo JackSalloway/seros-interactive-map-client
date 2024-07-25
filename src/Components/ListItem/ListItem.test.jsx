@@ -8,28 +8,30 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 library.add(faChevronDown);
 
+// Render ListItem component with default values
+const renderListItem = (
+    time = "Fake time",
+    coords = { lat: 0, lng: 0 },
+    ref = {}
+) => {
+    return render(
+        <ListItem
+            id={0}
+            name={"Nook of the North"}
+            description={"Fake description"}
+            updated_at={time}
+            coords={coords}
+            mapRef={ref}
+        />
+    );
+};
+
+// Click event to expand list item dropdown
+const expandList = () => {
+    fireEvent.click(screen.getByTestId("item-header-toggle"));
+};
+
 describe("ListItem renders data correctly", () => {
-    // Render ListItem component
-    const renderListItem = (
-        time = "Fake time",
-        coords = { lat: 0, lng: 0 }
-    ) => {
-        return render(
-            <ListItem
-                id={0}
-                name={"Nook of the North"}
-                description={"Fake description"}
-                coords={coords}
-                updated_at={time}
-            />
-        );
-    };
-
-    // Fire click event to expand list item dropdown
-    const expandList = () => {
-        fireEvent.click(screen.getByTestId("item-header-toggle"));
-    };
-
     test("list item displays name value correctly", async () => {
         //ARRANGE
         renderListItem();
@@ -95,69 +97,66 @@ describe("ListItem renders data correctly", () => {
 });
 
 describe("ListItem jump to location button functionality", () => {
-    // Fire click event to expand list item dropdown and click jump to location button
-    const mockJumpToLocation = async () => {
-        fireEvent.click(screen.getByTestId("item-header-toggle"));
-        fireEvent.click(await screen.findByText("Jump to location!"));
-    };
-
-    test("jump to location button renders and calls flyTo function in ref.current object when ref.current._zoom value is 5 ", async () => {
+    test("button renders correctly", async () => {
         // ARRANGE
-        const mockRef = {
-            current: {
-                getZoom: jest.fn(() => {
-                    return 5; // Simulates getting the _zoom value from the ref.current object
-                }),
-                flyTo: jest.fn(),
-            },
-        };
-
-        render(
-            <ListItem
-                id={0}
-                name={"Nook of the North"}
-                description={"Fake Description"}
-                coords={{ lat: 0, lng: 0 }}
-                mapRef={mockRef}
-                updated_at={"Fake Time"}
-            />
-        );
+        renderListItem();
 
         // ACT
-        await mockJumpToLocation();
+        expandList();
+        const jumpToLocationButton = await screen.findByText(
+            "Jump to location!"
+        );
 
         // ASSERT
-        expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
-        expect(mockRef.current.flyTo).toHaveBeenCalledTimes(1);
+        expect(jumpToLocationButton).toBeInTheDocument();
     });
 
-    test("jump to location button renders and calls setView function in ref.current object when ref.current._zoom value is < 5 ", async () => {
-        // ARRANGE
-        const mockRef = {
-            current: {
-                getZoom: jest.fn(() => {
-                    return 2; // Simulates getting the _zoom value from the ref.current object
-                }),
-                setView: jest.fn(),
-            },
+    describe("jump to location button functionality", () => {
+        // Click event to simulate clicking the jump to location button
+        const mockJumpToLocation = async () => {
+            fireEvent.click(await screen.findByText("Jump to location!"));
         };
 
-        render(
-            <ListItem
-                id={0}
-                name={"Nook of the North"}
-                description={"Fake Description"}
-                coords={{ lat: 0, lng: 0 }}
-                mapRef={mockRef}
-                updated_at={"Fake Time"}
-            />
-        );
+        test("jump to location button calls flyTo function in ref.current object when ref.current._zoom value is 5 ", async () => {
+            // ARRANGE
+            const mockRef = {
+                current: {
+                    getZoom: jest.fn(() => {
+                        return 5; // Simulates getting the _zoom value from the ref.current object
+                    }),
+                    flyTo: jest.fn(),
+                },
+            };
+            renderListItem("Fake time", { lat: 0, lng: 0 }, mockRef);
 
-        // ACT
-        await mockJumpToLocation();
+            // ACT
+            expandList();
+            await mockJumpToLocation();
 
-        // ASSERT
-        expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
-        expect(mockRef.current.setView).toHaveBeenCalledTimes(1);
+            // ASSERT
+            expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
+            expect(mockRef.current.flyTo).toHaveBeenCalledTimes(1);
+        });
+
+        test("jump to location button calls setView function in ref.current object when ref.current._zoom value is < 5 ", async () => {
+            // ARRANGE
+            const mockRef = {
+                current: {
+                    getZoom: jest.fn(() => {
+                        return 2; // Simulates getting the _zoom value from the ref.current object
+                    }),
+                    setView: jest.fn(),
+                },
+            };
+            renderListItem("Fake time", { lat: 0, lng: 0 }, mockRef);
+
+            // ACT
+            expandList();
+            await mockJumpToLocation();
+
+            // ASSERT
+            expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
+            expect(mockRef.current.setView).toHaveBeenCalledTimes(1);
+        });
     });
 });
