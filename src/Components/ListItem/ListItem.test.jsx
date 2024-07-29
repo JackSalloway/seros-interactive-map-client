@@ -136,6 +136,10 @@ describe("ListItem jump to location button functionality", () => {
             // ASSERT
             expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
             expect(mockRef.current.flyTo).toHaveBeenCalledTimes(1);
+            expect(mockRef.current.flyTo).toHaveBeenCalledWith({
+                lat: 0,
+                lng: 0,
+            });
         });
 
         test("jump to location button calls setView function in ref.current object when ref.current._zoom value is < 5 ", async () => {
@@ -157,6 +161,10 @@ describe("ListItem jump to location button functionality", () => {
             // ASSERT
             expect(mockRef.current.getZoom).toHaveBeenCalledTimes(1);
             expect(mockRef.current.setView).toHaveBeenCalledTimes(1);
+            expect(mockRef.current.setView).toHaveBeenCalledWith(
+                { lat: 0, lng: 0 },
+                5
+            );
         });
     });
 });
