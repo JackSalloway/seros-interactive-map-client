@@ -17,13 +17,16 @@ const ChangelogItem: React.FC<ChangelogItemProps> = (props) => {
 
     return (
         <div className="changelog-item-wrapper">
-            <div className="changelog-item-header">
+            <div className="changelog-item-header" role="changelog-item-header">
                 {he.decode(item.user)}{" "}
                 {dayjs(item.created_at).format("DD/MM/YYYY")}
                 {" at "}
                 {dayjs(item.created_at).format("HH:mm:ss")}
             </div>
-            <div className="changelog-item-content">
+            <div
+                className="changelog-item-content"
+                role="changelog-item-content"
+            >
                 {item.action} {item.data_affected}: {he.decode(item.data_name)}
             </div>
         </div>
