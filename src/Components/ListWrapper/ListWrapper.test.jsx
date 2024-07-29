@@ -19,6 +19,16 @@ library.add(
     faHourglassEnd
 );
 
+// Click the toggle icon for the ListWrapper component
+const expandWrapper = () => {
+    fireEvent.click(screen.getByTestId("item-header-toggle"));
+};
+
+// Click a sort list icon
+const sortList = (sortValue) => {
+    fireEvent.click(screen.getByTitle(sortValue));
+};
+
 test("list wrapper header renders correctly", async () => {
     //ARRANGE
     render(<ListWrapper title={"Locations"} list={[]} />);
@@ -35,7 +45,7 @@ test("all sort icons render correctly", async () => {
     render(<ListWrapper title={"locations"} list={[]} />);
 
     // ACT
-    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for the ListWrapper component
+    expandWrapper();
     const sortIcons = await screen.findAllByTestId("list-sort-icon"); // Find all list sort icons
 
     // ASSERT
@@ -52,7 +62,7 @@ test("list is filtered on render by orderAlphabetically function ", () => {
     render(<ListWrapper title={"locations"} list={listItems} />);
 
     // ACT
-    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for the ListWrapper component
+    expandWrapper();
     const renderedItems = screen.getAllByRole("item-header-name");
 
     // ASSERT
@@ -71,7 +81,7 @@ test("sort alphabetically functionality works with multiple items that share the
     render(<ListWrapper title={"locations"} list={listItems} />);
 
     // ACT
-    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for the ListWrapper component
+    expandWrapper();
     const renderedItems = screen.getAllByRole("item-header-name");
 
     // ASSERT
@@ -90,8 +100,9 @@ test("list is filtered reverse alphabetical after z-a icon is clicked", () => {
     render(<ListWrapper title={"locations"} list={listItems} />);
 
     // ACT
-    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for the ListWrapper component
-    fireEvent.click(screen.getByTitle("arrow-down-z-a")); // Simulate click on the Z-A sort icon
+    expandWrapper();
+    sortList("arrow-down-z-a");
+
     const renderedItems = screen.getAllByRole("item-header-name");
 
     // ASSERT
@@ -125,8 +136,8 @@ test("list is filtered in chronological order after hourglass start icon is clic
     render(<ListWrapper title={"locations"} list={listItems} />);
 
     // ACT
-    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for the ListWrapper component
-    fireEvent.click(screen.getByTitle("hourglass-start")); // Simulate click on the hourglass-start sort icon (not really many good icons for ordering in chronological order)
+    expandWrapper();
+    sortList("hourglass-start");
     const renderedItems = screen.getAllByRole("item-header-name");
 
     // ASSERT
@@ -160,8 +171,8 @@ test("list is filtered in reverse chronological order after hourglass end icon i
     render(<ListWrapper title={"locations"} list={listItems} />);
 
     // ACT
-    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click the toggle icon for the ListWrapper component
-    fireEvent.click(screen.getByTitle("hourglass-end")); // Simulate click on the hourglass-end sort icon (not really many good icons for ordering in chronological order)
+    expandWrapper();
+    sortList("hourglass-end");
     const renderedItems = screen.getAllByRole("item-header-name");
 
     // ASSERT
