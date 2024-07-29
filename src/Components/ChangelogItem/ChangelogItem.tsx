@@ -16,7 +16,7 @@ const ChangelogItem: React.FC<ChangelogItemProps> = (props) => {
     const { item } = props;
 
     return (
-        <div className="changelog-item-wrapper">
+        <div className="changelog-item-wrapper" role="changelog-item-wrapper">
             <div className="changelog-item-header" role="changelog-item-header">
                 {he.decode(item.user)}{" "}
                 {dayjs(item.created_at).format("DD/MM/YYYY")}
