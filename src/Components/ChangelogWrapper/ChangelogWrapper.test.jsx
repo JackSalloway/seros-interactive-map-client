@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { screen, render } from "@testing-library/react";
+import { screen, render, fireEvent } from "@testing-library/react";
 import ChangelogWrapper from "./ChangelogWrapper";
 
 // FonteAwesome icon imports
@@ -17,4 +17,29 @@ test("header element renders correctly and its content is the value of the title
     // ASSERT
     expect(heading).toBeInTheDocument();
     expect(heading).toHaveTextContent("Fake Title");
+});
+
+test("renders the correct amount of changelog items", async () => {
+    const mockItem = {
+        user: "",
+        created_at: "",
+        action: "",
+        data_affected: "",
+        data_name: "",
+    };
+
+    // ARRANGE
+    render(
+        <ChangelogWrapper
+            title={"Fake Title"}
+            changelog={[mockItem, mockItem]}
+        />
+    );
+
+    // ACT
+    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click event to expand list item dropdown
+    const children = await screen.findAllByRole("changelog-item-wrapper");
+
+    // ASSERT
+    expect(children.length).toBe(2);
 });
