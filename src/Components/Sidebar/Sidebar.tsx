@@ -142,6 +142,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
     return (
         <div
+            role="sidebar-wrapper"
             className={`sidebar-wrapper ${
                 sidebarOpen === true ? "sidebar-open" : "sidebar-closed"
             }`}
