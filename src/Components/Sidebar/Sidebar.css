@@ -21,7 +21,7 @@
     width: 40%;
 }
 
-.sidebar-closed.sidebar-wrapper {
+.sidebar-closed {
     width: 0;
 }
 
