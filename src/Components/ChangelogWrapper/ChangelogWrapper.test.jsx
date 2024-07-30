@@ -21,6 +21,16 @@ test("header element renders correctly and its content is the value of the title
 
 test("renders the correct amount of changelog items", async () => {
     const mockItem = {
+        id: 0,
+        user: "",
+        created_at: "",
+        action: "",
+        data_affected: "",
+        data_name: "",
+    };
+
+    const mockItem2 = {
+        id: 1,
         user: "",
         created_at: "",
         action: "",
@@ -32,7 +42,7 @@ test("renders the correct amount of changelog items", async () => {
     render(
         <ChangelogWrapper
             title={"Fake Title"}
-            changelog={[mockItem, mockItem]}
+            changelog={[mockItem, mockItem2]}
         />
     );
 
