@@ -53,3 +53,15 @@ test("renders the correct amount of changelog items", async () => {
     // ASSERT
     expect(children.length).toBe(2);
 });
+
+test("renders message informing user no changelog entries were found if the changelog array is empty", async () => {
+    // ARRANGE
+    render(<ChangelogWrapper title="Fake Title" changelog={[]} />);
+
+    // ACT
+    fireEvent.click(screen.getByTestId("item-header-toggle")); // Click event to expand list item dropdown
+    const paragraphElement = await screen.findByRole("paragraph");
+
+    // ASSERT
+    expect(paragraphElement).toHaveTextContent("No entries found.");
+});
