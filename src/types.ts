@@ -17,6 +17,11 @@ export interface ListItemType {
     updated_at: string;
 }
 
+export interface SelectBoxValue {
+    value: number;
+    label: string;
+}
+
 export interface Campaign {
     id: number;
     name: string;
