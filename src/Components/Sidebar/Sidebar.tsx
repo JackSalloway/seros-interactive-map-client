@@ -92,6 +92,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                     };
                                 })
                             )}
+                            setSelectedLocationId={setSelectedLocationId}
                         />
                         {/* Quest List */}
                         <ListWrapper
@@ -108,6 +109,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                     };
                                 })
                             )}
+                            setSelectedLocationId={setSelectedLocationId}
                         />
                         {/* NPC List */}
                         <ListWrapper
@@ -124,6 +126,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                     };
                                 })
                             )}
+                            setSelectedLocationId={setSelectedLocationId}
                         />
                         {/* Combat Instance List */}
                         <ListWrapper
@@ -140,6 +143,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                                     };
                                 })
                             )}
+                            setSelectedLocationId={setSelectedLocationId}
                         />
                     </div>
                 </>

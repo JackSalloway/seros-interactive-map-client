@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, SetStateAction } from "react";
 
 // Component imports
 import ListItem from "../ListItem/ListItem";
@@ -17,10 +17,11 @@ interface ListWrapperProps {
     title: string;
     list: ListItemType[];
     mapRef: React.RefObject<Map>;
+    setSelectedLocationId: React.Dispatch<SetStateAction<null | number>>;
 }
 
 const ListWrapper: React.FC<ListWrapperProps> = (props) => {
-    const { title, list, mapRef } = props;
+    const { title, list, mapRef, setSelectedLocationId } = props;
 
     const [selected, setSelected] = useState<boolean>(false); // State for opening/closing list
     const [filterString, setFilterString] = useState<string>(""); // State for filter by search query
@@ -128,6 +129,7 @@ const ListWrapper: React.FC<ListWrapperProps> = (props) => {
                                 coords={item.coords}
                                 mapRef={mapRef}
                                 updated_at={item.updated_at}
+                                setSelectedLocationId={setSelectedLocationId}
                             />
                         );
                     })}

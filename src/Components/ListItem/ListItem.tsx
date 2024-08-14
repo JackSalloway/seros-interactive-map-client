@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, SetStateAction } from "react";
 import he from "he";
 import dayjs from "dayjs";
 
@@ -19,10 +19,19 @@ interface ListComponentProps {
     coords: LatLng | AssociatedLocation[];
     mapRef: React.RefObject<Map>;
     updated_at: string;
+    setSelectedLocationId: React.Dispatch<SetStateAction<null | number>>;
 }
 
 const ListItem: React.FC<ListComponentProps> = (props) => {
-    const { id, name, description, coords, mapRef, updated_at } = props;
+    const {
+        id,
+        name,
+        description,
+        coords,
+        mapRef,
+        updated_at,
+        setSelectedLocationId,
+    } = props;
 
     const [selected, setSelected] = useState<boolean>(false);
 
@@ -35,6 +44,7 @@ const ListItem: React.FC<ListComponentProps> = (props) => {
                 } else {
                     mapRef.current?.setView(coordinates, 5);
                 }
+                setSelectedLocationId(id);
             }}
         >
             Jump to location!
