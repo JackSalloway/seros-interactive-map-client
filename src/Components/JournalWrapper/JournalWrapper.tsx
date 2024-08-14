@@ -132,7 +132,7 @@ const JournalWrapper: React.FC<JournalWrapperProps> = (props) => {
 
     return (
         <div id="journal-wrapper">
-            <div id="journal-header">
+            <div id="journal-header-wrapper">
                 {selectedLocation.name}
                 <FaCrossIcon deselect={setSelectedLocationId} />
             </div>

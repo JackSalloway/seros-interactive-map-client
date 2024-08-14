@@ -10,7 +10,7 @@
     background: rgba(0, 0, 0, 0.1);
 }
 
-#journal-header {
+#journal-header-wrapper {
     height: auto;
     padding: 0.5rem 0;
     width: 100%;
