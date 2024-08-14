@@ -4,6 +4,7 @@ import { Map } from "leaflet";
 // Component imports
 import ListWrapper from "../ListWrapper/ListWrapper";
 import ChangelogWrapper from "../ChangelogWrapper/ChangelogWrapper";
+import JournalWrapper from "../JournalWrapper/JournalWrapper";
 
 // Type imports
 import type {
@@ -31,7 +32,8 @@ interface SidebarProps {
     combatInstances: CombatInstance[];
     setCombatInstances: React.Dispatch<SetStateAction<CombatInstance[]>>;
     changelog: Changelog[];
-    selectedLocation: Location;
+    setSelectedLocationId: React.Dispatch<SetStateAction<null | number>>;
+    selectedLocation: null | Location;
     selectedQuests: Quest[];
     selectedNPCs: NPC[];
     selectedCombatInstances: CombatInstance[];
@@ -51,6 +53,7 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         combatInstances,
         setCombatInstances,
         changelog,
+        setSelectedLocationId,
         selectedLocation,
         selectedQuests,
         selectedNPCs,
@@ -59,85 +62,103 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
 
     const sidebarContent = () => {
         if (!sidebarOpen) return null;
-        return (
-            <>
-                <div id="sidebar-header">
-                    <h2>{campaign.name}</h2>
-                </div>
-                <div id="sidebar-list-wrapper">
-                    {/* Changelog List */}
-                    <ChangelogWrapper
-                        title={"Changelog"}
-                        changelog={changelog}
-                    />
 
-                    {/* Location List */}
-                    <ListWrapper
-                        title={"Locations"}
-                        mapRef={mapRef}
-                        list={Array.from(
-                            locations?.map((location) => {
-                                return {
-                                    id: location.id,
-                                    name: location.name,
-                                    description: location.description,
-                                    coords: location.latlng,
-                                    updated_at: location.updated_at,
-                                };
-                            })
-                        )}
-                    />
-                    {/* Quest List */}
-                    <ListWrapper
-                        title={"Quests"}
-                        mapRef={mapRef}
-                        list={Array.from(
-                            quests?.map((quest) => {
-                                return {
-                                    id: quest.id,
-                                    name: quest.name,
-                                    description: quest.description,
-                                    coords: quest.associated_locations,
-                                    updated_at: quest.updated_at,
-                                };
-                            })
-                        )}
-                    />
-                    {/* NPC List */}
-                    <ListWrapper
-                        title={"NPCs"}
-                        mapRef={mapRef}
-                        list={Array.from(
-                            npcs?.map((npc) => {
-                                return {
-                                    id: npc.id,
-                                    name: npc.name,
-                                    description: npc.description,
-                                    coords: npc.associated_locations,
-                                    updated_at: npc.updated_at,
-                                };
-                            })
-                        )}
-                    />
-                    {/* Combat Instance List */}
-                    <ListWrapper
-                        title={"Combat Instances"}
-                        mapRef={mapRef}
-                        list={Array.from(
-                            combatInstances?.map((instance) => {
-                                return {
-                                    id: instance.id,
-                                    name: instance.name,
-                                    description: instance.description,
-                                    coords: instance.location.latlng,
-                                    updated_at: instance.updated_at,
-                                };
-                            })
-                        )}
-                    />
-                </div>
-            </>
-        );
+        // Sidebar is open but no location is selected - return lists
+        if (selectedLocation === null)
+            return (
+                <>
+                    <div id="sidebar-header">
+                        <h2>{campaign.name}</h2>
+                    </div>
+                    <div id="sidebar-list-wrapper">
+                        {/* Changelog List */}
+                        <ChangelogWrapper
+                            title={"Changelog"}
+                            changelog={changelog}
+                        />
+
+                        {/* Location List */}
+                        <ListWrapper
+                            title={"Locations"}
+                            mapRef={mapRef}
+                            list={Array.from(
+                                locations?.map((location) => {
+                                    return {
+                                        id: location.id,
+                                        name: location.name,
+                                        description: location.description,
+                                        coords: location.latlng,
+                                        updated_at: location.updated_at,
+                                    };
+                                })
+                            )}
+                        />
+                        {/* Quest List */}
+                        <ListWrapper
+                            title={"Quests"}
+                            mapRef={mapRef}
+                            list={Array.from(
+                                quests?.map((quest) => {
+                                    return {
+                                        id: quest.id,
+                                        name: quest.name,
+                                        description: quest.description,
+                                        coords: quest.associated_locations,
+                                        updated_at: quest.updated_at,
+                                    };
+                                })
+                            )}
+                        />
+                        {/* NPC List */}
+                        <ListWrapper
+                            title={"NPCs"}
+                            mapRef={mapRef}
+                            list={Array.from(
+                                npcs?.map((npc) => {
+                                    return {
+                                        id: npc.id,
+                                        name: npc.name,
+                                        description: npc.description,
+                                        coords: npc.associated_locations,
+                                        updated_at: npc.updated_at,
+                                    };
+                                })
+                            )}
+                        />
+                        {/* Combat Instance List */}
+                        <ListWrapper
+                            title={"Combat Instances"}
+                            mapRef={mapRef}
+                            list={Array.from(
+                                combatInstances?.map((instance) => {
+                                    return {
+                                        id: instance.id,
+                                        name: instance.name,
+                                        description: instance.description,
+                                        coords: instance.location.latlng,
+                                        updated_at: instance.updated_at,
+                                    };
+                                })
+                            )}
+                        />
+                    </div>
+                </>
+            );
+        // Sidebar is open and a location is selected - return location notes
+        else
+            return (
+                <JournalWrapper
+                    selectedLocation={selectedLocation}
+                    setSelectedLocationId={setSelectedLocationId}
+                    selectedNPCs={selectedNPCs}
+                    selectedQuests={selectedQuests}
+                    selectedInstances={selectedCombatInstances}
+                    locations={locations}
+                    npcs={npcs}
+                    quests={quests}
+                    instances={combatInstances}
+                />
+            );
     };
 
     return (
