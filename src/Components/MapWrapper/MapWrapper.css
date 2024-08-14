@@ -1,0 +1,20 @@
+/* leaflet styles - things to do with MapBox.jsx */
+.leaflet-container {
+    height: inherit;
+    width: inherit;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    background: url("../../../public/maps/seros/png-example/5/7/12.png");
+    z-index: 1;
+}
+
+.toggle-sidebar-icon {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    right: 1rem;
+    top: 10%;
+    cursor: pointer;
+    z-index: 1000; /* Set this very high as React Leaflet uses z-index to render tiles as the user zooms in */
+}

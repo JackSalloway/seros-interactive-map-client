@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 // Component imports
+import MapWrapper from "../../Components/MapWrapper/MapWrapper";
 import MapBox from "../../Components/MapBox/MapBox";
 import Journal from "../../Components/Journal/Journal";
 import Sidebar from "../../Components/Sidebar/Sidebar";
@@ -177,10 +178,47 @@ const Campaign = () => {
         fetchData().catch((err) => console.log(err));
     }, [campaign, combatInstances]);
 
+    // Reset selected location data if selectedLocationId state value = null
+    useEffect(() => {
+        // Early return if there is a location selected
+        if (selectedLocationId !== null) return;
+
+        setSelectedLocationQuests(null);
+        setSelectedLocationNPCs(null);
+        setSelectedLocationCombatInstances(null);
+    }, [selectedLocationId]);
+
     // Campaign has been selected so render a map and a journal sidebar
     return (
         <div className="map-screen-wrapper">
-            <MapBox
+            <MapWrapper
+                locations={locations}
+                npcs={npcs}
+                quests={quests}
+                combatInstances={combatInstances}
+                mapRef={map}
+                selectedLocationId={selectedLocationId}
+                setSelectedLocationId={setSelectedLocationId}
+                setSelectedLocationNPCs={setSelectedLocationNPCs}
+                setSelectedLocationQuests={setSelectedLocationQuests}
+                setSelectedLocationCombatInstances={
+                    setSelectedLocationCombatInstances
+                }
+                renderCreationMarker={renderCreationMarker}
+                creationMarkerLatLng={creationMarkerLatLng}
+                setCreationMarkerLatLng={setCreationMarkerLatLng}
+                markerBeingEdited={markerBeingEdited}
+                setMarkerBeingEdited={setMarkerBeingEdited}
+                setEditLocationDetails={setEditLocationDetails}
+                editMarkerLatLng={editMarkerLatLng}
+                setEditMarkerLatLng={setEditMarkerLatLng}
+                editMarkerType={editMarkerType}
+                setEditMarkerType={setEditMarkerType}
+                setDeleteData={setDeleteData}
+                sidebarOpen={sidebarOpen}
+                setSidebarOpen={setSidebarOpen}
+            />
+            {/* <MapBox
                 locations={locations}
                 npcs={npcs}
                 quests={quests}
@@ -209,7 +247,7 @@ const Campaign = () => {
                 setDeleteData={setDeleteData}
                 sidebarOpen={sidebarOpen}
                 setSidebarOpen={setSidebarOpen}
-            />
+            /> */}
 
             <Sidebar
                 sidebarOpen={sidebarOpen}
@@ -224,6 +262,7 @@ const Campaign = () => {
                 combatInstances={combatInstances ?? []}
                 setCombatInstance={setCombatInstances}
                 changelog={changelog}
+                setSelectedLocationId={setSelectedLocationId}
                 selectedLocation={
                     locations?.filter(
                         (location) => location.id === selectedLocationId
