@@ -1,6 +1,9 @@
 import React, { useState, useEffect, SetStateAction } from "react";
 import he from "he";
 
+// Component imports
+import FaCrossIcon from "../FaCrossIcon/FaCrossIcon";
+
 // Type imports
 import type {
     Location,
@@ -128,8 +131,11 @@ const JournalWrapper: React.FC<JournalWrapperProps> = (props) => {
     };
 
     return (
-        <div>
-            <button onClick={() => deselectLocation()}>close location</button>
+        <div id="journal-wrapper">
+            <div id="journal-header">
+                {selectedLocation.name}
+                <FaCrossIcon deselect={setSelectedLocationId} />
+            </div>
         </div>
     );
 };
