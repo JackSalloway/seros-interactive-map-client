@@ -10,6 +10,7 @@ import JournalWrapper from "../JournalWrapper/JournalWrapper";
 import type {
     Campaign,
     Location,
+    Sublocation,
     Quest,
     NPC,
     CombatInstance,
@@ -37,6 +38,10 @@ interface SidebarProps {
     selectedQuests: Quest[];
     selectedNPCs: NPC[];
     selectedCombatInstances: CombatInstance[];
+    deleteData: Location | Sublocation | NPC | Quest | CombatInstance;
+    setDeleteData: React.Dispatch<
+        SetStateAction<Location | Sublocation | NPC | Quest | CombatInstance>
+    >;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {
@@ -58,6 +63,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
         selectedQuests,
         selectedNPCs,
         selectedCombatInstances,
+        deleteData,
+        setDeleteData,
     } = props;
 
     const sidebarContent = () => {
@@ -161,6 +168,8 @@ const Sidebar: React.FC<SidebarProps> = (props) => {
                     npcs={npcs}
                     quests={quests}
                     instances={combatInstances}
+                    deleteData={deleteData}
+                    setDeleteData={setDeleteData}
                 />
             );
     };

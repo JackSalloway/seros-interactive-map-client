@@ -23,3 +23,13 @@
     z-index: 10;
     border-bottom: 1px solid black;
 }
+
+#journal-notes-wrapper {
+    height: auto;
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}

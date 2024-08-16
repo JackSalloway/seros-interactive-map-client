@@ -271,6 +271,8 @@ const Campaign = () => {
                 selectedQuests={selectedLocationQuests}
                 selectedNPCs={selectedLocationNPCs}
                 selectedCombatInstances={selectedLocationCombatInstances}
+                deleteData={deleteData}
+                setDeleteData={setDeleteData}
             />
 
             {/* <Journal
