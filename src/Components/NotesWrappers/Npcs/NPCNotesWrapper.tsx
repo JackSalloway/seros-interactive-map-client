@@ -33,7 +33,7 @@ const NPCNotesWrapper: React.FC<NPCNotesWrapperProps> = (props) => {
             {showNPCs ? (
                 <div className="notes-wrapper-content">
                     <div className="notes-wrapper-content-icons">
-                        Add a new Sublocation!
+                        Add a new NPC!
                         <FaPlusIcon setAddNew={setAddNewNPC} />
                     </div>
                     <div className="notes-wrapper-content-list">
