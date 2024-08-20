@@ -14,8 +14,8 @@ import "../GenericStyles/NoteItem.css";
 
 interface SublocationItemProps {
     sublocation: Sublocation;
-    editSublocation: null | Sublocation;
-    setEditSublocation: React.Dispatch<SetStateAction<null | Sublocation>>;
+    editSublocation: null | number;
+    setEditSublocation: React.Dispatch<SetStateAction<null | number>>;
     deleteData: null | DeleteItem;
     setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
 }

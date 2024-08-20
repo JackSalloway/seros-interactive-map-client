@@ -23,9 +23,7 @@ const SublocationNotesWrapper: React.FC<SublocationNotesWrapperProps> = (
     const { sublocations, deleteData, setDeleteData } = props;
 
     const [showSublocations, setShowSublocations] = useState<boolean>(false);
-    const [editSublocation, setEditSublocation] = useState<null | Sublocation>(
-        null
-    );
+    const [editSublocation, setEditSublocation] = useState<null | number>(null);
     const [addNewSublocation, setAddNewSublocation] = useState<boolean>(false);
 
     return (

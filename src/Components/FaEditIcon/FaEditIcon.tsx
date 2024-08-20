@@ -12,8 +12,8 @@ import type {
 
 interface FaEditIconProps {
     // item: Location | Sublocation | NPC | Quest | CombatInstance;
-    editing: null | Sublocation;
-    setEditing: React.Dispatch<SetStateAction<null | Sublocation>>;
+    editing: null | number;
+    setEditing: React.Dispatch<SetStateAction<null | number>>;
 }
 
 const FaEditIcon: React.FC<FaEditIconProps> = (props) => {

@@ -21,7 +21,7 @@ const NPCNotesWrapper: React.FC<NPCNotesWrapperProps> = (props) => {
     const { npcs, deleteData, setDeleteData } = props;
 
     const [showNPCs, setShowNPCs] = useState<boolean>(false);
-    const [editNPC, setEditNPC] = useState<null | NPC>(null);
+    const [editNPC, setEditNPC] = useState<null | number>(null);
     const [addNewNPC, setAddNewNPC] = useState<boolean>(false);
 
     return (
