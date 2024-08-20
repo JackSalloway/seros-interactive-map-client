@@ -3,6 +3,9 @@ import React, { SetStateAction } from "react";
 // Type imports
 import type { NPC, DeleteItem } from "../../../types";
 
+// Style imports
+import "../GenericStyles/NoteItem.css";
+
 interface NPCItem {
     npc: NPC;
     editNPC: null | NPC;
