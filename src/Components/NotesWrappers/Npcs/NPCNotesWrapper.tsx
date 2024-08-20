@@ -2,6 +2,8 @@ import React, { useState, SetStateAction } from "react";
 
 // Component imports
 import FaChevronIcon from "../../FaChevronIcon/FaChevronIcon";
+import FaPlusIcon from "../../FaPlusIcon/FaPlusIcon";
+import NPCItem from "./NPCItem";
 
 // Type imports
 import type { NPC, DeleteItem } from "../../../types";
@@ -20,6 +22,7 @@ const NPCNotesWrapper: React.FC<NPCNotesWrapperProps> = (props) => {
 
     const [showNPCs, setShowNPCs] = useState<boolean>(false);
     const [editNPC, setEditNPC] = useState<null | NPC>(null);
+    const [addNewNPC, setAddNewNPC] = useState<boolean>(false);
 
     return (
         <div className="notes-wrapper">
@@ -27,6 +30,28 @@ const NPCNotesWrapper: React.FC<NPCNotesWrapperProps> = (props) => {
                 <h3>NPCs</h3>
                 <FaChevronIcon open={showNPCs} toggleOpen={setShowNPCs} />
             </div>
+            {showNPCs ? (
+                <div className="notes-wrapper-content">
+                    <div className="notes-wrapper-content-icons">
+                        Add a new Sublocation!
+                        <FaPlusIcon setAddNew={setAddNewNPC} />
+                    </div>
+                    <div className="notes-wrapper-content-list">
+                        {npcs?.map((npc) => {
+                            return (
+                                <NPCItem
+                                    key={npc.id}
+                                    npc={npc}
+                                    editNPC={editNPC}
+                                    setEditNPC={setEditNPC}
+                                    deleteData={deleteData}
+                                    setDeleteData={setDeleteData}
+                                />
+                            );
+                        })}
+                    </div>
+                </div>
+            ) : null}
         </div>
     );
 };
