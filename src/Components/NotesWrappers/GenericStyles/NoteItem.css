@@ -1,7 +1,6 @@
 .note-item-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
     border: 1px solid white;
     border-radius: 0.5rem;
@@ -14,7 +13,6 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-self: flex-start;
     align-items: center;
     gap: 1rem;
     position: relative;
