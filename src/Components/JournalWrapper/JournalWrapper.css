@@ -23,7 +23,7 @@
     border-bottom: 1px solid black;
 }
 
-#journal-notes-wrapper {
+.journal-notes-wrapper {
     height: auto;
     width: 99%;
     display: flex;

@@ -87,7 +87,7 @@ const JournalWrapper: React.FC<JournalWrapperProps> = (props) => {
                 {he.decode(selectedLocation.name)}
                 <FaCrossIcon deselect={setSelectedLocationId} />
             </div>
-            <div id="journal-notes-wrapper">
+            <div className="journal-notes-wrapper">
                 <SublocationNotesWrapper
                     sublocations={selectedLocation.sublocations}
                     deleteData={deleteData}
