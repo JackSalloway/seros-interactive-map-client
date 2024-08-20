@@ -1,6 +1,15 @@
-import React from "react";
+import React, { SetStateAction } from "react";
 
-interface NPCItem {}
+// Type imports
+import type { NPC, DeleteItem } from "../../../types";
+
+interface NPCItem {
+    npc: NPC;
+    editNPC: null | NPC;
+    setEditNPC: React.Dispatch<SetStateAction<null | NPC>>;
+    deleteData: null | DeleteItem;
+    setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
+}
 
 const NPCItem: React.FC<NPCItem> = (props) => {
     return <div></div>;
