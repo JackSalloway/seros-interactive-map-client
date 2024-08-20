@@ -75,6 +75,55 @@ const NPCItem: React.FC<NPCItem> = (props) => {
         }
     };
 
+    const npcDescription = () => {
+        return (
+            <div className="note-item-content">
+                <h5 className="note-item-content-header">Description:</h5>
+                <p>{he.decode(npc.description)}</p>
+            </div>
+        );
+    };
+
+    const npcLocations = () => {
+        return (
+            <div className="note-item-content">
+                <h5 className="note-item-content-header">
+                    Associated Locations:
+                </h5>
+                {npc.associated_locations.map((location) => {
+                    return <p key={location.id}>{he.decode(location.name)}</p>;
+                })}
+            </div>
+        );
+    };
+
+    const npcQuests = () => {
+        return (
+            <div className="note-item-content">
+                <h5 className="note-item-content-header">Associated Quests:</h5>
+                {npc.associated_quests.length !== 0 ? (
+                    npc.associated_quests.map((quest) => {
+                        return <p key={quest.id}>{he.decode(quest.name)}</p>;
+                    })
+                ) : (
+                    <p>No quests found...</p>
+                )}
+            </div>
+        );
+    };
+
+    const npcContent = () => {
+        if (openNPC === true) {
+            return (
+                <>
+                    {npcDescription()}
+                    {npcLocations()}
+                    {npcQuests()}
+                </>
+            );
+        } else return null;
+    };
+
     return (
         <div
             ref={npcItemRef}
@@ -82,6 +131,7 @@ const NPCItem: React.FC<NPCItem> = (props) => {
             style={{ height: height }}
         >
             {npcHeader()}
+            {npcContent()}
         </div>
     );
 };
