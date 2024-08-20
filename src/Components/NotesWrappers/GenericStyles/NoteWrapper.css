@@ -8,6 +8,7 @@
     align-items: center;
     padding: 1rem 0;
     gap: 1rem;
+    background-color: rgb(17, 27, 39);
 }
 
 .notes-wrapper-header {
