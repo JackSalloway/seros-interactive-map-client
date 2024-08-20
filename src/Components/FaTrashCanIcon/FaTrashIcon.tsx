@@ -12,7 +12,7 @@ import type {
 } from "../../types";
 
 interface FaTrashIconProps {
-    item: null | DeleteItem;
+    // item: null | DeleteItem;
     deleteData: null | DeleteItem;
     setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
 }

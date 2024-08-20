@@ -55,12 +55,12 @@ const SublocationItem: React.FC<SublocationItemProps> = (props) => {
                 {openSublocation ? (
                     <div className="note-item-header-icons">
                         <FaEditIcon
-                            item={sublocation}
+                            // item={sublocation}
                             editing={editSublocation}
                             setEditing={setEditSublocation}
                         />
                         <FaTrashIcon
-                            item={sublocation}
+                            // item={sublocation}
                             deleteData={deleteData}
                             setDeleteData={setDeleteData}
                         />

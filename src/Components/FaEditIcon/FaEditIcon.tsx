@@ -11,7 +11,7 @@ import type {
 } from "../../types";
 
 interface FaEditIconProps {
-    item: Location | Sublocation | NPC | Quest | CombatInstance;
+    // item: Location | Sublocation | NPC | Quest | CombatInstance;
     editing: null | Sublocation;
     setEditing: React.Dispatch<SetStateAction<null | Sublocation>>;
 }
