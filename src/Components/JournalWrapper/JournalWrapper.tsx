@@ -4,6 +4,7 @@ import he from "he";
 // Component imports
 import FaCrossIcon from "../FaCrossIcon/FaCrossIcon";
 import SublocationNotesWrapper from "../NotesWrappers/Sublocations/SublocationNotesWrapper";
+import NPCNotesWrapper from "../NotesWrappers/Npcs/NPCNotesWrapper";
 
 // Type imports
 import type {
@@ -90,6 +91,13 @@ const JournalWrapper: React.FC<JournalWrapperProps> = (props) => {
             <div className="journal-notes-wrapper">
                 <SublocationNotesWrapper
                     sublocations={selectedLocation.sublocations}
+                    deleteData={deleteData}
+                    setDeleteData={setDeleteData}
+                />
+            </div>
+            <div className="journal-notes-wrapper">
+                <NPCNotesWrapper
+                    npcs={selectedNPCs}
                     deleteData={deleteData}
                     setDeleteData={setDeleteData}
                 />
