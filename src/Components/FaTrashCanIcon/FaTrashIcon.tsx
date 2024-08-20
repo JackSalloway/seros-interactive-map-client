@@ -8,14 +8,13 @@ import type {
     NPC,
     Quest,
     CombatInstance,
+    DeleteItem,
 } from "../../types";
 
 interface FaTrashIconProps {
-    item: Location | Sublocation | NPC | Quest | CombatInstance;
-    deleteData: Location | Sublocation | NPC | Quest | CombatInstance;
-    setDeleteData: React.Dispatch<
-        SetStateAction<Location | Sublocation | NPC | Quest | CombatInstance>
-    >;
+    item: null | DeleteItem;
+    deleteData: null | DeleteItem;
+    setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
 }
 
 const FaTrashIcon: React.FC<FaTrashIconProps> = (props) => {

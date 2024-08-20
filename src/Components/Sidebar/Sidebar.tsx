@@ -15,6 +15,7 @@ import type {
     NPC,
     CombatInstance,
     Changelog,
+    DeleteItem,
 } from "../../types";
 
 // Style imports
@@ -38,10 +39,8 @@ interface SidebarProps {
     selectedQuests: Quest[];
     selectedNPCs: NPC[];
     selectedCombatInstances: CombatInstance[];
-    deleteData: Location | Sublocation | NPC | Quest | CombatInstance;
-    setDeleteData: React.Dispatch<
-        SetStateAction<Location | Sublocation | NPC | Quest | CombatInstance>
-    >;
+    deleteData: null | DeleteItem;
+    setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
 }
 
 const Sidebar: React.FC<SidebarProps> = (props) => {

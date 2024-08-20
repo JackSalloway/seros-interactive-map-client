@@ -6,12 +6,12 @@ import FaPlusIcon from "../../FaPlusIcon/FaPlusIcon";
 import SublocationItem from "./SublocationItem";
 
 // Type imports
-import type { Sublocation } from "../../../types";
+import type { Sublocation, DeleteItem } from "../../../types";
 
 interface SublocationNotesWrapperProps {
     sublocations: Sublocation[];
-    deleteData: Sublocation;
-    setDeleteData: React.Dispatch<SetStateAction<Sublocation>>;
+    deleteData: null | DeleteItem;
+    setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
 }
 
 // Style imports

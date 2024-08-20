@@ -14,6 +14,7 @@ import type {
     Quest,
     CombatInstance,
     SelectBoxValue,
+    DeleteItem,
 } from "../../types";
 
 // Style imports
@@ -29,10 +30,8 @@ interface JournalWrapperProps {
     npcs: NPC[];
     quests: Quest[];
     instances: CombatInstance[];
-    deleteData: Location | Sublocation | NPC | Quest | CombatInstance;
-    setDeleteData: React.Dispatch<
-        SetStateAction<Location | Sublocation | NPC | Quest | CombatInstance>
-    >;
+    deleteData: null | DeleteItem;
+    setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
 }
 
 const JournalWrapper: React.FC<JournalWrapperProps> = (props) => {

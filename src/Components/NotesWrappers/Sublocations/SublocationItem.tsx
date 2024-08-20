@@ -7,7 +7,7 @@ import FaEditIcon from "../../FaEditIcon/FaEditIcon";
 import FaTrashIcon from "../../FaTrashCanIcon/FaTrashIcon";
 
 // Type imports
-import type { Sublocation } from "../../../types";
+import type { Sublocation, DeleteItem } from "../../../types";
 
 // Style imports
 import "../GenericStyles/NoteItem.css";
@@ -16,8 +16,8 @@ interface SublocationItemProps {
     sublocation: Sublocation;
     editSublocation: null | Sublocation;
     setEditSublocation: React.Dispatch<SetStateAction<null | Sublocation>>;
-    deleteData: Sublocation;
-    setDeleteData: React.Dispatch<SetStateAction<Sublocation>>;
+    deleteData: null | DeleteItem;
+    setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
 }
 
 const SublocationItem: React.FC<SublocationItemProps> = (props) => {

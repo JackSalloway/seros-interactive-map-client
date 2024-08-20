@@ -1,15 +1,15 @@
 import React, { useState, SetStateAction } from "react";
 
 // Type imports
-import type { NPC } from "../../../types";
+import type { NPC, DeleteItem } from "../../../types";
 
 // Style imports
 import "../GenericStyles/NoteWrapper.css";
 
 interface NPCNotesWrapperProps {
     npcs: NPC[];
-    deleteData: NPC;
-    setDeleteData: React.Dispatch<SetStateAction<NPC>>;
+    deleteData: null | DeleteItem;
+    setDeleteData: React.Dispatch<SetStateAction<null | DeleteItem>>;
 }
 
 const NPCNotesWrapper: React.FC<NPCNotesWrapperProps> = (props) => {
