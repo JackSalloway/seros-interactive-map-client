@@ -24,7 +24,7 @@ const FaEditIcon: React.FC<FaEditIconProps> = (props) => {
                 className="edit-button"
                 onClick={() => {
                     window.alert("Edit functionality is not implemented yet!");
-                    props.setEditing(props.item);
+                    // props.setEditing(props.item);
                 }}
             />
         </div>
