@@ -9,6 +9,12 @@ export interface Changelog {
     user: string;
 }
 
+export interface DeleteItem {
+    id: number;
+    name: string;
+    type: string;
+}
+
 export interface ListItemType {
     id: number;
     name: string;
