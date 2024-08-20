@@ -11,6 +11,7 @@ import type { NPC, DeleteItem } from "../../../types";
 
 // Style imports
 import "../GenericStyles/NoteItem.css";
+import "./NPCItem.css";
 
 interface NPCItem {
     npc: NPC;
@@ -39,21 +40,39 @@ const NPCItem: React.FC<NPCItem> = (props) => {
     }, [openNPC]);
 
     const npcHeader = () => {
-        return (
-            <div className="note-item-header">
-                <h4>{he.decode(npc.name)}</h4>
-                <FaChevronIcon open={openNPC} toggleOpen={setOpenNPC} />
-                {openNPC ? (
-                    <div className="note-item-header-icons">
-                        <FaEditIcon editing={editNPC} setEditing={setEditNPC} />
-                        <FaTrashIcon
-                            deleteData={deleteData}
-                            setDeleteData={setDeleteData}
-                        />
+        if (openNPC === false) {
+            return (
+                <div className="note-item-header">
+                    <h4>{he.decode(npc.name)}</h4>
+                    <FaChevronIcon open={openNPC} toggleOpen={setOpenNPC} />
+                </div>
+            );
+        } else {
+            return (
+                <div className="note-item-header">
+                    <div className="npc-item-header-text">
+                        <h4>{he.decode(npc.name)}</h4>
+                        <p>
+                            {he.decode(npc.race)}, {he.decode(npc.disposition)},{" "}
+                            {he.decode(npc.status)}
+                        </p>
                     </div>
-                ) : null}
-            </div>
-        );
+                    <FaChevronIcon open={openNPC} toggleOpen={setOpenNPC} />
+                    {openNPC ? (
+                        <div className="note-item-header-icons">
+                            <FaEditIcon
+                                editing={editNPC}
+                                setEditing={setEditNPC}
+                            />
+                            <FaTrashIcon
+                                deleteData={deleteData}
+                                setDeleteData={setDeleteData}
+                            />
+                        </div>
+                    ) : null}
+                </div>
+            );
+        }
     };
 
     return (
