@@ -56,6 +56,12 @@
     gap: 0.7rem;
 }
 
+.note-item-content-associated {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
 .note-item-header-text {
     display: flex;
     flex-direction: column;
