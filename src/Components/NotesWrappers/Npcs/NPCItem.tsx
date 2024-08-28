@@ -97,9 +97,13 @@ const NPCItem: React.FC<NPCItem> = (props) => {
                 <h5 className="note-item-content-header">
                     Associated Locations:
                 </h5>
-                {npc.associated_locations.map((location) => {
-                    return <p key={location.id}>{he.decode(location.name)}</p>;
-                })}
+                <div className="note-item-content-associated">
+                    {npc.associated_locations.map((location) => {
+                        return (
+                            <p key={location.id}>{he.decode(location.name)}</p>
+                        );
+                    })}
+                </div>
             </div>
         );
     };
@@ -108,13 +112,17 @@ const NPCItem: React.FC<NPCItem> = (props) => {
         return (
             <div className="note-item-content">
                 <h5 className="note-item-content-header">Associated Quests:</h5>
-                {npc.associated_quests.length !== 0 ? (
-                    npc.associated_quests.map((quest) => {
-                        return <p key={quest.id}>{he.decode(quest.name)}</p>;
-                    })
-                ) : (
-                    <p>No quests found...</p>
-                )}
+                <div className="note-item-content-associated">
+                    {npc.associated_quests.length !== 0 ? (
+                        npc.associated_quests.map((quest) => {
+                            return (
+                                <p key={quest.id}>{he.decode(quest.name)}</p>
+                            );
+                        })
+                    ) : (
+                        <p>No quests found...</p>
+                    )}
+                </div>
             </div>
         );
     };
