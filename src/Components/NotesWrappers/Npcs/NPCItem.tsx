@@ -29,7 +29,7 @@ const NPCItem: React.FC<NPCItem> = (props) => {
 
     const npcItemRef = useRef<null | HTMLDivElement>(null);
 
-    // useEffect to add an animation to the SublocationItem components height when it opens and closes
+    // useEffect to add an animation to the NPCItem components height when it opens and closes
     useEffect(() => {
         const item = npcItemRef.current;
         if (openNPC) {
