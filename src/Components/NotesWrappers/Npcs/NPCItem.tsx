@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, SetStateAction } from "react";
 import he from "he";
+import { splitParas } from "../../../imports/imports";
 
 // Component imports
 import FaChevronIcon from "../../FaChevronIcon/FaChevronIcon";
@@ -50,7 +51,7 @@ const NPCItem: React.FC<NPCItem> = (props) => {
         } else {
             return (
                 <div className="note-item-header">
-                    <div className="npc-item-header-text">
+                    <div className="note-item-header-text">
                         <h4>{he.decode(npc.name)}</h4>
                         <p>
                             {he.decode(npc.race)}, {he.decode(npc.disposition)},{" "}
@@ -79,7 +80,11 @@ const NPCItem: React.FC<NPCItem> = (props) => {
         return (
             <div className="note-item-content">
                 <h5 className="note-item-content-header">Description:</h5>
-                <p>{he.decode(npc.description)}</p>
+                {splitParas(npc.description).map(
+                    (para: string, index: number) => {
+                        return <p key={index}>{he.decode(para)}</p>;
+                    }
+                )}
             </div>
         );
     };
