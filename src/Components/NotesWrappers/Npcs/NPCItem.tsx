@@ -80,11 +80,13 @@ const NPCItem: React.FC<NPCItem> = (props) => {
         return (
             <div className="note-item-content">
                 <h5 className="note-item-content-header">Description:</h5>
-                {splitParas(npc.description).map(
-                    (para: string, index: number) => {
-                        return <p key={index}>{he.decode(para)}</p>;
-                    }
-                )}
+                <div className="note-item-content-description">
+                    {splitParas(npc.description).map(
+                        (para: string, index: number) => {
+                            return <p key={index}>{he.decode(para)}</p>;
+                        }
+                    )}
+                </div>
             </div>
         );
     };
