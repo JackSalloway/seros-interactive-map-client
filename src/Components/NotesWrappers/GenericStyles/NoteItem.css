@@ -22,6 +22,18 @@
     font-size: 1.4rem;
 }
 
+/* This style is used in components that display information under the name header element */
+/* Components like: NPCItem, QuestItem, InstanceItem */
+.note-item-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.note-item-header-text > h4 {
+    font-size: 1.4rem;
+}
+
 .note-item-header-icons {
     position: absolute;
     right: 3%;
@@ -35,4 +47,10 @@
 
 .note-item-content > h5 {
     font-size: 1rem;
+}
+
+.note-item-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
 }

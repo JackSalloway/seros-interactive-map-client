@@ -1,9 +1,0 @@
-.npc-item-header-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.npc-item-header-text > h4 {
-    font-size: 1.4rem;
-}
