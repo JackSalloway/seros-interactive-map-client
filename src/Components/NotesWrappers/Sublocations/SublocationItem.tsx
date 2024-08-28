@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, SetStateAction } from "react";
 import he from "he";
+import { splitParas } from "../../../imports/imports";
 
 // Component imports
 import FaChevronIcon from "../../FaChevronIcon/FaChevronIcon";
@@ -74,7 +75,13 @@ const SublocationItem: React.FC<SublocationItemProps> = (props) => {
         return openSublocation ? (
             <div className="note-item-content">
                 <h5 className="note-item-content-header">Description</h5>
-                <p>{he.decode(sublocation.description)}</p>
+                <div className="note-item-content-description">
+                    {splitParas(sublocation.description).map(
+                        (para: string, index: number) => {
+                            return <p key={index}>{he.decode(para)}</p>;
+                        }
+                    )}
+                </div>
             </div>
         ) : null;
     };
