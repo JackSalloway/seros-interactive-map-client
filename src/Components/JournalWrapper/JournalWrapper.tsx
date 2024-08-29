@@ -6,6 +6,7 @@ import FaCrossIcon from "../FaCrossIcon/FaCrossIcon";
 import SublocationNotesWrapper from "../NotesWrappers/Sublocations/SublocationNotesWrapper";
 import NPCNotesWrapper from "../NotesWrappers/Npcs/NPCNotesWrapper";
 import QuestNotesWrapper from "../NotesWrappers/Quests/QuestNotesWrapper";
+import CombatInstanceNotesWrapper from "../NotesWrappers/CombatInstances/CombatInstanceNotesWrapper";
 
 // Type imports
 import type {
@@ -105,6 +106,13 @@ const JournalWrapper: React.FC<JournalWrapperProps> = (props) => {
             <div className="journal-notes-wrapper">
                 <QuestNotesWrapper
                     quests={selectedQuests}
+                    deleteData={deleteData}
+                    setDeleteData={setDeleteData}
+                />
+            </div>
+            <div className="journal-notes-wrapper">
+                <CombatInstanceNotesWrapper
+                    instances={selectedInstances}
                     deleteData={deleteData}
                     setDeleteData={setDeleteData}
                 />
